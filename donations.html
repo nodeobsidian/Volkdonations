@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Lookup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #result {
+      margin-top: 20px;
+    }
+    .error {
+      background: #fee;
+      color: #c00;
+      padding: 15px;
+      border-radius: 4px;
+      border-left: 4px solid #c00;
+    }
+    .success {
+      background: #efe;
+      color: #060;
+      padding: 15px;
+      border-radius: 4px;
+      border-left: 4px solid #060;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #f8f9fa;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Receipt Lookup</h1>
+    <p>Enter your receipt ID to view donation details:</p>
+    
+    <input 
+      type="text" 
+      id="receiptInput" 
+      placeholder="Enter receipt ID (e.g., RCP-2024-001)" 
+    />
+    
+    <button onclick="lookupReceipt()">Search Receipt</button>
+    
+    <div id="result"></div>
+  </div>
+
+  <script>
+    async function lookupReceipt() {
+      const receipt = document.getElementById('receiptInput').value.trim();
+      const resultDiv = document.getElementById('result');
+      
+      if (!receipt) {
+        resultDiv.innerHTML = '<div class="error">Please enter a receipt ID</div>';
+        return;
+      }
+
+      resultDiv.innerHTML = '<p>Searching...</p>';
+
+      try {
+        const response = await fetch('/api/receipt', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ receipt })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || data.error) {
+          resultDiv.innerHTML = `<div class="error"><strong>Error:</strong> ${data.error}</div>`;
+          return;
+        }
+
+        if (data.data.length === 0) {
+          resultDiv.innerHTML = '<div class="error">No receipt found with that ID</div>';
+          return;
+        }
+
+        // Display results
+        let html = '<div class="success">Receipt found!</div>';
+        html += '<table>';
+        html += '<tr><th>Field</th><th>Value</th></tr>';
+        
+        const donation = data.data[0];
+        html += `<tr><td>Receipt ID</td><td>${donation.receipt_id}</td></tr>`;
+        html += `<tr><td>Donor Name</td><td>${donation.donor_name}</td></tr>`;
+        html += `<tr><td>Email</td><td>${donation.email}</td></tr>`;
+        html += `<tr><td>Amount</td><td>${donation.currency} ${donation.amount}</td></tr>`;
+        html += `<tr><td>Country</td><td>${donation.country}</td></tr>`;
+        html += `<tr><td>Date</td><td>${new Date(donation.created_at).toLocaleString()}</td></tr>`;
+        html += '</table>';
+
+        resultDiv.innerHTML = html;
+
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="error"><strong>Error:</strong> ${error.message}</div>`;
+      }
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('receiptInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        lookupReceipt();
+      }
+    });
+  </script>
+</body>
+</html>

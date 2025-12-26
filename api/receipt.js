@@ -1,4 +1,6 @@
 // /api/receipt.js
+const { neon } = require('@neondatabase/serverless');
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
@@ -11,47 +13,27 @@ module.exports = async (req, res) => {
   }
 
   // ---- INTENTIONALLY INSECURE QUERY ----
-  // Raw string concatenation (by design)
-  const query = `
+  const queryText = `
     SELECT id, receipt_id, donor_name, email, amount, currency, country, created_at
     FROM donations
     WHERE receipt_id = '${receipt}'
   `;
 
   try {
-    // Only attempt database query if NEON_HTTP_URL is configured
-    if (!process.env.NEON_HTTP_URL) {
-      return res.status(500).json({
-        error: "Database not configured"
-      });
+    if (!process.env.NEON_DATABASE_URL) {
+      return res.status(500).json({ error: "Database not configured" });
     }
 
-    const neonRes = await fetch(process.env.NEON_HTTP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEON_API_KEY}`
-      },
-      body: JSON.stringify({
-        query
-      })
-    });
-
-    const result = await neonRes.json();
-
-    // Forward DB errors directly (error-based SQLi)
-    if (result.error) {
-      return res.status(500).json({
-        error: result.error.message || result.error
-      });
-    }
+    const sql = neon(process.env.NEON_DATABASE_URL);
+    const rows = await sql(queryText);
 
     return res.status(200).json({
       success: true,
-      data: result.rows || []
+      data: rows
     });
 
   } catch (e) {
+    // Forward error for SQLi lab
     return res.status(500).json({
       error: e.message
     });

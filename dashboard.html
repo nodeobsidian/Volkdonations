@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Operations Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+
+    header {
+      background: #020617;
+      padding: 18px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    header h1 {
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .container {
+      padding: 28px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .card .value {
+      font-size: 26px;
+      font-weight: 600;
+      color: #22c55e;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #1e293b;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .export {
+      margin-top: 30px;
+      background: #22c55e;
+      color: #022c22;
+      border: none;
+      padding: 12px 18px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .export:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Internal Operations</h1>
+  <div id="admin-info"></div>
+</header>
+
+<div class="container" id="dashboard" style="display:none">
+
+  <div class="stats" id="stats"></div>
+
+  <div class="section">
+    <h2>Partner Countries</h2>
+    <table id="countries-table">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Active Programs</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <button class="export">Export Data</button>
+
+</div>
+
+<script>
+(async () => {
+  try {
+    // ---- VERIFY SESSION BEFORE ANYTHING ----
+    const verifyRes = await fetch("/api/adminsessionverify.js", {
+      method: "POST",
+      credentials: "include"
+    });
+
+    const verify = await verifyRes.json();
+
+    if (!verify.authenticated) {
+      window.location.href = "/";
+      return;
+    }
+
+    document.getElementById("admin-info").textContent =
+      verify.admin.email + " (" + verify.admin.role + ")";
+
+    document.getElementById("dashboard").style.display = "block";
+
+    // ---- FETCH DASHBOARD DATA ----
+    const dataRes = await fetch("/api/volkdata.js", {
+      credentials: "include"
+    });
+
+    if (!dataRes.ok) {
+      throw new Error("Failed to load data");
+    }
+
+    const result = await dataRes.json();
+    const data = result.data;
+
+    // ---- RENDER METRICS ----
+    const stats = document.getElementById("stats");
+    stats.innerHTML = `
+      <div class="card">
+        <h3>Total Members</h3>
+        <div class="value">${data.members}</div>
+      </div>
+      <div class="card">
+        <h3>Main Branches</h3>
+        <div class="value">${data.branches}</div>
+      </div>
+      <div class="card">
+        <h3>Donations This Year</h3>
+        <div class="value">$${data.donations}</div>
+      </div>
+      <div class="card">
+        <h3>Educated Children</h3>
+        <div class="value">${data.children}</div>
+      </div>
+    `;
+
+    // ---- PARTNER COUNTRIES ----
+    const tbody = document.querySelector("#countries-table tbody");
+    tbody.innerHTML = "";
+
+    data.partner_countries.forEach(c => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${c.name}</td>
+        <td>${c.programs}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+  } catch (e) {
+    window.location.href = "/";
+  }
+})();
+</script>
+
+</body>
+</html>

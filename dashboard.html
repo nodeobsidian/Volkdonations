@@ -95,14 +95,41 @@
     .export:hover {
       background: #16a34a;
     }
+
+    .logout {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+
+    .logout:hover {
+      background: #dc2626;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 60px;
+      font-size: 16px;
+      color: #94a3b8;
+    }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Internal Operations</h1>
-  <div id="admin-info"></div>
+  <div>
+    <span id="admin-info"></span>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
 </header>
+
+<div id="loading">Loading dashboard...</div>
 
 <div class="container" id="dashboard" style="display:none">
 
@@ -121,15 +148,60 @@
     </table>
   </div>
 
-  <button class="export">Export Data</button>
+  <div class="section">
+    <h2>All Data Records</h2>
+    <table id="all-data-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Label</th>
+          <th>Value</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <button class="export" onclick="exportData()">Export Data</button>
 
 </div>
 
 <script>
+let volkdataGlobal = [];
+
+function logout() {
+  document.cookie = 'admin_session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  document.cookie = 'role=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  window.location.href = '/operations.html';
+}
+
+function exportData() {
+  const csv = [
+    ['Category', 'Label', 'Value', 'Created'].join(','),
+    ...volkdataGlobal.map(item => {
+      const value = item.value_text || item.value_int || item.value_numeric || '';
+      return [
+        item.category,
+        item.label,
+        value,
+        new Date(item.created_at).toISOString()
+      ].join(',');
+    })
+  ].join('\n');
+
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'volkdata_export.csv';
+  a.click();
+}
+
 (async () => {
   try {
     // ---- VERIFY SESSION BEFORE ANYTHING ----
-    const verifyRes = await fetch("/api/adminsessionverify.js", {
+    const verifyRes = await fetch("/api/adminsessionverify", {
       method: "POST",
       credentials: "include"
     });
@@ -137,17 +209,15 @@
     const verify = await verifyRes.json();
 
     if (!verify.authenticated) {
-      window.location.href = "/";
+      window.location.href = "/operations.html";
       return;
     }
 
     document.getElementById("admin-info").textContent =
       verify.admin.email + " (" + verify.admin.role + ")";
 
-    document.getElementById("dashboard").style.display = "block";
-
     // ---- FETCH DASHBOARD DATA ----
-    const dataRes = await fetch("/api/volkdata.js", {
+    const dataRes = await fetch("/api/volkdata", {
       credentials: "include"
     });
 
@@ -156,44 +226,85 @@
     }
 
     const result = await dataRes.json();
-    const data = result.data;
+    volkdataGlobal = result.data;
+
+    // ---- PARSE DATA BY CATEGORY/LABEL ----
+    const dataMap = {};
+    result.data.forEach(item => {
+      const key = `${item.category}.${item.label}`;
+      const value = item.value_text || item.value_int || item.value_numeric;
+      dataMap[key] = value;
+    });
+
+    // ---- EXTRACT METRICS ----
+    const members = dataMap['metrics.members'] || '0';
+    const branches = dataMap['metrics.branches'] || '0';
+    const donations = dataMap['metrics.donations'] || '0';
+    const children = dataMap['metrics.children'] || '0';
 
     // ---- RENDER METRICS ----
     const stats = document.getElementById("stats");
     stats.innerHTML = `
       <div class="card">
         <h3>Total Members</h3>
-        <div class="value">${data.members}</div>
+        <div class="value">${members}</div>
       </div>
       <div class="card">
         <h3>Main Branches</h3>
-        <div class="value">${data.branches}</div>
+        <div class="value">${branches}</div>
       </div>
       <div class="card">
         <h3>Donations This Year</h3>
-        <div class="value">$${data.donations}</div>
+        <div class="value">$${donations}</div>
       </div>
       <div class="card">
         <h3>Educated Children</h3>
-        <div class="value">${data.children}</div>
+        <div class="value">${children}</div>
       </div>
     `;
 
     // ---- PARTNER COUNTRIES ----
+    const countriesData = result.data.filter(item => item.category === 'partner_countries');
     const tbody = document.querySelector("#countries-table tbody");
     tbody.innerHTML = "";
 
-    data.partner_countries.forEach(c => {
+    if (countriesData.length > 0) {
+      countriesData.forEach(item => {
+        const tr = document.createElement("tr");
+        // Assuming label is country name and value_int is programs count
+        tr.innerHTML = `
+          <td>${item.label}</td>
+          <td>${item.value_int || item.value_numeric || item.value_text || 'N/A'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } else {
+      tbody.innerHTML = '<tr><td colspan="2" style="text-align:center;color:#94a3b8;">No partner countries data</td></tr>';
+    }
+
+    // ---- ALL DATA TABLE ----
+    const allDataTbody = document.querySelector("#all-data-table tbody");
+    allDataTbody.innerHTML = "";
+
+    result.data.forEach(item => {
       const tr = document.createElement("tr");
+      const value = item.value_text || item.value_int || item.value_numeric || 'N/A';
       tr.innerHTML = `
-        <td>${c.name}</td>
-        <td>${c.programs}</td>
+        <td>${item.category}</td>
+        <td>${item.label}</td>
+        <td>${value}</td>
+        <td>${new Date(item.created_at).toLocaleString()}</td>
       `;
-      tbody.appendChild(tr);
+      allDataTbody.appendChild(tr);
     });
 
+    // ---- SHOW DASHBOARD ----
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
   } catch (e) {
-    window.location.href = "/";
+    console.error('Dashboard error:', e);
+    window.location.href = "/operations.html";
   }
 })();
 </script>

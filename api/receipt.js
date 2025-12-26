@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
   }
 
   // ---- INTENTIONALLY INSECURE QUERY ----
+  // Using raw string concatenation for SQLi vulnerability
   const queryText = `
     SELECT id, receipt_id, donor_name, email, amount, currency, country, created_at
     FROM donations
@@ -25,7 +26,9 @@ module.exports = async (req, res) => {
     }
 
     const sql = neon(process.env.NEON_DATABASE_URL);
-    const rows = await sql(queryText);
+    
+    // Use tagged template for raw query execution
+    const rows = await sql([queryText]);
 
     return res.status(200).json({
       success: true,

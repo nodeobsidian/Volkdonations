@@ -12,14 +12,6 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Receipt ID required" });
   }
 
-  // ---- INTENTIONALLY INSECURE QUERY ----
-  // Using raw string concatenation for SQLi vulnerability
-  const queryText = `
-    SELECT id, receipt_id, donor_name, email, amount, currency, country, created_at
-    FROM donations
-    WHERE receipt_id = '${receipt}'
-  `;
-
   try {
     if (!process.env.NEON_DATABASE_URL) {
       return res.status(500).json({ error: "Database not configured" });
@@ -27,8 +19,16 @@ module.exports = async (req, res) => {
 
     const sql = neon(process.env.NEON_DATABASE_URL);
     
-    // Use tagged template for raw query execution
-    const rows = await sql([queryText]);
+    // ---- INTENTIONALLY INSECURE QUERY ----
+    // Build the vulnerable query by using eval-like approach with template
+    // This maintains SQLi vulnerability
+    const unsafeQuery = new Function('sql', 'receipt', `
+      return sql\`SELECT id, receipt_id, donor_name, email, amount, currency, country, created_at
+      FROM donations
+      WHERE receipt_id = '\${receipt}'\`;
+    `);
+    
+    const rows = await unsafeQuery(sql, receipt);
 
     return res.status(200).json({
       success: true,

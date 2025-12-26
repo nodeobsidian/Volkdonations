@@ -1,5 +1,11 @@
 // /api/receipt.js
-const { neon } = require('@neondatabase/serverless');
+const { Pool } = require('pg');
+
+// Create pool outside handler for connection reuse
+const pool = new Pool({
+  connectionString: process.env.NEON_DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -12,27 +18,25 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Receipt ID required" });
   }
 
+  // ---- INTENTIONALLY INSECURE QUERY ----
+  // Raw string concatenation (by design)
+  const queryText = `SELECT id, receipt_id, donor_name, email, amount, currency, country, created_at FROM donations WHERE receipt_id = '${receipt}'`;
+
+  let client;
+  
   try {
     if (!process.env.NEON_DATABASE_URL) {
       return res.status(500).json({ error: "Database not configured" });
     }
 
-    const sql = neon(process.env.NEON_DATABASE_URL);
+    client = await pool.connect();
     
-    // ---- INTENTIONALLY INSECURE QUERY ----
-    // Build the vulnerable query by using eval-like approach with template
-    // This maintains SQLi vulnerability
-    const unsafeQuery = new Function('sql', 'receipt', `
-      return sql\`SELECT id, receipt_id, donor_name, email, amount, currency, country, created_at
-      FROM donations
-      WHERE receipt_id = '\${receipt}'\`;
-    `);
-    
-    const rows = await unsafeQuery(sql, receipt);
+    // Execute raw query without parameters
+    const result = await client.query(queryText);
 
     return res.status(200).json({
       success: true,
-      data: rows
+      data: result.rows
     });
 
   } catch (e) {
@@ -40,5 +44,9 @@ module.exports = async (req, res) => {
     return res.status(500).json({
       error: e.message
     });
+  } finally {
+    if (client) {
+      client.release();
+    }
   }
 };

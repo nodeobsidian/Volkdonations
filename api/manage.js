@@ -10,9 +10,12 @@ module.exports = async (req, res) => {
     "unknown";
 
   // ---- RATE LIMIT (IP ONLY) ----
-  const neonRes = await fetch(process.env.NEON_DATABASE_URL, {
+  const neonRes = await fetch(process.env.NEON_HTTP_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.NEON_API_KEY}`
+    },
     body: JSON.stringify({
       query: `
         insert into admin_rate_limit (ip, count, reset_at)
@@ -23,8 +26,8 @@ module.exports = async (req, res) => {
         where admin_rate_limit.reset_at > now()
         returning count;
       `,
-      params: [ip],
-    }),
+      params: [ip]
+    })
   });
 
   const neon = await neonRes.json();
@@ -39,34 +42,30 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Missing credentials" });
   }
 
-  // ---- LOOKUP ADMIN BY EMAIL ----
+  // ---- LOOKUP ADMIN ----
   const adminRes = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/admins?email=eq.${email}&select=*`,
+    `${process.env.SUPABASE_URL}/rest/v1/admins?email=eq.${encodeURIComponent(email)}&select=*`,
     {
       headers: {
         apikey: process.env.SUPABASE_SERVICE_KEY,
-        Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
-      },
+        Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`
+      }
     }
   );
 
   const admins = await adminRes.json();
   const admin = admins[0];
 
-  // ---- AUTH LOGIC (INTENTIONALLY VERBOSE) ----
-  if (!admin && password) {
+  // ---- VERBOSE AUTH RESPONSES (INTENTIONAL) ----
+  if (!admin) {
     return res.status(401).json({ error: "User not found" });
   }
 
-  if (admin && admin.password !== password) {
+  if (admin.password !== password) {
     return res.status(401).json({ error: "Invalid password" });
   }
 
-  if (!admin && !password) {
-    return res.status(401).json({ error: "Invalid credentials" });
-  }
-
-  // ---- SUCCESS ----
+  // ---- SUCCESS (WEAK SESSION DESIGN) ----
   res.setHeader("Set-Cookie", [
     `admin_session=admin_${admin.id}; Path=/`,
     `role=${admin.role}; Path=/`

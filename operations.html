@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Administration Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0b0f14;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #111827;
+      padding: 32px;
+      width: 100%;
+      max-width: 380px;
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 18px;
+      background: #020617;
+      border: 1px solid #1f2933;
+      border-radius: 6px;
+      color: #e5e7eb;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      background: #2563eb;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .error {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #f87171;
+      text-align: center;
+      display: none;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 12px;
+      text-align: center;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h1>Admin Access</h1>
+    <p>Authorized personnel only</p>
+
+    <form id="loginForm">
+      <label>Email</label>
+      <input type="email" id="email" required />
+
+      <label>Password</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Sign In</button>
+    </form>
+
+    <div class="error" id="errorBox"></div>
+
+    <div class="footer">
+      Internal Management System
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const errorBox = document.getElementById("errorBox");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorBox.style.display = "none";
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const res = await fetch("/api/manage", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorBox.textContent = data.error || "Login failed";
+          errorBox.style.display = "block";
+          return;
+        }
+
+        window.location.href = "/admin/dashboard.html";
+      } catch (err) {
+        errorBox.textContent = "Unable to connect to server";
+        errorBox.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+</html>

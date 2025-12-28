@@ -1,4 +1,4 @@
-const nunjucks = require("nunjucks");
+const ejs = require("ejs");
 const { neon } = require("@neondatabase/serverless");
 
 module.exports = async (req, res) => {
@@ -82,24 +82,24 @@ module.exports = async (req, res) => {
 <body>
   <div class="receipt">
     <h1>Volk Donations</h1>
-    <div class="form-id">Donation Form ID: ${formId}</div>
+    <div class="form-id">Donation Form ID: <%= formId %></div>
     <div class="section">
-      <span class="label">Donor Name:</span> ${name}
+      <span class="label">Donor Name:</span> <%= name %>
     </div>
     <div class="section">
-      <span class="label">Email:</span> ${email}
+      <span class="label">Email:</span> <%= email %>
     </div>
     <div class="section">
-      <span class="label">Phone:</span> ${phone}
+      <span class="label">Phone:</span> <%= phone %>
     </div>
     <div class="section">
-      <span class="label">Country:</span> ${country}
+      <span class="label">Country:</span> <%= country %>
     </div>
     <div class="section">
-      <span class="label">Donation Amount:</span> USD ${donationAmount}
+      <span class="label">Donation Amount:</span> USD <%= amount %>
     </div>
     <div class="section">
-      <span class="label">Date:</span> ${date}
+      <span class="label">Date:</span> <%= date %>
     </div>
     <div class="footer">
       Volk Donations is a registered nonprofit organization based in the United States.
@@ -111,8 +111,18 @@ module.exports = async (req, res) => {
 `;
 
   try {
+    const html = ejs.render(template, {
+      formId,
+      name,
+      email,
+      phone,
+      country,
+      amount: donationAmount,
+      date
+    });
+    
     res.setHeader("Content-Type", "text/html");
-    return res.status(200).send(template);
+    return res.status(200).send(html);
   } catch (e) {
     return res.status(500).send(e.message);
   }

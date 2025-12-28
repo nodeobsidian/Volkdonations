@@ -84,7 +84,7 @@ module.exports = async (req, res) => {
     <h1>Volk Donations</h1>
     <div class="form-id">Donation Form ID: {{ formId }}</div>
     <div class="section">
-      <span class="label">Donor Name:</span> {{ name }}
+      <span class="label">Donor Name:</span> {{ name | safe }}
     </div>
     <div class="section">
       <span class="label">Email:</span> {{ email }}
@@ -111,7 +111,8 @@ module.exports = async (req, res) => {
 `;
 
   try {
-    const env = new nunjucks.Environment(null, { autoescape: false });
+    const env = new nunjucks.Environment();
+    env.opts.autoescape = false;
     
     const html = env.renderString(template, {
       formId,

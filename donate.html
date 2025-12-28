@@ -111,17 +111,6 @@
       color: #666;
       margin-top: 15px;
     }
-
-    .debug {
-      margin-top: 20px;
-      padding: 15px;
-      background: #f0f0f0;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      font-family: monospace;
-      font-size: 12px;
-      display: none;
-    }
   </style>
 </head>
 
@@ -184,11 +173,6 @@
     <div class="note">
       An official printable donation receipt will be generated after submission.
     </div>
-
-    <div class="debug" id="debugInfo">
-      <strong>Debug Info:</strong><br>
-      <span id="debugContent"></span>
-    </div>
   </main>
 
   <footer>
@@ -206,13 +190,10 @@
 
   <script>
     const form = document.getElementById("donationForm");
-    const debugDiv = document.getElementById("debugInfo");
-    const debugContent = document.getElementById("debugContent");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Get raw values without any encoding
       const data = {
         name: form.name.value,
         email: form.email.value,
@@ -220,10 +201,6 @@
         country: form.country.value,
         amount: form.amount.value
       };
-
-      // Show debug info
-      debugDiv.style.display = "block";
-      debugContent.textContent = JSON.stringify(data, null, 2);
 
       try {
         const res = await fetch("/api/receipt-generate", {
@@ -241,7 +218,6 @@
           return;
         }
 
-        // Open receipt in new window
         const receiptWindow = window.open("", "_blank");
         receiptWindow.document.open();
         receiptWindow.document.write(text);

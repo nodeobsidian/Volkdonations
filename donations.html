@@ -3,105 +3,839 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Receipt Lookup</title>
+  <title>Receipt Lookup | Volk Donations</title>
+  <meta name="description" content="Look up your donation receipt from Volk Donations." />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      background: #f5f5f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f9fb;
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
     }
-    h1 {
-      color: #333;
-      margin-bottom: 20px;
+
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-container img {
+      height: 50px;
+      width: auto;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin: 0;
+    }
+
+    .logo-text span {
+      font-size: 12px;
+      color: #00a86b;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav a {
+      font-weight: 500;
+      color: #2c3e50;
+      font-size: 15px;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #00a86b;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00a86b;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-menu-btn span {
+      width: 28px;
+      height: 3px;
+      background: #1e3a5f;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .page-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      color: #ffffff;
+      padding: 60px 5%;
+      text-align: center;
+    }
+
+    .page-hero h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .page-hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    main {
+      max-width: 900px;
+      margin: -40px auto 80px;
+      background: #ffffff;
+      padding: 50px 60px;
+      border-radius: 12px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .lookup-intro {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .lookup-intro h3 {
+      color: #1e3a5f;
+      font-size: 28px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .lookup-intro p {
+      color: #5a6c7d;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .search-section {
+      margin-bottom: 30px;
+    }
+
+    .search-group {
+      display: flex;
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .search-input-wrapper {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-input-wrapper svg {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7a8a9e;
+    }
+
     input {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
+      padding: 14px 15px 14px 45px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      background: #ffffff;
     }
-    button {
-      background: #007bff;
-      color: white;
+
+    input:focus {
+      outline: none;
+      border-color: #00a86b;
+      box-shadow: 0 0 0 3px rgba(0,168,107,0.1);
+    }
+
+    input:hover {
+      border-color: #00a86b;
+    }
+
+    input::placeholder {
+      color: #b0c4d9;
+    }
+
+    .search-btn {
+      background: linear-gradient(135deg, #00a86b 0%, #008557 100%);
+      color: #ffffff;
       border: none;
-      padding: 12px 24px;
-      border-radius: 4px;
+      padding: 14px 35px;
+      font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,168,107,0.3);
+      white-space: nowrap;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,168,107,0.4);
+    }
+
+    .search-btn:active {
+      transform: translateY(0);
+    }
+
+    #result {
+      margin-top: 30px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #5a6c7d;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f0f0f0;
+      border-top: 4px solid #00a86b;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 20px 25px;
+      border-radius: 8px;
+      display: flex;
+      align-items: start;
+      gap: 15px;
+    }
+
+    .error-message svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .error-message .content {
+      flex: 1;
+    }
+
+    .error-message strong {
+      color: #991b1b;
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .error-message p {
+      color: #7f1d1d;
+      margin: 0;
       font-size: 14px;
     }
-    button:hover {
-      background: #0056b3;
+
+    .success-message {
+      background: #f0fdf7;
+      border-left: 4px solid #00a86b;
+      padding: 20px 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: start;
+      gap: 15px;
     }
-    #result {
+
+    .success-message svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .success-message strong {
+      color: #065f46;
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .success-message p {
+      color: #047857;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .receipt-card {
+      background: #ffffff;
+      border: 2px solid #e8eef3;
+      border-radius: 12px;
+      overflow: hidden;
       margin-top: 20px;
     }
-    .error {
-      background: #fee;
-      color: #c00;
-      padding: 15px;
-      border-radius: 4px;
-      border-left: 4px solid #c00;
+
+    .receipt-card-header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2a5080 100%);
+      color: #ffffff;
+      padding: 20px 25px;
     }
-    .success {
-      background: #efe;
-      color: #060;
-      padding: 15px;
-      border-radius: 4px;
-      border-left: 4px solid #060;
+
+    .receipt-card-header h4 {
+      font-size: 20px;
+      margin: 0 0 5px 0;
+      font-weight: 600;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
+
+    .receipt-card-header p {
+      font-size: 13px;
+      margin: 0;
+      opacity: 0.9;
     }
-    th, td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+
+    .receipt-details {
+      padding: 0;
     }
-    th {
-      background: #f8f9fa;
-      font-weight: bold;
+
+    .detail-row {
+      display: flex;
+      padding: 18px 25px;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.2s ease;
+    }
+
+    .detail-row:hover {
+      background: #f9fafb;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      flex: 0 0 180px;
+      font-weight: 600;
+      color: #5a6c7d;
+      font-size: 14px;
+    }
+
+    .detail-value {
+      flex: 1;
+      color: #2c3e50;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .detail-value.highlight {
+      color: #00a86b;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .help-section {
+      background: #f9fafb;
+      border: 1px solid #e8eef3;
+      border-radius: 8px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    .help-section h4 {
+      color: #1e3a5f;
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .help-section p {
+      color: #5a6c7d;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .help-section a {
+      color: #00a86b;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .help-section a:hover {
+      color: #008557;
+    }
+
+    footer {
+      background: #1e3a5f;
+      color: #ffffff;
+      padding: 70px 5% 30px;
+      margin-top: 0;
+    }
+
+    .footer-grid {
+      max-width: 1400px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-about {
+      padding-right: 30px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo img {
+      height: 45px;
+      width: auto;
+    }
+
+    .footer-logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .footer-about p {
+      color: #b8c7d9;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #00a86b;
+      transform: translateY(-3px);
+    }
+
+    footer h5 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    footer a {
+      display: block;
+      color: #b8c7d9;
+      margin-bottom: 12px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #00a86b;
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px;
+      color: #b8c7d9;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .footer-bottom p {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 968px) {
+      nav {
+        position: fixed;
+        top: 86px;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: calc(100vh - 86px);
+        background: #ffffff;
+        flex-direction: column;
+        padding: 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      main {
+        padding: 40px 30px;
+        margin: -30px 20px 60px;
+      }
+
+      .search-group {
+        flex-direction: column;
+      }
+
+      .search-btn {
+        width: 100%;
+      }
+
+      .detail-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .detail-label {
+        flex: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-about {
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo-container img {
+        height: 40px;
+      }
+
+      .logo-text h1 {
+        font-size: 18px;
+      }
+
+      .page-hero h2 {
+        font-size: 32px;
+      }
+
+      .page-hero p {
+        font-size: 16px;
+      }
+
+      main {
+        padding: 30px 20px;
+        margin: -20px 15px 40px;
+      }
+
+      .lookup-intro h3 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Receipt Lookup</h1>
-    <p>Enter your receipt ID to view donation details:</p>
-    
-    <input 
-      type="text" 
-      id="receiptInput" 
-      placeholder="Enter receipt ID (e.g., RCP-2024-001)" 
-    />
-    
-    <button onclick="lookupReceipt()">Search Receipt</button>
-    
+
+  <header>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </div>
+    <nav id="mainNav">
+      <a href="/">Home</a>
+      <a href="/campaigns">Campaigns</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/contact">Contact</a>
+      <a href="/auth">Login</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <h2>Receipt Lookup</h2>
+    <p>Retrieve your donation receipt and view transaction details anytime</p>
+  </section>
+
+  <main>
+    <div class="lookup-intro">
+      <h3>Find Your Receipt</h3>
+      <p>
+        Enter your receipt ID below to view your donation details. Your receipt ID was provided
+        to you when you made your donation and can also be found in your confirmation email.
+      </p>
+    </div>
+
+    <div class="search-section">
+      <div class="search-group">
+        <div class="search-input-wrapper">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input 
+            type="text" 
+            id="receiptInput" 
+            placeholder="Enter receipt ID (e.g., VD-FORM-ABC1-12345)" 
+          />
+        </div>
+        <button class="search-btn" onclick="lookupReceipt()">Search Receipt</button>
+      </div>
+    </div>
+
     <div id="result"></div>
-  </div>
+
+    <div class="help-section">
+      <h4>Need Help?</h4>
+      <p>
+        If you're unable to locate your receipt ID or having trouble accessing your donation records,
+        please don't hesitate to reach out to our support team.
+      </p>
+      <p>
+        Contact us at <a href="mailto:support@volkdonations.org">support@volkdonations.org</a> 
+        or call <a href="tel:+15551234567">+1 (555) 123-4567</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>
+          Volk Donations is dedicated to creating lasting change in the lives of orphaned
+          children worldwide. Through compassion, commitment, and community support, we're
+          building a better future for those who need it most.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h5>Organization</h5>
+        <a href="/about">About Us</a>
+        <a href="/partners">Our Partners</a>
+        <a href="/branches">Branches</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
+      </div>
+
+      <div>
+        <h5>Get Involved</h5>
+        <a href="/contribute">Contribute</a>
+        <a href="/volunteer">Volunteer</a>
+        <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
+      </div>
+
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
+    </div>
+  </footer>
 
   <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuBtn.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function(event) {
+      const isClickInsideNav = mainNav.contains(event.target);
+      const isClickOnButton = mobileMenuBtn.contains(event.target);
+      
+      if (!isClickInsideNav && !isClickOnButton && mainNav.classList.contains('active')) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 968) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
     async function lookupReceipt() {
       const receipt = document.getElementById('receiptInput').value.trim();
       const resultDiv = document.getElementById('result');
       
       if (!receipt) {
-        resultDiv.innerHTML = '<div class="error">Please enter a receipt ID</div>';
+        resultDiv.innerHTML = `
+          <div class="error-message">
+            <svg width="24" height="24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <div class="content">
+              <strong>Input Required</strong>
+              <p>Please enter a receipt ID to search for your donation record.</p>
+            </div>
+          </div>
+        `;
         return;
       }
 
-      resultDiv.innerHTML = '<p>Searching...</p>';
+      resultDiv.innerHTML = `
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <p>Searching for your receipt...</p>
+        </div>
+      `;
 
       try {
         const response = await fetch('/api/receipt', {
@@ -115,42 +849,112 @@
         const data = await response.json();
 
         if (!response.ok || data.error) {
-          resultDiv.innerHTML = `<div class="error"><strong>Error:</strong> ${data.error}</div>`;
+          resultDiv.innerHTML = `
+            <div class="error-message">
+              <svg width="24" height="24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+              <div class="content">
+                <strong>Error</strong>
+                <p>${data.error || 'Unable to retrieve receipt information'}</p>
+              </div>
+            </div>
+          `;
           return;
         }
 
         if (data.data.length === 0) {
-          resultDiv.innerHTML = '<div class="error">No receipt found with that ID</div>';
+          resultDiv.innerHTML = `
+            <div class="error-message">
+              <svg width="24" height="24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <div class="content">
+                <strong>Not Found</strong>
+                <p>No receipt found with that ID. Please check the receipt ID and try again.</p>
+              </div>
+            </div>
+          `;
           return;
         }
 
-        // Display results
-        let html = '<div class="success">Receipt found!</div>';
-        html += '<table>';
-        html += '<tr><th>Field</th><th>Value</th></tr>';
-        
         const donation = data.data[0];
-        html += `<tr><td>Receipt ID</td><td>${donation.receipt_id}</td></tr>`;
-        html += `<tr><td>Donor Name</td><td>${donation.donor_name}</td></tr>`;
-        html += `<tr><td>Email</td><td>${donation.email}</td></tr>`;
-        html += `<tr><td>Amount</td><td>${donation.currency} ${donation.amount}</td></tr>`;
-        html += `<tr><td>Country</td><td>${donation.country}</td></tr>`;
-        html += `<tr><td>Date</td><td>${new Date(donation.created_at).toLocaleString()}</td></tr>`;
-        html += '</table>';
-
-        resultDiv.innerHTML = html;
+        
+        resultDiv.innerHTML = `
+          <div class="success-message">
+            <svg width="24" height="24" fill="none" stroke="#00a86b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <div>
+              <strong>Receipt Found</strong>
+              <p>We've successfully located your donation record.</p>
+            </div>
+          </div>
+          
+          <div class="receipt-card">
+            <div class="receipt-card-header">
+              <h4>Donation Details</h4>
+              <p>Receipt ID: ${donation.receipt_id}</p>
+            </div>
+            <div class="receipt-details">
+              <div class="detail-row">
+                <div class="detail-label">Donor Name</div>
+                <div class="detail-value">${donation.donor_name}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Email Address</div>
+                <div class="detail-value">${donation.email}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Donation Amount</div>
+                <div class="detail-value highlight">${donation.currency} ${donation.amount}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Country</div>
+                <div class="detail-value">${donation.country}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Date</div>
+                <div class="detail-value">${new Date(donation.created_at).toLocaleString('en-US', { 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}</div>
+              </div>
+            </div>
+          </div>
+        `;
 
       } catch (error) {
-        resultDiv.innerHTML = `<div class="error"><strong>Error:</strong> ${error.message}</div>`;
+        resultDiv.innerHTML = `
+          <div class="error-message">
+            <svg width="24" height="24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="15" y1="9" x2="9" y2="15"/>
+              <line x1="9" y1="9" x2="15" y2="15"/>
+            </svg>
+            <div class="content">
+              <strong>Connection Error</strong>
+              <p>${error.message}</p>
+            </div>
+          </div>
+        `;
       }
     }
 
-    // Allow Enter key to submit
     document.getElementById('receiptInput').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         lookupReceipt();
       }
     });
   </script>
+
 </body>
-</html>
+</html

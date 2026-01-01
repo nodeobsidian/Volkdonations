@@ -780,16 +780,18 @@
             Active Community
           </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Volunteer Name</th>
-              <th>Email Address</th>
-              <th>Joined Date</th>
-            </tr>
-          </thead>
-          <tbody id="volunteerTable"></tbody>
-        </table>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Volunteer Name</th>
+                <th>Email Address</th>
+                <th>Joined Date</th>
+              </tr>
+            </thead>
+            <tbody id="volunteerTable"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -965,21 +967,11 @@
 
         data.forEach(v => {
           const row = document.createElement("tr");
-          
-          // Create cells individually to ensure proper structure
-          const nameCell = document.createElement("td");
-          nameCell.textContent = v.name || 'N/A';
-          
-          const emailCell = document.createElement("td");
-          emailCell.textContent = v.email || 'N/A';
-          
-          const dateCell = document.createElement("td");
-          dateCell.textContent = v.created_at ? new Date(v.created_at).toLocaleDateString() : 'N/A';
-          
-          row.appendChild(nameCell);
-          row.appendChild(emailCell);
-          row.appendChild(dateCell);
-          
+          row.innerHTML = `
+            <td>${v.name}</td>
+            <td>${v.email}</td>
+            <td>${new Date(v.created_at).toLocaleDateString()}</td>
+          `;
           table.appendChild(row);
         });
       } catch (error) {

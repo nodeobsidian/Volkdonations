@@ -958,11 +958,21 @@
 
         data.forEach(v => {
           const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${v.name || 'N/A'}</td>
-            <td>${v.email || 'N/A'}</td>
-            <td>${v.created_at ? new Date(v.created_at).toLocaleDateString() : 'N/A'}</td>
-          `;
+          
+          // Create cells individually to ensure proper structure
+          const nameCell = document.createElement("td");
+          nameCell.textContent = v.name || 'N/A';
+          
+          const emailCell = document.createElement("td");
+          emailCell.textContent = v.email || 'N/A';
+          
+          const dateCell = document.createElement("td");
+          dateCell.textContent = v.created_at ? new Date(v.created_at).toLocaleDateString() : 'N/A';
+          
+          row.appendChild(nameCell);
+          row.appendChild(emailCell);
+          row.appendChild(dateCell);
+          
           table.appendChild(row);
         });
       } catch (error) {

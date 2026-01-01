@@ -946,9 +946,9 @@
         data.forEach(v => {
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${v.name}</td>
-            <td>${v.email}</td>
-            <td>${new Date(v.created_at).toLocaleDateString()}</td>
+            <td>${v.name || 'N/A'}</td>
+            <td>${v.email || 'N/A'}</td>
+            <td>${v.created_at ? new Date(v.created_at).toLocaleDateString() : 'N/A'}</td>
           `;
           table.appendChild(row);
         });

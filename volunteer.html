@@ -224,10 +224,11 @@
 
     .volunteer-table-container {
       background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       overflow: hidden;
       margin-top: 40px;
+      border: 1px solid #e9ecef;
     }
 
     table {
@@ -236,33 +237,117 @@
     }
 
     th, td {
-      padding: 18px 24px;
+      padding: 20px 28px;
       text-align: left;
       font-size: 15px;
     }
 
     th {
-      background: #f8f9fa;
-      color: #1e3a5f;
+      background: linear-gradient(135deg, #1e3a5f 0%, #2a4d6f 100%);
+      color: #ffffff;
       font-weight: 600;
-      border-bottom: 2px solid #e9ecef;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.8px;
+      border: none;
     }
 
     td {
-      color: #5a6c7d;
-      border-bottom: 1px solid #e9ecef;
+      color: #2c3e50;
+      border-bottom: 1px solid #f1f3f5;
+      position: relative;
     }
 
     tbody tr {
-      transition: background 0.2s ease;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    tbody tr::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: #00a86b;
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
     }
 
     tbody tr:hover {
-      background: #f8f9fa;
+      background: linear-gradient(90deg, rgba(0,168,107,0.03) 0%, transparent 100%);
+      transform: translateX(2px);
+    }
+
+    tbody tr:hover::before {
+      transform: scaleY(1);
     }
 
     tbody tr:last-child td {
       border-bottom: none;
+    }
+
+    td:first-child {
+      font-weight: 600;
+      color: #1e3a5f;
+    }
+
+    td:nth-child(2) {
+      color: #5a6c7d;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+
+    td:nth-child(3) {
+      color: #00a86b;
+      font-weight: 500;
+    }
+
+    .volunteer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, #00a86b 0%, #008f5a 100%);
+      color: white;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .volunteer-count {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #e9ecef;
+    }
+
+    .volunteer-count-text {
+      color: #1e3a5f;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .volunteer-count-number {
+      background: #00a86b;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .table-icon {
+      width: 20px;
+      height: 20px;
+      opacity: 0.8;
     }
 
     .form-section {
@@ -666,16 +751,33 @@
         </svg>
         <p>No volunteers yet. Be the first to join our mission!</p>
       </div>
-      <table id="volunteerTableContainer" style="display: none;">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Date Joined</th>
-          </tr>
-        </thead>
-        <tbody id="volunteerTable"></tbody>
-      </table>
+      <div id="volunteerTableContainer" style="display: none;">
+        <div class="volunteer-count">
+          <div class="volunteer-count-text">
+            <svg class="table-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            Total Volunteers
+            <span class="volunteer-count-number" id="volunteerCount">0</span>
+          </div>
+          <div class="volunteer-badge">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+            Active Community
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Volunteer Name</th>
+              <th>Email Address</th>
+              <th>Joined Date</th>
+            </tr>
+          </thead>
+          <tbody id="volunteerTable"></tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -836,8 +938,10 @@
         }
 
         emptyState.style.display = 'none';
-        tableContainer.style.display = 'table';
+        tableContainer.style.display = 'block';
         table.innerHTML = "";
+
+        document.getElementById('volunteerCount').textContent = data.length;
 
         data.forEach(v => {
           const row = document.createElement("tr");

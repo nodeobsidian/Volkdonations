@@ -234,12 +234,25 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
     }
 
     th, td {
       padding: 20px 28px;
       text-align: left;
       font-size: 15px;
+    }
+
+    th:nth-child(1), td:nth-child(1) {
+      width: 25%;
+    }
+
+    th:nth-child(2), td:nth-child(2) {
+      width: 50%;
+    }
+
+    th:nth-child(3), td:nth-child(3) {
+      width: 25%;
     }
 
     th {

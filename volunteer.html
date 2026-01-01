@@ -942,6 +942,13 @@
         const res = await fetch("https://volunteer.volkdonations.website");
         const data = await res.json();
 
+        // Debug: Log the data structure
+        console.log("API Response:", data);
+        if (data && data.length > 0) {
+          console.log("First volunteer object:", data[0]);
+          console.log("Object keys:", Object.keys(data[0]));
+        }
+
         loadingState.style.display = 'none';
 
         if (!data || data.length === 0) {

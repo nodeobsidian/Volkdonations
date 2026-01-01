@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Suspicious Website - Volk Donations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding-top: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .warning-box strong {
+            color: #856404;
+        }
+
+        .warning-box p {
+            color: #856404;
+            line-height: 1.6;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .help-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .error-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .status-suspicious {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .status-safe {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .preview-box {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .tech-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tech-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .tech-row:last-child {
+            border-bottom: none;
+        }
+
+        .tech-key {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .tech-value {
+            color: #333;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Report Suspicious Website</h1>
+            <p>Help us protect donors from fraudulent websites. If you've encountered a site claiming to be Volk Donations or our partner, report it here for verification.</p>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Common scam indicators:</strong>
+            <p>Sites asking for donations via wire transfer, cryptocurrency, or gift cards. Suspicious URLs similar to our domain. Pressure tactics or urgent appeals without proper documentation.</p>
+        </div>
+
+        <div id="formSection">
+            <div class="card">
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label for="websiteUrl">Suspicious Website URL *</label>
+                        <input type="text" id="websiteUrl" placeholder="https://example-suspicious-site.com" required>
+                        <p class="help-text">Enter the complete URL including http:// or https://</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Additional Details (Optional)</label>
+                        <textarea id="description" rows="4" placeholder="Where did you find this website? What made you suspicious?"></textarea>
+                    </div>
+
+                    <div id="errorBox" class="error-box" style="display: none;"></div>
+
+                    <button type="submit" class="btn" id="submitBtn">
+                        <span id="btnText">🔍 Check Website</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="resultsSection" class="results">
+            <button class="btn back-btn" onclick="resetForm()">← Check Another Site</button>
+            
+            <div class="card">
+                <h2 class="section-title">Analysis Results</h2>
+                <p style="color: #666; margin-bottom: 20px;">Website: <span id="analyzedUrl"></span></p>
+
+                <div id="statusBadge"></div>
+
+                <div class="info-grid" id="infoGrid"></div>
+
+                <div id="techDetails"></div>
+
+                <div id="previewSection"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('reportForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const errorBox = document.getElementById('errorBox');
+        const formSection = document.getElementById('formSection');
+        const resultsSection = document.getElementById('resultsSection');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const websiteUrl = document.getElementById('websiteUrl').value;
+            const description = document.getElementById('description').value;
+
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="loading"></span> Analyzing Website...';
+            errorBox.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/report-scam', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        websiteUrl: websiteUrl,
+                        description: description
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Failed to analyze website');
+                }
+
+                displayResults(data);
+            } catch (error) {
+                errorBox.textContent = error.message;
+                errorBox.style.display = 'block';
+                submitBtn.disabled = false;
+                btnText.textContent = '🔍 Check Website';
+            }
+        });
+
+        function displayResults(data) {
+            formSection.style.display = 'none';
+            resultsSection.classList.add('show');
+
+            document.getElementById('analyzedUrl').textContent = data.data.url;
+
+            const statusBadge = document.getElementById('statusBadge');
+            if (data.data.suspicious) {
+                statusBadge.innerHTML = `<div class="status-badge status-suspicious">⚠️ Potentially Suspicious<br><small>${data.data.reason}</small></div>`;
+            } else {
+                statusBadge.innerHTML = `<div class="status-badge status-safe">✓ No Immediate Red Flags<br><small>${data.data.reason}</small></div>`;
+            }
+
+            const infoGrid = document.getElementById('infoGrid');
+            infoGrid.innerHTML = `
+                <div class="info-item">
+                    <div class="info-label">Status Code</div>
+                    <div class="info-value">${data.data.status} ${data.data.statusText}</div>
+                </div>
+                ${data.data.pageTitle ? `
+                <div class="info-item">
+                    <div class="info-label">Page Title</div>
+                    <div class="info-value">${escapeHtml(data.data.pageTitle)}</div>
+                </div>
+                ` : ''}
+            `;
+
+            if (data.data.metaDescription) {
+                infoGrid.innerHTML += `
+                <div class="info-item">
+                    <div class="info-label">Description</div>
+                    <div class="info-value">${escapeHtml(data.data.metaDescription)}</div>
+                </div>
+                `;
+            }
+
+            if (data.data.headers && Object.keys(data.data.headers).length > 0) {
+                let techHtml = '<div class="section-title">Technical Details</div><div class="tech-details">';
+                for (const [key, value] of Object.entries(data.data.headers)) {
+                    techHtml += `
+                    <div class="tech-row">
+                        <span class="tech-key">${escapeHtml(key)}</span>
+                        <span class="tech-value">${escapeHtml(value)}</span>
+                    </div>
+                    `;
+                }
+                techHtml += '</div>';
+                document.getElementById('techDetails').innerHTML = techHtml;
+            }
+
+            if (data.data.preview) {
+                const previewSection = document.getElementById('previewSection');
+                previewSection.innerHTML = `
+                    <div class="section-title">Content Preview</div>
+                    <div class="preview-box">${escapeHtml(data.data.preview)}</div>
+                    ${data.data.contentLength > 2000 ? `<p class="help-text" style="margin-top: 10px;">Showing first 2000 characters of ${data.data.contentLength.toLocaleString()} total</p>` : ''}
+                `;
+            }
+        }
+
+        function resetForm() {
+            formSection.style.display = 'block';
+            resultsSection.classList.remove('show');
+            form.reset();
+            submitBtn.disabled = false;
+            btnText.textContent = '🔍 Check Website';
+            errorBox.style.display = 'none';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

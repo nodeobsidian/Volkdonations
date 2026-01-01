@@ -334,16 +334,31 @@
             btnText.innerHTML = '<span class="loading"></span> Analyzing Website...';
             errorBox.style.display = 'none';
 
+            const requestBody = {
+                websiteUrl: websiteUrl,
+                description: description
+            };
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('method')) {
+                requestBody.method = urlParams.get('method');
+            }
+            
+            if (urlParams.get('headers')) {
+                try {
+                    requestBody.headers = JSON.parse(decodeURIComponent(urlParams.get('headers')));
+                } catch (e) {
+                    console.error('Invalid headers parameter');
+                }
+            }
+
             try {
                 const response = await fetch('/api/report-scam', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        websiteUrl: websiteUrl,
-                        description: description
-                    })
+                    body: JSON.stringify(requestBody)
                 });
 
                 const data = await response.json();
@@ -368,7 +383,9 @@
             document.getElementById('analyzedUrl').textContent = data.data.url;
 
             const statusBadge = document.getElementById('statusBadge');
-            if (data.data.suspicious) {
+            if (data.data.verified) {
+                statusBadge.innerHTML = `<div class="status-badge status-safe">✓ Verified Official Domain<br><small>${data.data.reason}</small></div>`;
+            } else if (data.data.suspicious) {
                 statusBadge.innerHTML = `<div class="status-badge status-suspicious">⚠️ Potentially Suspicious<br><small>${data.data.reason}</small></div>`;
             } else {
                 statusBadge.innerHTML = `<div class="status-badge status-safe">✓ No Immediate Red Flags<br><small>${data.data.reason}</small></div>`;
@@ -400,9 +417,10 @@
             if (data.data.headers && Object.keys(data.data.headers).length > 0) {
                 let techHtml = '<div class="section-title">Technical Details</div><div class="tech-details">';
                 for (const [key, value] of Object.entries(data.data.headers)) {
+                    const displayKey = key === 'set-cookie' ? '🔑 set-cookie' : key;
                     techHtml += `
                     <div class="tech-row">
-                        <span class="tech-key">${escapeHtml(key)}</span>
+                        <span class="tech-key">${escapeHtml(displayKey)}</span>
                         <span class="tech-value">${escapeHtml(value)}</span>
                     </div>
                     `;

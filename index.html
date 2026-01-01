@@ -25,148 +25,435 @@
   <meta name="theme-color" content="#ffffff">
 
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f7f9fb;
-      color: #333;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffffff;
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
       text-decoration: none;
-      color: #1a73e8;
+      color: inherit;
+      transition: all 0.3s ease;
     }
 
     header {
       background: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
-      padding: 16px 32px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    header h1 {
-      font-size: 20px;
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-container img {
+      height: 50px;
+      width: auto;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e3a5f;
       margin: 0;
-      color: #1f3a5f;
+    }
+
+    .logo-text span {
+      font-size: 12px;
+      color: #00a86b;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
     }
 
     nav a {
-      margin-left: 20px;
       font-weight: 500;
-      color: #333;
+      color: #2c3e50;
+      font-size: 15px;
+      position: relative;
     }
 
     nav a:hover {
-      color: #1a73e8;
+      color: #00a86b;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00a86b;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-menu-btn span {
+      width: 28px;
+      height: 3px;
+      background: #1e3a5f;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
     }
 
     .hero {
-      background: linear-gradient(135deg, #1f3a5f, #2b5da8);
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
       color: #ffffff;
-      padding: 80px 32px;
+      padding: 120px 5% 100px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+      background-size: cover;
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
 
     .hero h2 {
-      font-size: 36px;
-      margin-bottom: 16px;
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      line-height: 1.2;
     }
 
     .hero p {
-      font-size: 18px;
-      max-width: 700px;
-      margin: 0 auto 32px;
-      line-height: 1.6;
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      opacity: 0.95;
     }
 
-    .hero a {
+    .cta-button {
       background: #ffffff;
-      color: #1f3a5f;
-      padding: 14px 28px;
-      border-radius: 4px;
-      font-weight: bold;
+      color: #1e3a5f;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
     .section {
-      padding: 60px 32px;
-      max-width: 1100px;
+      padding: 80px 5%;
+      max-width: 1400px;
       margin: auto;
     }
 
     .section h3 {
       text-align: center;
-      margin-bottom: 40px;
-      font-size: 28px;
-      color: #1f3a5f;
+      margin-bottom: 20px;
+      font-size: 38px;
+      color: #1e3a5f;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 50px;
+      color: #5a6c7d;
+      font-size: 17px;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
     }
 
     .card {
       background: #ffffff;
-      padding: 24px;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border-top: 4px solid #00a86b;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     }
 
     .card h4 {
       margin-top: 0;
-      color: #1f3a5f;
+      margin-bottom: 15px;
+      color: #1e3a5f;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: #5a6c7d;
+      line-height: 1.7;
+      font-size: 15px;
     }
 
     footer {
-      background: #0f1f33;
+      background: #1e3a5f;
       color: #ffffff;
-      padding: 50px 32px;
-      margin-top: 60px;
+      padding: 70px 5% 30px;
+      margin-top: 80px;
     }
 
     .footer-grid {
-      max-width: 1100px;
+      max-width: 1400px;
       margin: auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-about {
+      padding-right: 30px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo img {
+      height: 45px;
+      width: auto;
+    }
+
+    .footer-logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .footer-about p {
+      color: #b8c7d9;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #00a86b;
+      transform: translateY(-3px);
     }
 
     footer h5 {
       margin-top: 0;
-      margin-bottom: 12px;
-      font-size: 16px;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
     }
 
     footer a {
       display: block;
-      color: #cfd8e3;
-      margin-bottom: 8px;
+      color: #b8c7d9;
+      margin-bottom: 12px;
       font-size: 14px;
+      transition: all 0.3s ease;
     }
 
     footer a:hover {
-      color: #ffffff;
+      color: #00a86b;
+      padding-left: 5px;
     }
 
     .footer-bottom {
       text-align: center;
-      margin-top: 40px;
-      font-size: 13px;
-      color: #b0c4de;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px;
+      color: #b8c7d9;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .footer-bottom p {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 968px) {
+      nav {
+        position: fixed;
+        top: 86px;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: calc(100vh - 86px);
+        background: #ffffff;
+        flex-direction: column;
+        padding: 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .hero h2 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .section h3 {
+        font-size: 32px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-about {
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo-container img {
+        height: 40px;
+      }
+
+      .logo-text h1 {
+        font-size: 18px;
+      }
+
+      .hero {
+        padding: 80px 5% 70px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .section {
+        padding: 60px 5%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
   <header>
-    <h1>Volk Donations</h1>
-    <nav>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </div>
+    <nav id="mainNav">
       <a href="/">Home</a>
       <a href="/campaigns">Campaigns</a>
       <a href="/donate">Donate</a>
@@ -174,48 +461,86 @@
       <a href="/contact">Contact</a>
       <a href="/auth">Login</a>
     </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
-    <h2>Supporting Orphans Across the World</h2>
-    <p>
-      Volk Donations is a United States–based nonprofit organization committed
-      to improving the lives of orphaned children through education, healthcare,
-      and community support worldwide.
-    </p>
-    <a href="/donate">Make a Donation</a>
+    <div class="hero-content">
+      <h2>Supporting Orphans Across the World</h2>
+      <p>
+        Volk Donations is a United States-based nonprofit organization committed
+        to improving the lives of orphaned children through education, healthcare,
+        and community support worldwide.
+      </p>
+      <a href="/donate" class="cta-button">Make a Donation</a>
+    </div>
   </section>
 
-  <!-- MISSION -->
   <section class="section">
     <h3>Our Mission</h3>
+    <p class="section-subtitle">
+      We believe every child deserves a chance at a better future. Through our dedicated programs,
+      we work tirelessly to provide essential support to orphaned children around the globe.
+    </p>
     <div class="cards">
       <div class="card">
         <h4>Child Welfare</h4>
-        <p>We provide shelter, nutrition, and emotional support to orphaned children in vulnerable communities.</p>
+        <p>We provide shelter, nutrition, and emotional support to orphaned children in vulnerable communities, ensuring they have a safe and nurturing environment to grow.</p>
       </div>
       <div class="card">
         <h4>Education Access</h4>
-        <p>Supporting education programs that give children a chance for a better future.</p>
+        <p>Supporting education programs that give children a chance for a better future through scholarships, school supplies, and learning resources.</p>
       </div>
       <div class="card">
         <h4>Global Impact</h4>
-        <p>Our programs operate across Africa, Asia, and Latin America with transparency and accountability.</p>
+        <p>Our programs operate across Africa, Asia, and Latin America with transparency and accountability, making a real difference in thousands of lives.</p>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
+
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>
+          Volk Donations is dedicated to creating lasting change in the lives of orphaned
+          children worldwide. Through compassion, commitment, and community support, we're
+          building a better future for those who need it most.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
 
       <div>
         <h5>Organization</h5>
         <a href="/about">About Us</a>
         <a href="/partners">Our Partners</a>
         <a href="/branches">Branches</a>
-        <a href="/reports">Transparency & Reports</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
       </div>
 
       <div>
@@ -223,27 +548,60 @@
         <a href="/contribute">Contribute</a>
         <a href="/volunteer">Volunteer</a>
         <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
       </div>
 
       <div>
         <h5>Legal</h5>
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms of Service</a>
-      </div>
-
-      <div>
-        <h5>Connect</h5>
-        <a href="#">Facebook</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Twitter / X</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      © 2025 Volk Donations. A registered 501(c)(3) nonprofit organization based in the United States.
+      <p>© 2026 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
     </div>
   </footer>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuBtn.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function(event) {
+      const isClickInsideNav = mainNav.contains(event.target);
+      const isClickOnButton = mobileMenuBtn.contains(event.target);
+      
+      if (!isClickInsideNav && !isClickOnButton && mainNav.classList.contains('active')) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 968) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+  </script>
 
 </body>
 </html>

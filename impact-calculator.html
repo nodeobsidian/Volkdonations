@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volk Donations - Impact Calculator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2d3748;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .subtitle {
+      color: #718096;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      color: #4a5568;
+      font-weight: 600;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    textarea {
+      font-family: 'Courier New', monospace;
+      min-height: 120px;
+      resize: vertical;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #5a67d8;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    .result {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #f7fafc;
+      border-left: 4px solid #667eea;
+    }
+    .error {
+      border-left-color: #f56565;
+      background: #fff5f5;
+      color: #c53030;
+    }
+    .success {
+      border-left-color: #48bb78;
+      background: #f0fff4;
+      color: #276749;
+    }
+    pre {
+      background: #2d3748;
+      color: #68d391;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>🌍 Impact Calculator</h1>
+      <p class="subtitle">See the difference your donation makes</p>
+
+      <label>Donation Amount ($)</label>
+      <input type="number" id="amount" value="100" min="1">
+
+      <label>Impact Category</label>
+      <select id="category">
+        <option value="meals">Meals for Families</option>
+        <option value="water">Clean Water Access</option>
+        <option value="education">Education Programs</option>
+        <option value="healthcare">Healthcare Services</option>
+      </select>
+
+      <button onclick="calculateImpact()">Calculate Impact</button>
+
+      <div id="calcResult"></div>
+    </div>
+
+    <div class="card">
+      <h1>⚙️ Customize Preferences</h1>
+      <p class="subtitle">Save your calculator settings</p>
+
+      <label>Preferences (JSON)</label>
+      <textarea id="preferences" placeholder='{"displayFormat": "chart", "currency": "USD"}'>{
+  "displayFormat": "chart",
+  "currency": "USD",
+  "showBreakdown": true
+}</textarea>
+
+      <button onclick="savePreferences()">Save Preferences</button>
+
+      <div id="prefResult"></div>
+    </div>
+
+    <div class="card">
+      <h1>🔐 Admin Dashboard</h1>
+      <p class="subtitle">Access administrative features</p>
+
+      <button onclick="checkAdmin()">Access Dashboard</button>
+
+      <div id="adminResult"></div>
+    </div>
+  </div>
+
+  <script>
+    // Replace with your Cloudflare Workers URLs
+    const API_URLS = {
+      savePrefs: 'https://volk-save-prefs.your-subdomain.workers.dev',
+      admin: 'https://volk-admin.your-subdomain.workers.dev',
+      calculate: 'https://volk-calculate.your-subdomain.workers.dev'
+    };
+    
+    // OR if using single router worker:
+    // const API_BASE = 'https://volk-donations-api.your-subdomain.workers.dev';
+
+    async function calculateImpact() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const category = document.getElementById('category').value;
+      const resultDiv = document.getElementById('calcResult');
+
+      try {
+        const response = await fetch(API_URLS.calculate, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount, category })
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+          resultDiv.className = 'result success';
+          resultDiv.innerHTML = `
+            <strong>Impact Calculated!</strong>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          resultDiv.className = 'result error';
+          resultDiv.innerHTML = `<strong>Error:</strong> ${data.error}`;
+        }
+      } catch (error) {
+        resultDiv.className = 'result error';
+        resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      }
+    }
+
+    async function savePreferences() {
+      const preferences = document.getElementById('preferences').value;
+      const resultDiv = document.getElementById('prefResult');
+
+      try {
+        const response = await fetch(API_URLS.savePrefs, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ preferences })
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+          resultDiv.className = 'result success';
+          resultDiv.innerHTML = `
+            <strong>✓ Preferences Saved</strong>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          resultDiv.className = 'result error';
+          resultDiv.innerHTML = `<strong>Error:</strong> ${data.error}`;
+        }
+      } catch (error) {
+        resultDiv.className = 'result error';
+        resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      }
+    }
+
+    async function checkAdmin() {
+      const resultDiv = document.getElementById('adminResult');
+
+      try {
+        const response = await fetch(API_URLS.admin);
+        const data = await response.json();
+
+        if (data.access === 'granted') {
+          resultDiv.className = 'result success';
+          resultDiv.innerHTML = `
+            <strong>🎉 Access Granted!</strong>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          resultDiv.className = 'result error';
+          resultDiv.innerHTML = `
+            <strong>Access Denied</strong>
+            <p>${data.message}</p>
+          `;
+        }
+      } catch (error) {
+        resultDiv.className = 'result error';
+        resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      }
+    }
+  </script>
+</body>
+</html>

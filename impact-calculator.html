@@ -155,15 +155,8 @@
   </div>
 
   <script>
-    // Replace with your Cloudflare Workers URLs
-    const API_URLS = {
-      savePrefs: 'https://preferences.volkdonations.website',
-      admin: 'https://admindash.volkdonations.website',
-      calculate: 'https://calc.volkdonations.website'
-    };
-    
-    // OR if using single router worker:
-    // const API_BASE = 'https://volk-donations-api.your-subdomain.workers.dev';
+    // Unified gateway endpoint
+    const GATEWAY = 'https://gateway.volkdonations.website';
 
     async function calculateImpact() {
       const amount = parseFloat(document.getElementById('amount').value);
@@ -171,7 +164,7 @@
       const resultDiv = document.getElementById('calcResult');
 
       try {
-        const response = await fetch(API_URLS.calculate, {
+        const response = await fetch(`${GATEWAY}/calculate`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ amount, category })
@@ -200,7 +193,7 @@
       const resultDiv = document.getElementById('prefResult');
 
       try {
-        const response = await fetch(API_URLS.savePrefs, {
+        const response = await fetch(`${GATEWAY}/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ preferences })
@@ -228,7 +221,7 @@
       const resultDiv = document.getElementById('adminResult');
 
       try {
-        const response = await fetch(API_URLS.admin);
+        const response = await fetch(`${GATEWAY}/admin`);
         const data = await response.json();
 
         if (data.access === 'granted') {

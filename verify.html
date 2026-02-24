@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verify Email | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Verify your Volk Donations account with the code sent to your email." />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fb;
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-container img { height: 46px; width: auto; }
+
+    .logo-text h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e3a5f;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      color: #00a86b;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+    }
+
+    .verify-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 440px;
+      overflow: hidden;
+    }
+
+    .verify-card-header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      padding: 36px 40px;
+      text-align: center;
+    }
+
+    .verify-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .verify-card-header h2 {
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .verify-card-header p {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .verify-card-header .email-highlight {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .verify-card-body {
+      padding: 40px;
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .alert.success {
+      background: #eafaf1;
+      border: 1px solid #00a86b;
+      color: #1e6b4b;
+      display: block;
+    }
+
+    .alert.error {
+      background: #fef0ee;
+      border: 1px solid #e74c3c;
+      color: #a93226;
+      display: block;
+    }
+
+    .token-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e3a5f;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+      text-align: center;
+    }
+
+    .token-inputs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .token-input {
+      width: 64px;
+      height: 72px;
+      border: 2px solid #dce3eb;
+      border-radius: 10px;
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      color: #1e3a5f;
+      background: #f9fbfd;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      caret-color: #00a86b;
+    }
+
+    .token-input:focus {
+      border-color: #00a86b;
+      box-shadow: 0 0 0 3px rgba(0,168,107,0.12);
+      background: #ffffff;
+    }
+
+    .token-input.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231,76,60,0.1);
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1e3a5f, #00a86b);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s, transform 0.2s;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .submit-btn .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto;
+    }
+
+    .submit-btn.loading span { display: none; }
+    .submit-btn.loading .spinner { display: block; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .expiry-note {
+      text-align: center;
+      font-size: 13px;
+      color: #8a9ab0;
+      margin-bottom: 20px;
+    }
+
+    .expiry-note strong { color: #5a6c7d; }
+
+    .resend-section {
+      text-align: center;
+      font-size: 14px;
+      color: #5a6c7d;
+      border-top: 1px solid #f0f3f7;
+      padding-top: 20px;
+    }
+
+    .resend-btn {
+      background: none;
+      border: none;
+      color: #00a86b;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .resend-btn:hover { opacity: 0.8; }
+    .resend-btn:disabled { color: #8a9ab0; cursor: not-allowed; text-decoration: none; }
+
+    .countdown {
+      color: #8a9ab0;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .success-state {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: #eafaf1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-state h3 {
+      color: #1e3a5f;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .success-state p {
+      color: #5a6c7d;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .login-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      background: linear-gradient(135deg, #1e3a5f, #00a86b);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .login-btn:hover { opacity: 0.9; }
+
+    footer {
+      background: #1e3a5f;
+      color: #b8c7d9;
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+      .verify-card-body { padding: 28px 20px; }
+      .token-input { width: 54px; height: 62px; font-size: 26px; }
+      .token-inputs { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </a>
+  </header>
+
+  <main>
+    <div class="verify-card">
+      <div class="verify-card-header">
+        <div class="verify-icon">
+          <svg width="32" height="32" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <h2>Check Your Email</h2>
+        <p>We sent a 4-digit verification code to<br><span class="email-highlight" id="emailDisplay">your email address</span></p>
+      </div>
+
+      <div class="verify-card-body">
+        <div class="alert" id="formAlert"></div>
+
+        <div id="verifyForm">
+          <label class="token-label">Enter your 4-digit code</label>
+
+          <div class="token-inputs">
+            <input type="text" class="token-input" inputmode="numeric" maxlength="1" pattern="[0-9]" id="d1" aria-label="Digit 1" />
+            <input type="text" class="token-input" inputmode="numeric" maxlength="1" pattern="[0-9]" id="d2" aria-label="Digit 2" />
+            <input type="text" class="token-input" inputmode="numeric" maxlength="1" pattern="[0-9]" id="d3" aria-label="Digit 3" />
+            <input type="text" class="token-input" inputmode="numeric" maxlength="1" pattern="[0-9]" id="d4" aria-label="Digit 4" />
+          </div>
+
+          <div class="expiry-note">Code expires in <strong>4 hours</strong></div>
+
+          <button class="submit-btn" id="submitBtn" type="button">
+            <span>Verify Email</span>
+            <div class="spinner"></div>
+          </button>
+
+          <div class="resend-section">
+            Didn't receive the code?
+            <br>
+            <button class="resend-btn" id="resendBtn" type="button">Resend code</button>
+            <div class="countdown" id="countdown"></div>
+          </div>
+        </div>
+
+        <div class="success-state" id="successState" style="display:none;">
+          <div class="success-icon">
+            <svg width="36" height="36" fill="none" stroke="#00a86b" stroke-width="2.5" viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3>Email Verified!</h3>
+          <p>Your account has been successfully verified. You can now sign in to your Volk Donations account.</p>
+          <a href="/auth/login" class="login-btn">Sign In Now</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Volk Donations · 501(c)(3) Nonprofit · EIN: 45-1234567</p>
+  </footer>
+
+  <script>
+    // Pull pending data from session storage
+    const userId = sessionStorage.getItem('pendingUserId');
+    const pendingEmail = sessionStorage.getItem('pendingEmail');
+
+    // Redirect to signup if no pending session
+    if (!userId) {
+      window.location.href = '/auth';
+    }
+
+    if (pendingEmail) {
+      document.getElementById('emailDisplay').textContent = pendingEmail;
+    }
+
+    const inputs = [
+      document.getElementById('d1'),
+      document.getElementById('d2'),
+      document.getElementById('d3'),
+      document.getElementById('d4'),
+    ];
+
+    const submitBtn = document.getElementById('submitBtn');
+    const formAlert = document.getElementById('formAlert');
+    const resendBtn = document.getElementById('resendBtn');
+    const countdownEl = document.getElementById('countdown');
+
+    // Auto-focus and navigation between digit inputs
+    inputs.forEach((input, idx) => {
+      input.addEventListener('input', function(e) {
+        const val = this.value.replace(/\D/g, '');
+        this.value = val ? val[0] : '';
+        if (val && idx < 3) inputs[idx + 1].focus();
+        checkAutoSubmit();
+      });
+
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && !this.value && idx > 0) {
+          inputs[idx - 1].focus();
+          inputs[idx - 1].value = '';
+        }
+        if (e.key === 'ArrowLeft' && idx > 0) inputs[idx - 1].focus();
+        if (e.key === 'ArrowRight' && idx < 3) inputs[idx + 1].focus();
+      });
+
+      input.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+        if (pasted.length >= 4) {
+          inputs.forEach((inp, i) => { inp.value = pasted[i] || ''; });
+          inputs[3].focus();
+          checkAutoSubmit();
+        }
+      });
+    });
+
+    function getToken() {
+      return inputs.map(i => i.value).join('');
+    }
+
+    function checkAutoSubmit() {
+      const token = getToken();
+      if (token.length === 4) submitVerification();
+    }
+
+    function showAlert(message, type) {
+      formAlert.textContent = message;
+      formAlert.className = `alert ${type}`;
+    }
+
+    function clearAlert() {
+      formAlert.className = 'alert';
+      formAlert.textContent = '';
+    }
+
+    function setInputsError(hasError) {
+      inputs.forEach(i => {
+        i.classList.toggle('error', hasError);
+      });
+    }
+
+    async function submitVerification() {
+      const token = getToken();
+
+      if (token.length !== 4 || !/^\d{4}$/.test(token)) {
+        showAlert('Please enter the complete 4-digit code.', 'error');
+        setInputsError(true);
+        return;
+      }
+
+      clearAlert();
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+      setInputsError(false);
+
+      try {
+        const response = await fetch('/api/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId, token }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          sessionStorage.removeItem('pendingUserId');
+          sessionStorage.removeItem('pendingEmail');
+          document.getElementById('verifyForm').style.display = 'none';
+          document.getElementById('successState').style.display = 'block';
+        } else {
+          showAlert(data.error || 'Verification failed. Please try again.', 'error');
+          setInputsError(true);
+          // Clear inputs and refocus on first
+          inputs.forEach(i => i.value = '');
+          inputs[0].focus();
+        }
+      } catch (err) {
+        showAlert('Network error. Please check your connection and try again.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+      }
+    }
+
+    submitBtn.addEventListener('click', submitVerification);
+
+    // Resend cooldown logic (60 seconds)
+    let resendCooldown = 0;
+    let cooldownTimer = null;
+
+    function startCooldown(seconds) {
+      resendCooldown = seconds;
+      resendBtn.disabled = true;
+      updateCountdown();
+      cooldownTimer = setInterval(() => {
+        resendCooldown--;
+        if (resendCooldown <= 0) {
+          clearInterval(cooldownTimer);
+          resendBtn.disabled = false;
+          countdownEl.textContent = '';
+        } else {
+          updateCountdown();
+        }
+      }, 1000);
+    }
+
+    function updateCountdown() {
+      countdownEl.textContent = `You can resend in ${resendCooldown}s`;
+    }
+
+    resendBtn.addEventListener('click', async function() {
+      if (resendBtn.disabled) return;
+      resendBtn.disabled = true;
+      clearAlert();
+
+      try {
+        const response = await fetch('/api/resend-token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showAlert('A new verification code has been sent to your email.', 'success');
+          inputs.forEach(i => i.value = '');
+          inputs[0].focus();
+          startCooldown(60);
+        } else {
+          showAlert(data.error || 'Failed to resend code. Please try again.', 'error');
+          resendBtn.disabled = false;
+        }
+      } catch (err) {
+        showAlert('Network error. Please try again.', 'error');
+        resendBtn.disabled = false;
+      }
+    });
+
+    // Focus first input on load
+    inputs[0].focus();
+  </script>
+
+</body>
+</html>

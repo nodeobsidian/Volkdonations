@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Account | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create your Volk Donations account to start supporting orphans worldwide." />
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fb;
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-container img {
+      height: 46px;
+      width: auto;
+    }
+
+    .logo-text h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e3a5f;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      color: #00a86b;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .header-link {
+      font-size: 14px;
+      color: #5a6c7d;
+    }
+
+    .header-link a {
+      color: #00a86b;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .header-link a:hover { text-decoration: underline; }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 20px;
+    }
+
+    .auth-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+    }
+
+    .auth-card-header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      padding: 36px 40px;
+      text-align: center;
+    }
+
+    .auth-card-header h2 {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .auth-card-header p {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+    }
+
+    .auth-card-body {
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e3a5f;
+      margin-bottom: 7px;
+      letter-spacing: 0.3px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #dce3eb;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #2c3e50;
+      background: #f9fbfd;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      outline: none;
+      font-family: inherit;
+    }
+
+    input:focus {
+      border-color: #00a86b;
+      box-shadow: 0 0 0 3px rgba(0,168,107,0.12);
+      background: #ffffff;
+    }
+
+    input.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231,76,60,0.1);
+    }
+
+    .field-error {
+      display: none;
+      font-size: 12px;
+      color: #e74c3c;
+      margin-top: 5px;
+    }
+
+    .field-error.visible { display: block; }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-pw {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #8a9ab0;
+      background: none;
+      border: none;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-pw:hover { color: #1e3a5f; }
+
+    .password-strength {
+      margin-top: 8px;
+      display: flex;
+      gap: 4px;
+    }
+
+    .strength-bar {
+      height: 4px;
+      flex: 1;
+      border-radius: 2px;
+      background: #dce3eb;
+      transition: background 0.3s;
+    }
+
+    .strength-bar.weak { background: #e74c3c; }
+    .strength-bar.medium { background: #f39c12; }
+    .strength-bar.strong { background: #00a86b; }
+
+    .strength-label {
+      font-size: 11px;
+      color: #8a9ab0;
+      margin-top: 4px;
+    }
+
+    .captcha-wrapper {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1e3a5f, #00a86b);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s, transform 0.2s;
+      position: relative;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .submit-btn .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto;
+    }
+
+    .submit-btn.loading span { display: none; }
+    .submit-btn.loading .spinner { display: block; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert.success {
+      background: #eafaf1;
+      border: 1px solid #00a86b;
+      color: #1e6b4b;
+      display: block;
+    }
+
+    .alert.error {
+      background: #fef0ee;
+      border: 1px solid #e74c3c;
+      color: #a93226;
+      display: block;
+    }
+
+    .divider {
+      text-align: center;
+      color: #8a9ab0;
+      font-size: 13px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background: #dce3eb;
+    }
+
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+
+    .signin-link {
+      text-align: center;
+      font-size: 14px;
+      color: #5a6c7d;
+    }
+
+    .signin-link a {
+      color: #00a86b;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .signin-link a:hover { text-decoration: underline; }
+
+    footer {
+      background: #1e3a5f;
+      color: #b8c7d9;
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 520px) {
+      .auth-card-body { padding: 28px 24px; }
+      .auth-card-header { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </a>
+    <div class="header-link">Already have an account? <a href="/auth/login">Sign in</a></div>
+  </header>
+
+  <main>
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h2>Create Your Account</h2>
+        <p>Join us in making a difference worldwide</p>
+      </div>
+      <div class="auth-card-body">
+
+        <div class="alert" id="formAlert"></div>
+
+        <form id="signupForm" novalidate>
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Jane Smith"
+              autocomplete="name"
+              maxlength="100"
+              required
+            />
+            <div class="field-error" id="nameError">Please enter your full name (at least 2 characters).</div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="jane@example.com"
+              autocomplete="email"
+              maxlength="255"
+              required
+            />
+            <div class="field-error" id="emailError">Please enter a valid email address.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a strong password"
+                autocomplete="new-password"
+                maxlength="128"
+                required
+              />
+              <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+                <svg id="eyeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar" id="bar1"></div>
+              <div class="strength-bar" id="bar2"></div>
+              <div class="strength-bar" id="bar3"></div>
+              <div class="strength-bar" id="bar4"></div>
+            </div>
+            <div class="strength-label" id="strengthLabel"></div>
+            <div class="field-error" id="passwordError">
+              Password must be 8+ characters with uppercase, lowercase, a number, and a special character.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Repeat your password"
+                autocomplete="new-password"
+                maxlength="128"
+                required
+              />
+            </div>
+            <div class="field-error" id="confirmPasswordError">Passwords do not match.</div>
+          </div>
+
+          <div class="captcha-wrapper">
+            <div
+              class="h-captcha"
+              data-sitekey="0x4AAAAAAChUqb3ILZv073OU"
+              id="hcaptcha"
+            ></div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span>Create Account</span>
+            <div class="spinner"></div>
+          </button>
+
+        </form>
+
+        <div class="divider">or</div>
+        <div class="signin-link">Already have an account? <a href="/auth/login">Sign in here</a></div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Volk Donations · 501(c)(3) Nonprofit · EIN: 45-1234567</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const submitBtn = document.getElementById('submitBtn');
+    const formAlert = document.getElementById('formAlert');
+
+    // Toggle password visibility
+    document.getElementById('togglePw').addEventListener('click', function() {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+    });
+
+    // Password strength meter
+    passwordInput.addEventListener('input', function() {
+      const val = this.value;
+      let score = 0;
+      if (val.length >= 8) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+
+      const bars = [
+        document.getElementById('bar1'),
+        document.getElementById('bar2'),
+        document.getElementById('bar3'),
+        document.getElementById('bar4'),
+      ];
+      const label = document.getElementById('strengthLabel');
+      const classMap = ['', 'weak', 'medium', 'medium', 'strong'];
+      const labelMap = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+
+      bars.forEach((b, i) => {
+        b.className = 'strength-bar';
+        if (i < score) b.classList.add(classMap[score]);
+      });
+
+      label.textContent = val.length > 0 ? labelMap[score] : '';
+    });
+
+    function showFieldError(id, show) {
+      const el = document.getElementById(id);
+      el.classList.toggle('visible', show);
+    }
+
+    function setInputError(input, hasError) {
+      input.classList.toggle('error', hasError);
+    }
+
+    function showAlert(message, type) {
+      formAlert.textContent = message;
+      formAlert.className = `alert ${type}`;
+    }
+
+    function clearAlert() {
+      formAlert.className = 'alert';
+      formAlert.textContent = '';
+    }
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    }
+
+    function validatePassword(password) {
+      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(password);
+    }
+
+    function validateForm() {
+      let valid = true;
+
+      const name = nameInput.value.trim();
+      const nameOk = name.length >= 2 && name.length <= 100;
+      showFieldError('nameError', !nameOk);
+      setInputError(nameInput, !nameOk);
+      if (!nameOk) valid = false;
+
+      const email = emailInput.value.trim();
+      const emailOk = validateEmail(email);
+      showFieldError('emailError', !emailOk);
+      setInputError(emailInput, !emailOk);
+      if (!emailOk) valid = false;
+
+      const password = passwordInput.value;
+      const passwordOk = validatePassword(password);
+      showFieldError('passwordError', !passwordOk);
+      setInputError(passwordInput, !passwordOk);
+      if (!passwordOk) valid = false;
+
+      const confirmOk = confirmPasswordInput.value === passwordInput.value && confirmPasswordInput.value.length > 0;
+      showFieldError('confirmPasswordError', !confirmOk);
+      setInputError(confirmPasswordInput, !confirmOk);
+      if (!confirmOk) valid = false;
+
+      return valid;
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      clearAlert();
+
+      if (!validateForm()) return;
+
+      // Get hCaptcha token
+      const captchaToken = hcaptcha.getResponse();
+      if (!captchaToken) {
+        showAlert('Please complete the CAPTCHA verification.', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+
+      try {
+        const response = await fetch('/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameInput.value.trim(),
+            email: emailInput.value.trim().toLowerCase(),
+            password: passwordInput.value,
+            captchaToken,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Store userId for verify page
+          sessionStorage.setItem('pendingUserId', data.userId);
+          sessionStorage.setItem('pendingEmail', emailInput.value.trim().toLowerCase());
+          window.location.href = '/verify';
+        } else {
+          showAlert(data.error || 'Something went wrong. Please try again.', 'error');
+          hcaptcha.reset();
+        }
+      } catch (err) {
+        showAlert('Network error. Please check your connection and try again.', 'error');
+        hcaptcha.reset();
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+      }
+    });
+
+    // Live validation on blur
+    nameInput.addEventListener('blur', () => {
+      const ok = nameInput.value.trim().length >= 2;
+      showFieldError('nameError', !ok);
+      setInputError(nameInput, !ok);
+    });
+
+    emailInput.addEventListener('blur', () => {
+      const ok = validateEmail(emailInput.value);
+      showFieldError('emailError', !ok);
+      setInputError(emailInput, !ok);
+    });
+
+    passwordInput.addEventListener('blur', () => {
+      const ok = validatePassword(passwordInput.value);
+      showFieldError('passwordError', !ok);
+      setInputError(passwordInput, !ok);
+    });
+
+    confirmPasswordInput.addEventListener('blur', () => {
+      const ok = confirmPasswordInput.value === passwordInput.value && confirmPasswordInput.value.length > 0;
+      showFieldError('confirmPasswordError', !ok);
+      setInputError(confirmPasswordInput, !ok);
+    });
+  </script>
+
+</body>
+</html>

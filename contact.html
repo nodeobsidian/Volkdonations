@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get in touch with Volk Donations. We'd love to hear from you." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #2c3e50; line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+    header { background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-container img { height: 50px; width: auto; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: #1e3a5f; margin: 0; }
+    .logo-text span { font-size: 12px; color: #00a86b; font-weight: 500; letter-spacing: 0.5px; }
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { font-weight: 500; color: #2c3e50; font-size: 15px; position: relative; }
+    nav a:hover { color: #00a86b; }
+    nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00a86b; transition: width 0.3s ease; }
+    nav a:hover::after { width: 100%; }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+    .mobile-menu-btn span { width: 28px; height: 3px; background: #1e3a5f; transition: all 0.3s ease; border-radius: 2px; }
+    .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    .hero { background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%); color: #ffffff; padding: 80px 5% 70px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom; background-size: cover; opacity: 0.3; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h2 { font-size: 42px; margin-bottom: 16px; font-weight: 700; line-height: 1.2; }
+    .hero p { font-size: 18px; max-width: 620px; margin: 0 auto; line-height: 1.7; opacity: 0.95; }
+
+    .page-body { background: #f5f7fa; padding: 60px 5% 80px; }
+    .page-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start; }
+
+    .card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-top: 4px solid #00a86b; transition: all 0.3s ease; }
+    .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.11); transform: translateY(-2px); }
+    .card-inner { padding: 36px; }
+    .card-title { font-size: 22px; font-weight: 700; color: #1e3a5f; margin-bottom: 5px; }
+    .card-sub { font-size: 14px; color: #5a6c7d; margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+
+    label { display: block; font-size: 13px; font-weight: 600; color: #1e3a5f; margin-bottom: 7px; letter-spacing: 0.2px; }
+
+    input[type=text], input[type=email], select, textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid #dce6ef;
+      border-radius: 8px; font-size: 15px;
+      color: #2c3e50; background: #f9fbfd;
+      font-family: 'Segoe UI', sans-serif;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      outline: none;
+    }
+
+    input[type=text]:focus, input[type=email]:focus, select:focus, textarea:focus {
+      border-color: #00a86b;
+      box-shadow: 0 0 0 3px rgba(0,168,107,0.1);
+      background: #fff;
+    }
+
+    input.field-error, textarea.field-error { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.08); }
+
+    textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+
+    select {
+      background: #f9fbfd url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6c7d' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 14px center;
+      -webkit-appearance: none; cursor: pointer;
+    }
+
+    .err-msg { font-size: 12px; color: #e74c3c; margin-top: 5px; display: none; }
+    .err-msg.show { display: block; }
+
+    .char-count { font-size: 11px; color: #8a9ab0; text-align: right; margin-top: 4px; }
+
+    .turnstile-wrap { margin-bottom: 20px; }
+
+    .submit-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      color: #fff; border: none; border-radius: 50px;
+      font-size: 16px; font-weight: 700;
+      font-family: 'Segoe UI', sans-serif;
+      cursor: pointer; transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .btn-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    .submit-btn.loading .btn-text { display: none; }
+    .submit-btn.loading .btn-spinner { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .form-alert { padding: 14px 18px; border-radius: 10px; font-size: 14px; margin-bottom: 20px; display: none; line-height: 1.55; }
+    .form-alert.success { background: #eafaf3; border: 1px solid rgba(0,168,107,0.3); color: #0d6e47; display: block; }
+    .form-alert.error   { background: #fff5f5; border: 1px solid rgba(231,76,60,0.3); color: #c0392b; display: block; }
+
+    .success-state { text-align: center; padding: 20px 0 10px; display: none; }
+    .success-icon { width: 72px; height: 72px; background: #eafaf3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+    .success-state h3 { font-size: 22px; font-weight: 700; color: #1e3a5f; margin-bottom: 10px; }
+    .success-state p { font-size: 14px; color: #5a6c7d; line-height: 1.65; margin-bottom: 6px; }
+    .ref-box { display: inline-block; background: #f0f4f8; border: 1.5px solid #dce6ef; border-radius: 8px; padding: 10px 20px; margin-top: 14px; }
+    .ref-label { font-size: 11px; color: #5a6c7d; text-transform: uppercase; letter-spacing: 0.6px; }
+    .ref-id { font-size: 22px; font-weight: 700; color: #1e3a5f; margin-top: 2px; }
+
+    .right-col { display: flex; flex-direction: column; gap: 24px; }
+
+    .info-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-top: 4px solid #1e3a5f; padding: 28px; transition: all 0.3s ease; }
+    .info-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.11); transform: translateY(-2px); }
+    .info-card h3 { font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 18px; }
+
+    .info-item { display: flex; gap: 14px; margin-bottom: 18px; }
+    .info-item:last-child { margin-bottom: 0; }
+    .info-icon { width: 40px; height: 40px; border-radius: 10px; background: #eafaf3; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .info-text .ititle { font-size: 13px; font-weight: 600; color: #1e3a5f; }
+    .info-text .ivalue { font-size: 13px; color: #5a6c7d; margin-top: 2px; }
+
+    .response-card { background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%); border-radius: 12px; padding: 28px; color: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+    .response-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+    .response-card p { font-size: 13px; opacity: 0.88; line-height: 1.65; }
+    .response-times { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .rt-item { display: flex; justify-content: space-between; font-size: 13px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .rt-item:last-child { border-bottom: none; }
+    .rt-type { opacity: 0.78; }
+    .rt-time { font-weight: 600; }
+
+    footer { background: #1e3a5f; color: #ffffff; padding: 70px 5% 30px; }
+    .footer-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
+    .footer-about { padding-right: 30px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { height: 45px; width: auto; }
+    .footer-logo-text { font-size: 20px; font-weight: 700; color: #ffffff; }
+    .footer-about p { color: #b8c7d9; line-height: 1.8; margin-bottom: 20px; font-size: 14px; }
+    .social-links { display: flex; gap: 15px; margin-top: 20px; }
+    .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+    .social-links a:hover { background: #00a86b; transform: translateY(-3px); }
+    footer h5 { margin-top: 0; margin-bottom: 20px; font-size: 18px; font-weight: 600; color: #ffffff; }
+    footer a { display: block; color: #b8c7d9; margin-bottom: 12px; font-size: 14px; transition: all 0.3s ease; }
+    footer a:hover { color: #00a86b; padding-left: 5px; }
+    .staff-link { color: #b8c7d9 !important; font-size: 13px !important; opacity: 0.55; padding-left: 0 !important; margin-top: 10px !important; }
+    .staff-link:hover { opacity: 0.8; color: #b8c7d9 !important; padding-left: 0 !important; }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #b8c7d9; max-width: 1400px; margin: auto; }
+    .footer-bottom p { margin: 5px 0; }
+
+    @media (max-width: 968px) {
+      nav { position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px; height: calc(100vh - 86px); background: #ffffff; flex-direction: column; padding: 30px; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; gap: 20px; align-items: flex-start; }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .page-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-about { padding-right: 0; }
+      .hero h2 { font-size: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .logo-container img { height: 40px; }
+      .logo-text h1 { font-size: 18px; }
+      .hero { padding: 60px 5% 50px; }
+      .hero h2 { font-size: 26px; }
+      .card-inner { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </div>
+    <nav id="mainNav">
+      <a href="/">Home</a>
+      <a href="/campaigns">Campaigns</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/contact">Contact</a>
+      <a href="/auth">Login</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Get in Touch</h2>
+      <p>Have a question, want to volunteer, or looking to partner with us? We'd love to hear from you. Our team typically responds within two business days.</p>
+    </div>
+  </section>
+
+  <div class="page-body">
+    <div class="page-inner">
+
+      <!-- CONTACT FORM -->
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-title">Send Us a Message</div>
+          <div class="card-sub">Fill in the form below and we'll get back to you as soon as possible</div>
+
+          <div class="form-alert" id="formAlert"></div>
+
+          <div id="contactForm">
+            <div class="form-row">
+              <div>
+                <label for="name">Full Name <span style="color:#e74c3c">*</span></label>
+                <input type="text" id="name" placeholder="Jane Smith" maxlength="100" autocomplete="name" />
+                <div class="err-msg" id="nameErr">Please enter your full name.</div>
+              </div>
+              <div>
+                <label for="email">Email Address <span style="color:#e74c3c">*</span></label>
+                <input type="email" id="email" placeholder="jane@example.com" maxlength="254" autocomplete="email" />
+                <div class="err-msg" id="emailErr">Please enter a valid email address.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject <span style="color:#e74c3c">*</span></label>
+              <select id="subject">
+                <option value="">Select a topic...</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Donation Support">Donation Support</option>
+                <option value="Volunteer Application">Volunteer Application</option>
+                <option value="Partnership Opportunity">Partnership Opportunity</option>
+                <option value="Media & Press">Media &amp; Press</option>
+                <option value="Technical Support">Technical Support</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="err-msg" id="subjectErr">Please select a subject.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message <span style="color:#e74c3c">*</span></label>
+              <textarea id="message" placeholder="Write your message here..." maxlength="2000" oninput="updateCharCount(this)"></textarea>
+              <div class="char-count"><span id="charCount">0</span> / 2000</div>
+              <div class="err-msg" id="messageErr">Message must be at least 10 characters.</div>
+            </div>
+
+            <div class="turnstile-wrap">
+              <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" id="turnstileWidget"></div>
+            </div>
+
+            <button class="submit-btn" id="submitBtn" onclick="submitForm()">
+              <span class="btn-text">Send Message</span>
+              <div class="btn-spinner"></div>
+            </button>
+          </div>
+
+          <div class="success-state" id="successState">
+            <div class="success-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00a86b" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. A member of our team will respond to you within 2 business days.</p>
+            <p style="font-size:13px;color:#8a9ab0;margin-top:6px;">Keep your reference ID handy if you need to follow up.</p>
+            <div class="ref-box">
+              <div class="ref-label">Reference ID</div>
+              <div class="ref-id" id="refIdDisplay">—</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <div class="info-card">
+          <h3>Contact Information</h3>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00a86b" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="info-text">
+              <div class="ititle">Email</div>
+              <div class="ivalue">info@volkdonations.org</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00a86b" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .15h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.12-1.12a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="info-text">
+              <div class="ititle">Phone</div>
+              <div class="ivalue">+1 (800) 865-5748</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00a86b" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="info-text">
+              <div class="ititle">Headquarters</div>
+              <div class="ivalue">1420 Harbor Blvd, Suite 300<br>Washington, D.C. 20001</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00a86b" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="info-text">
+              <div class="ititle">Office Hours</div>
+              <div class="ivalue">Monday – Friday<br>9:00 AM – 5:00 PM EST</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="response-card">
+          <h3>Response Times</h3>
+          <p>We aim to respond to all inquiries as quickly as possible.</p>
+          <div class="response-times">
+            <div class="rt-item"><span class="rt-type">General Inquiries</span><span class="rt-time">2 business days</span></div>
+            <div class="rt-item"><span class="rt-type">Donation Support</span><span class="rt-time">1 business day</span></div>
+            <div class="rt-item"><span class="rt-type">Volunteer Applications</span><span class="rt-time">3–5 business days</span></div>
+            <div class="rt-item"><span class="rt-type">Media & Press</span><span class="rt-time">Same day</span></div>
+            <div class="rt-item"><span class="rt-type">Partnerships</span><span class="rt-time">3 business days</span></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Organization</h5>
+        <a href="/about">About Us</a>
+        <a href="/partners">Our Partners</a>
+        <a href="/branches">Branches</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
+      </div>
+      <div>
+        <h5>Get Involved</h5>
+        <a href="/contribute">Contribute</a>
+        <a href="/volunteer">Volunteer</a>
+        <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
+        <a href="https://gateway.volkdonations.website/admin" class="staff-link">Staff Portal</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
+    </div>
+  </footer>
+
+  <script>
+    const CONTACT_WORKER = 'https://contact.volkdonations.website';
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    mobileMenuBtn.addEventListener('click', function() { this.classList.toggle('active'); mainNav.classList.toggle('active'); });
+    document.addEventListener('click', function(e) { if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) { mobileMenuBtn.classList.remove('active'); mainNav.classList.remove('active'); } });
+    window.addEventListener('resize', function() { if (window.innerWidth > 968) { mobileMenuBtn.classList.remove('active'); mainNav.classList.remove('active'); } });
+
+    function updateCharCount(el) {
+      document.getElementById('charCount').textContent = el.value.length;
+    }
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    }
+
+    function setFieldError(inputId, errId, show) {
+      const input = document.getElementById(inputId);
+      const err   = document.getElementById(errId);
+      input.classList.toggle('field-error', show);
+      err.classList.toggle('show', show);
+    }
+
+    function showAlert(msg, type) {
+      const el = document.getElementById('formAlert');
+      el.textContent = msg;
+      el.className = `form-alert ${type}`;
+    }
+
+    function clearAlert() {
+      document.getElementById('formAlert').className = 'form-alert';
+    }
+
+    function validateForm() {
+      let valid = true;
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value.trim();
+
+      if (name.length < 2)       { setFieldError('name', 'nameErr', true);    valid = false; } else { setFieldError('name', 'nameErr', false); }
+      if (!validateEmail(email)) { setFieldError('email', 'emailErr', true);   valid = false; } else { setFieldError('email', 'emailErr', false); }
+      if (!subject)              { setFieldError('subject', 'subjectErr', true); valid = false; } else { setFieldError('subject', 'subjectErr', false); }
+      if (message.length < 10)   { setFieldError('message', 'messageErr', true); valid = false; } else { setFieldError('message', 'messageErr', false); }
+
+      return valid;
+    }
+
+    async function submitForm() {
+      clearAlert();
+      if (!validateForm()) return;
+
+      const turnstileToken = turnstile.getResponse();
+      if (!turnstileToken) {
+        showAlert('Please complete the CAPTCHA verification.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      const payload = {
+        name:           document.getElementById('name').value.trim(),
+        email:          document.getElementById('email').value.trim().toLowerCase(),
+        subject:        document.getElementById('subject').value,
+        message:        document.getElementById('message').value.trim(),
+        turnstileToken,
+      };
+
+      try {
+        const res  = await fetch(`${CONTACT_WORKER}/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById('contactForm').style.display  = 'none';
+          document.getElementById('successState').style.display = 'block';
+          document.getElementById('refIdDisplay').textContent   = `#${data.referenceId}`;
+
+          // Store for potential status check
+          sessionStorage.setItem('lastSubmissionId', data.referenceId);
+          sessionStorage.setItem('trackingUrl', data.trackingUrl);
+        } else {
+          showAlert(data.error || 'Failed to send message. Please try again.', 'error');
+          turnstile.reset();
+        }
+      } catch (err) {
+        showAlert('Network error. Please check your connection and try again.', 'error');
+        turnstile.reset();
+      } finally {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // Submission status checker
+    // Used to retrieve submission details by reference ID
+    async function checkSubmissionStatus(id) {
+      try {
+        const res  = await fetch(`${CONTACT_WORKER}/submission?id=${id}`);
+        const data = await res.json();
+        return data;
+      } catch (err) {
+        return { success: false, error: err.message };
+      }
+    }
+
+    // Live validation on blur
+    document.getElementById('name').addEventListener('blur',    function() { setFieldError('name',    'nameErr',    this.value.trim().length < 2); });
+    document.getElementById('email').addEventListener('blur',   function() { setFieldError('email',   'emailErr',   !validateEmail(this.value)); });
+    document.getElementById('subject').addEventListener('blur', function() { setFieldError('subject', 'subjectErr', !this.value); });
+    document.getElementById('message').addEventListener('blur', function() { setFieldError('message', 'messageErr', this.value.trim().length < 10); });
+  </script>
+
+</body>
+</html>

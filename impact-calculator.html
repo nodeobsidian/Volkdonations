@@ -1,245 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volk Donations - Impact Calculator</title>
+  <meta charset="UTF-8" />
+  <title>Impact Calculator | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Use our impact calculator to see how your donation supports orphaned children worldwide." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#ffffff">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 40px 20px;
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #2c3e50; line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+    header { background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-container img { height: 50px; width: auto; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: #1e3a5f; margin: 0; }
+    .logo-text span { font-size: 12px; color: #00a86b; font-weight: 500; letter-spacing: 0.5px; }
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { font-weight: 500; color: #2c3e50; font-size: 15px; position: relative; }
+    nav a:hover { color: #00a86b; }
+    nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00a86b; transition: width 0.3s ease; }
+    nav a:hover::after { width: 100%; }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+    .mobile-menu-btn span { width: 28px; height: 3px; background: #1e3a5f; transition: all 0.3s ease; border-radius: 2px; }
+    .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    .hero { background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%); color: #ffffff; padding: 80px 5% 70px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom; background-size: cover; opacity: 0.3; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h2 { font-size: 42px; margin-bottom: 16px; font-weight: 700; line-height: 1.2; }
+    .hero p { font-size: 18px; max-width: 680px; margin: 0 auto 40px; line-height: 1.7; opacity: 0.95; }
+    .hero-stats { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; overflow: hidden; max-width: 700px; margin: 0 auto; }
+    .hero-stat { flex: 1; min-width: 140px; padding: 22px 20px; text-align: center; border-right: 1px solid rgba(255,255,255,0.15); }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat .val { font-size: 30px; font-weight: 700; color: #fff; line-height: 1; }
+    .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 4px; letter-spacing: 0.3px; }
+
+    .page-body { background: #f5f7fa; padding: 52px 5% 80px; }
+    .page-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 380px; gap: 28px; align-items: start; }
+    .left-col { display: flex; flex-direction: column; gap: 28px; }
+    .right-col { display: flex; flex-direction: column; gap: 28px; }
+
+    .card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-top: 4px solid #00a86b; transition: all 0.3s ease; }
+    .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    .card-inner { padding: 32px; }
+    .card-title { font-size: 22px; font-weight: 700; color: #1e3a5f; margin-bottom: 5px; }
+    .card-sub { font-size: 14px; color: #5a6c7d; margin-bottom: 26px; }
+
+    .amount-display { background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%); border-radius: 10px; padding: 24px; text-align: center; margin-bottom: 18px; }
+    .amount-label { font-size: 11px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .amount-value { font-size: 52px; font-weight: 700; color: #fff; line-height: 1; }
+    .amount-value sup { font-size: 26px; vertical-align: super; }
+
+    .quick-amounts { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+    .quick-btn { flex: 1; min-width: 54px; padding: 10px 4px; border: 1.5px solid #dce6ef; background: #fff; color: #2c3e50; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Segoe UI', sans-serif; transition: all 0.2s ease; }
+    .quick-btn:hover, .quick-btn.active { border-color: #00a86b; background: #eafaf3; color: #00a86b; }
+
+    .slider-wrap { margin-bottom: 22px; }
+    input[type=range] { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px; background: #dce6ef; outline: none; cursor: pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #00a86b; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,168,107,0.35); cursor: pointer; transition: transform 0.15s; }
+    input[type=range]::-webkit-slider-thumb:active { transform: scale(1.2); }
+    .slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: #5a6c7d; margin-top: 6px; }
+
+    .section-label { font-size: 12px; font-weight: 700; color: #1e3a5f; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.6px; }
+    .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+    .cat-card { border: 2px solid #dce6ef; border-radius: 10px; padding: 16px 14px; cursor: pointer; transition: all 0.2s ease; position: relative; }
+    .cat-card:hover { border-color: #00a86b; background: #eafaf3; }
+    .cat-card.active { border-color: #00a86b; background: #eafaf3; }
+    .cat-card.active::after { content: ''; position: absolute; top: 9px; right: 9px; width: 8px; height: 8px; background: #00a86b; border-radius: 50%; }
+    .cat-emoji { font-size: 22px; margin-bottom: 6px; }
+    .cat-name  { font-size: 14px; font-weight: 600; color: #1e3a5f; }
+    .cat-rate  { font-size: 12px; color: #5a6c7d; margin-top: 2px; }
+
+    .calc-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%); color: #fff; border: none; border-radius: 50px; font-size: 16px; font-weight: 700; font-family: 'Segoe UI', sans-serif; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .calc-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .btn-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    .calc-btn.loading .btn-text { display: none; }
+    .calc-btn.loading .btn-spinner { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .impact-result { margin-top: 22px; display: none; animation: fadeUp 0.35s ease; }
+    .impact-result.show { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .impact-success { border-radius: 12px; overflow: hidden; border: 1.5px solid #00a86b; }
+    .impact-top { background: linear-gradient(135deg, #eafaf3, #d0f5e5); padding: 28px; text-align: center; }
+    .impact-number { font-size: 58px; font-weight: 700; color: #00a86b; line-height: 1; }
+    .impact-unit { font-size: 15px; color: #5a6c7d; margin-top: 5px; font-weight: 500; }
+    .impact-description { padding: 16px 20px; font-size: 14px; color: #5a6c7d; line-height: 1.65; background: #fff; border-top: 1px solid #eaf0f6; }
+    .impact-meta { display: flex; background: #fff; border-top: 1px solid #eaf0f6; }
+    .meta-item { flex: 1; padding: 14px; text-align: center; }
+    .meta-item:not(:last-child) { border-right: 1px solid #eaf0f6; }
+    .meta-val { font-size: 16px; font-weight: 700; color: #1e3a5f; }
+    .meta-lbl { font-size: 11px; color: #5a6c7d; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .impact-error { padding: 16px 18px; background: #fff5f5; border: 1.5px solid #f5c6c6; border-radius: 10px; color: #c0392b; font-size: 14px; }
+
+    .campaign-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid #f0f4f8; }
+    .campaign-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .campaign-icon { width: 44px; height: 44px; background: #eafaf3; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .campaign-info { flex: 1; }
+    .campaign-name { font-size: 15px; font-weight: 600; color: #1e3a5f; }
+    .campaign-loc  { font-size: 12px; color: #5a6c7d; margin-top: 2px; }
+    .progress-wrap { margin-top: 10px; }
+    .progress-track { height: 5px; background: #dce6ef; border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #1e3a5f, #00a86b); border-radius: 3px; transition: width 1.2s ease; }
+    .progress-labels { display: flex; justify-content: space-between; font-size: 11px; color: #5a6c7d; margin-top: 5px; }
+
+    .pref-section { margin-bottom: 20px; }
+    .pref-section-title { font-size: 11px; font-weight: 700; color: #5a6c7d; text-transform: uppercase; letter-spacing: 0.8px; padding-bottom: 10px; border-bottom: 1px solid #eaf0f6; margin-bottom: 4px; }
+    .pref-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f5f7fa; }
+    .pref-row:last-child { border-bottom: none; }
+    .pref-info { flex: 1; }
+    .pref-name { font-size: 14px; font-weight: 600; color: #1e3a5f; }
+    .pref-desc { font-size: 12px; color: #5a6c7d; margin-top: 2px; }
+    .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; margin-left: 14px; }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track { position: absolute; inset: 0; background: #dce6ef; border-radius: 12px; cursor: pointer; transition: background 0.25s; }
+    .toggle-track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: #fff; border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,0.2); transition: transform 0.25s; }
+    .toggle input:checked + .toggle-track { background: #00a86b; }
+    .toggle input:checked + .toggle-track::after { transform: translateX(20px); }
+    .pref-select { padding: 8px 30px 8px 12px; border: 1.5px solid #dce6ef; border-radius: 8px; font-size: 13px; font-family: 'Segoe UI', sans-serif; color: #2c3e50; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6c7d' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center; -webkit-appearance: none; cursor: pointer; outline: none; transition: border-color 0.2s; margin-left: 14px; flex-shrink: 0; }
+    .pref-select:focus { border-color: #00a86b; }
+
+    .save-btn { width: 100%; padding: 14px; background: #1e3a5f; color: #fff; border: none; border-radius: 50px; font-size: 15px; font-weight: 700; font-family: 'Segoe UI', sans-serif; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(30,58,95,0.2); display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .save-btn:hover { background: #2a4f7c; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30,58,95,0.28); }
+    .save-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .save-btn.loading .btn-text { display: none; }
+    .save-btn.loading .btn-spinner { display: block; }
+    .pref-feedback { margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 13px; display: none; }
+    .pref-feedback.success { background: #eafaf3; border: 1px solid rgba(0,168,107,0.3); color: #0d6e47; display: flex; align-items: center; gap: 8px; }
+    .pref-feedback.error { background: #fff5f5; border: 1px solid rgba(231,76,60,0.3); color: #c0392b; display: block; }
+
+    .cta-card { background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%) !important; border-top: none !important; padding: 32px; text-align: center; color: #fff; }
+    .cta-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+    .cta-card p { font-size: 14px; opacity: 0.88; line-height: 1.65; margin-bottom: 24px; }
+    .cta-card-btn { display: inline-block; background: #fff; color: #1e3a5f; padding: 14px 36px; border-radius: 50px; font-size: 15px; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+    .cta-card-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+
+    footer { background: #1e3a5f; color: #ffffff; padding: 70px 5% 30px; }
+    .footer-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
+    .footer-about { padding-right: 30px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { height: 45px; width: auto; }
+    .footer-logo-text { font-size: 20px; font-weight: 700; color: #ffffff; }
+    .footer-about p { color: #b8c7d9; line-height: 1.8; margin-bottom: 20px; font-size: 14px; }
+    .social-links { display: flex; gap: 15px; margin-top: 20px; }
+    .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+    .social-links a:hover { background: #00a86b; transform: translateY(-3px); }
+    footer h5 { margin-top: 0; margin-bottom: 20px; font-size: 18px; font-weight: 600; color: #ffffff; }
+    footer a { display: block; color: #b8c7d9; margin-bottom: 12px; font-size: 14px; transition: all 0.3s ease; }
+    footer a:hover { color: #00a86b; padding-left: 5px; }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #b8c7d9; max-width: 1400px; margin: auto; }
+    .footer-bottom p { margin: 5px 0; }
+    .staff-link { color: #b8c7d9 !important; font-size: 13px !important; opacity: 0.55; padding-left: 0 !important; margin-top: 10px !important; }
+    .staff-link:hover { color: #b8c7d9 !important; opacity: 0.8; padding-left: 0 !important; }
+
+    @media (max-width: 968px) {
+      nav { position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px; height: calc(100vh - 86px); background: #ffffff; flex-direction: column; padding: 30px; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; gap: 20px; align-items: flex-start; }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .page-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-about { padding-right: 0; }
+      .hero h2 { font-size: 32px; }
+      .hero-stats { border-radius: 10px; }
+      .hero-stat { min-width: 120px; padding: 16px 12px; }
     }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 30px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #2d3748;
-      margin-bottom: 10px;
-      font-size: 28px;
-    }
-    .subtitle {
-      color: #718096;
-      margin-bottom: 30px;
-    }
-    label {
-      display: block;
-      color: #4a5568;
-      font-weight: 600;
-      margin-bottom: 8px;
-      margin-top: 20px;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: border-color 0.3s;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: #667eea;
-    }
-    textarea {
-      font-family: 'Courier New', monospace;
-      min-height: 120px;
-      resize: vertical;
-    }
-    button {
-      background: #667eea;
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #5a67d8;
-    }
-    button:active {
-      transform: scale(0.98);
-    }
-    .result {
-      margin-top: 20px;
-      padding: 16px;
-      border-radius: 8px;
-      background: #f7fafc;
-      border-left: 4px solid #667eea;
-    }
-    .error {
-      border-left-color: #f56565;
-      background: #fff5f5;
-      color: #c53030;
-    }
-    .success {
-      border-left-color: #48bb78;
-      background: #f0fff4;
-      color: #276749;
-    }
-    pre {
-      background: #2d3748;
-      color: #68d391;
-      padding: 16px;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin-top: 12px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+    @media (max-width: 600px) {
+      .logo-container img { height: 40px; }
+      .logo-text h1 { font-size: 18px; }
+      .hero { padding: 60px 5% 50px; }
+      .hero h2 { font-size: 26px; }
+      .page-body { padding: 32px 4% 60px; }
+      .card-inner { padding: 22px; }
+      .amount-value { font-size: 40px; }
+      .impact-number { font-size: 44px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>🌍 Impact Calculator</h1>
-      <p class="subtitle">See the difference your donation makes</p>
 
-      <label>Donation Amount ($)</label>
-      <input type="number" id="amount" value="100" min="1">
-
-      <label>Impact Category</label>
-      <select id="category">
-        <option value="meals">Meals for Families</option>
-        <option value="water">Clean Water Access</option>
-        <option value="education">Education Programs</option>
-        <option value="healthcare">Healthcare Services</option>
-      </select>
-
-      <button onclick="calculateImpact()">Calculate Impact</button>
-
-      <div id="calcResult"></div>
+  <header>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
     </div>
-
-    <div class="card">
-      <h1>⚙️ Customize Preferences</h1>
-      <p class="subtitle">Save your calculator settings</p>
-
-      <label>Preferences (JSON)</label>
-      <textarea id="preferences" placeholder='{"displayFormat": "chart", "currency": "USD"}'>{
-  "displayFormat": "chart",
-  "currency": "USD",
-  "showBreakdown": true
-}</textarea>
-
-      <button onclick="savePreferences()">Save Preferences</button>
-
-      <div id="prefResult"></div>
+    <nav id="mainNav">
+      <a href="/">Home</a>
+      <a href="/campaigns">Campaigns</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/contact">Contact</a>
+      <a href="/auth">Login</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
     </div>
+  </header>
 
-    <div class="card">
-      <h1>🔐 Admin Dashboard</h1>
-      <p class="subtitle">Access administrative features</p>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>See the Impact of Your Donation</h2>
+      <p>Enter any amount and discover exactly how many lives your generosity can change through our verified programs across 38 countries.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="val">$2.4M</div><div class="lbl">Raised This Year</div></div>
+        <div class="hero-stat"><div class="val">47,200</div><div class="lbl">Lives Impacted</div></div>
+        <div class="hero-stat"><div class="val">23</div><div class="lbl">Active Campaigns</div></div>
+        <div class="hero-stat"><div class="val">38</div><div class="lbl">Countries</div></div>
+      </div>
+    </div>
+  </section>
 
-      <button onclick="checkAdmin()">Access Dashboard</button>
+  <div class="page-body">
+    <div class="page-inner">
 
-      <div id="adminResult"></div>
+      <div class="left-col">
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-title">Impact Calculator</div>
+            <div class="card-sub">Adjust the amount and choose an impact area to see your real-world difference</div>
+
+            <div class="amount-display">
+              <div class="amount-label">Your Donation</div>
+              <div class="amount-value"><sup>$</sup><span id="amountDisplay">100</span></div>
+            </div>
+
+            <div class="quick-amounts">
+              <button class="quick-btn" onclick="setAmount(25, this)">$25</button>
+              <button class="quick-btn active" onclick="setAmount(100, this)">$100</button>
+              <button class="quick-btn" onclick="setAmount(250, this)">$250</button>
+              <button class="quick-btn" onclick="setAmount(500, this)">$500</button>
+              <button class="quick-btn" onclick="setAmount(1000, this)">$1,000</button>
+            </div>
+
+            <div class="slider-wrap">
+              <input type="range" id="amountSlider" min="1" max="10000" value="100" oninput="onSlider(this.value)">
+              <div class="slider-labels"><span>$1</span><span>$10,000</span></div>
+            </div>
+
+            <div class="section-label">Choose Impact Area</div>
+            <div class="category-grid">
+              <div class="cat-card active" data-cat="meals" onclick="selectCat(this)">
+                <div class="cat-emoji">🍽️</div>
+                <div class="cat-name">Meals</div>
+                <div class="cat-rate">2 meals per $1</div>
+              </div>
+              <div class="cat-card" data-cat="water" onclick="selectCat(this)">
+                <div class="cat-emoji">💧</div>
+                <div class="cat-name">Clean Water</div>
+                <div class="cat-rate">0.5 days per $1</div>
+              </div>
+              <div class="cat-card" data-cat="education" onclick="selectCat(this)">
+                <div class="cat-emoji">📚</div>
+                <div class="cat-name">Education</div>
+                <div class="cat-rate">0.1 days per $1</div>
+              </div>
+              <div class="cat-card" data-cat="healthcare" onclick="selectCat(this)">
+                <div class="cat-emoji">🏥</div>
+                <div class="cat-name">Healthcare</div>
+                <div class="cat-rate">0.25 consults per $1</div>
+              </div>
+            </div>
+
+            <button class="calc-btn" id="calcBtn" onclick="calculateImpact()">
+              <span class="btn-text">Calculate My Impact</span>
+              <div class="btn-spinner"></div>
+            </button>
+
+            <div class="impact-result" id="impactResult"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-title">Active Campaigns</div>
+            <div class="card-sub">Programs currently running across the globe</div>
+
+            <div class="campaign-item">
+              <div class="campaign-icon">🌍</div>
+              <div class="campaign-info">
+                <div class="campaign-name">East Africa School Meals</div>
+                <div class="campaign-loc">📍 Kenya &amp; Tanzania</div>
+                <div class="progress-wrap">
+                  <div class="progress-track"><div class="progress-fill" style="width:78%"></div></div>
+                  <div class="progress-labels"><span>$78,240 raised</span><span>78% of $100K goal</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="campaign-item">
+              <div class="campaign-icon">💧</div>
+              <div class="campaign-info">
+                <div class="campaign-name">Clean Wells Initiative</div>
+                <div class="campaign-loc">📍 South Sudan</div>
+                <div class="progress-wrap">
+                  <div class="progress-track"><div class="progress-fill" style="width:54%"></div></div>
+                  <div class="progress-labels"><span>$27,000 raised</span><span>54% of $50K goal</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="campaign-item">
+              <div class="campaign-icon">📚</div>
+              <div class="campaign-info">
+                <div class="campaign-name">Girls Education Fund</div>
+                <div class="campaign-loc">📍 Pakistan &amp; Bangladesh</div>
+                <div class="progress-wrap">
+                  <div class="progress-track"><div class="progress-fill" style="width:91%"></div></div>
+                  <div class="progress-labels"><span>$91,000 raised</span><span>91% of $100K goal</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="campaign-item">
+              <div class="campaign-icon">🏥</div>
+              <div class="campaign-info">
+                <div class="campaign-name">Rural Health Clinics</div>
+                <div class="campaign-loc">📍 Guatemala &amp; Honduras</div>
+                <div class="progress-wrap">
+                  <div class="progress-track"><div class="progress-fill" style="width:42%"></div></div>
+                  <div class="progress-labels"><span>$21,000 raised</span><span>42% of $50K goal</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="right-col">
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-title">Calculator Settings</div>
+            <div class="card-sub">Customize how your results are displayed</div>
+
+            <div class="pref-section">
+              <div class="pref-section-title">Display Options</div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <div class="pref-name">Show Breakdown</div>
+                  <div class="pref-desc">Display detailed impact breakdown</div>
+                </div>
+                <label class="toggle"><input type="checkbox" id="pref_showBreakdown" checked><span class="toggle-track"></span></label>
+              </div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <div class="pref-name">Display Format</div>
+                  <div class="pref-desc">How results are presented</div>
+                </div>
+                <select class="pref-select" id="pref_displayFormat">
+                  <option value="chart">Chart</option>
+                  <option value="list">List</option>
+                  <option value="minimal">Minimal</option>
+                </select>
+              </div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <div class="pref-name">Currency</div>
+                  <div class="pref-desc">Display currency for amounts</div>
+                </div>
+                <select class="pref-select" id="pref_currency">
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="CAD">CAD</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pref-section">
+              <div class="pref-section-title">Notifications</div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <div class="pref-name">Campaign Milestones</div>
+                  <div class="pref-desc">Notify when campaigns hit funding goals</div>
+                </div>
+                <label class="toggle"><input type="checkbox" id="pref_impactAlerts" checked><span class="toggle-track"></span></label>
+              </div>
+              <div class="pref-row">
+                <div class="pref-info">
+                  <div class="pref-name">Monthly Reports</div>
+                  <div class="pref-desc">Receive monthly donation summaries</div>
+                </div>
+                <label class="toggle"><input type="checkbox" id="pref_monthlyReports"><span class="toggle-track"></span></label>
+              </div>
+            </div>
+
+            <button class="save-btn" id="savePrefBtn" onclick="savePreferences()">
+              <span class="btn-text">Save Settings</span>
+              <div class="btn-spinner" style="display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;"></div>
+            </button>
+
+            <div class="pref-feedback" id="prefFeedback"></div>
+          </div>
+        </div>
+
+        <div class="card cta-card">
+          <h3>Ready to Make a Difference?</h3>
+          <p>Every dollar counts. Join thousands of donors already changing lives through our verified programs worldwide.</p>
+          <a href="/donate" class="cta-card-btn">Donate Now</a>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-title">How It Works</div>
+            <div class="card-sub">Your donation journey in three simple steps</div>
+            <div class="campaign-item" style="padding:16px 0">
+              <div class="campaign-icon" style="background:#eaf0f8;font-size:18px;font-weight:700;color:#1e3a5f;">1</div>
+              <div class="campaign-info">
+                <div class="campaign-name">Choose Your Impact</div>
+                <div class="campaign-loc" style="color:#5a6c7d;font-size:13px;margin-top:4px;">Select an amount and cause that matters to you</div>
+              </div>
+            </div>
+            <div class="campaign-item" style="padding:16px 0">
+              <div class="campaign-icon" style="background:#eaf0f8;font-size:18px;font-weight:700;color:#1e3a5f;">2</div>
+              <div class="campaign-info">
+                <div class="campaign-name">Secure Donation</div>
+                <div class="campaign-loc" style="color:#5a6c7d;font-size:13px;margin-top:4px;">Give securely through our encrypted payment system</div>
+              </div>
+            </div>
+            <div class="campaign-item" style="padding:16px 0 0;border-bottom:none">
+              <div class="campaign-icon" style="background:#eafaf3;font-size:18px;font-weight:700;color:#00a86b;">3</div>
+              <div class="campaign-info">
+                <div class="campaign-name">Track Your Impact</div>
+                <div class="campaign-loc" style="color:#5a6c7d;font-size:13px;margin-top:4px;">Receive updates and see your donation at work</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Organization</h5>
+        <a href="/about">About Us</a>
+        <a href="/partners">Our Partners</a>
+        <a href="/branches">Branches</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
+      </div>
+      <div>
+        <h5>Get Involved</h5>
+        <a href="/contribute">Contribute</a>
+        <a href="/volunteer">Volunteer</a>
+        <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
+        <a href="https://gateway.volkdonations.website/admin" class="staff-link">Staff Portal</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
+    </div>
+  </footer>
+
   <script>
-    // Unified gateway endpoint
     const GATEWAY = 'https://gateway.volkdonations.website';
+    let currentAmount = 100;
+    let currentCategory = 'meals';
+
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    mobileMenuBtn.addEventListener('click', function() { this.classList.toggle('active'); mainNav.classList.toggle('active'); });
+    document.addEventListener('click', function(e) { if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) { mobileMenuBtn.classList.remove('active'); mainNav.classList.remove('active'); } });
+    window.addEventListener('resize', function() { if (window.innerWidth > 968) { mobileMenuBtn.classList.remove('active'); mainNav.classList.remove('active'); } });
+
+    function setAmount(val, btn) {
+      currentAmount = val;
+      document.getElementById('amountDisplay').textContent = val >= 1000 ? (val/1000).toFixed(val%1000===0?0:1)+'K' : val;
+      document.getElementById('amountSlider').value = val;
+      document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    function onSlider(val) {
+      val = parseInt(val);
+      currentAmount = val;
+      document.getElementById('amountDisplay').textContent = val >= 1000 ? (val/1000).toFixed(1).replace(/\.0$/,'')+'K' : val;
+      document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+    }
+
+    function selectCat(el) {
+      document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      currentCategory = el.dataset.cat;
+    }
 
     async function calculateImpact() {
-      const amount = parseFloat(document.getElementById('amount').value);
-      const category = document.getElementById('category').value;
-      const resultDiv = document.getElementById('calcResult');
-
+      const btn = document.getElementById('calcBtn');
+      const resultDiv = document.getElementById('impactResult');
+      btn.classList.add('loading'); btn.disabled = true;
+      resultDiv.className = 'impact-result';
       try {
-        const response = await fetch(`${GATEWAY}/calculate`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount, category })
-        });
-
-        const data = await response.json();
-        
+        const res = await fetch(`${GATEWAY}/calculate`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({amount: currentAmount, category: currentCategory}) });
+        const data = await res.json();
         if (data.success) {
-          resultDiv.className = 'result success';
-          resultDiv.innerHTML = `
-            <strong>Impact Calculated!</strong>
-            <pre>${JSON.stringify(data, null, 2)}</pre>
-          `;
+          const v = Math.floor(data.impact.value).toLocaleString();
+          resultDiv.className = 'impact-result show';
+          resultDiv.innerHTML = `<div class="impact-success"><div class="impact-top"><div class="impact-number">${v}</div><div class="impact-unit">${data.impact.unit}</div></div><div class="impact-description">${data.impact.description}</div><div class="impact-meta"><div class="meta-item"><div class="meta-val">$${data.donation.toLocaleString()}</div><div class="meta-lbl">Donated</div></div><div class="meta-item"><div class="meta-val">${data.multiplier}×</div><div class="meta-lbl">Multiplier</div></div><div class="meta-item"><div class="meta-val">${data.currency||'USD'}</div><div class="meta-lbl">Currency</div></div></div></div>`;
         } else {
-          resultDiv.className = 'result error';
-          resultDiv.innerHTML = `<strong>Error:</strong> ${data.error}`;
+          resultDiv.className = 'impact-result show';
+          resultDiv.innerHTML = `<div class="impact-error"><strong>Unable to calculate:</strong> ${data.error}</div>`;
         }
-      } catch (error) {
-        resultDiv.className = 'result error';
-        resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
-      }
+      } catch(err) {
+        resultDiv.className = 'impact-result show';
+        resultDiv.innerHTML = `<div class="impact-error"><strong>Connection error:</strong> ${err.message}</div>`;
+      } finally { btn.classList.remove('loading'); btn.disabled = false; }
     }
 
     async function savePreferences() {
-      const preferences = document.getElementById('preferences').value;
-      const resultDiv = document.getElementById('prefResult');
-
+      const btn = document.getElementById('savePrefBtn');
+      const feedback = document.getElementById('prefFeedback');
+      btn.classList.add('loading'); btn.disabled = true;
+      feedback.className = 'pref-feedback';
+      const preferences = {
+        displayFormat: document.getElementById('pref_displayFormat').value,
+        currency: document.getElementById('pref_currency').value,
+        showBreakdown: document.getElementById('pref_showBreakdown').checked,
+        impactAlerts: document.getElementById('pref_impactAlerts').checked,
+        monthlyReports: document.getElementById('pref_monthlyReports').checked,
+      };
       try {
-        const response = await fetch(`${GATEWAY}/`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ preferences })
-        });
-
-        const data = await response.json();
-        
+        const res = await fetch(`${GATEWAY}/`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({preferences: JSON.stringify(preferences)}) });
+        const data = await res.json();
         if (data.success) {
-          resultDiv.className = 'result success';
-          resultDiv.innerHTML = `
-            <strong>✓ Preferences Saved</strong>
-            <pre>${JSON.stringify(data, null, 2)}</pre>
-          `;
+          feedback.className = 'pref-feedback success';
+          feedback.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Settings saved successfully.';
         } else {
-          resultDiv.className = 'result error';
-          resultDiv.innerHTML = `<strong>Error:</strong> ${data.error}`;
+          feedback.className = 'pref-feedback error';
+          feedback.textContent = data.error || 'Failed to save settings.';
         }
-      } catch (error) {
-        resultDiv.className = 'result error';
-        resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
-      }
-    }
-
-    async function checkAdmin() {
-      const resultDiv = document.getElementById('adminResult');
-
-      try {
-        const response = await fetch(`${GATEWAY}/admin`);
-        const data = await response.json();
-
-        if (data.access === 'granted') {
-          resultDiv.className = 'result success';
-          resultDiv.innerHTML = `
-            <strong>🎉 Access Granted!</strong>
-            <pre>${JSON.stringify(data, null, 2)}</pre>
-          `;
-        } else {
-          resultDiv.className = 'result error';
-          resultDiv.innerHTML = `
-            <strong>Access Denied</strong>
-            <p>${data.message}</p>
-          `;
-        }
-      } catch (error) {
-        resultDiv.className = 'result error';
-        resultDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      } catch(err) {
+        feedback.className = 'pref-feedback error';
+        feedback.textContent = 'Connection error. Please try again.';
+      } finally {
+        btn.classList.remove('loading'); btn.disabled = false;
+        setTimeout(() => { feedback.className = 'pref-feedback'; }, 4000);
       }
     }
   </script>

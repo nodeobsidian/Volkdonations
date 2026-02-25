@@ -11,6 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "@supabase/supabase-js": "^2.49.4",
+    "bcryptjs": "^3.0.2",
+    "nodemailer": "^7.0.3",
     "ejs": "^3.1.10",
     "nunjucks": "^3.2.4",
     "pg": "^8.16.3"

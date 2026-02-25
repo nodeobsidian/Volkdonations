@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terms of Service | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Terms of Service for Volk Donations — a US-based 501(c)(3) nonprofit organization." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #ffffff; color: #2c3e50; line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+    /* ── HEADER ── */
+    header { background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 18px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-container img { height: 50px; width: auto; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: #1e3a5f; margin: 0; }
+    .logo-text span { font-size: 12px; color: #00a86b; font-weight: 500; letter-spacing: 0.5px; }
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { font-weight: 500; color: #2c3e50; font-size: 15px; position: relative; }
+    nav a:hover { color: #00a86b; }
+    nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #00a86b; transition: width 0.3s ease; }
+    nav a:hover::after { width: 100%; }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+    .mobile-menu-btn span { width: 28px; height: 3px; background: #1e3a5f; transition: all 0.3s ease; border-radius: 2px; }
+    .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    /* ── HERO ── */
+    .hero { background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%); color: #ffffff; padding: 70px 5% 60px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom; background-size: cover; opacity: 0.3; }
+    .hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .hero-left h2 { font-size: 40px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+    .hero-left p { font-size: 15px; opacity: 0.85; max-width: 520px; line-height: 1.65; }
+    .hero-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 16px 22px; text-align: center; flex-shrink: 0; }
+    .hero-badge .badge-label { font-size: 11px; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .hero-badge .badge-date { font-size: 15px; font-weight: 700; }
+
+    /* ── LAYOUT ── */
+    .page-body { background: #f5f7fa; padding: 50px 5% 80px; }
+    .page-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 260px 1fr; gap: 32px; align-items: start; }
+
+    /* ── SIDEBAR TOC ── */
+    .toc { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-top: 4px solid #00a86b; padding: 24px; position: sticky; top: 90px; }
+    .toc-title { font-size: 12px; font-weight: 700; color: #5a6c7d; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #eaf0f6; }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a { display: block; font-size: 13px; color: #5a6c7d; padding: 7px 10px; border-radius: 7px; font-weight: 500; transition: all 0.2s; border-left: 2px solid transparent; }
+    .toc-list a:hover { background: #eafaf3; color: #00a86b; border-left-color: #00a86b; padding-left: 14px; }
+    .toc-list a.active { background: #eafaf3; color: #00a86b; border-left-color: #00a86b; padding-left: 14px; font-weight: 600; }
+    .toc-number { display: inline-block; width: 20px; font-size: 11px; color: #b8c7d9; }
+
+    /* ── MAIN CONTENT ── */
+    .content-col { display: flex; flex-direction: column; gap: 20px; }
+
+    .intro-card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-top: 4px solid #1e3a5f; padding: 32px 36px; }
+    .intro-card p { font-size: 15px; color: #5a6c7d; line-height: 1.75; }
+    .intro-card p + p { margin-top: 12px; }
+
+    .highlight-box { display: flex; gap: 14px; background: #fff8e8; border: 1px solid #f0d080; border-radius: 10px; padding: 16px 18px; margin-top: 18px; }
+    .highlight-box svg { flex-shrink: 0; margin-top: 1px; }
+    .highlight-box p { font-size: 13px; color: #7a5c00; line-height: 1.6; }
+    .highlight-box strong { color: #5c4400; }
+
+    .section-card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-top: 4px solid #00a86b; overflow: hidden; scroll-margin-top: 100px; }
+    .section-header { padding: 24px 36px 0; display: flex; align-items: center; gap: 14px; }
+    .section-num { width: 36px; height: 36px; background: linear-gradient(135deg, #1e3a5f, #00a86b); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .section-title { font-size: 20px; font-weight: 700; color: #1e3a5f; }
+    .section-body { padding: 20px 36px 30px; }
+    .section-body p { font-size: 14px; color: #5a6c7d; line-height: 1.78; margin-bottom: 14px; }
+    .section-body p:last-child { margin-bottom: 0; }
+    .section-body h4 { font-size: 14px; font-weight: 700; color: #1e3a5f; margin: 18px 0 8px; }
+    .section-body ul { margin: 10px 0 14px 0; display: flex; flex-direction: column; gap: 8px; }
+    .section-body ul li { font-size: 14px; color: #5a6c7d; line-height: 1.65; padding-left: 20px; position: relative; }
+    .section-body ul li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: #00a86b; border-radius: 50%; }
+    .section-body .divider { height: 1px; background: #f0f4f8; margin: 18px 0; }
+
+    .contact-card { background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%); border-radius: 12px; padding: 36px; color: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+    .contact-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+    .contact-card p { font-size: 14px; opacity: 0.88; line-height: 1.65; margin-bottom: 22px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .contact-item { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 16px 18px; }
+    .contact-item .ci-label { font-size: 11px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
+    .contact-item .ci-value { font-size: 14px; font-weight: 600; }
+    .contact-item a { color: #fff; }
+    .contact-item a:hover { opacity: 0.8; }
+
+    /* ── FOOTER ── */
+    footer { background: #1e3a5f; color: #ffffff; padding: 70px 5% 30px; }
+    .footer-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
+    .footer-about { padding-right: 30px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { height: 45px; width: auto; }
+    .footer-logo-text { font-size: 20px; font-weight: 700; color: #ffffff; }
+    .footer-about p { color: #b8c7d9; line-height: 1.8; margin-bottom: 20px; font-size: 14px; }
+    .social-links { display: flex; gap: 15px; margin-top: 20px; }
+    .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+    .social-links a:hover { background: #00a86b; transform: translateY(-3px); }
+    footer h5 { margin-top: 0; margin-bottom: 20px; font-size: 18px; font-weight: 600; color: #ffffff; }
+    footer a { display: block; color: #b8c7d9; margin-bottom: 12px; font-size: 14px; transition: all 0.3s ease; }
+    footer a:hover { color: #00a86b; padding-left: 5px; }
+    .staff-link { color: #b8c7d9 !important; font-size: 13px !important; opacity: 0.55; padding-left: 0 !important; margin-top: 10px !important; }
+    .staff-link:hover { opacity: 0.8; color: #b8c7d9 !important; padding-left: 0 !important; }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #b8c7d9; max-width: 1400px; margin: auto; }
+    .footer-bottom p { margin: 5px 0; }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px; background: linear-gradient(135deg, #1e3a5f, #00a86b); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.2); cursor: pointer; opacity: 0; pointer-events: none; transition: all 0.3s ease; border: none; z-index: 500; }
+    .back-to-top.show { opacity: 1; pointer-events: auto; }
+    .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 968px) {
+      nav { position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px; height: calc(100vh - 86px); background: #ffffff; flex-direction: column; padding: 30px; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; gap: 20px; align-items: flex-start; }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .page-inner { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-about { padding-right: 0; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-left h2 { font-size: 30px; }
+    }
+    @media (max-width: 600px) {
+      .logo-container img { height: 40px; }
+      .logo-text h1 { font-size: 18px; }
+      .hero { padding: 50px 5% 44px; }
+      .hero-left h2 { font-size: 26px; }
+      .section-header { padding: 22px 22px 0; }
+      .section-body { padding: 16px 22px 24px; }
+      .intro-card { padding: 24px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </div>
+    <nav id="mainNav">
+      <a href="/">Home</a>
+      <a href="/campaigns">Campaigns</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/contact">Contact</a>
+      <a href="/auth">Login</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-left">
+        <h2>Terms of Service</h2>
+        <p>Please read these terms carefully before using our website, making donations, or participating in our programs. By accessing Volk Donations, you agree to be bound by the terms described below.</p>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-label">Last Updated</div>
+        <div class="badge-date">February 1, 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-body">
+    <div class="page-inner">
+
+      <!-- SIDEBAR TOC -->
+      <aside>
+        <div class="toc">
+          <div class="toc-title">Table of Contents</div>
+          <ul class="toc-list">
+            <li><a href="#acceptance" id="toc-1"><span class="toc-number">01</span> Acceptance of Terms</a></li>
+            <li><a href="#eligibility" id="toc-2"><span class="toc-number">02</span> Eligibility</a></li>
+            <li><a href="#donations" id="toc-3"><span class="toc-number">03</span> Donations &amp; Payments</a></li>
+            <li><a href="#accounts" id="toc-4"><span class="toc-number">04</span> User Accounts</a></li>
+            <li><a href="#conduct" id="toc-5"><span class="toc-number">05</span> Acceptable Use</a></li>
+            <li><a href="#intellectual" id="toc-6"><span class="toc-number">06</span> Intellectual Property</a></li>
+            <li><a href="#privacy" id="toc-7"><span class="toc-number">07</span> Privacy &amp; Data</a></li>
+            <li><a href="#disclaimers" id="toc-8"><span class="toc-number">08</span> Disclaimers</a></li>
+            <li><a href="#liability" id="toc-9"><span class="toc-number">09</span> Limitation of Liability</a></li>
+            <li><a href="#termination" id="toc-10"><span class="toc-number">10</span> Termination</a></li>
+            <li><a href="#governing" id="toc-11"><span class="toc-number">11</span> Governing Law</a></li>
+            <li><a href="#changes" id="toc-12"><span class="toc-number">12</span> Changes to Terms</a></li>
+            <li><a href="#contact-section" id="toc-13"><span class="toc-number">13</span> Contact Us</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="content-col">
+
+        <!-- INTRO -->
+        <div class="intro-card">
+          <p>Welcome to Volk Donations ("we," "our," or "us"). These Terms of Service govern your access to and use of our website located at <strong>volkdonations.org</strong> and all associated services, including donation processing, volunteer coordination, campaign participation, and account management.</p>
+          <p>These terms constitute a legally binding agreement between you and Volk Donations, a registered 501(c)(3) nonprofit organization incorporated in the United States (EIN: 45-1234567). If you do not agree to these terms, please do not use our services.</p>
+          <div class="highlight-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a017" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p><strong>Important:</strong> By making a donation or creating an account, you confirm that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy.</p>
+          </div>
+        </div>
+
+        <!-- 01 ACCEPTANCE -->
+        <div class="section-card" id="acceptance">
+          <div class="section-header">
+            <div class="section-num">01</div>
+            <div class="section-title">Acceptance of Terms</div>
+          </div>
+          <div class="section-body">
+            <p>By accessing or using the Volk Donations website, submitting a donation, registering for an account, or otherwise engaging with our services, you agree to these Terms of Service, our Privacy Policy, and any additional guidelines or rules applicable to specific features.</p>
+            <p>These terms apply to all visitors, donors, volunteers, partners, and any other individuals who access or use our platform. If you are using our services on behalf of an organization or business, you represent and warrant that you have the authority to bind that entity to these terms.</p>
+            <p>We reserve the right to modify these terms at any time. Your continued use of our services after any changes constitutes acceptance of the revised terms. We will make reasonable efforts to notify registered users of material changes via email or prominent notice on our website.</p>
+          </div>
+        </div>
+
+        <!-- 02 ELIGIBILITY -->
+        <div class="section-card" id="eligibility">
+          <div class="section-header">
+            <div class="section-num">02</div>
+            <div class="section-title">Eligibility</div>
+          </div>
+          <div class="section-body">
+            <p>To use our services and make donations, you must meet the following eligibility requirements:</p>
+            <ul>
+              <li>You must be at least 18 years of age, or the legal age of majority in your jurisdiction if higher.</li>
+              <li>You must have the legal capacity to enter into a binding agreement.</li>
+              <li>You must not be located in, or a national or resident of, any country subject to US government embargo or sanctions.</li>
+              <li>You must not be listed on any US government list of prohibited or restricted parties.</li>
+              <li>If making a corporate donation, your organization must be legally authorized to make charitable contributions.</li>
+            </ul>
+            <p>We reserve the right to refuse service, close accounts, or cancel donations at our sole discretion, including where we believe that use of our services violates these terms or applicable law.</p>
+          </div>
+        </div>
+
+        <!-- 03 DONATIONS -->
+        <div class="section-card" id="donations">
+          <div class="section-header">
+            <div class="section-num">03</div>
+            <div class="section-title">Donations &amp; Payments</div>
+          </div>
+          <div class="section-body">
+            <h4>General Donation Policy</h4>
+            <p>All donations made through our platform are voluntary contributions to Volk Donations, a 501(c)(3) tax-exempt nonprofit organization. Donations are used to fund our charitable programs supporting orphaned children worldwide, including education, healthcare, nutrition, and community development initiatives.</p>
+
+            <h4>Tax Deductibility</h4>
+            <p>Donations made to Volk Donations may be tax-deductible to the extent permitted by law. We will provide a donation receipt via email for all contributions. Please consult your tax advisor to confirm deductibility based on your individual circumstances.</p>
+
+            <h4>Refund Policy</h4>
+            <p>All donations are considered final and non-refundable. In exceptional circumstances — such as duplicate charges or technical errors — refund requests may be considered at our sole discretion. Please contact us within 30 days of the transaction at <a href="mailto:finance@volkdonations.org" style="color:#00a86b;font-weight:600;">finance@volkdonations.org</a> with your donation reference number.</p>
+
+            <h4>Recurring Donations</h4>
+            <ul>
+              <li>Recurring donations will be charged automatically on the same date each month or year.</li>
+              <li>You may cancel a recurring donation at any time by logging into your account or contacting us.</li>
+              <li>Cancellation requests must be received at least 5 business days before the next scheduled charge.</li>
+              <li>We are not responsible for charges that occur before a cancellation is processed.</li>
+            </ul>
+
+            <h4>Fund Allocation</h4>
+            <p>While we make every effort to honor donor preferences for specific programs or campaigns, Volk Donations reserves the right to redirect funds where they are needed most if a campaign is overfunded, discontinued, or if operational requirements demand it. In such cases, funds will always be applied to our core charitable mission.</p>
+
+            <div class="divider"></div>
+            <p>Payment processing is handled by PCI-DSS compliant third-party providers. Volk Donations does not store your full payment card details on our servers.</p>
+          </div>
+        </div>
+
+        <!-- 04 USER ACCOUNTS -->
+        <div class="section-card" id="accounts">
+          <div class="section-header">
+            <div class="section-num">04</div>
+            <div class="section-title">User Accounts</div>
+          </div>
+          <div class="section-body">
+            <p>When you create an account with Volk Donations, you agree to provide accurate, current, and complete information. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+            <ul>
+              <li>You must notify us immediately of any unauthorized use of your account or security breach at <a href="mailto:security@volkdonations.org" style="color:#00a86b;font-weight:600;">security@volkdonations.org</a>.</li>
+              <li>You may not share your login credentials with any other person or entity.</li>
+              <li>You may not create multiple accounts to circumvent any restriction or limitation we impose.</li>
+              <li>Accounts created using automated means are strictly prohibited.</li>
+            </ul>
+            <p>We reserve the right to suspend or terminate accounts that violate these terms, display fraudulent activity, or are associated with abuse of our platform or services.</p>
+          </div>
+        </div>
+
+        <!-- 05 ACCEPTABLE USE -->
+        <div class="section-card" id="conduct">
+          <div class="section-header">
+            <div class="section-num">05</div>
+            <div class="section-title">Acceptable Use</div>
+          </div>
+          <div class="section-body">
+            <p>You agree to use our website and services only for lawful purposes and in a manner that does not infringe the rights of others or restrict their use and enjoyment of our platform. The following activities are strictly prohibited:</p>
+            <ul>
+              <li>Using our services for money laundering, fraud, or any other illegal financial activity.</li>
+              <li>Attempting to gain unauthorized access to any part of our systems, servers, or databases.</li>
+              <li>Transmitting malware, viruses, or any other harmful or disruptive code.</li>
+              <li>Scraping, crawling, or harvesting data from our website without express written permission.</li>
+              <li>Impersonating Volk Donations, our staff, partners, or any other individual or entity.</li>
+              <li>Using our platform to solicit donations for purposes other than our stated charitable mission.</li>
+              <li>Submitting false or misleading information through any form or account registration.</li>
+              <li>Interfering with the proper functioning of our website or services.</li>
+            </ul>
+            <p>Violation of these acceptable use standards may result in immediate account termination, legal action, or both. We cooperate fully with law enforcement authorities in the investigation of suspected criminal activity.</p>
+          </div>
+        </div>
+
+        <!-- 06 INTELLECTUAL PROPERTY -->
+        <div class="section-card" id="intellectual">
+          <div class="section-header">
+            <div class="section-num">06</div>
+            <div class="section-title">Intellectual Property</div>
+          </div>
+          <div class="section-body">
+            <p>All content on the Volk Donations website — including but not limited to text, graphics, logos, photographs, campaign materials, reports, and software — is the property of Volk Donations or its content suppliers and is protected by United States and international copyright, trademark, and other intellectual property laws.</p>
+            <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, or otherwise exploit any content from our website without our prior written consent, except as expressly permitted below:</p>
+            <ul>
+              <li>You may share links to our website and publicly available campaign pages for promotional or fundraising purposes.</li>
+              <li>You may download and print materials explicitly designated for public distribution.</li>
+              <li>Journalists and media professionals may use our materials in accordance with our Press Kit guidelines.</li>
+            </ul>
+            <p>The Volk Donations name, logo, and tagline "A better life for everyone" are registered trademarks. Unauthorized use is strictly prohibited and may result in legal action.</p>
+          </div>
+        </div>
+
+        <!-- 07 PRIVACY -->
+        <div class="section-card" id="privacy">
+          <div class="section-header">
+            <div class="section-num">07</div>
+            <div class="section-title">Privacy &amp; Data</div>
+          </div>
+          <div class="section-body">
+            <p>Your privacy is important to us. Our collection, use, and protection of your personal information is governed by our <a href="/privacy" style="color:#00a86b;font-weight:600;">Privacy Policy</a>, which is incorporated into these Terms of Service by reference.</p>
+            <p>By using our services, you consent to the collection and processing of your personal data as described in our Privacy Policy, including:</p>
+            <ul>
+              <li>Processing your name, email address, and payment information to fulfill donations.</li>
+              <li>Sending you donation receipts, campaign updates, and communications you have opted into.</li>
+              <li>Using anonymized, aggregated data to improve our services and demonstrate impact to stakeholders.</li>
+              <li>Sharing limited data with payment processors and service providers strictly necessary to operate our platform.</li>
+            </ul>
+            <p>We do not sell your personal information to third parties for marketing purposes. You have the right to access, correct, or request deletion of your personal data at any time by contacting us at <a href="mailto:privacy@volkdonations.org" style="color:#00a86b;font-weight:600;">privacy@volkdonations.org</a>.</p>
+          </div>
+        </div>
+
+        <!-- 08 DISCLAIMERS -->
+        <div class="section-card" id="disclaimers">
+          <div class="section-header">
+            <div class="section-num">08</div>
+            <div class="section-title">Disclaimers</div>
+          </div>
+          <div class="section-body">
+            <p>Our website and services are provided on an "as is" and "as available" basis without any warranties of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+            <p>Volk Donations does not warrant that:</p>
+            <ul>
+              <li>Our website will be uninterrupted, timely, secure, or error-free.</li>
+              <li>Any results obtained from using our services will be accurate or reliable.</li>
+              <li>Any defects or errors in our website will be corrected.</li>
+              <li>Our website or its servers are free of viruses or other harmful components.</li>
+            </ul>
+            <p>While we strive to ensure all campaign information and impact data is accurate, we make no representations regarding the completeness or accuracy of third-party program reports. Impact estimates are based on best available data and are provided for illustrative purposes.</p>
+          </div>
+        </div>
+
+        <!-- 09 LIABILITY -->
+        <div class="section-card" id="liability">
+          <div class="section-header">
+            <div class="section-num">09</div>
+            <div class="section-title">Limitation of Liability</div>
+          </div>
+          <div class="section-body">
+            <p>To the fullest extent permitted by applicable law, Volk Donations, its directors, officers, employees, volunteers, agents, and partners shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of our services, including but not limited to:</p>
+            <ul>
+              <li>Loss of data, revenue, profits, or goodwill.</li>
+              <li>Unauthorized access to or alteration of your account or data.</li>
+              <li>Statements or conduct of any third party on or through our services.</li>
+              <li>Any other matter relating to our services, even if we have been advised of the possibility of such damages.</li>
+            </ul>
+            <p>Our total liability to you for any claims arising out of these terms or your use of our services shall not exceed the total amount of donations you made to Volk Donations in the twelve months preceding the claim. Some jurisdictions do not allow the exclusion of certain warranties or limitations on liability, so the above limitations may not apply to you.</p>
+          </div>
+        </div>
+
+        <!-- 10 TERMINATION -->
+        <div class="section-card" id="termination">
+          <div class="section-header">
+            <div class="section-num">10</div>
+            <div class="section-title">Termination</div>
+          </div>
+          <div class="section-body">
+            <p>We reserve the right to suspend or terminate your access to our services at any time, with or without cause, and with or without notice, including if we reasonably believe that you have violated these Terms of Service.</p>
+            <p>You may close your account at any time by contacting us at <a href="mailto:info@volkdonations.org" style="color:#00a86b;font-weight:600;">info@volkdonations.org</a>. Upon termination:</p>
+            <ul>
+              <li>Your right to access our services will immediately cease.</li>
+              <li>Any outstanding recurring donations will be cancelled.</li>
+              <li>We may retain certain information as required by law or for legitimate business purposes.</li>
+              <li>Provisions of these terms that by their nature should survive termination will remain in effect.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 11 GOVERNING LAW -->
+        <div class="section-card" id="governing">
+          <div class="section-header">
+            <div class="section-num">11</div>
+            <div class="section-title">Governing Law</div>
+          </div>
+          <div class="section-body">
+            <p>These Terms of Service shall be governed by and construed in accordance with the laws of the District of Columbia, United States, without regard to its conflict of law provisions.</p>
+            <p>Any disputes arising under or in connection with these terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Washington, D.C. You hereby consent to personal jurisdiction in such courts and waive any objection to the laying of venue in such courts.</p>
+            <p>For disputes involving amounts less than $5,000, you agree to resolve the dispute through binding arbitration administered by the American Arbitration Association in accordance with its Consumer Arbitration Rules, rather than in court, except that you may assert claims in small claims court if your claims qualify.</p>
+          </div>
+        </div>
+
+        <!-- 12 CHANGES -->
+        <div class="section-card" id="changes">
+          <div class="section-header">
+            <div class="section-num">12</div>
+            <div class="section-title">Changes to Terms</div>
+          </div>
+          <div class="section-body">
+            <p>We reserve the right to update or modify these Terms of Service at any time. When we make material changes, we will:</p>
+            <ul>
+              <li>Update the "Last Updated" date at the top of this page.</li>
+              <li>Send an email notification to all registered account holders.</li>
+              <li>Display a prominent notice on our homepage for at least 14 days.</li>
+            </ul>
+            <p>Your continued use of our website or services after the effective date of any changes constitutes your acceptance of the revised terms. If you do not agree to the updated terms, you must discontinue use of our services and may close your account.</p>
+            <p>We encourage you to review these terms periodically. Previous versions of our Terms of Service are available upon request by contacting our legal team.</p>
+          </div>
+        </div>
+
+        <!-- 13 CONTACT -->
+        <div class="contact-card" id="contact-section">
+          <h3>Questions About These Terms?</h3>
+          <p>If you have any questions, concerns, or requests regarding these Terms of Service, our legal team is here to help. We aim to respond to all legal inquiries within 5 business days.</p>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="ci-label">Legal Inquiries</div>
+              <div class="ci-value"><a href="mailto:legal@volkdonations.org">legal@volkdonations.org</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-label">Privacy Requests</div>
+              <div class="ci-value"><a href="mailto:privacy@volkdonations.org">privacy@volkdonations.org</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-label">Mailing Address</div>
+              <div class="ci-value">1420 Harbor Blvd, Suite 300<br>Washington, D.C. 20001</div>
+            </div>
+            <div class="contact-item">
+              <div class="ci-label">General Support</div>
+              <div class="ci-value"><a href="/contact">Contact Form</a></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content-col -->
+    </div>
+  </div><!-- /page-body -->
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Organization</h5>
+        <a href="/about">About Us</a>
+        <a href="/partners">Our Partners</a>
+        <a href="/branches">Branches</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
+      </div>
+      <div>
+        <h5>Get Involved</h5>
+        <a href="/contribute">Contribute</a>
+        <a href="/volunteer">Volunteer</a>
+        <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
+        <a href="https://gateway.volkdonations.website/admin" class="staff-link">Staff Portal</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    mobileMenuBtn.addEventListener('click', function() { this.classList.toggle('active'); mainNav.classList.toggle('active'); });
+    document.addEventListener('click', function(e) { if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) { mobileMenuBtn.classList.remove('active'); mainNav.classList.remove('active'); } });
+    window.addEventListener('resize', function() { if (window.innerWidth > 968) { mobileMenuBtn.classList.remove('active'); mainNav.classList.remove('active'); } });
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => { btt.classList.toggle('show', window.scrollY > 400); });
+
+    // Active TOC highlight on scroll
+    const sections = document.querySelectorAll('.section-card, .contact-card');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+          });
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

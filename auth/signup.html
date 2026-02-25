@@ -4,609 +4,1057 @@
   <meta charset="UTF-8" />
   <title>Create Account | Volk Donations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Create your Volk Donations account to start supporting orphans worldwide." />
-  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <meta name="description" content="Create your Volk Donations account to start supporting orphaned children worldwide." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1e3a5f">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <style>
+    :root {
+      --navy:        #1e3a5f;
+      --navy-dark:   #152b47;
+      --navy-mid:    #2a4f7c;
+      --green:       #00a86b;
+      --green-dark:  #008f5a;
+      --green-light: #00c47d;
+      --green-glow:  rgba(0,168,107,0.18);
+      --white:       #ffffff;
+      --off-white:   #f0f4f8;
+      --surface:     #f7fafc;
+      --text:        #2c3e50;
+      --muted:       #5a6c7d;
+      --border:      #d5e0ec;
+      --border-focus:#1e3a5f;
+      --error:       #dc2626;
+      --error-bg:    #fef2f2;
+      --error-border:rgba(220,38,38,0.25);
+      --success-bg:  #f0fdf4;
+      --success-border:rgba(0,168,107,0.3);
+      --shadow-sm:   0 1px 3px rgba(30,58,95,0.07);
+      --shadow-md:   0 4px 20px rgba(30,58,95,0.11);
+      --shadow-lg:   0 16px 56px rgba(30,58,95,0.16);
+      --radius:      10px;
+    }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html { height: 100%; scroll-behavior: smooth; }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f7fb;
-      color: #2c3e50;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
+    a { text-decoration: none; color: inherit; transition: color 0.2s; }
+
+    /* ── HEADER ─────────────────────────────── */
     header {
-      background: #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      padding: 18px 5%;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      padding: 15px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .logo-container {
+    .logo-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
-      text-decoration: none;
+      gap: 11px;
     }
 
-    .logo-container img {
-      height: 46px;
-      width: auto;
-    }
+    .logo-wrap img { height: 44px; width: auto; }
 
     .logo-text h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #1e3a5f;
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
     }
 
     .logo-text span {
       font-size: 11px;
-      color: #00a86b;
+      color: var(--green);
       font-weight: 500;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
     }
 
-    .header-link {
+    .header-action {
       font-size: 14px;
-      color: #5a6c7d;
+      color: var(--muted);
     }
 
-    .header-link a {
-      color: #00a86b;
+    .header-action a {
+      color: var(--green);
       font-weight: 600;
-      text-decoration: none;
     }
 
-    .header-link a:hover { text-decoration: underline; }
+    .header-action a:hover { color: var(--green-dark); }
 
+    /* ── MAIN LAYOUT ────────────────────────── */
     main {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 50px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 74px);
     }
 
-    .auth-card {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 480px;
+    /* ── LEFT BRAND PANEL ───────────────────── */
+    .panel-brand {
+      background: linear-gradient(150deg, var(--navy-dark) 0%, #0b5238 100%);
+      position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 60px;
     }
 
-    .auth-card-header {
-      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
-      padding: 36px 40px;
-      text-align: center;
+    .panel-brand::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 85% 15%, rgba(0,168,107,0.28) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 5% 85%, rgba(0,168,107,0.16) 0%, transparent 60%);
+      pointer-events: none;
     }
 
-    .auth-card-header h2 {
-      color: #ffffff;
-      font-size: 24px;
-      font-weight: 700;
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+
+    .orb-1 { width: 380px; height: 380px; bottom: -120px; right: -120px; }
+    .orb-2 { width: 220px; height: 220px; top: -60px; left: -60px; border-color: rgba(0,168,107,0.12); }
+
+    .brand-inner { position: relative; z-index: 1; }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,168,107,0.18);
+      border: 1px solid rgba(0,168,107,0.38);
+      color: #5fffc4;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+
+    .trust-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--green-light);
+      border-radius: 50%;
+      animation: blink 2.2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.5); }
+    }
+
+    .brand-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .brand-heading em {
+      font-style: normal;
+      color: #5fffc4;
+    }
+
+    .brand-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.75;
+      max-width: 360px;
+      margin-bottom: 44px;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 360px;
+    }
+
+    .impact-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 18px 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .impact-val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .impact-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.4;
+    }
+
+    .impact-icon {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* ── RIGHT FORM PANEL ───────────────────── */
+    .panel-form {
+      background: var(--white);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 52px 48px;
+      overflow-y: auto;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .form-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .form-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
       margin-bottom: 6px;
     }
 
-    .auth-card-header p {
-      color: rgba(255,255,255,0.85);
+    .form-subtitle {
       font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 32px;
     }
 
-    .auth-card-body {
-      padding: 40px;
+    .form-subtitle a { color: var(--green); font-weight: 600; }
+    .form-subtitle a:hover { color: var(--green-dark); }
+
+    /* ── ALERTS ─────────────────────────────── */
+    .alert {
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 16px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      line-height: 1.55;
+      margin-bottom: 22px;
     }
 
-    .form-group {
-      margin-bottom: 20px;
+    .alert.visible { display: flex; }
+
+    .alert-error {
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      color: #991b1b;
     }
+
+    .alert-success {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: #065f46;
+    }
+
+    .alert svg { flex-shrink: 0; margin-top: 1px; }
+
+    /* ── FORM FIELDS ────────────────────────── */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field { margin-bottom: 18px; }
 
     label {
       display: block;
       font-size: 13px;
       font-weight: 600;
-      color: #1e3a5f;
+      color: var(--navy);
       margin-bottom: 7px;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
 
-    input {
+    .input-wrap { position: relative; }
+
+    .input-icon {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a0b0c0;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
       width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid #dce3eb;
-      border-radius: 8px;
-      font-size: 15px;
-      color: #2c3e50;
-      background: #f9fbfd;
-      transition: border-color 0.25s, box-shadow 0.25s;
+      padding: 11px 14px 11px 40px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface);
       outline: none;
-      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      -webkit-appearance: none;
     }
 
     input:focus {
-      border-color: #00a86b;
-      box-shadow: 0 0 0 3px rgba(0,168,107,0.12);
-      background: #ffffff;
+      border-color: var(--navy);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(30,58,95,0.08);
     }
 
-    input.error {
-      border-color: #e74c3c;
-      box-shadow: 0 0 0 3px rgba(231,76,60,0.1);
+    .input-wrap:focus-within .input-icon { color: var(--navy); }
+
+    input.is-error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
+    }
+
+    input.is-valid {
+      border-color: var(--green);
     }
 
     .field-error {
       display: none;
+      align-items: center;
+      gap: 4px;
       font-size: 12px;
-      color: #e74c3c;
+      color: var(--error);
       margin-top: 5px;
     }
 
-    .field-error.visible { display: block; }
-
-    .password-wrapper {
-      position: relative;
-    }
+    .field-error.visible { display: flex; }
 
     .toggle-pw {
       position: absolute;
       right: 12px;
       top: 50%;
       transform: translateY(-50%);
-      cursor: pointer;
-      color: #8a9ab0;
       background: none;
       border: none;
+      cursor: pointer;
+      color: #a0b0c0;
       padding: 4px;
       display: flex;
       align-items: center;
+      transition: color 0.2s;
     }
 
-    .toggle-pw:hover { color: #1e3a5f; }
+    .toggle-pw:hover { color: var(--navy); }
 
-    .password-strength {
-      margin-top: 8px;
+    /* ── STRENGTH METER ─────────────────────── */
+    .strength-track {
       display: flex;
       gap: 4px;
+      margin-top: 8px;
     }
 
-    .strength-bar {
-      height: 4px;
+    .strength-seg {
+      height: 3px;
       flex: 1;
       border-radius: 2px;
-      background: #dce3eb;
+      background: var(--border);
       transition: background 0.3s;
     }
 
-    .strength-bar.weak { background: #e74c3c; }
-    .strength-bar.medium { background: #f39c12; }
-    .strength-bar.strong { background: #00a86b; }
+    .strength-seg.s-weak   { background: #ef4444; }
+    .strength-seg.s-fair   { background: #f59e0b; }
+    .strength-seg.s-good   { background: #3b82f6; }
+    .strength-seg.s-strong { background: var(--green); }
 
-    .strength-label {
+    .strength-hint {
       font-size: 11px;
-      color: #8a9ab0;
+      color: var(--muted);
       margin-top: 4px;
+      min-height: 16px;
+      transition: color 0.3s;
     }
 
-    .captcha-wrapper {
-      margin-bottom: 20px;
+    /* ── TURNSTILE ───────────────────────────── */
+    .turnstile-wrap {
       display: flex;
       justify-content: center;
+      margin-bottom: 18px;
     }
 
-    .submit-btn {
+    /* ── SUBMIT ──────────────────────────────── */
+    .btn-submit {
       width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #1e3a5f, #00a86b);
-      color: #ffffff;
+      padding: 13px 20px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: var(--white);
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
-      font-family: inherit;
-      transition: opacity 0.2s, transform 0.2s;
+      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(30,58,95,0.28);
+      letter-spacing: 0.2px;
       position: relative;
     }
 
-    .submit-btn:hover:not(:disabled) {
-      opacity: 0.92;
+    .btn-submit:hover:not(:disabled) {
+      opacity: 0.91;
       transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(30,58,95,0.34);
     }
 
-    .submit-btn:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
+    .btn-submit:active:not(:disabled) { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    .submit-btn .spinner {
+    .spinner {
       display: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(255,255,255,0.4);
-      border-top-color: #fff;
+      width: 17px; height: 17px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: var(--white);
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
-      margin: 0 auto;
     }
-
-    .submit-btn.loading span { display: none; }
-    .submit-btn.loading .spinner { display: block; }
 
     @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-submit.loading .spinner { display: block; }
+    .btn-submit.loading .btn-label { opacity: 0.7; }
 
-    .alert {
-      padding: 12px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      margin-bottom: 20px;
-      display: none;
+    /* ── TRUST ROW ───────────────────────────── */
+    .trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
     }
 
-    .alert.success {
-      background: #eafaf1;
-      border: 1px solid #00a86b;
-      color: #1e6b4b;
-      display: block;
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--muted);
     }
 
-    .alert.error {
-      background: #fef0ee;
-      border: 1px solid #e74c3c;
-      color: #a93226;
-      display: block;
-    }
+    .trust-item svg { color: var(--green); }
 
+    /* ── DIVIDER ─────────────────────────────── */
     .divider {
-      text-align: center;
-      color: #8a9ab0;
-      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       margin: 20px 0;
-      position: relative;
     }
 
     .divider::before, .divider::after {
       content: '';
-      position: absolute;
-      top: 50%;
-      width: 42%;
+      flex: 1;
       height: 1px;
-      background: #dce3eb;
+      background: var(--border);
     }
 
-    .divider::before { left: 0; }
-    .divider::after { right: 0; }
+    .divider span { font-size: 12px; color: var(--muted); }
 
-    .signin-link {
+    .signin-prompt {
       text-align: center;
       font-size: 14px;
-      color: #5a6c7d;
+      color: var(--muted);
     }
 
-    .signin-link a {
-      color: #00a86b;
-      font-weight: 600;
-      text-decoration: none;
-    }
+    .signin-prompt a { color: var(--navy); font-weight: 600; }
+    .signin-prompt a:hover { color: var(--green); }
 
-    .signin-link a:hover { text-decoration: underline; }
-
+    /* ── FOOTER ──────────────────────────────── */
     footer {
-      background: #1e3a5f;
-      color: #b8c7d9;
-      text-align: center;
-      padding: 20px;
-      font-size: 13px;
+      background: var(--navy);
+      padding: 20px 5%;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-inner p { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+    .footer-links { display: flex; gap: 18px; }
+
+    .footer-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--green); }
+
+    /* ── HAMBURGER ───────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .panel-brand { padding: 60px 44px; }
+      .brand-heading { font-size: 36px; }
+    }
+
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      .panel-brand { display: none; }
+      .panel-form {
+        padding: 48px 32px;
+        align-items: center;
+        min-height: calc(100vh - 74px);
+      }
     }
 
     @media (max-width: 520px) {
-      .auth-card-body { padding: 28px 24px; }
-      .auth-card-header { padding: 28px 24px; }
+      .panel-form { padding: 36px 20px; }
+      .form-title { font-size: 26px; }
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+      .trust-row { flex-wrap: wrap; gap: 12px; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <a href="/" class="logo-container">
-      <img src="/images/logo.png" alt="Volk Donations Logo">
+    <a href="/" class="logo-wrap">
+      <img src="/images/logo.png" alt="Volk Donations">
       <div class="logo-text">
         <h1>Volk Donations</h1>
         <span>A better life for everyone</span>
       </div>
     </a>
-    <div class="header-link">Already have an account? <a href="/auth/login">Sign in</a></div>
+    <div class="header-action">
+      Already have an account? <a href="/auth/login">Sign in</a>
+    </div>
   </header>
 
   <main>
-    <div class="auth-card">
-      <div class="auth-card-header">
-        <h2>Create Your Account</h2>
-        <p>Join us in making a difference worldwide</p>
+
+    <!-- LEFT: Brand panel -->
+    <div class="panel-brand">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="brand-inner">
+
+        <div class="trust-badge">
+          <div class="trust-badge-dot"></div>
+          501(c)(3) Verified Nonprofit
+        </div>
+
+        <h2 class="brand-heading">
+          Join the movement<br>changing <em>children's</em><br>lives worldwide
+        </h2>
+
+        <p class="brand-desc">
+          Your account gives you full access to track donations, manage recurring gifts, and witness the real impact your generosity creates — from classrooms in Kenya to clinics in Cambodia.
+        </p>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-icon">🌍</div>
+            <div class="impact-val">38</div>
+            <div class="impact-label">Countries reached</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">👶</div>
+            <div class="impact-val">14K+</div>
+            <div class="impact-label">Children supported</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">🏫</div>
+            <div class="impact-val">320+</div>
+            <div class="impact-label">Schools funded</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">💚</div>
+            <div class="impact-val">2010</div>
+            <div class="impact-label">Serving since</div>
+          </div>
+        </div>
+
       </div>
-      <div class="auth-card-body">
+    </div>
 
-        <div class="alert" id="formAlert"></div>
+    <!-- RIGHT: Form panel -->
+    <div class="panel-form">
+      <div class="form-box">
 
-        <form id="signupForm" novalidate>
+        <p class="form-eyebrow">Donor Portal</p>
+        <h1 class="form-title">Create your account</h1>
+        <p class="form-subtitle">
+          Free forever · <a href="/auth/login">Already registered? Sign in</a>
+        </p>
 
-          <div class="form-group">
+        <!-- Alerts -->
+        <div class="alert alert-error" id="alertError" role="alert" aria-live="assertive">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="currentColor"/>
+          </svg>
+          <span id="alertErrorMsg"></span>
+        </div>
+
+        <div class="alert alert-success" id="alertSuccess" role="status" aria-live="polite">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span id="alertSuccessMsg"></span>
+        </div>
+
+        <form id="signupForm" novalidate autocomplete="on">
+
+          <!-- Name -->
+          <div class="field">
             <label for="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Jane Smith"
-              autocomplete="name"
-              maxlength="100"
-              required
-            />
-            <div class="field-error" id="nameError">Please enter your full name (at least 2 characters).</div>
+            <div class="input-wrap">
+              <svg class="input-icon" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Jane Smith"
+                autocomplete="name"
+                maxlength="100"
+                required
+                aria-describedby="nameError"
+              />
+            </div>
+            <div class="field-error" id="nameError" role="alert">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+              <span>Please enter your full name (min. 2 characters).</span>
+            </div>
           </div>
 
-          <div class="form-group">
+          <!-- Email -->
+          <div class="field">
             <label for="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="jane@example.com"
-              autocomplete="email"
-              maxlength="255"
-              required
-            />
-            <div class="field-error" id="emailError">Please enter a valid email address.</div>
+            <div class="input-wrap">
+              <svg class="input-icon" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="jane@example.com"
+                autocomplete="email"
+                maxlength="254"
+                required
+                aria-describedby="emailError"
+              />
+            </div>
+            <div class="field-error" id="emailError" role="alert">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+              <span>Please enter a valid email address.</span>
+            </div>
           </div>
 
-          <div class="form-group">
+          <!-- Password -->
+          <div class="field">
             <label for="password">Password</label>
-            <div class="password-wrapper">
+            <div class="input-wrap">
+              <svg class="input-icon" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+              </svg>
               <input
                 type="password"
                 id="password"
                 name="password"
                 placeholder="Create a strong password"
                 autocomplete="new-password"
-                maxlength="128"
+                maxlength="72"
                 required
+                aria-describedby="passwordError"
               />
               <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
-                <svg id="eyeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
+                <svg id="eyeIconPw" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
                 </svg>
               </button>
             </div>
-            <div class="password-strength">
-              <div class="strength-bar" id="bar1"></div>
-              <div class="strength-bar" id="bar2"></div>
-              <div class="strength-bar" id="bar3"></div>
-              <div class="strength-bar" id="bar4"></div>
+            <div class="strength-track">
+              <div class="strength-seg" id="seg1"></div>
+              <div class="strength-seg" id="seg2"></div>
+              <div class="strength-seg" id="seg3"></div>
+              <div class="strength-seg" id="seg4"></div>
             </div>
-            <div class="strength-label" id="strengthLabel"></div>
-            <div class="field-error" id="passwordError">
-              Password must be 8+ characters with uppercase, lowercase, a number, and a special character.
+            <div class="strength-hint" id="strengthHint"></div>
+            <div class="field-error" id="passwordError" role="alert">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+              <span>8+ characters with uppercase, lowercase, number &amp; special character.</span>
             </div>
           </div>
 
-          <div class="form-group">
+          <!-- Confirm Password -->
+          <div class="field">
             <label for="confirmPassword">Confirm Password</label>
-            <div class="password-wrapper">
+            <div class="input-wrap">
+              <svg class="input-icon" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+              </svg>
               <input
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
                 placeholder="Repeat your password"
                 autocomplete="new-password"
-                maxlength="128"
+                maxlength="72"
                 required
+                aria-describedby="confirmError"
               />
+              <button type="button" class="toggle-pw" id="toggleConfirm" aria-label="Show confirm password">
+                <svg id="eyeIconConfirm" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
             </div>
-            <div class="field-error" id="confirmPasswordError">Passwords do not match.</div>
+            <div class="field-error" id="confirmError" role="alert">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+              <span>Passwords do not match.</span>
+            </div>
           </div>
 
-          <div class="captcha-wrapper">
-            <div
-              class="h-captcha"
-              data-sitekey="0x4AAAAAAChUqb3ILZv073OU"
-              id="hcaptcha"
-            ></div>
+          <!-- Turnstile -->
+          <div class="turnstile-wrap">
+            <div class="cf-turnstile"
+              data-sitekey="YOUR_TURNSTILE_SITE_KEY"
+              data-theme="light"
+              data-size="normal">
+            </div>
           </div>
 
-          <button type="submit" class="submit-btn" id="submitBtn">
-            <span>Create Account</span>
-            <div class="spinner"></div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="btn-inner">
+              <div class="spinner"></div>
+              <span class="btn-label">Create My Account</span>
+            </span>
           </button>
 
         </form>
 
-        <div class="divider">or</div>
-        <div class="signin-link">Already have an account? <a href="/auth/login">Sign in here</a></div>
+        <!-- Trust signals -->
+        <div class="trust-row">
+          <div class="trust-item">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            SSL Secured
+          </div>
+          <div class="trust-item">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            No spam, ever
+          </div>
+          <div class="trust-item">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            Data encrypted
+          </div>
+        </div>
+
+        <div class="divider"><span>Already a member?</span></div>
+
+        <p class="signin-prompt">
+          <a href="/auth/login">Sign in to your existing account →</a>
+        </p>
 
       </div>
     </div>
+
   </main>
 
   <footer>
-    <p>© 2026 Volk Donations · 501(c)(3) Nonprofit · EIN: 45-1234567</p>
+    <div class="footer-inner">
+      <p>© 2026 Volk Donations · 501(c)(3) Nonprofit · EIN: 45-1234567 · Making a difference since 2010</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/contact">Support</a>
+      </div>
+    </div>
   </footer>
 
   <script>
-    const form = document.getElementById('signupForm');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const submitBtn = document.getElementById('submitBtn');
-    const formAlert = document.getElementById('formAlert');
+    (function () {
+      'use strict';
 
-    // Toggle password visibility
-    document.getElementById('togglePw').addEventListener('click', function() {
-      const type = passwordInput.type === 'password' ? 'text' : 'password';
-      passwordInput.type = type;
-    });
+      const form        = document.getElementById('signupForm');
+      const nameEl      = document.getElementById('name');
+      const emailEl     = document.getElementById('email');
+      const pwEl        = document.getElementById('password');
+      const confirmEl   = document.getElementById('confirmPassword');
+      const submitBtn   = document.getElementById('submitBtn');
 
-    // Password strength meter
-    passwordInput.addEventListener('input', function() {
-      const val = this.value;
-      let score = 0;
-      if (val.length >= 8) score++;
-      if (/[A-Z]/.test(val)) score++;
-      if (/[0-9]/.test(val)) score++;
-      if (/[^A-Za-z0-9]/.test(val)) score++;
+      const EYE_OPEN  = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+      const EYE_SHUT  = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
 
-      const bars = [
-        document.getElementById('bar1'),
-        document.getElementById('bar2'),
-        document.getElementById('bar3'),
-        document.getElementById('bar4'),
-      ];
-      const label = document.getElementById('strengthLabel');
-      const classMap = ['', 'weak', 'medium', 'medium', 'strong'];
-      const labelMap = ['', 'Weak', 'Fair', 'Good', 'Strong'];
-
-      bars.forEach((b, i) => {
-        b.className = 'strength-bar';
-        if (i < score) b.classList.add(classMap[score]);
-      });
-
-      label.textContent = val.length > 0 ? labelMap[score] : '';
-    });
-
-    function showFieldError(id, show) {
-      const el = document.getElementById(id);
-      el.classList.toggle('visible', show);
-    }
-
-    function setInputError(input, hasError) {
-      input.classList.toggle('error', hasError);
-    }
-
-    function showAlert(message, type) {
-      formAlert.textContent = message;
-      formAlert.className = `alert ${type}`;
-    }
-
-    function clearAlert() {
-      formAlert.className = 'alert';
-      formAlert.textContent = '';
-    }
-
-    function validateEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-    }
-
-    function validatePassword(password) {
-      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(password);
-    }
-
-    function validateForm() {
-      let valid = true;
-
-      const name = nameInput.value.trim();
-      const nameOk = name.length >= 2 && name.length <= 100;
-      showFieldError('nameError', !nameOk);
-      setInputError(nameInput, !nameOk);
-      if (!nameOk) valid = false;
-
-      const email = emailInput.value.trim();
-      const emailOk = validateEmail(email);
-      showFieldError('emailError', !emailOk);
-      setInputError(emailInput, !emailOk);
-      if (!emailOk) valid = false;
-
-      const password = passwordInput.value;
-      const passwordOk = validatePassword(password);
-      showFieldError('passwordError', !passwordOk);
-      setInputError(passwordInput, !passwordOk);
-      if (!passwordOk) valid = false;
-
-      const confirmOk = confirmPasswordInput.value === passwordInput.value && confirmPasswordInput.value.length > 0;
-      showFieldError('confirmPasswordError', !confirmOk);
-      setInputError(confirmPasswordInput, !confirmOk);
-      if (!confirmOk) valid = false;
-
-      return valid;
-    }
-
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      clearAlert();
-
-      if (!validateForm()) return;
-
-      // Get hCaptcha token
-      const captchaToken = hcaptcha.getResponse();
-      if (!captchaToken) {
-        showAlert('Please complete the CAPTCHA verification.', 'error');
-        return;
+      function sanitize(str) {
+        if (typeof str !== 'string') return '';
+        return str.trim().replace(/[\x00-\x1F\x7F<>]/g, '');
       }
 
-      submitBtn.disabled = true;
-      submitBtn.classList.add('loading');
+      function isValidEmail(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+      }
 
-      try {
-        const response = await fetch('/api/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: nameInput.value.trim(),
-            email: emailInput.value.trim().toLowerCase(),
-            password: passwordInput.value,
-            captchaToken,
-          }),
+      function isValidPassword(v) {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,}$/.test(v);
+      }
+
+      function fieldOk(inputEl, errorId) {
+        inputEl.classList.remove('is-error');
+        inputEl.classList.add('is-valid');
+        inputEl.removeAttribute('aria-invalid');
+        document.getElementById(errorId).classList.remove('visible');
+      }
+
+      function fieldFail(inputEl, errorId) {
+        inputEl.classList.add('is-error');
+        inputEl.classList.remove('is-valid');
+        inputEl.setAttribute('aria-invalid', 'true');
+        document.getElementById(errorId).classList.add('visible');
+      }
+
+      function fieldReset(inputEl, errorId) {
+        inputEl.classList.remove('is-error', 'is-valid');
+        inputEl.removeAttribute('aria-invalid');
+        document.getElementById(errorId).classList.remove('visible');
+      }
+
+      function showAlert(type, msg) {
+        document.getElementById('alertError').classList.remove('visible');
+        document.getElementById('alertSuccess').classList.remove('visible');
+        if (type === 'error') {
+          document.getElementById('alertErrorMsg').textContent = msg;
+          document.getElementById('alertError').classList.add('visible');
+          document.getElementById('alertError').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          document.getElementById('alertSuccessMsg').textContent = msg;
+          document.getElementById('alertSuccess').classList.add('visible');
+        }
+      }
+
+      function hideAlerts() {
+        document.getElementById('alertError').classList.remove('visible');
+        document.getElementById('alertSuccess').classList.remove('visible');
+      }
+
+      function setLoading(on) {
+        submitBtn.disabled = on;
+        submitBtn.classList.toggle('loading', on);
+      }
+
+      function toggleVisibility(inputEl, btnEl, iconId) {
+        const show = inputEl.type === 'password';
+        inputEl.type = show ? 'text' : 'password';
+        btnEl.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+        document.getElementById(iconId).innerHTML = show ? EYE_SHUT : EYE_OPEN;
+      }
+
+      document.getElementById('togglePw').addEventListener('click', () =>
+        toggleVisibility(pwEl, document.getElementById('togglePw'), 'eyeIconPw')
+      );
+
+      document.getElementById('toggleConfirm').addEventListener('click', () =>
+        toggleVisibility(confirmEl, document.getElementById('toggleConfirm'), 'eyeIconConfirm')
+      );
+
+      const segs  = [1,2,3,4].map(i => document.getElementById('seg' + i));
+      const hint  = document.getElementById('strengthHint');
+      const classMap  = ['', 's-weak', 's-fair', 's-good', 's-strong'];
+      const labelMap  = ['', 'Weak — add more variety', 'Fair — add a symbol or number', 'Good — almost there!', 'Strong password ✓'];
+      const colorMap  = ['', '#ef4444', '#f59e0b', '#3b82f6', '#00a86b'];
+
+      pwEl.addEventListener('input', function () {
+        const v = this.value;
+        let score = 0;
+        if (v.length >= 8)            score++;
+        if (/[A-Z]/.test(v))          score++;
+        if (/[0-9]/.test(v))          score++;
+        if (/[^A-Za-z0-9]/.test(v))   score++;
+
+        segs.forEach((s, i) => {
+          s.className = 'strength-seg';
+          if (i < score) s.classList.add(classMap[score]);
         });
 
-        const data = await response.json();
+        hint.textContent  = v.length > 0 ? labelMap[score] : '';
+        hint.style.color  = v.length > 0 ? colorMap[score] : '';
 
-        if (response.ok) {
-          // Store userId for verify page
-          sessionStorage.setItem('pendingUserId', data.userId);
-          sessionStorage.setItem('pendingEmail', emailInput.value.trim().toLowerCase());
-          window.location.href = '/verify';
-        } else {
-          showAlert(data.error || 'Something went wrong. Please try again.', 'error');
-          hcaptcha.reset();
-        }
-      } catch (err) {
-        showAlert('Network error. Please check your connection and try again.', 'error');
-        hcaptcha.reset();
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('loading');
+        if (confirmEl.value) validateConfirm();
+      });
+
+      function validateName() {
+        const v = sanitize(nameEl.value);
+        if (v.length >= 2 && v.length <= 100) { fieldOk(nameEl, 'nameError'); return true; }
+        fieldFail(nameEl, 'nameError'); return false;
       }
-    });
 
-    // Live validation on blur
-    nameInput.addEventListener('blur', () => {
-      const ok = nameInput.value.trim().length >= 2;
-      showFieldError('nameError', !ok);
-      setInputError(nameInput, !ok);
-    });
+      function validateEmail() {
+        const v = sanitize(emailEl.value).toLowerCase();
+        if (isValidEmail(v)) { fieldOk(emailEl, 'emailError'); return true; }
+        fieldFail(emailEl, 'emailError'); return false;
+      }
 
-    emailInput.addEventListener('blur', () => {
-      const ok = validateEmail(emailInput.value);
-      showFieldError('emailError', !ok);
-      setInputError(emailInput, !ok);
-    });
+      function validatePassword() {
+        if (isValidPassword(pwEl.value)) { fieldOk(pwEl, 'passwordError'); return true; }
+        fieldFail(pwEl, 'passwordError'); return false;
+      }
 
-    passwordInput.addEventListener('blur', () => {
-      const ok = validatePassword(passwordInput.value);
-      showFieldError('passwordError', !ok);
-      setInputError(passwordInput, !ok);
-    });
+      function validateConfirm() {
+        const ok = confirmEl.value === pwEl.value && confirmEl.value.length > 0;
+        if (ok) { fieldOk(confirmEl, 'confirmError'); return true; }
+        fieldFail(confirmEl, 'confirmError'); return false;
+      }
 
-    confirmPasswordInput.addEventListener('blur', () => {
-      const ok = confirmPasswordInput.value === passwordInput.value && confirmPasswordInput.value.length > 0;
-      showFieldError('confirmPasswordError', !ok);
-      setInputError(confirmPasswordInput, !ok);
-    });
+      nameEl.addEventListener('blur', validateName);
+      emailEl.addEventListener('blur', validateEmail);
+      pwEl.addEventListener('blur', validatePassword);
+      confirmEl.addEventListener('input', () => { if (confirmEl.value) validateConfirm(); });
+      confirmEl.addEventListener('blur', validateConfirm);
+
+      nameEl.addEventListener('input', () => { if (nameEl.classList.contains('is-error')) validateName(); });
+      emailEl.addEventListener('input', () => { if (emailEl.classList.contains('is-error')) validateEmail(); });
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideAlerts();
+
+        const n  = validateName();
+        const em = validateEmail();
+        const pw = validatePassword();
+        const co = validateConfirm();
+        if (!n || !em || !pw || !co) return;
+
+        const tsEl = document.querySelector('[name="cf-turnstile-response"]');
+        const captchaToken = tsEl ? tsEl.value : '';
+        if (!captchaToken) {
+          showAlert('error', 'Please complete the security check.');
+          return;
+        }
+
+        setLoading(true);
+
+        try {
+          const res = await fetch('/api/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+              name:         sanitize(nameEl.value),
+              email:        sanitize(emailEl.value).toLowerCase(),
+              password:     pwEl.value,
+              captchaToken: captchaToken,
+            }),
+          });
+
+          let data;
+          try { data = await res.json(); } catch { data = {}; }
+
+          if (res.ok) {
+            sessionStorage.setItem('pendingEmail', sanitize(emailEl.value).toLowerCase());
+            showAlert('success', data.message || 'Account created! Redirecting to verification…');
+            setTimeout(() => { window.location.href = '/verify'; }, 1200);
+            return;
+          }
+
+          showAlert('error', data.error || 'Something went wrong. Please try again.');
+          if (typeof turnstile !== 'undefined') turnstile.reset();
+
+        } catch {
+          showAlert('error', 'Network error. Please check your connection and try again.');
+          if (typeof turnstile !== 'undefined') turnstile.reset();
+        } finally {
+          setLoading(false);
+        }
+      });
+
+    })();
   </script>
 
 </body>

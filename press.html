@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Press Kit | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Official press kit for Volk Donations — media assets, fact sheet, leadership bios, and contact information for journalists and media professionals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --green: #00a86b;
+      --green-light: #00c47d;
+      --cream: #faf8f4;
+      --dark: #0d1f33;
+      --text: #2c3e50;
+      --muted: #6b7c8d;
+      --border: #e2e8f0;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-circle {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900; font-size: 22px; color: white;
+    }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: var(--navy); }
+    .logo-text span { font-size: 12px; color: var(--green); font-weight: 500; }
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a {
+      font-weight: 500; color: var(--text); font-size: 15px;
+      text-decoration: none; transition: color 0.3s;
+    }
+    nav a:hover { color: var(--green); }
+    nav a.active { color: var(--green); font-weight: 600; }
+    .mobile-menu-btn {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 5px; background: none; border: none;
+    }
+    .mobile-menu-btn span {
+      width: 28px; height: 3px; background: var(--navy);
+      transition: all 0.3s; border-radius: 2px; display: block;
+    }
+
+    /* ─── HERO ─── */
+    .press-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0d2a48 60%, #0a4a35 100%);
+      color: white;
+      padding: 100px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .press-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,168,107,0.18) 0%, transparent 70%);
+    }
+    .press-hero::after {
+      content: '';
+      position: absolute; top: -50%; right: -10%;
+      width: 600px; height: 600px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero-inner {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .press-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,168,107,0.2);
+      border: 1px solid rgba(0,168,107,0.4);
+      color: #4dffa8; border-radius: 50px;
+      padding: 6px 18px; font-size: 13px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .press-badge::before {
+      content: '';
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #4dffa8; animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+    .hero-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px; font-weight: 900; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-left h2 span { color: #4dffa8; }
+    .hero-left p {
+      font-size: 17px; color: rgba(255,255,255,0.8);
+      line-height: 1.8; margin-bottom: 36px; max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green); color: white;
+      padding: 14px 32px; border-radius: 50px;
+      font-weight: 600; font-size: 15px;
+      text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px;
+      transition: all 0.3s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,168,107,0.4); }
+    .btn-outline {
+      background: transparent; color: white;
+      padding: 14px 32px; border-radius: 50px;
+      font-weight: 600; font-size: 15px;
+      border: 1px solid rgba(255,255,255,0.3);
+      text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+    .hero-right { display: flex; flex-direction: column; gap: 16px; }
+    .stat-card {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 24px 28px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .stat-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--green), #007a4d);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .stat-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; font-weight: 900; color: white; line-height: 1;
+    }
+    .stat-card p { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+    /* ─── QUICK NAV ─── */
+    .quick-nav {
+      background: var(--cream); border-bottom: 1px solid var(--border);
+      padding: 0 5%; position: sticky; top: 86px; z-index: 900;
+    }
+    .quick-nav-inner {
+      max-width: 1200px; margin: auto;
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .quick-nav a {
+      padding: 18px 24px; font-size: 14px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s; white-space: nowrap; flex-shrink: 0;
+    }
+    .quick-nav a:hover { color: var(--navy); border-bottom-color: var(--green); }
+
+    /* ─── SECTIONS ─── */
+    .section-wrapper { max-width: 1200px; margin: auto; padding: 80px 5%; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: ''; width: 24px; height: 2px; background: var(--green);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px; font-weight: 800; color: var(--navy);
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-desc { font-size: 17px; color: var(--muted); max-width: 620px; line-height: 1.8; }
+
+    /* ─── DIVIDER ─── */
+    .divider { height: 1px; background: var(--border); max-width: 1200px; margin: 0 auto; }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start; margin-top: 60px;
+    }
+    .about-text p {
+      font-size: 16px; color: var(--text); line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .about-sidebar {}
+    .fact-sheet {
+      background: var(--navy); border-radius: 20px; padding: 36px;
+      color: white;
+    }
+    .fact-sheet h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700; margin-bottom: 28px;
+      padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .fact-row {
+      display: flex; flex-direction: column;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .fact-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .fact-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+    .fact-value { font-size: 15px; font-weight: 500; color: white; }
+    .fact-value.green { color: #4dffa8; }
+
+    /* ─── IMPACT NUMBERS ─── */
+    #impact { background: var(--cream); }
+    .impact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; margin-top: 60px; border-radius: 20px; overflow: hidden;
+    }
+    .impact-cell {
+      background: white; padding: 44px 32px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .impact-cell::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--navy), var(--green));
+    }
+    .impact-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px; font-weight: 900; color: var(--navy);
+      line-height: 1; display: block;
+    }
+    .impact-suffix { color: var(--green); }
+    .impact-label { font-size: 14px; color: var(--muted); margin-top: 10px; font-weight: 500; }
+
+    /* ─── COVERAGE ─── */
+    #coverage { background: white; }
+    .coverage-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 28px; margin-top: 60px;
+    }
+    .coverage-card {
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 32px; transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .coverage-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--navy));
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    .coverage-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+    .coverage-card:hover::after { transform: scaleX(1); }
+    .coverage-outlet {
+      font-weight: 700; font-size: 14px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .coverage-outlet span {
+      width: 8px; height: 8px; background: var(--green); border-radius: 50%;
+    }
+    .coverage-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700; color: var(--navy);
+      line-height: 1.4; margin-bottom: 12px;
+    }
+    .coverage-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .coverage-meta {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .coverage-date { font-size: 13px; color: var(--muted); }
+    .coverage-link {
+      font-size: 13px; font-weight: 600; color: var(--green);
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+    }
+    .coverage-link:hover { color: var(--navy); }
+
+    /* ─── LEADERSHIP ─── */
+    #leadership { background: var(--cream); }
+    .leadership-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 32px; margin-top: 60px;
+    }
+    .leader-card {
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.3s;
+    }
+    .leader-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,0.12); }
+    .leader-photo {
+      height: 200px; position: relative; overflow: hidden;
+    }
+    .leader-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .leader-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 48px; font-weight: 900; color: white;
+    }
+    .leader-info { padding: 28px; }
+    .leader-info h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    }
+    .leader-title { font-size: 13px; color: var(--green); font-weight: 600; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .leader-bio { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+    .leader-link {
+      font-size: 13px; font-weight: 600; color: var(--navy);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      border-bottom: 2px solid var(--green); padding-bottom: 2px;
+    }
+
+    /* ─── BOILERPLATE ─── */
+    #boilerplate { background: white; }
+    .boilerplate-box {
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 48px; margin-top: 48px; position: relative;
+    }
+    .boilerplate-box::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 120px; color: var(--green); opacity: 0.1;
+      position: absolute; top: -20px; left: 24px; line-height: 1;
+    }
+    .boilerplate-box p {
+      font-size: 17px; line-height: 1.9; color: var(--text);
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .boilerplate-box p:last-child { margin-bottom: 0; }
+    .copy-btn {
+      margin-top: 28px; background: var(--navy); color: white;
+      padding: 12px 28px; border-radius: 8px; font-size: 14px;
+      font-weight: 600; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.3s;
+    }
+    .copy-btn:hover { background: var(--green); }
+
+    /* ─── ASSETS ─── */
+    #assets { background: var(--cream); }
+    .assets-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 60px;
+    }
+    .asset-card {
+      background: white; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border); transition: all 0.3s;
+    }
+    .asset-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.1); transform: translateY(-3px); }
+    .asset-preview {
+      height: 200px; position: relative; overflow: hidden;
+    }
+    .asset-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .asset-preview-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; font-size: 40px;
+    }
+    .asset-preview-placeholder span {
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.8); letter-spacing: 1px;
+    }
+    .asset-info { padding: 20px 24px; }
+    .asset-info h5 {
+      font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    }
+    .asset-info p { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .asset-download {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--green);
+      text-decoration: none; border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+    }
+
+    /* ─── MEDIA CONTACT ─── */
+    #contact { background: var(--navy); color: white; }
+    #contact .section-wrapper { padding: 80px 5%; }
+    #contact .section-label { color: #4dffa8; }
+    #contact .section-label::before { background: #4dffa8; }
+    #contact .section-title { color: white; }
+    #contact .section-desc { color: rgba(255,255,255,0.7); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; margin-top: 60px; align-items: start;
+    }
+    .contact-cards { display: flex; flex-direction: column; gap: 20px; }
+    .contact-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 28px 32px;
+      display: flex; gap: 20px; align-items: flex-start;
+      transition: all 0.3s;
+    }
+    .contact-card:hover { background: rgba(255,255,255,0.1); }
+    .contact-icon {
+      width: 48px; height: 48px; flex-shrink: 0; border-radius: 12px;
+      background: rgba(0,168,107,0.25); display: flex;
+      align-items: center; justify-content: center; font-size: 20px;
+    }
+    .contact-card h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+    .contact-card p { font-size: 16px; font-weight: 500; color: white; }
+    .contact-card a { color: #4dffa8; text-decoration: none; font-size: 15px; }
+    .contact-form-area { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.1); }
+    .contact-form-area h4 { font-family: 'Playfair Display', serif; font-size: 22px; color: white; margin-bottom: 24px; }
+    .form-row { margin-bottom: 18px; }
+    .form-row label { display: block; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-row input, .form-row select, .form-row textarea {
+      width: 100%; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 10px;
+      padding: 14px 18px; font-size: 15px; color: white;
+      font-family: 'DM Sans', sans-serif;
+      outline: none; transition: border-color 0.3s;
+    }
+    .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .form-row input:focus, .form-row textarea:focus { border-color: var(--green); }
+    .form-row select option { background: var(--navy); }
+    .form-row textarea { height: 110px; resize: none; }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .submit-btn {
+      width: 100%; background: var(--green); color: white;
+      padding: 16px; border-radius: 12px; border: none;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.3s; margin-top: 8px;
+    }
+    .submit-btn:hover { background: var(--green-light); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      padding: 60px 5% 30px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 50px; margin-bottom: 50px;
+    }
+    .footer-brand { }
+    .footer-logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .footer-logo-circle {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 20px; color: white;
+    }
+    .footer-brand-name { font-size: 18px; font-weight: 700; color: white; }
+    .footer-brand p { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.8; margin-bottom: 20px; }
+    footer h6 { color: white; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+    footer ul li a:hover { color: var(--green); }
+    .footer-bottom {
+      max-width: 1200px; margin: auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px; display: flex;
+      justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 50px; }
+      .hero-right { display: grid; grid-template-columns: 1fr 1fr; }
+      .hero-left h2 { font-size: 44px; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .coverage-grid { grid-template-columns: repeat(2, 1fr); }
+      .leadership-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      nav {
+        position: fixed; top: 86px; right: -100%;
+        width: 70%; max-width: 300px;
+        height: calc(100vh - 86px); background: white;
+        flex-direction: column; padding: 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.3s; gap: 20px;
+        align-items: flex-start;
+      }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .press-hero { padding: 70px 5% 60px; }
+      .hero-left h2 { font-size: 34px; }
+      .hero-right { grid-template-columns: 1fr; }
+      .section-title { font-size: 32px; }
+      .coverage-grid { grid-template-columns: 1fr; }
+      .leadership-grid { grid-template-columns: 1fr; }
+      .assets-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .quick-nav { display: none; }
+      .footer-inner { grid-template-columns: 1fr; gap: 30px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-left h2 { font-size: 28px; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-outline { justify-content: center; }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+      .impact-num { font-size: 38px; }
+      .assets-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 28px; }
+      .boilerplate-box { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-container">
+    <div class="logo-circle">V</div>
+    <div class="logo-text">
+      <h1>Volk Donations</h1>
+      <span>A better life for everyone</span>
+    </div>
+  </div>
+  <nav id="mainNav">
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/contact">Contact</a>
+    <a href="/press" class="active">Press</a>
+  </nav>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="press-hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="press-badge">Press Room</div>
+      <h2>Official Press<br><span>Kit & Media</span><br>Resources</h2>
+      <p>Welcome, journalists and media professionals. Everything you need to cover Volk Donations — our story, data, leadership bios, brand assets, and press contacts — all in one place.</p>
+      <div class="hero-actions">
+        <a href="#assets" class="btn-primary">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Press Kit
+        </a>
+        <a href="#contact" class="btn-outline">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Media Inquiry
+        </a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-icon">🌍</div>
+        <div>
+          <h3>42<span style="color:#4dffa8">+</span></h3>
+          <p>Countries with active programs across Africa, Asia, and Latin America</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">👧</div>
+        <div>
+          <h3>128<span style="color:#4dffa8">K</span></h3>
+          <p>Orphaned children directly supported since our founding in 2010</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <div>
+          <h3>$94<span style="color:#4dffa8">M</span></h3>
+          <p>Total funds raised and deployed into impactful programs</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK NAV -->
+<nav class="quick-nav">
+  <div class="quick-nav-inner">
+    <a href="#about">About</a>
+    <a href="#impact">Impact</a>
+    <a href="#coverage">Coverage</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#boilerplate">Boilerplate</a>
+    <a href="#assets">Assets</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrapper">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">Our Story</h2>
+    <p class="section-desc">A comprehensive overview of who we are, what we do, and why it matters.</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Founded in 2010 by Margaret and Daniel Volk following a volunteer mission to East Africa, Volk Donations began as a grassroots effort to provide schoolbooks and nutritional meals to orphaned children in rural Kenya. What started as a small fundraising campaign among friends and family quickly grew into a full-scale, internationally recognized nonprofit organization with programs spanning three continents.</p>
+        <p>Today, Volk Donations is a registered 501(c)(3) nonprofit headquartered in Denver, Colorado. Our model focuses on three integrated pillars: <strong>Child Welfare</strong> — providing safe housing, nutrition, and mental health support; <strong>Education Access</strong> — funding schools, scholarships, and digital learning; and <strong>Community Empowerment</strong> — partnering with local organizations to create self-sustaining infrastructure.</p>
+        <p>We have maintained a Charity Navigator four-star rating for nine consecutive years, and 89 cents of every dollar donated goes directly to program delivery. Our work has been recognized by the United Nations Department of Economic and Social Affairs as a model for scalable humanitarian intervention.</p>
+        <p>Volk Donations partners with over 180 grassroots organizations across 42 countries, employing a localization-first approach — recruiting, training, and compensating local staff at fair market wages. This ensures cultural sensitivity, community trust, and lasting impact beyond the scope of any single donation cycle.</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="fact-sheet">
+          <h4>📋 Organization Fact Sheet</h4>
+          <div class="fact-row">
+            <span class="fact-label">Legal Name</span>
+            <span class="fact-value">Volk Donations, Inc.</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">EIN / Tax ID</span>
+            <span class="fact-value">45-1234567</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Founded</span>
+            <span class="fact-value">March 12, 2010</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Headquarters</span>
+            <span class="fact-value">Denver, Colorado, USA</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Classification</span>
+            <span class="fact-value">501(c)(3) Public Charity</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Focus Area</span>
+            <span class="fact-value">Orphaned Child Welfare, Education, Healthcare</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Regions Served</span>
+            <span class="fact-value">Sub-Saharan Africa, South & Southeast Asia, Latin America</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Annual Budget (2025)</span>
+            <span class="fact-value green">$18.4 million USD</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Charity Navigator Rating</span>
+            <span class="fact-value green">⭐⭐⭐⭐ Four Stars (2025)</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Full-Time Staff</span>
+            <span class="fact-value">214 globally (86% local hires)</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-label">Website</span>
+            <span class="fact-value green">volkdonations.org</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-wrapper">
+    <div class="section-label">By the Numbers</div>
+    <h2 class="section-title">Our Impact at a Glance</h2>
+    <p class="section-desc">Key metrics from our 2025 Annual Impact Report, independently audited by KPMG LLP.</p>
+    <div class="impact-grid">
+      <div class="impact-cell">
+        <span class="impact-num">128<span class="impact-suffix">K</span></span>
+        <div class="impact-label">Children Directly Supported</div>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">42<span class="impact-suffix">+</span></span>
+        <div class="impact-label">Countries with Active Programs</div>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">$94<span class="impact-suffix">M</span></span>
+        <div class="impact-label">Total Funds Deployed (Since 2010)</div>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">89<span class="impact-suffix">%</span></span>
+        <div class="impact-label">Program Expense Ratio</div>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">347</span>
+        <div class="impact-label">Schools Built or Renovated</div>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">1.2<span class="impact-suffix">M</span></span>
+        <div class="impact-label">Meals Provided Annually</div>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">18K<span class="impact-suffix">+</span></span>
+        <div class="impact-label">Active Donors &amp; Monthly Supporters</div>
+      </div>
+      <div class="impact-cell">
+        <span class="impact-num">4<span class="impact-suffix">★</span></span>
+        <div class="impact-label">Charity Navigator (9 Consecutive Years)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MEDIA COVERAGE -->
+<section id="coverage">
+  <div class="section-wrapper">
+    <div class="section-label">In the News</div>
+    <h2 class="section-title">Recent Media Coverage</h2>
+    <p class="section-desc">Selected press features and editorial coverage of Volk Donations' work around the world.</p>
+    <div class="coverage-grid">
+      <div class="coverage-card">
+        <div class="coverage-outlet"><span></span>The New York Times</div>
+        <h4>A Small Denver Nonprofit Is Quietly Changing Outcomes for Thousands of Orphaned Children in Sub-Saharan Africa</h4>
+        <p>An investigative feature examining Volk Donations' localization-first model and its measurable impact on school enrollment rates across Uganda, Kenya, and Tanzania.</p>
+        <div class="coverage-meta">
+          <span class="coverage-date">November 4, 2025</span>
+          <a href="#" class="coverage-link">Read More →</a>
+        </div>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-outlet"><span></span>Reuters</div>
+        <h4>Volk Donations Expands into Southeast Asia with $6M Program Grant from the Gates Foundation</h4>
+        <p>Reuters reports on the organization's new regional headquarters in Phnom Penh and its plans to reach 20,000 children in Cambodia and Vietnam by 2027.</p>
+        <div class="coverage-meta">
+          <span class="coverage-date">September 17, 2025</span>
+          <a href="#" class="coverage-link">Read More →</a>
+        </div>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-outlet"><span></span>Forbes</div>
+        <h4>The Nonprofits That Actually Deliver: Volk Donations Named Among Top 10 Global Children's Charities</h4>
+        <p>Forbes' annual philanthropic efficiency ranking highlighted Volk's overhead ratio and independently verified outcomes as benchmarks for the humanitarian sector.</p>
+        <div class="coverage-meta">
+          <span class="coverage-date">August 2, 2025</span>
+          <a href="#" class="coverage-link">Read More →</a>
+        </div>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-outlet"><span></span>BBC World Service</div>
+        <h4>Inside the Orphanages Volk Donations Has Helped Transform in Rural Ethiopia</h4>
+        <p>A radio documentary and online feature documenting the before-and-after conditions at seven care homes in the Amhara region following two years of Volk programming.</p>
+        <div class="coverage-meta">
+          <span class="coverage-date">June 29, 2025</span>
+          <a href="#" class="coverage-link">Read More →</a>
+        </div>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-outlet"><span></span>NPR</div>
+        <h4>Donor Transparency Is a Crisis in Nonprofit Giving. This Organization Is Trying to Fix That.</h4>
+        <p>NPR's philanthropy desk profiles Volk's open-data dashboard, which allows donors to track their contributions in real time through partner organizations on the ground.</p>
+        <div class="coverage-meta">
+          <span class="coverage-date">May 11, 2025</span>
+          <a href="#" class="coverage-link">Read More →</a>
+        </div>
+      </div>
+      <div class="coverage-card">
+        <div class="coverage-outlet"><span></span>The Guardian</div>
+        <h4>Child Welfare in the 21st Century: How Volk Donations Blends Technology and Compassion</h4>
+        <p>The Guardian's development desk explores Volk's pilot of AI-assisted health screening in rural clinics and digital learning tablets deployed to 6,400 students.</p>
+        <div class="coverage-meta">
+          <span class="coverage-date">March 22, 2025</span>
+          <a href="#" class="coverage-link">Read More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-wrapper">
+    <div class="section-label">Leadership</div>
+    <h2 class="section-title">Executive Team</h2>
+    <p class="section-desc">Meet the leadership guiding Volk Donations' global mission and strategy.</p>
+    <div class="leadership-grid">
+      <div class="leader-card">
+        <div class="leader-photo">
+          <div class="leader-photo-placeholder" style="background: linear-gradient(135deg, #1e3a5f, #00a86b);">M</div>
+        </div>
+        <div class="leader-info">
+          <h4>Margaret Volk</h4>
+          <div class="leader-title">Co-Founder &amp; Executive Director</div>
+          <p class="leader-bio">Margaret co-founded Volk Donations in 2010 after a career in international public health with the WHO. She holds an MPH from Johns Hopkins and an MBA from Wharton, and has been named to Time Magazine's 100 Most Influential People in 2023.</p>
+          <a href="#" class="leader-link">Full Biography →</a>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <div class="leader-photo-placeholder" style="background: linear-gradient(135deg, #0d2a48, #007a4d);">D</div>
+        </div>
+        <div class="leader-info">
+          <h4>Daniel Volk</h4>
+          <div class="leader-title">Co-Founder &amp; Chief Strategy Officer</div>
+          <p class="leader-bio">Daniel leads Volk Donations' global partnerships and long-range strategy. A former investment banker turned humanitarian, he engineered the organization's first major institutional grant from USAID and built the network of 180+ local partner organizations.</p>
+          <a href="#" class="leader-link">Full Biography →</a>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <div class="leader-photo-placeholder" style="background: linear-gradient(135deg, #0a4a35, #1e3a5f);">A</div>
+        </div>
+        <div class="leader-info">
+          <h4>Amara Osei-Bonsu</h4>
+          <div class="leader-title">Chief Program Officer — Africa</div>
+          <p class="leader-bio">Amara oversees all programming across 28 African nations and manages a team of 110 regional staff. A native of Accra, Ghana with a development economics background from LSE, she joined Volk in 2014 and has quadrupled program reach since her appointment.</p>
+          <a href="#" class="leader-link">Full Biography →</a>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <div class="leader-photo-placeholder" style="background: linear-gradient(135deg, #00a86b, #1e3a5f);">L</div>
+        </div>
+        <div class="leader-info">
+          <h4>Lena Kim</h4>
+          <div class="leader-title">Chief Financial Officer</div>
+          <p class="leader-bio">Lena brings 18 years of nonprofit financial management to her role, having previously served as CFO for Save the Children US. She oversees Volk's $18.4M annual budget, financial audits, and compliance across all international jurisdictions.</p>
+          <a href="#" class="leader-link">Full Biography →</a>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <div class="leader-photo-placeholder" style="background: linear-gradient(135deg, #2d5f1e, #1e3a5f);">R</div>
+        </div>
+        <div class="leader-info">
+          <h4>Rafael Mendez</h4>
+          <div class="leader-title">Chief Program Officer — Latin America</div>
+          <p class="leader-bio">Rafael leads operations across 11 Latin American countries, focusing on child welfare in post-conflict zones. A former UNICEF field director with assignments in Colombia, Honduras, and Guatemala, Rafael joined Volk Donations in 2017.</p>
+          <a href="#" class="leader-link">Full Biography →</a>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <div class="leader-photo-placeholder" style="background: linear-gradient(135deg, #1a4a5f, #006b5f);">S</div>
+        </div>
+        <div class="leader-info">
+          <h4>Sarah Nakamura</h4>
+          <div class="leader-title">Head of Communications &amp; Media Relations</div>
+          <p class="leader-bio">Sarah manages Volk's global communications strategy, media relationships, and brand integrity. A former AP foreign correspondent with a decade covering humanitarian crises across Asia, she brings an editorial sensibility to all organizational storytelling.</p>
+          <a href="#" class="leader-link">Full Biography →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BOILERPLATE -->
+<section id="boilerplate">
+  <div class="section-wrapper">
+    <div class="section-label">Standard Copy</div>
+    <h2 class="section-title">Official Boilerplate</h2>
+    <p class="section-desc">Please use the following approved language when referring to Volk Donations in articles, press releases, and broadcast scripts.</p>
+    <div class="boilerplate-box">
+      <p><strong>Short form (50 words):</strong> Volk Donations is a US-based 501(c)(3) nonprofit organization committed to improving the lives of orphaned children through education, healthcare, and community support in over 42 countries across Africa, Asia, and Latin America. Founded in 2010, Volk Donations has supported more than 128,000 children and raised over $94 million in program funds.</p>
+      <p><strong>Long form (120 words):</strong> Volk Donations is an internationally recognized, United States-based nonprofit organization headquartered in Denver, Colorado. Founded in 2010 by Margaret and Daniel Volk, the organization exists to transform the lives of orphaned and vulnerable children through integrated programs in education, child welfare, and healthcare access. Operating in 42+ countries across Sub-Saharan Africa, South and Southeast Asia, and Latin America, Volk Donations partners with over 180 grassroots organizations to deliver locally rooted, scalable interventions. With a four-star Charity Navigator rating for nine consecutive years and an 89% program expense ratio, Volk Donations is recognized as one of the most transparent and efficient children's charities in the world. Volk Donations is a registered 501(c)(3) public charity. EIN: 45-1234567.</p>
+      <button class="copy-btn" id="copyBtn">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+        Copy Boilerplate Text
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ASSETS -->
+<section id="assets">
+  <div class="section-wrapper">
+    <div class="section-label">Brand Assets</div>
+    <h2 class="section-title">Downloadable Media Assets</h2>
+    <p class="section-desc">All assets below are approved for editorial use with credit to "Volk Donations." For commercial use or modifications, contact our media team.</p>
+    <div class="assets-grid">
+      <div class="asset-card">
+        <div class="asset-preview">
+          <div class="asset-preview-placeholder" style="background: linear-gradient(135deg, #1e3a5f, #00a86b);">
+            <div style="font-size:48px">🖼️</div>
+            <span>LOGO PACKAGE</span>
+          </div>
+        </div>
+        <div class="asset-info">
+          <h5>Logo Package (All Variants)</h5>
+          <p>Primary, secondary, monochrome, and reversed versions in SVG, PNG, and EPS formats.</p>
+          <a href="#" class="asset-download">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download (.zip, 4.2 MB)
+          </a>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview">
+          <div class="asset-preview-placeholder" style="background: linear-gradient(135deg, #00a86b, #007a4d);">
+            <div style="font-size:48px">🎨</div>
+            <span>BRAND GUIDELINES</span>
+          </div>
+        </div>
+        <div class="asset-info">
+          <h5>Brand Style Guide</h5>
+          <p>Typography, color palette, tone of voice, and usage guidelines for all brand elements.</p>
+          <a href="#" class="asset-download">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download (.pdf, 8.7 MB)
+          </a>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview">
+          <div class="asset-preview-placeholder" style="background: linear-gradient(135deg, #2c3e50, #1e3a5f);">
+            <div style="font-size:48px">📸</div>
+            <span>PHOTO LIBRARY</span>
+          </div>
+        </div>
+        <div class="asset-info">
+          <h5>Editorial Photo Library</h5>
+          <p>Over 200 high-resolution images from programs in Africa, Asia, and Latin America. All subjects consented.</p>
+          <a href="#" class="asset-download">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download (.zip, 214 MB)
+          </a>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview">
+          <div class="asset-preview-placeholder" style="background: linear-gradient(135deg, #0d2a48, #00a86b);">
+            <div style="font-size:48px">📊</div>
+            <span>ANNUAL REPORT</span>
+          </div>
+        </div>
+        <div class="asset-info">
+          <h5>2025 Annual Impact Report</h5>
+          <p>Comprehensive data, financial statements, program outcomes, and stories from the field.</p>
+          <a href="#" class="asset-download">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download (.pdf, 12.1 MB)
+          </a>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview">
+          <div class="asset-preview-placeholder" style="background: linear-gradient(135deg, #007a4d, #1e3a5f);">
+            <div style="font-size:48px">🎬</div>
+            <span>B-ROLL VIDEO</span>
+          </div>
+        </div>
+        <div class="asset-info">
+          <h5>B-Roll Footage Package</h5>
+          <p>Broadcast-quality 4K footage from Uganda, Cambodia, and Colombia for editorial and documentary use.</p>
+          <a href="#" class="asset-download">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download (.zip, 2.4 GB)
+          </a>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview">
+          <div class="asset-preview-placeholder" style="background: linear-gradient(135deg, #5f1e3a, #1e3a5f);">
+            <div style="font-size:48px">📋</div>
+            <span>FACT SHEET</span>
+          </div>
+        </div>
+        <div class="asset-info">
+          <h5>One-Page Fact Sheet</h5>
+          <p>Print-ready one-pager with key statistics, leadership contacts, and organizational overview for editorial use.</p>
+          <a href="#" class="asset-download">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download (.pdf, 1.1 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA CONTACT -->
+<section id="contact">
+  <div class="section-wrapper">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Media Contact</h2>
+    <p class="section-desc">Our communications team responds to all press inquiries within one business day. For urgent requests, please call directly.</p>
+    <div class="contact-grid">
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-icon">👤</div>
+          <div>
+            <h5>Primary Media Contact</h5>
+            <p>Sarah Nakamura</p>
+            <p style="font-size:14px; color:rgba(255,255,255,0.5); margin-top:4px;">Head of Communications &amp; Media Relations</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <div>
+            <h5>Press Inquiries Email</h5>
+            <a href="mailto:press@volkdonations.org">press@volkdonations.org</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h5>Direct Press Line</h5>
+            <p>+1 (720) 844-3920</p>
+            <p style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:4px;">Monday – Friday, 8:00 AM – 6:00 PM MT</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h5>Headquarters</h5>
+            <p>1840 Blake Street, Suite 300</p>
+            <p>Denver, Colorado 80202, USA</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">⚡</div>
+          <div>
+            <h5>Response Guarantee</h5>
+            <p>Within 1 business day</p>
+            <p style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:4px;">Urgent: same-day via phone line</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-area">
+        <h4>Submit a Press Inquiry</h4>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+          <div class="form-row">
+            <label>Last Name</label>
+            <input type="text" placeholder="Doe">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Media Organization</label>
+          <input type="text" placeholder="e.g. The Washington Post">
+        </div>
+        <div class="form-row">
+          <label>Email Address</label>
+          <input type="email" placeholder="jane.doe@publication.com">
+        </div>
+        <div class="form-row">
+          <label>Inquiry Type</label>
+          <select>
+            <option value="">Select inquiry type...</option>
+            <option>Interview Request</option>
+            <option>Asset / Photo Request</option>
+            <option>Fact-Check / Verification</option>
+            <option>Feature / Documentary</option>
+            <option>Press Release Pickup</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Message</label>
+          <textarea placeholder="Tell us about your story, deadline, and what you need from us..."></textarea>
+        </div>
+        <button class="submit-btn">Send Inquiry →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <div class="footer-logo-circle">V</div>
+        <span class="footer-brand-name">Volk Donations</span>
+      </div>
+      <p>A registered 501(c)(3) nonprofit organization committed to improving the lives of orphaned children worldwide through education, healthcare, and community support.</p>
+    </div>
+    <div>
+      <h6>Organization</h6>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/partners">Partners</a></li>
+        <li><a href="/reports">Annual Reports</a></li>
+        <li><a href="/team">Our Team</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Get Involved</h6>
+      <ul>
+        <li><a href="/donate">Donate</a></li>
+        <li><a href="/volunteer">Volunteer</a></li>
+        <li><a href="/fundraise">Fundraise</a></li>
+        <li><a href="/events">Events</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Press</h6>
+      <ul>
+        <li><a href="/press">Press Kit</a></li>
+        <li><a href="/press#coverage">Media Coverage</a></li>
+        <li><a href="/press#assets">Brand Assets</a></li>
+        <li><a href="/press#contact">Media Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations, Inc. All rights reserved. EIN: 45-1234567</p>
+    <p>
+      <a href="/privacy" style="color:rgba(255,255,255,0.4); text-decoration:none; margin: 0 12px;">Privacy Policy</a>
+      <a href="/terms" style="color:rgba(255,255,255,0.4); text-decoration:none; margin: 0 12px;">Terms of Service</a>
+      <a href="/financial" style="color:rgba(255,255,255,0.4); text-decoration:none; margin: 0 12px;">Financial Disclosure</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const btn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('mainNav');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    nav.classList.toggle('active');
+  });
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !btn.contains(e.target) && nav.classList.contains('active')) {
+      btn.classList.remove('active');
+      nav.classList.remove('active');
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      btn.classList.remove('active');
+      nav.classList.remove('active');
+    }
+  });
+
+  // Copy boilerplate
+  document.getElementById('copyBtn').addEventListener('click', function() {
+    const boxes = document.querySelectorAll('.boilerplate-box p');
+    let text = '';
+    boxes.forEach(p => text += p.innerText + '\n\n');
+    navigator.clipboard.writeText(text.trim()).then(() => {
+      this.textContent = '✓ Copied to Clipboard!';
+      this.style.background = '#00a86b';
+      setTimeout(() => {
+        this.innerHTML = `<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg> Copy Boilerplate Text`;
+        this.style.background = '';
+      }, 2500);
+    });
+  });
+
+  // Smooth scroll for quick nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Animate impact numbers on scroll
+  const counters = document.querySelectorAll('.impact-num');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'countUp 0.6s ease forwards';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => observer.observe(c));
+</script>
+</body>
+</html>

@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Annual Reports | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Volk Donations Annual Reports — financial transparency, program outcomes, and impact data from 2010 to present." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --green: #00a86b;
+      --green-light: #00c47d;
+      --green-dim: rgba(0,168,107,0.12);
+      --dark: #0b1724;
+      --dark2: #111f30;
+      --dark3: #162840;
+      --text: #e8edf2;
+      --muted: #7a93aa;
+      --border: rgba(255,255,255,0.08);
+      --card-bg: rgba(255,255,255,0.04);
+      --gold: #c9a84c;
+      --gold-light: #e8c76a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(11,23,36,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-circle {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: 22px; color: white;
+    }
+    .logo-text h1 { font-size: 20px; font-weight: 700; color: white; font-family: 'Outfit', sans-serif; }
+    .logo-text span { font-size: 11px; color: var(--green); font-weight: 500; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { font-weight: 500; color: var(--muted); font-size: 14px; text-decoration: none; transition: color 0.3s; }
+    nav a:hover, nav a.active { color: var(--green); }
+    .mobile-menu-btn {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .mobile-menu-btn span { width: 26px; height: 2px; background: var(--text); display: block; transition: all 0.3s; border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 110px 5% 90px;
+      background: linear-gradient(160deg, var(--dark2) 0%, var(--dark) 100%);
+    }
+    .hero-bg-shape {
+      position: absolute; top: -100px; right: -80px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,168,107,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-bg-lines {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-bg-lines::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      opacity: 0.3;
+    }
+    .hero-inner { max-width: 1200px; margin: auto; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 28px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; height: 1px; background: var(--green); opacity: 0.5;
+    }
+    .hero-eyebrow::before { width: 30px; }
+    .hero-eyebrow::after { width: 30px; }
+    .hero h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 76px; font-weight: 700; line-height: 1.0;
+      color: white; margin-bottom: 28px; letter-spacing: -1px;
+    }
+    .hero h2 em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-size: 17px; color: var(--muted); max-width: 560px;
+      line-height: 1.8; margin-bottom: 50px; font-weight: 400;
+    }
+    .hero-meta-row {
+      display: flex; gap: 48px; flex-wrap: wrap;
+    }
+    .hero-meta {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .hero-meta-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
+    .hero-meta-value { font-size: 22px; font-weight: 700; color: white; }
+    .hero-meta-value span { color: var(--green); }
+    .hero-divider { width: 1px; background: var(--border); align-self: stretch; }
+
+    /* ── FEATURED REPORT ── */
+    .featured-wrap {
+      background: var(--dark2); border-top: 1px solid var(--border);
+    }
+    .featured-inner {
+      max-width: 1200px; margin: auto; padding: 80px 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .featured-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .featured-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+    .featured-year-badge {
+      display: inline-block; background: var(--gold);
+      color: var(--dark); font-size: 11px; font-weight: 700;
+      padding: 4px 12px; border-radius: 4px; margin-bottom: 20px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .featured-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px; font-weight: 700; line-height: 1.1;
+      color: white; margin-bottom: 20px;
+    }
+    .featured-title em { font-style: italic; color: var(--gold-light); }
+    .featured-desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; }
+    .featured-highlights {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden;
+      margin-bottom: 36px;
+    }
+    .highlight-cell {
+      background: var(--dark3); padding: 20px 18px; text-align: center;
+    }
+    .highlight-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 700; color: var(--green); display: block;
+    }
+    .highlight-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold); color: var(--dark);
+      padding: 14px 28px; border-radius: 8px;
+      font-weight: 700; font-size: 14px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.3s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      padding: 14px 28px; border-radius: 8px;
+      font-weight: 600; font-size: 14px;
+      border: 1px solid var(--border);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+
+    /* REPORT COVER VISUAL */
+    .report-cover-visual {
+      position: relative; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    }
+    .report-cover {
+      background: linear-gradient(155deg, #1e3a5f 0%, #0b2040 50%, #002d1a 100%);
+      padding: 48px 40px; min-height: 480px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+    .cover-grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.03) 59px, rgba(255,255,255,0.03) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.03) 59px, rgba(255,255,255,0.03) 60px);
+    }
+    .cover-accent {
+      position: absolute; top: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(0,168,107,0.25), transparent 70%);
+    }
+    .cover-top { position: relative; z-index: 1; }
+    .cover-logo { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+    .cover-volk { font-size: 20px; font-weight: 700; color: white; letter-spacing: 1px; }
+    .cover-mid { position: relative; z-index: 1; }
+    .cover-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 96px; font-weight: 700; line-height: 1;
+      color: rgba(255,255,255,0.08); letter-spacing: -4px;
+      position: absolute; bottom: -20px; right: -10px;
+    }
+    .cover-title-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 600; color: white; line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .cover-subtitle { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 400; }
+    .cover-bottom {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px; display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    .cover-bar {
+      display: flex; flex-direction: column; gap: 6px; width: 60%;
+    }
+    .cover-bar-label { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .cover-bar-track { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+    .cover-bar-fill { height: 100%; border-radius: 2px; background: var(--green); }
+    .cover-audit-stamp {
+      text-align: right;
+    }
+    .cover-audit-stamp p { font-size: 10px; color: rgba(255,255,255,0.35); }
+    .cover-audit-stamp strong { color: var(--gold); font-size: 12px; display: block; margin-bottom: 2px; }
+    .cover-pages { position: absolute; right: 0; top: 0; bottom: 0; width: 8px; background: rgba(0,0,0,0.4); }
+
+    /* ── KEY METRICS / ANIMATED BARS ── */
+    #financials { padding: 80px 5%; max-width: 1200px; margin: auto; }
+    .section-header { margin-bottom: 56px; }
+    .sec-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .sec-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--green); }
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px; font-weight: 700; color: white; margin-bottom: 12px; line-height: 1.1;
+    }
+    .sec-desc { font-size: 16px; color: var(--muted); max-width: 580px; line-height: 1.8; }
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+      background: var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 60px;
+    }
+    .metric-cell {
+      background: var(--dark2); padding: 36px 28px; text-align: center;
+      transition: background 0.3s;
+    }
+    .metric-cell:hover { background: var(--dark3); }
+    .metric-icon { font-size: 28px; margin-bottom: 12px; }
+    .metric-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px; font-weight: 700; color: white; line-height: 1;
+      display: block;
+    }
+    .metric-green { color: var(--green); }
+    .metric-gold { color: var(--gold); }
+    .metric-label { font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .metric-change { font-size: 12px; color: var(--green); margin-top: 6px; font-weight: 600; }
+
+    /* ALLOCATION BARS */
+    .allocation-section {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+    }
+    .alloc-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: white; margin-bottom: 8px; }
+    .alloc-desc { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.7; }
+    .bar-row { margin-bottom: 22px; }
+    .bar-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .bar-name { font-size: 14px; font-weight: 500; color: var(--text); }
+    .bar-pct { font-size: 13px; font-weight: 700; }
+    .bar-track {
+      height: 8px; background: rgba(255,255,255,0.06); border-radius: 8px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 8px;
+      width: 0; transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bar-fill.green { background: linear-gradient(90deg, var(--green), var(--green-light)); }
+    .bar-fill.gold { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+    .bar-fill.blue { background: linear-gradient(90deg, #4a90d9, #7ab8f5); }
+    .bar-fill.red { background: linear-gradient(90deg, #e05c5c, #ff8080); }
+
+    /* DONUT CHART */
+    .donut-wrap { display: flex; align-items: center; gap: 36px; }
+    .donut-svg { flex-shrink: 0; }
+    .donut-legend { display: flex; flex-direction: column; gap: 14px; }
+    .legend-item { display: flex; align-items: center; gap: 10px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .legend-info { }
+    .legend-name { font-size: 13px; color: var(--muted); }
+    .legend-val { font-size: 15px; font-weight: 700; color: white; }
+
+    /* ── TIMELINE ── */
+    #timeline { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .timeline-inner { max-width: 1200px; margin: auto; padding: 80px 5%; }
+    .timeline-track { position: relative; margin-top: 60px; }
+    .timeline-line {
+      position: absolute; left: 120px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, var(--green), rgba(0,168,107,0.1));
+    }
+    .timeline-items { display: flex; flex-direction: column; gap: 0; }
+    .t-item {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 0; position: relative; padding-bottom: 48px;
+    }
+    .t-item:last-child { padding-bottom: 0; }
+    .t-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 700; color: var(--muted);
+      padding-top: 2px; text-align: right; padding-right: 32px;
+      transition: color 0.3s;
+    }
+    .t-item:hover .t-year { color: var(--green); }
+    .t-dot {
+      position: absolute; left: 112px; top: 8px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--dark2); border: 2px solid var(--green);
+      z-index: 1; transition: all 0.3s;
+    }
+    .t-item:hover .t-dot { background: var(--green); box-shadow: 0 0 16px rgba(0,168,107,0.5); }
+    .t-content { padding-left: 36px; }
+    .t-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px 28px; transition: all 0.3s; cursor: default;
+      display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;
+    }
+    .t-item:hover .t-card { background: rgba(255,255,255,0.07); border-color: rgba(0,168,107,0.3); }
+    .t-card-left { }
+    .t-headline { font-size: 15px; font-weight: 600; color: white; margin-bottom: 6px; }
+    .t-summary { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .t-card-right { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; flex-shrink: 0; }
+    .t-stat { text-align: right; }
+    .t-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 700; color: var(--green); line-height: 1;
+    }
+    .t-stat-label { font-size: 11px; color: var(--muted); }
+    .t-download {
+      font-size: 12px; font-weight: 600; color: var(--green);
+      text-decoration: none; display: flex; align-items: center; gap: 5px;
+      border-bottom: 1px solid rgba(0,168,107,0.3); padding-bottom: 2px;
+      transition: all 0.3s; white-space: nowrap;
+    }
+    .t-download:hover { color: var(--green-light); }
+    .t-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 6px;
+    }
+    .t-badge.award { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+    .t-badge.milestone { background: rgba(0,168,107,0.12); color: var(--green); border: 1px solid rgba(0,168,107,0.3); }
+
+    /* ── ARCHIVE GRID ── */
+    #archive { padding: 80px 5%; max-width: 1200px; margin: auto; }
+    .filter-bar {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 44px;
+    }
+    .filter-btn {
+      background: var(--card-bg); border: 1px solid var(--border);
+      color: var(--muted); padding: 9px 20px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all 0.3s; font-family: 'Outfit', sans-serif;
+    }
+    .filter-btn:hover { border-color: var(--green); color: var(--green); }
+    .filter-btn.active { background: var(--green); border-color: var(--green); color: white; }
+    .reports-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .report-card {
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      transition: all 0.3s; background: var(--card-bg);
+    }
+    .report-card:hover { border-color: rgba(0,168,107,0.4); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .report-thumb {
+      height: 180px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .report-thumb-inner {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative;
+    }
+    .thumb-year-bg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px; font-weight: 700; color: rgba(255,255,255,0.06);
+      position: absolute; bottom: -10px; right: 10px; line-height: 1; letter-spacing: -3px;
+    }
+    .thumb-icon { font-size: 36px; position: relative; z-index: 1; }
+    .thumb-type { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 8px; position: relative; z-index: 1; }
+    .report-body { padding: 22px 24px 24px; }
+    .report-year-tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      padding: 3px 10px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .report-body h4 { font-size: 17px; font-weight: 700; color: white; margin-bottom: 8px; line-height: 1.3; }
+    .report-body p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+    .report-meta { display: flex; justify-content: space-between; align-items: center; }
+    .report-meta-left { }
+    .report-pages { font-size: 12px; color: var(--muted); }
+    .report-size { font-size: 12px; color: var(--muted); }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--green);
+      text-decoration: none; background: var(--green-dim);
+      border: 1px solid rgba(0,168,107,0.25); padding: 8px 16px;
+      border-radius: 8px; transition: all 0.3s;
+    }
+    .download-btn:hover { background: rgba(0,168,107,0.2); }
+
+    /* ── AUDITOR SECTION ── */
+    #auditor {
+      background: var(--dark2); border-top: 1px solid var(--border);
+    }
+    .auditor-inner { max-width: 1200px; margin: auto; padding: 80px 5%; }
+    .auditor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 56px; }
+    .auditor-text p { font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 18px; }
+    .auditor-certs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .cert-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+      text-align: center; transition: all 0.3s;
+    }
+    .cert-card:hover { border-color: var(--gold); }
+    .cert-icon { font-size: 32px; margin-bottom: 10px; }
+    .cert-name { font-size: 14px; font-weight: 700; color: white; margin-bottom: 4px; }
+    .cert-desc { font-size: 12px; color: var(--muted); }
+    .cert-since { font-size: 11px; color: var(--gold); font-weight: 600; margin-top: 6px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); border-top: 1px solid var(--border);
+      padding: 60px 5% 30px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px;
+    }
+    .footer-brand-p { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top: 16px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 12px; }
+    .footer-logo-circle {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 20px; color: white;
+    }
+    .footer-brand-name { font-size: 18px; font-weight: 700; color: white; }
+    footer h6 { color: white; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 18px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+    footer ul li a:hover { color: var(--green); }
+    .footer-bottom {
+      max-width: 1200px; margin: auto;
+      border-top: 1px solid var(--border); padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: var(--muted); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+    .footer-legal a:hover { color: var(--green); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero h2 { font-size: 56px; }
+      .featured-inner { grid-template-columns: 1fr; gap: 50px; }
+      .allocation-section { grid-template-columns: 1fr; gap: 48px; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .auditor-grid { grid-template-columns: 1fr; gap: 48px; }
+      .reports-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      nav {
+        position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px;
+        height: calc(100vh - 86px); background: var(--dark2); flex-direction: column;
+        padding: 30px; border-left: 1px solid var(--border);
+        transition: right 0.3s; gap: 20px; align-items: flex-start;
+      }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .hero h2 { font-size: 40px; }
+      .hero-meta-row { gap: 28px; }
+      .hero-divider { display: none; }
+      .featured-highlights { grid-template-columns: 1fr; }
+      .timeline-line { left: 0; }
+      .t-item { grid-template-columns: 1fr; }
+      .t-year { text-align: left; padding-right: 0; padding-left: 20px; font-size: 18px; padding-bottom: 8px; }
+      .t-dot { left: -8px; }
+      .t-content { padding-left: 20px; }
+      .t-card { grid-template-columns: 1fr; }
+      .t-card-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .reports-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .auditor-certs { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 30px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-legal { flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .hero h2 { font-size: 32px; }
+      .sec-title { font-size: 36px; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .filter-bar { gap: 8px; }
+      .featured-title { font-size: 34px; }
+      .hero-meta-row { gap: 20px; }
+      .hero-meta-value { font-size: 18px; }
+      .auditor-certs { grid-template-columns: 1fr; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.7s ease forwards; opacity: 0; }
+    .fade-in-1 { animation-delay: 0.1s; }
+    .fade-in-2 { animation-delay: 0.2s; }
+    .fade-in-3 { animation-delay: 0.3s; }
+    .fade-in-4 { animation-delay: 0.4s; }
+    @keyframes spin {
+      to { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="/" class="logo-container">
+    <div class="logo-circle">V</div>
+    <div class="logo-text">
+      <h1>Volk Donations</h1>
+      <span>A better life for everyone</span>
+    </div>
+  </a>
+  <nav id="mainNav">
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/press">Press</a>
+    <a href="/reports" class="active">Reports</a>
+  </nav>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Financial Transparency</div>
+    <h2 class="fade-in fade-in-1">Annual <em>Impact</em><br>&amp; Financial<br>Reports</h2>
+    <p class="hero-sub fade-in fade-in-2">Complete financial accountability, program outcomes, and impact data from our founding in 2010 to present. Every dollar accounted for. Every child counted.</p>
+    <div class="hero-meta-row fade-in fade-in-3">
+      <div class="hero-meta">
+        <span class="hero-meta-label">Reports Published</span>
+        <span class="hero-meta-value">15 <span>Years</span></span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta">
+        <span class="hero-meta-label">Program Ratio</span>
+        <span class="hero-meta-value">89<span>%</span></span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta">
+        <span class="hero-meta-label">Auditor</span>
+        <span class="hero-meta-value">KPMG <span>LLP</span></span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta">
+        <span class="hero-meta-label">Charity Navigator</span>
+        <span class="hero-meta-value">4<span>★</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED REPORT -->
+<div class="featured-wrap">
+  <div class="featured-inner">
+    <div>
+      <div class="featured-label">Latest Release</div>
+      <span class="featured-year-badge">FY 2025</span>
+      <h2 class="featured-title">2025 Annual<br><em>Impact Report</em></h2>
+      <p class="featured-desc">Our most comprehensive report to date — covering financial statements audited by KPMG LLP, program outcomes across 42 countries, beneficiary stories, and a forward-looking strategy for 2026–2030. Published February 14, 2026.</p>
+      <div class="featured-highlights">
+        <div class="highlight-cell">
+          <span class="highlight-num">$18.4M</span>
+          <div class="highlight-label">Total Revenue</div>
+        </div>
+        <div class="highlight-cell">
+          <span class="highlight-num">89%</span>
+          <div class="highlight-label">Program Expenses</div>
+        </div>
+        <div class="highlight-cell">
+          <span class="highlight-num">128K+</span>
+          <div class="highlight-label">Children Served</div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <a href="#" class="btn-gold">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download PDF (12.1 MB)
+        </a>
+        <a href="#" class="btn-ghost">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          View Online
+        </a>
+      </div>
+    </div>
+    <div class="report-cover-visual">
+      <div class="report-cover">
+        <div class="cover-grid-lines"></div>
+        <div class="cover-accent"></div>
+        <div class="cover-top">
+          <div class="cover-logo">Volk Donations, Inc.</div>
+          <div class="cover-volk">ANNUAL IMPACT REPORT</div>
+        </div>
+        <div class="cover-mid">
+          <div class="cover-title-text">Building Futures,<br>Transforming Lives</div>
+          <div class="cover-subtitle">Fiscal Year January – December 2025</div>
+          <div class="cover-year">2025</div>
+        </div>
+        <div class="cover-bottom">
+          <div class="cover-bar">
+            <div class="cover-bar-label">Program Delivery Rate</div>
+            <div class="cover-bar-track"><div class="cover-bar-fill" style="width:89%"></div></div>
+            <div class="cover-bar-label">Overhead Rate</div>
+            <div class="cover-bar-track" style="margin-top:6px"><div class="cover-bar-fill" style="width:11%; background: var(--gold)"></div></div>
+          </div>
+          <div class="cover-audit-stamp">
+            <strong>Independently Audited</strong>
+            <p>KPMG LLP</p>
+            <p>Denver, Colorado</p>
+          </div>
+        </div>
+        <div class="cover-pages"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCIALS -->
+<section id="financials">
+  <div class="section-header">
+    <div class="sec-eyebrow">FY 2025 Financials</div>
+    <h2 class="sec-title">Financial Performance</h2>
+    <p class="sec-desc">All figures independently audited by KPMG LLP. Full financial statements available in the 2025 Annual Report.</p>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-cell">
+      <div class="metric-icon">💵</div>
+      <span class="metric-num metric-green">$18.4M</span>
+      <div class="metric-label">Total Revenue (FY 2025)</div>
+      <div class="metric-change">↑ 14.2% from FY 2024</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-icon">🏃</div>
+      <span class="metric-num metric-green">$16.4M</span>
+      <div class="metric-label">Program Expenditures</div>
+      <div class="metric-change">89% of total expenses</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-icon">📈</div>
+      <span class="metric-num metric-gold">$94.2M</span>
+      <div class="metric-label">Cumulative Funds Deployed</div>
+      <div class="metric-change">Since founding in 2010</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-icon">💎</div>
+      <span class="metric-num">$2.0M</span>
+      <div class="metric-label">Operating Reserve Fund</div>
+      <div class="metric-change">≈ 1.5 months operating cover</div>
+    </div>
+  </div>
+
+  <div class="allocation-section">
+    <div>
+      <h3 class="alloc-title">How Every Dollar Is Used</h3>
+      <p class="alloc-desc">Our expense allocation is published in full and reviewed annually by our Board of Directors and independent auditors. We are proud to maintain one of the lowest overhead ratios in the sector.</p>
+      <div class="bar-row">
+        <div class="bar-top">
+          <span class="bar-name">Child Welfare &amp; Shelter Programs</span>
+          <span class="bar-pct" style="color:var(--green)">38%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill green" data-width="38"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-top">
+          <span class="bar-name">Education Access &amp; Scholarships</span>
+          <span class="bar-pct" style="color:var(--green)">29%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill green" data-width="29"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-top">
+          <span class="bar-name">Healthcare &amp; Nutrition Initiatives</span>
+          <span class="bar-pct" style="color:var(--green)">22%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill green" data-width="22"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-top">
+          <span class="bar-name">Fundraising &amp; Development</span>
+          <span class="bar-pct" style="color:var(--gold)">7%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill gold" data-width="7"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-top">
+          <span class="bar-name">Administration &amp; Governance</span>
+          <span class="bar-pct" style="color:#7ab8f5">4%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill blue" data-width="4"></div></div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="alloc-title">Revenue by Source</h3>
+      <p class="alloc-desc">Volk Donations maintains a diversified funding base to ensure organizational stability and mission continuity regardless of any single funding stream fluctuation.</p>
+      <div class="donut-wrap">
+        <svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="60" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="28"/>
+          <!-- Individual donors: 46% -->
+          <circle cx="80" cy="80" r="60" fill="none" stroke="#00a86b" stroke-width="28"
+            stroke-dasharray="173.2 376.8" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+          <!-- Institutional grants: 31% -->
+          <circle cx="80" cy="80" r="60" fill="none" stroke="#c9a84c" stroke-width="28"
+            stroke-dasharray="116.6 433.4" stroke-dashoffset="-173.2" transform="rotate(-90 80 80)"/>
+          <!-- Corporate partners: 14% -->
+          <circle cx="80" cy="80" r="60" fill="none" stroke="#4a90d9" stroke-width="28"
+            stroke-dasharray="52.7 497.3" stroke-dashoffset="-289.8" transform="rotate(-90 80 80)"/>
+          <!-- Events & other: 9% -->
+          <circle cx="80" cy="80" r="60" fill="none" stroke="#e05c5c" stroke-width="28"
+            stroke-dasharray="33.9 516.1" stroke-dashoffset="-342.5" transform="rotate(-90 80 80)"/>
+          <text x="80" y="76" text-anchor="middle" font-family="Cormorant Garamond" font-size="22" font-weight="700" fill="white">$18.4</text>
+          <text x="80" y="92" text-anchor="middle" font-family="Outfit" font-size="10" fill="rgba(255,255,255,0.5)">Million Total</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#00a86b"></div>
+            <div class="legend-info">
+              <div class="legend-name">Individual Donors</div>
+              <div class="legend-val">$8.5M <span style="color:var(--muted); font-size:13px; font-weight:400">46%</span></div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#c9a84c"></div>
+            <div class="legend-info">
+              <div class="legend-name">Institutional Grants</div>
+              <div class="legend-val">$5.7M <span style="color:var(--muted); font-size:13px; font-weight:400">31%</span></div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#4a90d9"></div>
+            <div class="legend-info">
+              <div class="legend-name">Corporate Partners</div>
+              <div class="legend-val">$2.6M <span style="color:var(--muted); font-size:13px; font-weight:400">14%</span></div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#e05c5c"></div>
+            <div class="legend-info">
+              <div class="legend-name">Events &amp; Other</div>
+              <div class="legend-val">$1.6M <span style="color:var(--muted); font-size:13px; font-weight:400">9%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="timeline-inner">
+    <div class="sec-eyebrow">Year by Year</div>
+    <h2 class="sec-title">Growth Over Time</h2>
+    <p class="sec-desc">Fifteen years of sustained growth, expanding reach, and deepening impact — tracked transparently through our published annual reports.</p>
+    <div class="timeline-track">
+      <div class="timeline-line"></div>
+      <div class="timeline-items">
+
+        <div class="t-item">
+          <div class="t-year">2025</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <span class="t-badge milestone">● Milestone Year</span>
+                <div class="t-headline">Southeast Asia Expansion &amp; Record Revenue</div>
+                <div class="t-summary">Launched programs in Cambodia, Vietnam, and the Philippines with a $6M Gates Foundation grant. Crossed 128,000 cumulative beneficiaries. Adopted new AI-assisted health screening in 14 clinics.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$18.4M</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-year">2024</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <span class="t-badge award">★ Forbes Top 10</span>
+                <div class="t-headline">Digital Learning Initiative &amp; Forbes Recognition</div>
+                <div class="t-summary">Deployed 6,400 digital tablets across partner schools in Uganda and Kenya. Received Forbes recognition as a top-10 children's charity globally. Expanded Latin America operations to 11 countries.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$16.1M</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-year">2023</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <span class="t-badge award">★ Time 100 — Margaret Volk</span>
+                <div class="t-headline">Time 100 Recognition &amp; USAID Partnership</div>
+                <div class="t-summary">Executive Director Margaret Volk named to Time 100 Most Influential People. Secured a $4.2M multi-year USAID cooperative agreement for food security programs in Ethiopia and Mozambique.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$14.1M</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-year">2022</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <div class="t-headline">Post-Pandemic Recovery &amp; Growth Resumption</div>
+                <div class="t-summary">Restored all field operations suspended during COVID-19. Introduced real-time donor tracking dashboard. Rebuilt to pre-pandemic staffing levels and expanded to 36 countries.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$11.8M</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-year">2020</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <span class="t-badge milestone">● COVID-19 Emergency Response</span>
+                <div class="t-headline">Emergency COVID-19 Pivot: $2.1M Relief Fund</div>
+                <div class="t-summary">Pivoted operations to provide emergency food and hygiene supplies to 34,000 children in lockdown-impacted regions. Raised and deployed $2.1M COVID relief fund within 60 days. Maintained 87% program ratio despite crisis.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$9.4M</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-year">2017</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <span class="t-badge milestone">● 50,000 Beneficiaries</span>
+                <div class="t-headline">Latin America Launch &amp; 50K Beneficiary Milestone</div>
+                <div class="t-summary">Opened first Latin American operations in Colombia and Guatemala. Crossed the 50,000 cumulative beneficiary milestone. Earned first Charity Navigator four-star rating and launched monthly donor program.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$6.2M</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-year">2013</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <div class="t-headline">Asia Expansion &amp; First Institutional Grant</div>
+                <div class="t-summary">Expanded into South Asia with programs in Bangladesh and Nepal. Received first institutional grant from the Conrad N. Hilton Foundation ($800K). Hired first full-time program staff in Nairobi and Dhaka.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$2.8M</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-year">2010</div>
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <div class="t-card">
+              <div class="t-card-left">
+                <span class="t-badge milestone">● Founded</span>
+                <div class="t-headline">Founding Year — Kenya Pilot Program</div>
+                <div class="t-summary">Volk Donations incorporated in Denver, Colorado. Launched first pilot program in rural Kenya, providing school supplies and nutritional support to 312 orphaned children across three care homes in Kisumu County.</div>
+              </div>
+              <div class="t-card-right">
+                <div class="t-stat"><div class="t-stat-num">$148K</div><div class="t-stat-label">Revenue</div></div>
+                <a href="#" class="t-download">
+                  <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVE -->
+<section id="archive">
+  <div class="sec-eyebrow">Report Archive</div>
+  <h2 class="sec-title">All Annual Reports</h2>
+  <p class="sec-desc" style="margin-bottom:40px">Every report published since our founding, freely available for download. Filter by region focus or report type.</p>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Reports</button>
+    <button class="filter-btn" data-filter="full">Full Annual Reports</button>
+    <button class="filter-btn" data-filter="financial">Financial Summaries</button>
+    <button class="filter-btn" data-filter="impact">Impact Reports</button>
+  </div>
+  <div class="reports-grid" id="reportsGrid">
+
+    <div class="report-card" data-type="full">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#0b2040,#002d1a)">
+        <div class="thumb-icon">📋</div><div class="thumb-type">Full Report</div>
+        <div class="thumb-year-bg">2025</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(0,168,107,0.15);color:var(--green)">FY 2025</span>
+        <h4>Annual Impact &amp; Financial Report 2025</h4>
+        <p>Record revenue of $18.4M, Southeast Asia launch, 128K+ cumulative beneficiaries, KPMG audit opinion.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">112 pages</div>
+            <div class="report-size">12.1 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="impact">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#1e3a5f,#005c3a)">
+        <div class="thumb-icon">🌍</div><div class="thumb-type">Impact Report</div>
+        <div class="thumb-year-bg">2025</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(201,168,76,0.15);color:var(--gold)">FY 2025</span>
+        <h4>Mid-Year Impact Summary — H1 2025</h4>
+        <p>Six-month program outcomes, beneficiary stories from Uganda, Cambodia, and Colombia, and a donor accountability dashboard.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">48 pages</div>
+            <div class="report-size">5.4 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="full">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#12304f,#003d24)">
+        <div class="thumb-icon">📋</div><div class="thumb-type">Full Report</div>
+        <div class="thumb-year-bg">2024</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(0,168,107,0.15);color:var(--green)">FY 2024</span>
+        <h4>Annual Impact &amp; Financial Report 2024</h4>
+        <p>$16.1M revenue, digital learning expansion to 36 countries, Forbes Top 10 recognition, KPMG audited financials.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">98 pages</div>
+            <div class="report-size">10.7 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="financial">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#0d2638,#004020)">
+        <div class="thumb-icon">📊</div><div class="thumb-type">Financial Summary</div>
+        <div class="thumb-year-bg">2024</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(74,144,217,0.15);color:#7ab8f5">FY 2024</span>
+        <h4>Financial Statements &amp; Audit Opinion 2024</h4>
+        <p>Standalone financial statements including balance sheet, income statement, cash flow, and KPMG LLP independent audit opinion.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">34 pages</div>
+            <div class="report-size">3.2 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="full">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#17223a,#002218)">
+        <div class="thumb-icon">📋</div><div class="thumb-type">Full Report</div>
+        <div class="thumb-year-bg">2023</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(0,168,107,0.15);color:var(--green)">FY 2023</span>
+        <h4>Annual Impact &amp; Financial Report 2023</h4>
+        <p>$14.1M revenue, Time 100 recognition for Margaret Volk, $4.2M USAID cooperative agreement, Ethiopia &amp; Mozambique food security launch.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">94 pages</div>
+            <div class="report-size">9.8 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="impact">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#1a2840,#001e14)">
+        <div class="thumb-icon">🌍</div><div class="thumb-type">Impact Report</div>
+        <div class="thumb-year-bg">2022</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(201,168,76,0.15);color:var(--gold)">FY 2022</span>
+        <h4>Impact Report: Post-Pandemic Recovery 2022</h4>
+        <p>Documenting the restoration of all field operations post-COVID, the re-engagement of 74,000 children in programming, and the launch of real-time donor transparency tools.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">62 pages</div>
+            <div class="report-size">6.9 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="full">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#1e2f40,#001a14)">
+        <div class="thumb-icon">📋</div><div class="thumb-type">Full Report</div>
+        <div class="thumb-year-bg">2021</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(0,168,107,0.15);color:var(--green)">FY 2021</span>
+        <h4>Annual Impact &amp; Financial Report 2021</h4>
+        <p>$10.5M revenue during continued COVID recovery. Emergency food distribution to 46 countries, new mobile health clinic partnerships, and a full Board governance review.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">86 pages</div>
+            <div class="report-size">8.3 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="financial">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#141e2e,#001008)">
+        <div class="thumb-icon">📊</div><div class="thumb-type">Financial Summary</div>
+        <div class="thumb-year-bg">2020</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(224,92,92,0.15);color:#e05c5c">FY 2020</span>
+        <h4>COVID-19 Emergency Fund Financial Disclosure</h4>
+        <p>Special disclosure report detailing the $2.1M COVID-19 emergency relief fund — donor contributions, expenditures, supply chain, and beneficiary counts by country.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">28 pages</div>
+            <div class="report-size">2.8 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-card" data-type="full">
+      <div class="report-thumb"><div class="report-thumb-inner" style="background:linear-gradient(135deg,#0f1a28,#000e08)">
+        <div class="thumb-icon">📋</div><div class="thumb-type">Full Report</div>
+        <div class="thumb-year-bg">2018</div>
+      </div></div>
+      <div class="report-body">
+        <span class="report-year-tag" style="background:rgba(0,168,107,0.15);color:var(--green)">FY 2018</span>
+        <h4>Annual Impact &amp; Financial Report 2018</h4>
+        <p>$7.3M revenue, first UN Department of Economic &amp; Social Affairs recognition, expansion to 28 countries, and the opening of Amhara region care home renovations in Ethiopia.</p>
+        <div class="report-meta">
+          <div class="report-meta-left">
+            <div class="report-pages">76 pages</div>
+            <div class="report-size">7.1 MB PDF</div>
+          </div>
+          <a href="#" class="download-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AUDITOR & CERTIFICATIONS -->
+<section id="auditor">
+  <div class="auditor-inner">
+    <div class="sec-eyebrow">Accountability</div>
+    <h2 class="sec-title">Independent Oversight</h2>
+    <p class="sec-desc">Volk Donations is committed to the highest standards of financial integrity and organizational transparency.</p>
+    <div class="auditor-grid">
+      <div class="auditor-text">
+        <p>Our financial statements are independently audited annually by <strong style="color:white">KPMG LLP</strong>, one of the world's leading audit, tax, and advisory firms. KPMG's Denver office has served as our independent auditor since fiscal year 2014, providing the highest standard of independent assurance to our donors, grantors, and the public.</p>
+        <p>In addition to our annual external audit, Volk Donations' Finance Committee — composed of three independent Board members with CPA or CFA designations — conducts quarterly financial reviews and approves all expenditures above $25,000. Board meetings are held six times per year, with minutes published on our website within 30 days.</p>
+        <p>Our IRS Form 990 filings are publicly available on GuideStar and directly from our offices upon request. We comply fully with all reporting requirements of the Colorado Secretary of State, the IRS, and all international jurisdictions in which we operate.</p>
+        <a href="#" class="btn-ghost" style="display:inline-flex; margin-top:20px">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download Form 990 (2025)
+        </a>
+      </div>
+      <div class="auditor-certs">
+        <div class="cert-card">
+          <div class="cert-icon">⭐</div>
+          <div class="cert-name">Charity Navigator</div>
+          <div class="cert-desc">Four-Star Rating — Top 3% of U.S. charities evaluated</div>
+          <div class="cert-since">Since 2017 · 9 Consecutive Years</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🏛️</div>
+          <div class="cert-name">GuideStar Platinum</div>
+          <div class="cert-desc">Platinum Seal of Transparency on Candid (GuideStar)</div>
+          <div class="cert-since">Since 2019</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">✅</div>
+          <div class="cert-name">BBB Accredited</div>
+          <div class="cert-desc">Meets all 20 BBB Wise Giving Alliance Standards for Charity Accountability</div>
+          <div class="cert-since">Since 2015</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🌐</div>
+          <div class="cert-name">UN ECOSOC Status</div>
+          <div class="cert-desc">UN Department of Economic &amp; Social Affairs Special Consultative Status</div>
+          <div class="cert-since">Since 2018</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-circle">V</div>
+        <span class="footer-brand-name">Volk Donations</span>
+      </div>
+      <p class="footer-brand-p">A registered 501(c)(3) nonprofit committed to improving the lives of orphaned children through education, healthcare, and community support across 42+ countries.</p>
+    </div>
+    <div>
+      <h6>Organization</h6>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/partners">Partners</a></li>
+        <li><a href="/team">Our Team</a></li>
+        <li><a href="/press">Press Kit</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Get Involved</h6>
+      <ul>
+        <li><a href="/donate">Donate</a></li>
+        <li><a href="/volunteer">Volunteer</a></li>
+        <li><a href="/fundraise">Fundraise</a></li>
+        <li><a href="/events">Events</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Transparency</h6>
+      <ul>
+        <li><a href="/reports">Annual Reports</a></li>
+        <li><a href="/financial">Financial Info</a></li>
+        <li><a href="/reports#auditor">Audit &amp; Compliance</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations, Inc. All rights reserved. EIN: 45-1234567 · 501(c)(3) Public Charity</p>
+    <div class="footer-legal">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/financial">Financial Disclosure</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const btn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('mainNav');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    nav.classList.toggle('active');
+  });
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !btn.contains(e.target) && nav.classList.contains('active')) {
+      btn.classList.remove('active');
+      nav.classList.remove('active');
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) { btn.classList.remove('active'); nav.classList.remove('active'); }
+  });
+
+  // Animate bars on scroll
+  const bars = document.querySelectorAll('.bar-fill[data-width]');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.width + '%';
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(b => barObserver.observe(b));
+
+  // Filter reports
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const reportCards = document.querySelectorAll('.report-card');
+  filterBtns.forEach(fb => {
+    fb.addEventListener('click', () => {
+      filterBtns.forEach(x => x.classList.remove('active'));
+      fb.classList.add('active');
+      const f = fb.dataset.filter;
+      reportCards.forEach(card => {
+        if (f === 'all' || card.dataset.type === f) {
+          card.style.display = '';
+          card.style.animation = 'fadeInUp 0.4s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn about Volk Donations — our story, our leadership, our vision, and the values that guide every decision we make for orphaned children worldwide." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#1e3a5f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,600;9..144,0,700;9..144,0,900;9..144,1,400;9..144,1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:       #1a3254;
+      --navy-deep:  #0f1f34;
+      --navy-mid:   #243d62;
+      --navy-light: #2e5080;
+      --green:      #00a86b;
+      --green-dk:   #008755;
+      --green-lt:   #00c47d;
+      --green-mu:   rgba(0,168,107,.12);
+      --gold:       #e8a020;
+      --gold-lt:    #f5bc4a;
+      --gold-mu:    rgba(232,160,32,.13);
+      --canvas:     #f1f5fb;
+      --surface:    #ffffff;
+      --text:       #18263a;
+      --text-2:     #48596e;
+      --text-3:     #8496a8;
+      --border:     #dde6f0;
+      --border-2:   #c8d6e8;
+      --red:        #e84040;
+      --blue:       #3a7bd5;
+      --r:          12px;
+      --r-lg:       20px;
+      --sh:         0 4px 22px rgba(26,50,84,.08);
+      --sh-lg:      0 14px 54px rgba(26,50,84,.13);
+      --sh-xl:      0 28px 80px rgba(26,50,84,.18);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; transition: all .25s; }
+    img { display: block; max-width: 100%; }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 70px;
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 900;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 11px; }
+    .logo-wrap img { height: 44px; width: auto; }
+    .logo-txt strong { display: block; font-size: 17px; font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -.2px; }
+    .logo-txt span  { font-size: 10.5px; color: var(--green); font-weight: 600; letter-spacing: .4px; }
+    nav { display: flex; gap: 26px; align-items: center; }
+    nav a { font-size: 13.5px; font-weight: 600; color: var(--text-2); position: relative; }
+    nav a:hover { color: var(--navy); }
+    nav a.active { color: var(--navy); }
+    nav a.active::after { content:''; position:absolute; bottom:-4px; left:0; width:100%; height:2.5px; background:var(--green); border-radius:2px; }
+    .hdr-cta {
+      padding: 9px 22px;
+      background: linear-gradient(135deg, var(--green), var(--green-dk));
+      color: #fff !important;
+      border-radius: 50px; font-size: 13px !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 14px rgba(0,168,107,.3);
+    }
+    .hdr-cta:hover { transform: translateY(-1px); box-shadow: 0 7px 22px rgba(0,168,107,.42); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; background: none; border: none; }
+    .hamburger span { display:block; width:22px; height:2.5px; background:var(--navy); border-radius:2px; transition:all .3s; }
+    .mob-nav {
+      display: none; position:fixed; top:70px; left:0; right:0;
+      background:#fff; padding:20px 5%;
+      border-top:1px solid var(--border);
+      box-shadow: 0 12px 32px rgba(26,50,84,.12);
+      z-index:899; flex-direction:column; gap:14px;
+    }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { font-size:14.5px; font-weight:600; color:var(--text-2); padding:6px 0; border-bottom:1px solid var(--border); }
+    .mob-nav a:last-child { border-bottom:none; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 620px;
+      display: flex; align-items: center;
+      overflow: hidden;
+      background: var(--navy-deep);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=80&auto=format&fit=crop');
+      background-size: cover; background-position: center 30%;
+      opacity: .18;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--navy-deep) 0%, rgba(10,50,35,.92) 55%, rgba(0,100,60,.55) 100%);
+    }
+    .hero-grid-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+    .hero-glow {
+      position: absolute; top: -160px; right: -160px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,168,107,.18) 0%, transparent 68%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 100px 5% 90px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .hero-text {}
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,168,107,.16);
+      border: 1px solid rgba(0,168,107,.32);
+      border-radius: 50px; padding: 5px 15px;
+      font-size: 10.5px; font-weight: 700; color: #4dffa0;
+      letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .hero-badge::before { content:''; width:6px; height:6px; background:#4dffa0; border-radius:50%; animation: pulse 2.2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(1.7)} }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 900; color: #fff;
+      line-height: 1.08; letter-spacing: -1.5px;
+      margin-bottom: 22px;
+    }
+    .hero h1 em { font-style: italic; color: #4dffa0; font-weight: 400; }
+    .hero-lead {
+      font-size: clamp(14px, 1.8vw, 17px);
+      color: rgba(255,255,255,.62);
+      line-height: 1.8; max-width: 500px; margin-bottom: 34px;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 13px 30px;
+      background: linear-gradient(135deg, var(--green), var(--green-dk));
+      border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px; font-weight: 700; color: #fff;
+      cursor: pointer; transition: all .22s;
+      box-shadow: 0 5px 18px rgba(0,168,107,.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 9px 28px rgba(0,168,107,.48); }
+    .btn-ghost {
+      padding: 13px 30px;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.28);
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.78);
+      cursor: pointer; transition: all .22s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.6); color: #fff; }
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .hsc {
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--r);
+      padding: 22px 20px;
+      backdrop-filter: blur(8px);
+      position: relative; overflow: hidden;
+    }
+    .hsc::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+      background: var(--green);
+    }
+    .hsc-val {
+      font-family: 'Fraunces', serif;
+      font-size: 34px; font-weight: 700;
+      color: #4dffa0; line-height: 1; margin-bottom: 5px;
+    }
+    .hsc-lbl { font-size: 12px; color: rgba(255,255,255,.48); font-weight: 500; }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      background: var(--canvas);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 5%;
+    }
+    .breadcrumb-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-3);
+    }
+    .breadcrumb-inner a { color: var(--text-3); }
+    .breadcrumb-inner a:hover { color: var(--green); }
+    .breadcrumb-inner span { color: var(--text-2); font-weight: 600; }
+    .bc-sep { opacity: .4; }
+
+    /* ── SECTION UTILITY ── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 80px 5%; }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.3px; color: var(--green); margin-bottom: 14px;
+    }
+    .section-eyebrow::before { content:''; width:22px; height:2px; background:var(--green); border-radius:2px; }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700; color: var(--navy);
+      line-height: 1.18; letter-spacing: -.5px;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+    .section-sub {
+      font-size: clamp(14px, 1.6vw, 16px);
+      color: var(--text-2); line-height: 1.8;
+      max-width: 640px; margin-top: 12px;
+    }
+
+    /* ── ORIGIN STORY ── */
+    .origin {
+      background: var(--canvas);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .origin-grid {
+      max-width: 1200px; margin: 0 auto; padding: 80px 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .origin-img-wrap { position: relative; }
+    .origin-img {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh-xl);
+      aspect-ratio: 4/3;
+    }
+    .origin-img img { width: 100%; height: 100%; object-fit: cover; }
+    .origin-badge {
+      position: absolute; bottom: -22px; right: -22px;
+      background: var(--navy-deep); border-radius: var(--r);
+      padding: 18px 24px; box-shadow: var(--sh-lg);
+      border: 1px solid rgba(255,255,255,.07);
+      z-index: 2;
+    }
+    .ob-val {
+      font-family: 'Fraunces', serif;
+      font-size: 32px; font-weight: 700;
+      color: var(--green-lt); line-height: 1;
+    }
+    .ob-lbl { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 4px; }
+    .origin-accent {
+      position: absolute; top: -18px; left: -18px;
+      width: 90px; height: 90px;
+      border: 3px solid var(--green);
+      border-radius: var(--r);
+      opacity: .25; z-index: 0;
+    }
+    .origin-text {}
+    .origin-text p {
+      font-size: 15px; color: var(--text-2); line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .origin-text p strong { color: var(--navy); font-weight: 700; }
+    .origin-quote {
+      background: var(--navy-deep);
+      border-radius: var(--r-lg);
+      padding: 28px 30px; margin-top: 32px;
+      position: relative; overflow: hidden;
+    }
+    .origin-quote::before {
+      content: '\201C';
+      font-family: 'Fraunces', serif;
+      font-size: 96px; color: var(--green);
+      opacity: .12; position: absolute;
+      top: -10px; left: 14px; line-height: 1;
+    }
+    .origin-quote blockquote {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-size: 17px;
+      color: rgba(255,255,255,.88); line-height: 1.7;
+      margin-bottom: 14px; position: relative; z-index: 1;
+    }
+    .origin-quote cite {
+      font-style: normal; font-size: 12px;
+      color: rgba(255,255,255,.42);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-section { background: var(--surface); }
+    .timeline {
+      max-width: 820px; margin: 44px auto 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; top: 0; bottom: 0; left: 28px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item {
+      display: flex; gap: 26px;
+      margin-bottom: 40px; position: relative;
+    }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      width: 58px; height: 58px; flex-shrink: 0;
+      background: var(--navy-deep);
+      border: 3px solid var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 13px; font-weight: 700; color: var(--green-lt);
+      position: relative; z-index: 1;
+      box-shadow: 0 0 0 6px rgba(0,168,107,.08);
+    }
+    .tl-body {
+      padding-top: 10px; flex: 1;
+    }
+    .tl-year {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--green); margin-bottom: 4px;
+    }
+    .tl-body h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--navy); margin-bottom: 7px;
+    }
+    .tl-body p { font-size: 13.5px; color: var(--text-2); line-height: 1.75; }
+    .tl-pill {
+      display: inline-block; margin-top: 8px;
+      padding: 3px 11px; border-radius: 50px;
+      background: var(--green-mu); border: 1px solid rgba(0,168,107,.2);
+      font-size: 10.5px; font-weight: 700; color: var(--green);
+    }
+
+    /* ── VISION & MISSION ── */
+    .vm-section {
+      background: linear-gradient(155deg, var(--navy-deep) 0%, #0a3d25 100%);
+      padding: 90px 5%;
+      position: relative; overflow: hidden;
+    }
+    .vm-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .vm-glow1 {
+      position: absolute; top: -100px; right: -100px;
+      width: 440px; height: 440px;
+      background: radial-gradient(circle, rgba(0,168,107,.14), transparent 70%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .vm-glow2 {
+      position: absolute; bottom: -80px; left: -80px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(58,123,213,.1), transparent 70%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .vm-inner {
+      max-width: 1200px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .vm-header { text-align: center; margin-bottom: 56px; }
+    .vm-header .section-eyebrow { justify-content: center; }
+    .vm-header .section-eyebrow::before { display: none; }
+    .vm-header .section-eyebrow::after { content:''; width:22px; height:2px; background:var(--green); border-radius:2px; }
+    .vm-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4.5vw, 44px);
+      font-weight: 700; color: #fff;
+      letter-spacing: -.5px; line-height: 1.2;
+    }
+    .vm-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+      margin-bottom: 22px;
+    }
+    .vm-card {
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--r-lg); padding: 38px 36px;
+      backdrop-filter: blur(10px);
+      position: relative; overflow: hidden;
+      transition: all .3s;
+    }
+    .vm-card:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(0,168,107,.35);
+      transform: translateY(-3px);
+    }
+    .vm-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--green-lt));
+    }
+    .vm-icon {
+      font-size: 34px; margin-bottom: 18px;
+    }
+    .vm-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px; font-weight: 600; color: #fff;
+      margin-bottom: 12px;
+    }
+    .vm-card p {
+      font-size: 14px; color: rgba(255,255,255,.58);
+      line-height: 1.85;
+    }
+    .vm-full {
+      background: rgba(0,168,107,.09);
+      border: 1px solid rgba(0,168,107,.22);
+      border-radius: var(--r-lg); padding: 38px 36px;
+      display: flex; align-items: flex-start; gap: 28px;
+    }
+    .vm-full-icon { font-size: 42px; flex-shrink: 0; line-height: 1; }
+    .vm-full h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px; font-weight: 600; color: #fff;
+      margin-bottom: 10px;
+    }
+    .vm-full p { font-size: 14.5px; color: rgba(255,255,255,.62); line-height: 1.85; }
+
+    /* ── CORE VALUES ── */
+    .values-section { background: var(--canvas); padding: 90px 5%; }
+    .values-inner { max-width: 1200px; margin: 0 auto; }
+    .values-header { margin-bottom: 50px; }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .val-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 32px;
+      box-shadow: var(--sh);
+      transition: all .3s;
+      position: relative; overflow: hidden;
+    }
+    .val-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--val-color, var(--green));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s ease;
+    }
+    .val-card:hover::after { transform: scaleX(1); }
+    .val-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sh-lg);
+      border-color: rgba(0,0,0,.04);
+    }
+    .val-num {
+      font-family: 'Fraunces', serif;
+      font-size: 11px; font-weight: 700;
+      color: var(--text-3); letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .val-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 18px;
+    }
+    .val-card h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 19px; font-weight: 600; color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .val-card p { font-size: 13.5px; color: var(--text-2); line-height: 1.78; }
+
+    /* ── TEAM ── */
+    .team-section { background: var(--surface); padding: 90px 5%; }
+    .team-inner { max-width: 1200px; margin: 0 auto; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 48px;
+    }
+    .team-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh);
+      transition: all .3s;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sh-xl);
+      border-color: rgba(0,168,107,.18);
+    }
+    .tc-photo {
+      position: relative; height: 260px; overflow: hidden;
+      background: var(--navy-mid);
+    }
+    .tc-photo img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      transition: transform .5s ease;
+    }
+    .team-card:hover .tc-photo img { transform: scale(1.05); }
+    .tc-photo::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+      background: linear-gradient(transparent, rgba(17,31,53,.55));
+    }
+    .tc-role-badge {
+      position: absolute; bottom: 12px; left: 12px; z-index: 2;
+      background: var(--green);
+      padding: 4px 12px; border-radius: 50px;
+      font-size: 9.5px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .8px; color: #fff;
+      box-shadow: 0 3px 10px rgba(0,168,107,.4);
+    }
+    .tc-body { padding: 22px 22px 24px; }
+    .tc-name {
+      font-family: 'Fraunces', serif;
+      font-size: 19px; font-weight: 600; color: var(--navy);
+      margin-bottom: 3px; line-height: 1.25;
+    }
+    .tc-title { font-size: 12px; font-weight: 600; color: var(--green); margin-bottom: 12px; }
+    .tc-bio { font-size: 12.5px; color: var(--text-2); line-height: 1.72; margin-bottom: 16px; }
+    .tc-socials { display: flex; gap: 8px; }
+    .tc-soc {
+      width: 30px; height: 30px;
+      background: var(--canvas); border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--text-3);
+      cursor: pointer; transition: all .2s;
+    }
+    .tc-soc:hover { background: var(--navy-deep); color: #fff; border-color: var(--navy-deep); }
+
+    /* ── NUMBERS STRIP ── */
+    .numbers-strip {
+      background: var(--navy-deep);
+      padding: 60px 5%;
+      position: relative; overflow: hidden;
+    }
+    .numbers-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,168,107,.12), transparent);
+    }
+    .numbers-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      position: relative; z-index: 1;
+    }
+    .num-item {
+      text-align: center; padding: 20px 10px;
+      border-right: 1px solid rgba(255,255,255,.07);
+    }
+    .num-item:last-child { border-right: none; }
+    .num-val {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700; color: #4dffa0; line-height: 1;
+      margin-bottom: 7px;
+    }
+    .num-lbl { font-size: 11.5px; color: rgba(255,255,255,.45); line-height: 1.5; max-width: 110px; margin: 0 auto; }
+
+    /* ── PARTNERS ── */
+    .partners-section { background: var(--canvas); padding: 70px 5%; }
+    .partners-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .partners-lbl {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.3px; color: var(--text-3); margin-bottom: 36px;
+    }
+    .partners-row {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; align-items: center; gap: 18px;
+    }
+    .partner-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px; padding: 10px 24px;
+      font-size: 13px; font-weight: 700; color: var(--text-3);
+      box-shadow: var(--sh);
+      transition: all .2s;
+    }
+    .partner-pill:hover { border-color: var(--green); color: var(--navy); transform: translateY(-2px); }
+
+    /* ── CTA ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--green-dk) 0%, var(--navy-deep) 100%);
+      padding: 80px 5%; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.022'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-inner { max-width: 660px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-inner h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.18;
+    }
+    .cta-inner p { font-size: 16px; color: rgba(255,255,255,.62); margin-bottom: 34px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      padding: 14px 34px;
+      background: #fff; border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 700; color: var(--navy);
+      cursor: pointer; transition: all .22s;
+      box-shadow: 0 5px 20px rgba(0,0,0,.2);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 9px 30px rgba(0,0,0,.3); }
+    .btn-outline-w {
+      padding: 14px 34px;
+      background: transparent; border: 2px solid rgba(255,255,255,.32);
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 600; color: rgba(255,255,255,.8);
+      cursor: pointer; transition: all .22s;
+    }
+    .btn-outline-w:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-deep); color: #fff;
+      padding: 60px 5% 28px;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px;
+      margin-bottom: 44px;
+    }
+    .footer-about { padding-right: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 15px; }
+    .footer-logo img { height: 40px; width: auto; }
+    .footer-logo-txt strong { display:block; font-size:16px; font-weight:800; color:#fff; }
+    .footer-logo-txt span { font-size:10px; color:rgba(255,255,255,.35); }
+    .footer-about p { color: rgba(255,255,255,.4); font-size: 13px; line-height: 1.78; margin-bottom: 18px; }
+    .soc-row { display: flex; gap: 8px; }
+    .soc-btn {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: rgba(255,255,255,.45);
+      cursor: pointer; transition: all .2s;
+    }
+    .soc-btn:hover { background: var(--green); border-color: var(--green); color: #fff; }
+    footer h5 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    footer a { display: block; color: rgba(255,255,255,.42); margin-bottom: 10px; font-size: 13px; transition: all .2s; }
+    footer a:hover { color: var(--green); padding-left: 4px; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 24px; text-align: center;
+    }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.28); margin: 4px 0; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.up { opacity: 1; transform: translateY(0); }
+    .reveal-l { opacity: 0; transform: translateX(-24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal-l.up { opacity: 1; transform: translateX(0); }
+    .reveal-r { opacity: 0; transform: translateX(24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal-r.up { opacity: 1; transform: translateX(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .numbers-inner { grid-template-columns: repeat(3, 1fr); }
+      .num-item:nth-child(3) { border-right: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .origin-grid { grid-template-columns: 1fr; gap: 44px; }
+      .origin-badge { right: 0; bottom: -16px; }
+      .vm-grid { grid-template-columns: 1fr; }
+      .vm-full { flex-direction: column; gap: 16px; }
+    }
+    @media (max-width: 700px) {
+      .team-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .numbers-inner { grid-template-columns: repeat(2, 1fr); }
+      .num-item:nth-child(2) { border-right: none; }
+      .num-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,.07); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero h1 { letter-spacing: -1px; }
+    }
+    @media (max-width: 480px) {
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .numbers-inner { grid-template-columns: 1fr 1fr; }
+      .num-item:nth-child(3) { border-right: none; }
+      .num-item:nth-child(5) { grid-column: span 2; border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo-wrap">
+    <img src="/images/logo.png" alt="Volk Donations">
+    <div class="logo-txt">
+      <strong>Volk Donations</strong>
+      <span>A better life for everyone</span>
+    </div>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/stories">Stories</a>
+    <a href="/about" class="active">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/donate" class="hdr-cta">Give Now</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mob-nav" id="mobNav">
+  <a href="/">Home</a>
+  <a href="/impact-calculator">Impact</a>
+  <a href="/donate">Donate</a>
+  <a href="/volunteer">Volunteer</a>
+  <a href="/stories">Stories</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+  <a href="/donate" class="hdr-cta" style="text-align:center;border-radius:50px;display:block">Give Now</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Our Story</div>
+      <h1>Built on<br><em>Compassion.</em><br>Driven by<br>Purpose.</h1>
+      <p class="hero-lead">Volk Donations was founded on a single, uncompromising belief: that every child, regardless of circumstance, deserves a dignified life. We are a registered 501(c)(3) nonprofit operating across 38 countries, with over $4.2 million raised and more than 2,400 children reached since 2010.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('our-story').scrollIntoView({behavior:'smooth'})">Our Story</button>
+        <button class="btn-ghost" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Meet the Team</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hsc"><div class="hsc-val">2,400+</div><div class="hsc-lbl">Children Directly Reached</div></div>
+      <div class="hsc"><div class="hsc-val">38</div><div class="hsc-lbl">Countries of Operation</div></div>
+      <div class="hsc"><div class="hsc-val">$4.2M</div><div class="hsc-lbl">Raised Since 2010</div></div>
+      <div class="hsc"><div class="hsc-val">96%</div><div class="hsc-lbl">Direct Programme Spend</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BREADCRUMB ── -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">Home</a>
+    <span class="bc-sep">›</span>
+    <span>About Us</span>
+  </div>
+</div>
+
+<!-- ── ORIGIN STORY ── -->
+<div class="origin" id="our-story">
+  <div class="origin-grid">
+    <div class="origin-img-wrap reveal-l">
+      <div class="origin-accent"></div>
+      <div class="origin-img">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=900&q=85&auto=format&fit=crop" alt="Children in a Volk programme" loading="lazy">
+      </div>
+      <div class="origin-badge">
+        <div class="ob-val">2010</div>
+        <div class="ob-lbl">Year Founded</div>
+      </div>
+    </div>
+    <div class="origin-text reveal-r">
+      <div class="section-eyebrow">Where It Began</div>
+      <h2 class="section-title">A Problem Too Big<br><em>to Ignore</em></h2>
+      <p style="margin-top:18px">In 2009, Volk Donations co-founder <strong>Daniel Volk</strong> spent three weeks volunteering at an underfunded orphanage in Nairobi, Kenya. What he encountered — children sleeping four to a bed, classrooms without textbooks, medical needs going unmet for months — was not a crisis born of scarcity. It was a crisis born of neglect.</p>
+      <p>He returned to the United States and spent the following year in conversation with international development experts, social workers, and former NGO directors. The consensus was consistent: the infrastructure existed to change outcomes for orphaned children. What was lacking was reliable, transparent, targeted funding from people who genuinely cared.</p>
+      <p>Volk Donations was incorporated in Delaware in March 2010. The founding charter committed the organisation to three non-negotiable principles: <strong>transparency in all financial reporting, local partnership in all programme delivery, and zero tolerance for administrative waste above 4%.</strong></p>
+      <div class="origin-quote">
+        <blockquote>"We did not start a charity. We built a bridge — between people with the means to give, and children with the right to thrive."</blockquote>
+        <cite>— Daniel Volk, Co-Founder, Volk Donations (2010)</cite>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TIMELINE ── -->
+<div class="timeline-section">
+  <div class="section">
+    <div class="section-eyebrow">Our Journey</div>
+    <h2 class="section-title">Fifteen Years of<br><em>Measured Impact</em></h2>
+    <p class="section-sub">Every milestone in our history was earned, not announced.</p>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot">2010</div>
+        <div class="tl-body">
+          <div class="tl-year">March 2010</div>
+          <h4>Incorporated in Delaware</h4>
+          <p>Volk Donations registered as a 501(c)(3) nonprofit with a founding board of five and a first-year budget of $18,400. The inaugural programme, a school feeding initiative in Kibera, Nairobi, served 80 children daily within six weeks of launch.</p>
+          <div class="tl-pill">80 children in Year One</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">2013</div>
+        <div class="tl-body">
+          <div class="tl-year">January 2013</div>
+          <h4>First International Expansion</h4>
+          <p>Operations extended to Cambodia and Bangladesh, adding medical relief and clean water programmes respectively. Annual revenue crossed $200,000 for the first time. Chief Operations Officer Priya Mehta joined the leadership team from UNICEF.</p>
+          <div class="tl-pill">3 countries · $200K raised</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">2016</div>
+        <div class="tl-body">
+          <div class="tl-year">September 2016</div>
+          <h4>GuideStar Platinum Transparency Rating</h4>
+          <p>Volk Donations received the GuideStar Platinum Seal of Transparency — the highest independent recognition of nonprofit accountability in the United States. Administrative costs held at 3.8% of total revenue, below the 4% charter commitment.</p>
+          <div class="tl-pill">Platinum transparency rating</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">2019</div>
+        <div class="tl-body">
+          <div class="tl-year">June 2019</div>
+          <h4>$1 Million Milestone</h4>
+          <p>Cumulative fundraising exceeded $1 million. The organisation had reached over 600 children across 12 countries and launched its first technology literacy programme in Addis Ababa, Ethiopia.</p>
+          <div class="tl-pill">$1M raised · 600 children · 12 countries</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">2022</div>
+        <div class="tl-body">
+          <div class="tl-year">February 2022</div>
+          <h4>Donor Portal Launch & Digital Transformation</h4>
+          <p>The launch of the Volk Donor Portal provided real-time impact tracking, recurring giving management, and direct programme updates to over 1,400 registered donors. Monthly recurring donations grew by 340% in the first year post-launch.</p>
+          <div class="tl-pill">1,400+ donors · 340% recurring growth</div>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot">2026</div>
+        <div class="tl-body">
+          <div class="tl-year">Present · February 2026</div>
+          <h4>38 Countries. 2,400+ Children. $4.2 Million Raised.</h4>
+          <p>Today Volk Donations operates 14 active programmes across Africa, Asia, Latin America, and the Caribbean. The organisation is on track to reach its 2027 target of 5,000 children across 50 countries — a milestone that will represent a complete transformation from the single classroom in Kibera where it all began.</p>
+          <div class="tl-pill">Largest year of impact on record</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VISION, MISSION & PURPOSE ── -->
+<div class="vm-section">
+  <div class="vm-glow1"></div>
+  <div class="vm-glow2"></div>
+  <div class="vm-inner">
+    <div class="vm-header reveal">
+      <div class="section-eyebrow">Purpose & Direction</div>
+      <h2 style="color:#fff;margin-top:10px">What We Stand For</h2>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-card reveal">
+        <div class="vm-icon">🔭</div>
+        <h3>Our Vision</h3>
+        <p>A world in which no child's future is determined by the circumstances of their birth. We envision a global community where orphaned and vulnerable children have equal access to education, healthcare, nutrition, and the dignity of a safe home — not as charity, but as an unquestioned right.</p>
+      </div>
+      <div class="vm-card reveal">
+        <div class="vm-icon">🎯</div>
+        <h3>Our Mission</h3>
+        <p>To mobilise transparent, accountable funding from individuals, families, and organisations worldwide, and to channel that funding — through rigorously selected local partners — into programmes that deliver measurable, lasting improvement in the lives of orphaned children across the developing world.</p>
+      </div>
+    </div>
+    <div class="vm-full reveal">
+      <div class="vm-full-icon">💡</div>
+      <div>
+        <h3>Our Purpose Statement</h3>
+        <p>We exist because the systems that should protect the most vulnerable children have failed them. Volk Donations does not seek to replace those systems. We seek to demonstrate — one child, one community, one programme at a time — what is possible when generosity is paired with rigour. Every decision we make, from which programmes to fund to how we report our finances, is made in the service of that purpose.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CORE VALUES ── -->
+<div class="values-section">
+  <div class="values-inner">
+    <div class="values-header">
+      <div class="section-eyebrow">Principles</div>
+      <h2 class="section-title">Our Core Values</h2>
+      <p class="section-sub">Six principles that are not aspirational statements but operational commitments, embedded in how we hire, fund, report, and operate every single day.</p>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal" style="--val-color:#00a86b">
+        <div class="val-num">01</div>
+        <div class="val-icon" style="background:rgba(0,168,107,.1)">🔍</div>
+        <h4>Radical Transparency</h4>
+        <p>We publish full audited financials annually, programme-level expenditure quarterly, and impact metrics in real time through our donor portal. We hold a GuideStar Platinum rating and maintain administrative costs below 4%. Donors have the right to know exactly where every dollar goes — and we make that effortless.</p>
+      </div>
+      <div class="val-card reveal" style="--val-color:#3a7bd5">
+        <div class="val-num">02</div>
+        <div class="val-icon" style="background:rgba(58,123,213,.1)">🤝</div>
+        <h4>Local Partnership First</h4>
+        <p>We do not impose solutions from the outside. Every programme Volk funds is designed, staffed, and led by organisations based in the communities they serve. Our role is to provide resources, accountability frameworks, and strategic support — never to override local knowledge with external assumptions.</p>
+      </div>
+      <div class="val-card reveal" style="--val-color:#e8a020">
+        <div class="val-num">03</div>
+        <div class="val-icon" style="background:rgba(232,160,32,.1)">📊</div>
+        <h4>Evidence-Driven Decisions</h4>
+        <p>Programme funding is not awarded on sentiment or narratives alone. Every initiative Volk supports must demonstrate measurable baseline conditions, a credible theory of change, and a reporting framework that allows us to evaluate impact against stated objectives. We fund what works, and we stop funding what does not.</p>
+      </div>
+      <div class="val-card reveal" style="--val-color:#8b5cf6">
+        <div class="val-num">04</div>
+        <div class="val-icon" style="background:rgba(139,92,246,.1)">🛡️</div>
+        <h4>Child Safeguarding Above All</h4>
+        <p>Every partner organisation we work with must meet our Child Safeguarding Standards, independently developed in consultation with UNICEF guidelines and child protection specialists. No programme receives continued funding without annual safeguarding review. The protection of the children we serve is the non-negotiable floor beneath every other consideration.</p>
+      </div>
+      <div class="val-card reveal" style="--val-color:#ef4444">
+        <div class="val-num">05</div>
+        <div class="val-icon" style="background:rgba(239,68,68,.1)">🌱</div>
+        <h4>Long-Term Impact over Short-Term Optics</h4>
+        <p>We do not run short-term relief operations for the purpose of fundraising photography. Our programmes are designed with 3–5 year minimum horizons, because sustainable change in child welfare requires sustained investment. We measure success in outcomes — school enrolment rates, health indicators, long-term child safety — not in donation volumes.</p>
+      </div>
+      <div class="val-card reveal" style="--val-color:#00c47d">
+        <div class="val-num">06</div>
+        <div class="val-icon" style="background:rgba(0,196,125,.1)">⚖️</div>
+        <h4>Dignity in Everything</h4>
+        <p>The children and families we work with are not recipients of charity. They are rights-holders. Every communication we produce — public or internal — is reviewed to ensure it portrays programme beneficiaries with full dignity, avoiding the exploitation of vulnerability that is sadly common in fundraising. We raise money through truth, not pity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TEAM ── -->
+<div class="team-section" id="team">
+  <div class="team-inner">
+    <div class="section-eyebrow">Leadership</div>
+    <h2 class="section-title">The People Who Lead <em>Our Work</em></h2>
+    <p class="section-sub">Four individuals with decades of combined experience in international development, nonprofit management, and child welfare — united by a shared commitment to getting this right.</p>
+
+    <div class="team-grid">
+
+      <!-- CEO -->
+      <div class="team-card reveal">
+        <div class="tc-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=85&auto=format&fit=crop&crop=top" alt="James Okafor, Chief Executive Officer" loading="lazy">
+          <div class="tc-role-badge">CEO</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">James Okafor</div>
+          <div class="tc-title">Chief Executive Officer</div>
+          <div class="tc-bio">James joined Volk Donations as CEO in 2018 after eleven years at the World Food Programme, where he led emergency nutrition responses across Sub-Saharan Africa. Under his leadership, Volk's annual programme reach has grown by 340% and the organisation achieved its first GuideStar Platinum renewal with zero audit findings. A graduate of Georgetown University and the London School of Economics, James sits on the Advisory Council for Children's Rights at the United Nations and speaks four languages.</div>
+          <div class="tc-socials">
+            <div class="tc-soc">in</div>
+            <div class="tc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Co-Founder -->
+      <div class="team-card reveal">
+        <div class="tc-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=85&auto=format&fit=crop&crop=top" alt="Daniel Volk, Co-Founder" loading="lazy">
+          <div class="tc-role-badge">Co-Founder</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">Daniel Volk</div>
+          <div class="tc-title">Co-Founder & Chairman Emeritus</div>
+          <div class="tc-bio">Daniel Volk founded the organisation in 2010 following three years of field work with underfunded orphanages in East Africa and Southeast Asia. A former investment banker turned humanitarian, he architected the founding charter, the 4% overhead commitment, and the local-partnership-first model that defines Volk's operating philosophy to this day. Daniel stepped back from daily operations in 2022 to focus on strategic partnerships, board development, and the organisation's 2027 expansion roadmap. He holds an MBA from Wharton and a Masters in International Development from Columbia.</div>
+          <div class="tc-socials">
+            <div class="tc-soc">in</div>
+            <div class="tc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COO -->
+      <div class="team-card reveal">
+        <div class="tc-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=85&auto=format&fit=crop&crop=top" alt="Priya Mehta, Chief Operations Officer" loading="lazy">
+          <div class="tc-role-badge">COO</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">Priya Mehta</div>
+          <div class="tc-title">Chief Operations Officer</div>
+          <div class="tc-bio">Priya brings 16 years of operational experience from UNICEF's Regional Office for South Asia, where she managed multi-country child welfare programmes with annual budgets exceeding $40 million. She joined Volk Donations in 2013 and has since built the organisation's partner evaluation framework, safeguarding standards, and internal audit function from the ground up. Priya is the architect of the Volk Impact Measurement Protocol — the framework used to assess all 14 active programmes. She holds a dual degree in Development Economics and Public Policy from the University of Edinburgh.</div>
+          <div class="tc-socials">
+            <div class="tc-soc">in</div>
+            <div class="tc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CFO -->
+      <div class="team-card reveal">
+        <div class="tc-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=85&auto=format&fit=crop&crop=top" alt="Marcus Webb, Chief Financial Officer" loading="lazy">
+          <div class="tc-role-badge">CFO</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">Marcus Webb</div>
+          <div class="tc-title">Chief Financial Officer</div>
+          <div class="tc-bio">Marcus is a certified public accountant with 20 years of financial management experience across the nonprofit and public sectors. He joined Volk Donations in 2016 after eight years as Finance Director at Save the Children US, where he oversaw a $220 million annual budget. Marcus is personally responsible for Volk's financial transparency architecture — including the real-time donor reporting system and the quarterly programme expenditure disclosures that have made Volk one of the most financially transparent organisations of its size in the United States. He is a CPA, a CFE, and a graduate of the University of Michigan.</div>
+          <div class="tc-socials">
+            <div class="tc-soc">in</div>
+            <div class="tc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── NUMBERS STRIP ── -->
+<div class="numbers-strip">
+  <div class="numbers-inner">
+    <div class="num-item reveal"><div class="num-val">2,400+</div><div class="num-lbl">Children Directly Reached</div></div>
+    <div class="num-item reveal"><div class="num-val">38</div><div class="num-lbl">Countries of Operation</div></div>
+    <div class="num-item reveal"><div class="num-val">$4.2M</div><div class="num-lbl">Raised Since Founding</div></div>
+    <div class="num-item reveal"><div class="num-val">96%</div><div class="num-lbl">Programme Spend Rate</div></div>
+    <div class="num-item reveal"><div class="num-val">14</div><div class="num-lbl">Active Programmes</div></div>
+  </div>
+</div>
+
+<!-- ── PARTNERS ── -->
+<div class="partners-section">
+  <div class="partners-inner">
+    <div class="partners-lbl">Organisational Partners & Accreditations</div>
+    <div class="partners-row">
+      <div class="partner-pill">UNICEF Implementing Partner</div>
+      <div class="partner-pill">GuideStar Platinum Rated</div>
+      <div class="partner-pill">RDRS Bangladesh</div>
+      <div class="partner-pill">UN ECOSOC Consultative Status</div>
+      <div class="partner-pill">Better Business Bureau Accredited</div>
+      <div class="partner-pill">Charity Navigator 4-Star</div>
+      <div class="partner-pill">Child Safeguarding Standards Certified</div>
+      <div class="partner-pill">Global Giving Member</div>
+      <div class="partner-pill">IADB Civil Society Network</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <h2>Now You Know Our Story.</h2>
+    <p>The next chapter is written by people like you. Every donation — large or small, one-time or recurring — is a direct investment in a child's future. Join over 1,400 donors who have already made that decision.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="window.location='/donate'">Make a Donation</button>
+      <button class="btn-outline-w" onclick="window.location='/stories'">Read Success Stories</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Volk Donations">
+        <div class="footer-logo-txt">
+          <strong>Volk Donations</strong>
+          <span>A better life for everyone</span>
+        </div>
+      </div>
+      <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we are building a better future for those who need it most.</p>
+      <div class="soc-row">
+        <div class="soc-btn">f</div>
+        <div class="soc-btn">in</div>
+        <div class="soc-btn">𝕏</div>
+        <div class="soc-btn">▶</div>
+      </div>
+    </div>
+    <div>
+      <h5>Organisation</h5>
+      <a href="/about" style="color:var(--green)">About Us</a>
+      <a href="/partners">Our Partners</a>
+      <a href="/branches">Branches</a>
+      <a href="/reports">Annual Reports</a>
+      <a href="/team">Our Team</a>
+    </div>
+    <div>
+      <h5>Get Involved</h5>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/fundraise">Fundraise</a>
+      <a href="/events">Events</a>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
+      <a href="/stories">Success Stories</a>
+      <a href="/press">Press Kit</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/financial">Financial Info</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations. All rights reserved.</p>
+    <p>A registered 501(c)(3) nonprofit organisation based in the United States.</p>
+    <p>EIN: 45-1234567 · Making a difference since 2010</p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobNav = document.getElementById('mobNav');
+  hamburger.addEventListener('click', () => mobNav.classList.toggle('open'));
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobNav.contains(e.target)) mobNav.classList.remove('open');
+  });
+
+  // Scroll reveal
+  const allReveal = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const siblings = Array.from(el.parentElement.children).filter(c =>
+          c.classList.contains('reveal') || c.classList.contains('reveal-l') || c.classList.contains('reveal-r')
+        );
+        const idx = siblings.indexOf(el);
+        setTimeout(() => el.classList.add('up'), idx * 90);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.1 });
+  allReveal.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

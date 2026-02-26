@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundraise | Volk Donations</title>
+  <meta name="description" content="Start your own fundraiser for Volk Donations and help orphaned children worldwide access education, healthcare, and safe homes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --navy2: #162d4a;
+      --green: #00a86b;
+      --green-light: #00c47d;
+      --green-dim: rgba(0,168,107,0.1);
+      --green-dim2: rgba(0,168,107,0.06);
+      --cream: #faf8f4;
+      --cream2: #f4f1eb;
+      --warm: #f9f5f0;
+      --text: #2c3e50;
+      --muted: #6b7c8d;
+      --border: #e4ddd4;
+      --white: #ffffff;
+      --gold: #c9a84c;
+      --red: #e05c5c;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.3s; }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 18px 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-container img { height: 50px; width: auto; }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: var(--navy); margin: 0; }
+    .logo-text span { font-size: 12px; color: var(--green); font-weight: 500; }
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { font-weight: 500; color: var(--text); font-size: 15px; position: relative; }
+    nav a:hover { color: var(--green); }
+    nav a.active { color: var(--green); font-weight: 600; }
+    nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--green); transition: width 0.3s; }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+    .nav-cta {
+      background: var(--green); color: white !important;
+      padding: 10px 22px; border-radius: 50px;
+      font-weight: 700 !important; font-size: 14px !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; border: none; background: none; }
+    .mobile-menu-btn span { width: 28px; height: 3px; background: var(--navy); border-radius: 2px; display: block; transition: all 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      padding: 100px 5% 0;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        radial-gradient(circle at 80% 20%, rgba(0,168,107,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(0,168,107,0.08) 0%, transparent 40%);
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: auto; position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+    }
+    .hero-left { padding-bottom: 80px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 24px;
+    }
+    .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+    .hero-left h2 {
+      font-family: 'Lora', serif;
+      font-size: 58px; font-weight: 700; line-height: 1.1;
+      color: white; margin-bottom: 24px; letter-spacing: -0.5px;
+    }
+    .hero-left h2 em { font-style: italic; color: #7de8b8; }
+    .hero-left p {
+      font-size: 17px; color: rgba(255,255,255,0.75);
+      line-height: 1.8; margin-bottom: 40px; max-width: 460px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green); color: white;
+      padding: 15px 32px; border-radius: 10px; font-weight: 700;
+      font-size: 15px; display: inline-flex; align-items: center; gap: 8px;
+      border: none; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,168,107,0.35); }
+    .btn-outline-white {
+      background: transparent; color: white;
+      padding: 15px 32px; border-radius: 10px; font-weight: 600;
+      font-size: 15px; display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid rgba(255,255,255,0.3); cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s;
+    }
+    .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+    /* Hero right — floating campaign card */
+    .hero-right { position: relative; padding-bottom: 0; }
+    .hero-campaign-card {
+      background: white; border-radius: 20px 20px 0 0;
+      padding: 32px; box-shadow: 0 -20px 60px rgba(0,0,0,0.3);
+      position: relative; overflow: hidden;
+    }
+    .campaign-card-top {
+      display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;
+    }
+    .campaign-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 18px; color: white; flex-shrink: 0;
+    }
+    .campaign-badge {
+      background: var(--green-dim); color: var(--green);
+      font-size: 11px; font-weight: 700; padding: 4px 12px;
+      border-radius: 50px; border: 1px solid rgba(0,168,107,0.2);
+    }
+    .campaign-card h4 {
+      font-family: 'Lora', serif; font-size: 19px; font-weight: 700;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .campaign-card .organizer { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .progress-section { margin-bottom: 18px; }
+    .progress-numbers {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;
+    }
+    .progress-raised { font-size: 26px; font-weight: 700; color: var(--navy); }
+    .progress-goal { font-size: 13px; color: var(--muted); }
+    .progress-bar-track {
+      height: 8px; background: #eef0f2; border-radius: 8px; overflow: hidden; margin-bottom: 8px;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 8px;
+      background: linear-gradient(90deg, var(--green), var(--green-light));
+      width: 68%;
+      animation: fillBar 1.5s ease forwards;
+    }
+    @keyframes fillBar { from { width: 0; } to { width: 68%; } }
+    .progress-meta { display: flex; gap: 20px; }
+    .progress-meta span { font-size: 12px; color: var(--muted); }
+    .progress-meta strong { color: var(--text); }
+    .campaign-donate-btn {
+      width: 100%; background: var(--navy); color: white;
+      padding: 14px; border-radius: 10px; border: none;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s;
+      margin-top: 4px;
+    }
+    .campaign-donate-btn:hover { background: var(--green); }
+    .campaign-supporters {
+      display: flex; align-items: center; gap: 10px; margin-top: 14px;
+    }
+    .supporter-avatars { display: flex; }
+    .supporter-avatar {
+      width: 28px; height: 28px; border-radius: 50%; border: 2px solid white;
+      margin-left: -8px; font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; color: white;
+    }
+    .supporter-avatars .supporter-avatar:first-child { margin-left: 0; }
+    .supporter-text { font-size: 12px; color: var(--muted); }
+
+    /* ── IMPACT STRIP ── */
+    .impact-strip {
+      background: var(--green); padding: 28px 5%;
+    }
+    .impact-strip-inner {
+      max-width: 1200px; margin: auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+    }
+    .impact-stat { text-align: center; }
+    .impact-stat-num {
+      font-family: 'Lora', serif;
+      font-size: 36px; font-weight: 700; color: white; line-height: 1;
+    }
+    .impact-stat-label { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 4px; font-weight: 500; }
+    .impact-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.25); }
+
+    /* ── WHY FUNDRAISE ── */
+    .why-section { padding: 100px 5%; background: var(--white); }
+    .why-inner { max-width: 1200px; margin: auto; }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .section-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--green); }
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: 46px; font-weight: 700; color: var(--navy);
+      line-height: 1.15; margin-bottom: 14px;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+    .section-desc { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.8; }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 28px; margin-top: 60px;
+    }
+    .why-card {
+      padding: 36px 32px; border-radius: 16px;
+      border: 1.5px solid var(--border); background: var(--cream);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .why-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--green-light));
+      transform: scaleX(0); transition: transform 0.3s; transform-origin: left;
+    }
+    .why-card:hover { border-color: transparent; box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .why-card:hover::before { transform: scaleX(1); }
+    .why-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: var(--green-dim); display: flex; align-items: center;
+      justify-content: center; font-size: 26px; margin-bottom: 20px;
+    }
+    .why-card h4 {
+      font-family: 'Lora', serif; font-size: 20px; font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .why-card p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { padding: 100px 5%; background: var(--cream); }
+    .how-inner { max-width: 1200px; margin: auto; }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-top: 60px; position: relative;
+    }
+    .steps-grid::before {
+      content: ''; position: absolute; top: 36px; left: 12.5%; right: 12.5%; height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--green-light));
+      z-index: 0;
+    }
+    .step {
+      text-align: center; padding: 0 20px; position: relative; z-index: 1;
+    }
+    .step-num {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--navy); color: white;
+      font-family: 'Lora', serif; font-size: 26px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; border: 4px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--green);
+    }
+    .step h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── CAMPAIGN IDEAS ── */
+    .ideas-section { padding: 100px 5%; background: var(--white); }
+    .ideas-inner { max-width: 1200px; margin: auto; }
+    .ideas-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 60px;
+    }
+    .idea-card {
+      border-radius: 16px; overflow: hidden;
+      border: 1.5px solid var(--border); transition: all 0.3s;
+      background: var(--white);
+    }
+    .idea-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.1); transform: translateY(-4px); border-color: transparent; }
+    .idea-thumb {
+      height: 180px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .idea-thumb-bg {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .idea-thumb-emoji { font-size: 48px; }
+    .idea-thumb-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: rgba(255,255,255,0.7);
+    }
+    .idea-body { padding: 24px; }
+    .idea-tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 50px; margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .idea-body h4 {
+      font-family: 'Lora', serif; font-size: 18px; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px; line-height: 1.3;
+    }
+    .idea-body p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .idea-stats { display: flex; gap: 16px; }
+    .idea-stat { font-size: 12px; color: var(--muted); }
+    .idea-stat strong { color: var(--text); display: block; font-size: 15px; font-weight: 700; }
+
+    /* ── LEADERBOARD ── */
+    .leaderboard-section { padding: 100px 5%; background: var(--navy); }
+    .leaderboard-inner { max-width: 1200px; margin: auto; }
+    .leaderboard-section .section-eyebrow { color: #7de8b8; }
+    .leaderboard-section .section-eyebrow::before { background: #7de8b8; }
+    .leaderboard-section .section-title { color: white; }
+    .leaderboard-section .section-title em { color: #7de8b8; }
+    .leaderboard-section .section-desc { color: rgba(255,255,255,0.65); }
+    .leaderboard-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px;
+    }
+    .leaderboard-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; overflow: hidden;
+    }
+    .lb-header {
+      padding: 20px 28px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .lb-header h4 { font-size: 15px; font-weight: 700; color: white; }
+    .lb-period { font-size: 12px; color: rgba(255,255,255,0.4); }
+    .lb-list { padding: 8px 0; }
+    .lb-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 28px; transition: background 0.2s;
+    }
+    .lb-item:hover { background: rgba(255,255,255,0.04); }
+    .lb-rank {
+      font-family: 'Lora', serif; font-size: 18px; font-weight: 700;
+      color: rgba(255,255,255,0.25); width: 28px; flex-shrink: 0; text-align: center;
+    }
+    .lb-rank.gold { color: var(--gold); }
+    .lb-rank.silver { color: #a0aec0; }
+    .lb-rank.bronze { color: #c47c3e; }
+    .lb-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: white; flex-shrink: 0;
+    }
+    .lb-info { flex: 1; }
+    .lb-name { font-size: 14px; font-weight: 600; color: white; margin-bottom: 2px; }
+    .lb-campaign { font-size: 12px; color: rgba(255,255,255,0.4); }
+    .lb-amount { font-size: 16px; font-weight: 700; color: var(--green); }
+    .lb-bar-wrap { width: 80px; }
+    .lb-bar-track { height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; }
+    .lb-bar-fill { height: 100%; border-radius: 4px; background: var(--green); }
+
+    /* ── START FORM ── */
+    .start-section { padding: 100px 5%; background: var(--warm); }
+    .start-inner {
+      max-width: 900px; margin: auto;
+    }
+    .start-card {
+      background: white; border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      overflow: hidden; margin-top: 60px;
+    }
+    .start-card-header {
+      background: linear-gradient(135deg, var(--navy), #0d2a48);
+      padding: 40px 48px; color: white; position: relative; overflow: hidden;
+    }
+    .start-card-header::after {
+      content: ''; position: absolute; right: -60px; top: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(0,168,107,0.15);
+    }
+    .start-card-header h3 {
+      font-family: 'Lora', serif; font-size: 28px; font-weight: 700;
+      margin-bottom: 8px; position: relative; z-index: 1;
+    }
+    .start-card-header p {
+      font-size: 15px; color: rgba(255,255,255,0.7);
+      position: relative; z-index: 1;
+    }
+    .start-card-body { padding: 48px; }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { margin-bottom: 22px; }
+    .form-group label {
+      display: block; font-size: 13px; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 14px 18px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text); background: var(--cream);
+      transition: all 0.3s; outline: none;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #b0bcc8; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--green); background: white;
+      box-shadow: 0 0 0 3px rgba(0,168,107,0.1);
+    }
+    .form-group select option { background: white; }
+    .form-group textarea { resize: none; }
+    .goal-input-wrap { position: relative; }
+    .goal-prefix {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      font-weight: 700; color: var(--muted); font-size: 16px;
+    }
+    .goal-input-wrap input { padding-left: 32px; }
+    .goal-presets { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .goal-preset {
+      background: var(--cream2); border: 1.5px solid var(--border);
+      color: var(--text); padding: 6px 14px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .goal-preset:hover, .goal-preset.active { background: var(--green); border-color: var(--green); color: white; }
+    .fundraise-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .type-option { display: none; }
+    .type-label {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 16px 10px; border: 1.5px solid var(--border);
+      border-radius: 12px; cursor: pointer; transition: all 0.2s;
+      text-align: center; background: var(--cream);
+    }
+    .type-label-icon { font-size: 24px; }
+    .type-label-text { font-size: 12px; font-weight: 600; color: var(--text); }
+    .type-option:checked + .type-label { border-color: var(--green); background: var(--green-dim); }
+    .type-option:checked + .type-label .type-label-text { color: var(--green); }
+    .submit-btn {
+      width: 100%; background: var(--green); color: white;
+      padding: 17px; border-radius: 12px; border: none;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,168,107,0.3); }
+    .form-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 14px; }
+    .form-note a { color: var(--green); font-weight: 600; }
+
+    /* Success state */
+    .success-state {
+      display: none; text-align: center; padding: 60px 48px;
+    }
+    .success-state.show { display: block; }
+    .success-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--green); margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+    }
+    .success-state h3 {
+      font-family: 'Lora', serif; font-size: 28px; font-weight: 700;
+      color: var(--navy); margin-bottom: 12px;
+    }
+    .success-state p { font-size: 16px; color: var(--muted); margin-bottom: 28px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .success-link {
+      display: inline-block; background: var(--navy); color: white;
+      padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 15px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section { padding: 100px 5%; background: var(--cream); }
+    .testimonials-inner { max-width: 1200px; margin: auto; }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 60px;
+    }
+    .testimonial-card {
+      background: white; border-radius: 16px; padding: 32px;
+      border: 1.5px solid var(--border); transition: all 0.3s;
+      position: relative;
+    }
+    .testimonial-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-3px); }
+    .testimonial-quote {
+      font-family: 'Lora', serif; font-size: 52px; color: var(--green);
+      opacity: 0.2; line-height: 1; position: absolute; top: 16px; left: 24px;
+    }
+    .testimonial-text {
+      font-size: 15px; color: var(--text); line-height: 1.8;
+      margin-bottom: 24px; position: relative; z-index: 1; padding-top: 16px;
+      font-style: italic;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: white; flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .testimonial-role { font-size: 12px; color: var(--muted); }
+    .testimonial-raised {
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--muted);
+    }
+    .testimonial-raised strong { color: var(--green); font-size: 16px; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 100px 5%; background: var(--white); }
+    .faq-inner { max-width: 800px; margin: auto; }
+    .faq-list { margin-top: 50px; }
+    .faq-item { border-bottom: 1.5px solid var(--border); }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0; cursor: pointer; font-size: 16px; font-weight: 600;
+      color: var(--navy); gap: 16px;
+    }
+    .faq-question:hover { color: var(--green); }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--green-dim); display: flex; align-items: center;
+      justify-content: center; font-size: 16px; flex-shrink: 0;
+      transition: all 0.3s; color: var(--green); font-weight: 700;
+    }
+    .faq-item.open .faq-icon { background: var(--green); color: white; transform: rotate(45deg); }
+    .faq-answer {
+      font-size: 15px; color: var(--muted); line-height: 1.8;
+      padding-bottom: 22px; display: none;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, #0a3d26 100%);
+      padding: 90px 5%; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,168,107,0.15) 0%, transparent 70%);
+    }
+    .cta-banner h2 {
+      font-family: 'Lora', serif; font-size: 48px; font-weight: 700;
+      color: white; margin-bottom: 16px; position: relative;
+    }
+    .cta-banner h2 em { font-style: italic; color: #7de8b8; }
+    .cta-banner p { font-size: 18px; color: rgba(255,255,255,0.75); margin-bottom: 40px; position: relative; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .cta-banner p + .hero-actions { justify-content: center; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy2); padding: 60px 5% 28px; }
+    .footer-inner {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+    }
+    .footer-logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .footer-logo-row img { height: 42px; }
+    .footer-brand-name { font-size: 18px; font-weight: 700; color: white; }
+    .footer-about p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.8; }
+    footer h6 { color: white; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 9px; }
+    footer ul li a { color: rgba(255,255,255,0.5); font-size: 13px; transition: color 0.3s; }
+    footer ul li a:hover { color: var(--green); }
+    .footer-bottom {
+      max-width: 1200px; margin: auto;
+      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 50px; }
+      .hero-right { display: none; }
+      .hero-left { padding-bottom: 80px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .steps-grid::before { display: none; }
+      .leaderboard-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      nav { position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px; height: calc(100vh - 86px); background: white; flex-direction: column; padding: 28px; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s; gap: 18px; align-items: flex-start; }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .hero-left h2 { font-size: 40px; }
+      .section-title { font-size: 34px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .ideas-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .fundraise-type-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .start-card-body { padding: 28px; }
+      .start-card-header { padding: 28px; }
+      .impact-strip-inner { justify-content: center; gap: 28px; }
+      .impact-divider { display: none; }
+      .cta-banner h2 { font-size: 34px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-left h2 { font-size: 32px; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-outline-white { justify-content: center; }
+      .section-title { font-size: 28px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .fundraise-type-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.7s ease forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.22s; }
+    .delay-3 { animation-delay: 0.34s; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-container">
+    <img src="/images/logo.png" alt="Volk Donations Logo">
+    <div class="logo-text">
+      <h1>Volk Donations</h1>
+      <span>A better life for everyone</span>
+    </div>
+  </div>
+  <nav id="mainNav">
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/contact">Contact</a>
+    <a href="/fundraise" class="active">Fundraise</a>
+    <a href="/donate" class="nav-cta">Donate Now</a>
+  </nav>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow fade-up">Start a Fundraiser</div>
+      <h2 class="fade-up delay-1">Turn Your <em>Passion</em><br>Into a Child's<br>Future</h2>
+      <p class="fade-up delay-2">Create your own fundraising campaign and rally your community behind a cause that matters. Every dollar you raise through Volk Donations goes directly to orphaned children who need it most.</p>
+      <div class="hero-actions fade-up delay-3">
+        <a href="#start" class="btn-primary">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          Start Your Campaign
+        </a>
+        <a href="#how" class="btn-outline-white">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-campaign-card">
+        <div class="campaign-card-top">
+          <div class="campaign-avatar">S</div>
+          <span class="campaign-badge">🔥 Trending</span>
+        </div>
+        <h4>Sarah's Birthday Fundraiser for Kenya Schools</h4>
+        <p class="organizer">by Sarah Okonkwo · Denver, Colorado</p>
+        <div class="progress-section">
+          <div class="progress-numbers">
+            <span class="progress-raised">$3,412</span>
+            <span class="progress-goal">of $5,000 goal</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill"></div>
+          </div>
+          <div class="progress-meta">
+            <span><strong>142</strong> donors</span>
+            <span><strong>12</strong> days left</span>
+            <span><strong>68%</strong> funded</span>
+          </div>
+        </div>
+        <button class="campaign-donate-btn">Donate to this Campaign</button>
+        <div class="campaign-supporters">
+          <div class="supporter-avatars">
+            <div class="supporter-avatar" style="background:#1e3a5f">M</div>
+            <div class="supporter-avatar" style="background:#00a86b">J</div>
+            <div class="supporter-avatar" style="background:#c9a84c">A</div>
+            <div class="supporter-avatar" style="background:#e05c5c">R</div>
+            <div class="supporter-avatar" style="background:#4a90d9">+</div>
+          </div>
+          <span class="supporter-text">138 others are supporting this</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <div class="impact-strip-inner">
+    <div class="impact-stat">
+      <div class="impact-stat-num">$4.2M</div>
+      <div class="impact-stat-label">Raised by Community Fundraisers</div>
+    </div>
+    <div class="impact-divider"></div>
+    <div class="impact-stat">
+      <div class="impact-stat-num">8,400+</div>
+      <div class="impact-stat-label">Active Fundraising Campaigns</div>
+    </div>
+    <div class="impact-divider"></div>
+    <div class="impact-stat">
+      <div class="impact-stat-num">94K+</div>
+      <div class="impact-stat-label">Individual Donors Reached</div>
+    </div>
+    <div class="impact-divider"></div>
+    <div class="impact-stat">
+      <div class="impact-stat-num">100%</div>
+      <div class="impact-stat-label">Goes to Program Delivery</div>
+    </div>
+    <div class="impact-divider"></div>
+    <div class="impact-stat">
+      <div class="impact-stat-num">42+</div>
+      <div class="impact-stat-label">Countries Benefiting</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY FUNDRAISE -->
+<section class="why-section">
+  <div class="why-inner">
+    <div class="section-eyebrow">Why Fundraise With Us</div>
+    <h2 class="section-title">The Most <em>Impactful</em> Way<br>to Give</h2>
+    <p class="section-desc">Fundraising with Volk Donations multiplies your personal impact. When you bring your network together behind a cause, you do something no single donation can match.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">💯</div>
+        <h4>100% to Programs</h4>
+        <p>Every dollar raised through your campaign goes directly to our programs. Volk Donations covers all platform and processing fees — your donors' money reaches children, not overhead.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛠️</div>
+        <h4>Full Campaign Support</h4>
+        <p>Our dedicated fundraiser team provides you with a personal fundraising page, shareable assets, email templates, and one-on-one support to help you hit your goal.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📊</div>
+        <h4>Real-Time Dashboard</h4>
+        <p>Track donations, donor counts, and campaign progress in real time through your personal dashboard. Send thank-you notes and updates directly to your supporters.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🧾</div>
+        <h4>Tax-Deductible Receipts</h4>
+        <p>All donations through your campaign are tax-deductible. We automatically issue official IRS 501(c)(3) receipts to every donor on your behalf.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌍</div>
+        <h4>Choose Your Impact</h4>
+        <p>Direct your fundraiser toward a specific program — education in Uganda, healthcare in Cambodia, or food security in Ethiopia. Your community will know exactly where their money goes.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏆</div>
+        <h4>Recognition & Rewards</h4>
+        <p>Top fundraisers are featured on our leaderboard, invited to virtual program visits, and recognized in our annual impact report. Your leadership gets seen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="section-eyebrow">The Process</div>
+    <h2 class="section-title">Up and Running<br>in <em>Minutes</em></h2>
+    <p class="section-desc">Starting a fundraiser is simple and free. No technical skills needed — just your story and your network.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Create Your Page</h4>
+        <p>Fill out a simple form with your name, fundraising goal, cause, and personal story. Your campaign page is live immediately.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Share Your Campaign</h4>
+        <p>Share your unique link via WhatsApp, email, Instagram, LinkedIn, or anywhere your network lives. Every share counts.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Watch Donations Come In</h4>
+        <p>Donors give securely through your campaign page. Track progress in real time and send updates to keep momentum going.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>See Your Impact</h4>
+        <p>When your campaign closes, we send you a full impact report showing exactly how many children your fundraiser supported.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPAIGN IDEAS -->
+<section class="ideas-section">
+  <div class="ideas-inner">
+    <div class="section-eyebrow">Fundraiser Ideas</div>
+    <h2 class="section-title">Find Your <em>Reason</em><br>to Fundraise</h2>
+    <p class="section-desc">There's no wrong reason to start a campaign. Here are some of the most successful fundraiser types our community has run.</p>
+    <div class="ideas-grid">
+      <div class="idea-card">
+        <div class="idea-thumb">
+          <div class="idea-thumb-bg" style="background: linear-gradient(135deg, #1e3a5f, #00a86b)">
+            <div class="idea-thumb-emoji">🎂</div>
+            <div class="idea-thumb-label">Birthday</div>
+          </div>
+        </div>
+        <div class="idea-body">
+          <span class="idea-tag" style="background:rgba(0,168,107,0.1);color:var(--green)">Most Popular</span>
+          <h4>Birthday Fundraiser</h4>
+          <p>Instead of gifts, ask your friends and family to donate to your campaign. Birthday fundraisers average 3× more donations than other types.</p>
+          <div class="idea-stats">
+            <div class="idea-stat"><strong>$1,840</strong> Avg raised</div>
+            <div class="idea-stat"><strong>2,100+</strong> Campaigns</div>
+          </div>
+        </div>
+      </div>
+      <div class="idea-card">
+        <div class="idea-thumb">
+          <div class="idea-thumb-bg" style="background: linear-gradient(135deg, #c9a84c, #9a6e1e)">
+            <div class="idea-thumb-emoji">🏃</div>
+            <div class="idea-thumb-label">Challenge</div>
+          </div>
+        </div>
+        <div class="idea-body">
+          <span class="idea-tag" style="background:rgba(201,168,76,0.12);color:var(--gold)">High Engagement</span>
+          <h4>Fitness Challenge</h4>
+          <p>Run a marathon, do 100 pushups a day for a month, or cycle across a city — get sponsors to pledge per mile or per rep.</p>
+          <div class="idea-stats">
+            <div class="idea-stat"><strong>$3,200</strong> Avg raised</div>
+            <div class="idea-stat"><strong>880+</strong> Campaigns</div>
+          </div>
+        </div>
+      </div>
+      <div class="idea-card">
+        <div class="idea-thumb">
+          <div class="idea-thumb-bg" style="background: linear-gradient(135deg, #2c3e50, #1e3a5f)">
+            <div class="idea-thumb-emoji">🏢</div>
+            <div class="idea-thumb-label">Corporate</div>
+          </div>
+        </div>
+        <div class="idea-body">
+          <span class="idea-tag" style="background:rgba(74,144,217,0.12);color:#4a90d9">Team Builder</span>
+          <h4>Workplace Campaign</h4>
+          <p>Engage your colleagues with a company-wide giving campaign. Many employers match donations — doubling your impact automatically.</p>
+          <div class="idea-stats">
+            <div class="idea-stat"><strong>$8,400</strong> Avg raised</div>
+            <div class="idea-stat"><strong>420+</strong> Campaigns</div>
+          </div>
+        </div>
+      </div>
+      <div class="idea-card">
+        <div class="idea-thumb">
+          <div class="idea-thumb-bg" style="background: linear-gradient(135deg, #0d2a48, #005c3a)">
+            <div class="idea-thumb-emoji">🎓</div>
+            <div class="idea-thumb-label">School</div>
+          </div>
+        </div>
+        <div class="idea-body">
+          <span class="idea-tag" style="background:rgba(0,168,107,0.1);color:var(--green)">Community</span>
+          <h4>School or Class Drive</h4>
+          <p>Organize a school-wide fundraiser or a classroom competition. Students learn the value of giving while building a real-world campaign.</p>
+          <div class="idea-stats">
+            <div class="idea-stat"><strong>$2,600</strong> Avg raised</div>
+            <div class="idea-stat"><strong>310+</strong> Campaigns</div>
+          </div>
+        </div>
+      </div>
+      <div class="idea-card">
+        <div class="idea-thumb">
+          <div class="idea-thumb-bg" style="background: linear-gradient(135deg, #4a0d0d, #8b2020)">
+            <div class="idea-thumb-emoji">🎪</div>
+            <div class="idea-thumb-label">Event</div>
+          </div>
+        </div>
+        <div class="idea-body">
+          <span class="idea-tag" style="background:rgba(224,92,92,0.1);color:var(--red)">High Value</span>
+          <h4>Charity Event</h4>
+          <p>Host a dinner, auction, concert, or quiz night and direct ticket proceeds and donations to your Volk campaign. Our team helps you set it up.</p>
+          <div class="idea-stats">
+            <div class="idea-stat"><strong>$12,000</strong> Avg raised</div>
+            <div class="idea-stat"><strong>180+</strong> Campaigns</div>
+          </div>
+        </div>
+      </div>
+      <div class="idea-card">
+        <div class="idea-thumb">
+          <div class="idea-thumb-bg" style="background: linear-gradient(135deg, #1a3a1a, #2d7a2d)">
+            <div class="idea-thumb-emoji">✨</div>
+            <div class="idea-thumb-label">Memorial</div>
+          </div>
+        </div>
+        <div class="idea-body">
+          <span class="idea-tag" style="background:rgba(45,122,45,0.1);color:#2d7a2d">Tribute</span>
+          <h4>Memorial or Tribute</h4>
+          <p>Honor a loved one by creating a campaign in their memory. Give friends and family a meaningful way to celebrate a life and create lasting change.</p>
+          <div class="idea-stats">
+            <div class="idea-stat"><strong>$4,800</strong> Avg raised</div>
+            <div class="idea-stat"><strong>240+</strong> Campaigns</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERBOARD -->
+<section class="leaderboard-section">
+  <div class="leaderboard-inner">
+    <div class="section-eyebrow">Community Leaders</div>
+    <h2 class="section-title">Our Top <em>Fundraisers</em></h2>
+    <p class="section-desc">These incredible community members are leading the charge this month. Join them and make your mark.</p>
+    <div class="leaderboard-grid">
+      <div class="leaderboard-card">
+        <div class="lb-header">
+          <h4>🏆 Top Campaigns — February 2026</h4>
+          <span class="lb-period">This Month</span>
+        </div>
+        <div class="lb-list">
+          <div class="lb-item">
+            <div class="lb-rank gold">1</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#c9a84c,#9a6e1e)">A</div>
+            <div class="lb-info">
+              <div class="lb-name">Amelia Thornton</div>
+              <div class="lb-campaign">London Marathon for Uganda Schools</div>
+            </div>
+            <div class="lb-amount">$14,280</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank silver">2</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#1e3a5f,#2d6aad)">J</div>
+            <div class="lb-info">
+              <div class="lb-name">James Osei</div>
+              <div class="lb-campaign">Accra Tech Company Drive</div>
+            </div>
+            <div class="lb-amount">$11,640</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank bronze">3</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#2c3e50,#00a86b)">M</div>
+            <div class="lb-info">
+              <div class="lb-name">Maria Santos</div>
+              <div class="lb-campaign">São Paulo Birthday Campaign</div>
+            </div>
+            <div class="lb-amount">$8,920</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank">4</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#5f1e3a,#a83060)">P</div>
+            <div class="lb-info">
+              <div class="lb-name">Priya Nair</div>
+              <div class="lb-campaign">Mumbai Diwali Fundraiser</div>
+            </div>
+            <div class="lb-amount">$6,340</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank">5</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#1a4a1a,#2d7a2d)">T</div>
+            <div class="lb-info">
+              <div class="lb-name">Tom Eriksson</div>
+              <div class="lb-campaign">Stockholm Office Challenge</div>
+            </div>
+            <div class="lb-amount">$5,810</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="leaderboard-card">
+        <div class="lb-header">
+          <h4>⚡ Rising Fast — New Campaigns</h4>
+          <span class="lb-period">Last 7 Days</span>
+        </div>
+        <div class="lb-list">
+          <div class="lb-item">
+            <div class="lb-rank gold">1</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#00a86b,#007a4d)">S</div>
+            <div class="lb-info">
+              <div class="lb-name">Sarah Okonkwo</div>
+              <div class="lb-campaign">Birthday for Kenya Schools</div>
+            </div>
+            <div class="lb-amount">$3,412</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank silver">2</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#c9a84c,#9a6e1e)">D</div>
+            <div class="lb-info">
+              <div class="lb-name">David Kim</div>
+              <div class="lb-campaign">Seoul Half Marathon 2026</div>
+            </div>
+            <div class="lb-amount">$2,880</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank bronze">3</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#1e3a5f,#4a90d9)">F</div>
+            <div class="lb-info">
+              <div class="lb-name">Fatima Al-Hassan</div>
+              <div class="lb-campaign">Ramadan Giving Campaign</div>
+            </div>
+            <div class="lb-amount">$2,640</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank">4</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#2c3e50,#5f8a2c)">R</div>
+            <div class="lb-info">
+              <div class="lb-name">Raj Patel</div>
+              <div class="lb-campaign">Chicago Cycle for Cambodia</div>
+            </div>
+            <div class="lb-amount">$1,920</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank">5</div>
+            <div class="lb-avatar" style="background:linear-gradient(135deg,#3a1e5f,#6a2da8)">L</div>
+            <div class="lb-info">
+              <div class="lb-name">Lena Müller</div>
+              <div class="lb-campaign">Berlin Class Charity Drive</div>
+            </div>
+            <div class="lb-amount">$1,740</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- START A FUNDRAISER FORM -->
+<section class="start-section" id="start">
+  <div class="start-inner">
+    <div class="section-eyebrow">Get Started</div>
+    <h2 class="section-title">Launch Your<br><em>Campaign Today</em></h2>
+    <p class="section-desc">It takes less than 5 minutes. Your campaign page goes live instantly.</p>
+
+    <div class="start-card">
+      <div class="start-card-header">
+        <h3>Create Your Fundraiser</h3>
+        <p>Free to start. No platform fees. 100% of donations reach children in need.</p>
+      </div>
+      <div class="start-card-body" id="formBody">
+        <form id="fundraiseForm">
+          <!-- Campaign type -->
+          <div class="form-group">
+            <label>Campaign Type</label>
+            <div class="fundraise-type-grid">
+              <input type="radio" name="type" id="type-birthday" value="birthday" class="type-option" checked>
+              <label for="type-birthday" class="type-label">
+                <span class="type-label-icon">🎂</span>
+                <span class="type-label-text">Birthday</span>
+              </label>
+              <input type="radio" name="type" id="type-fitness" value="fitness" class="type-option">
+              <label for="type-fitness" class="type-label">
+                <span class="type-label-icon">🏃</span>
+                <span class="type-label-text">Fitness</span>
+              </label>
+              <input type="radio" name="type" id="type-workplace" value="workplace" class="type-option">
+              <label for="type-workplace" class="type-label">
+                <span class="type-label-icon">🏢</span>
+                <span class="type-label-text">Workplace</span>
+              </label>
+              <input type="radio" name="type" id="type-school" value="school" class="type-option">
+              <label for="type-school" class="type-label">
+                <span class="type-label-icon">🎓</span>
+                <span class="type-label-text">School</span>
+              </label>
+              <input type="radio" name="type" id="type-event" value="event" class="type-option">
+              <label for="type-event" class="type-label">
+                <span class="type-label-icon">🎪</span>
+                <span class="type-label-text">Event</span>
+              </label>
+              <input type="radio" name="type" id="type-other" value="other" class="type-option">
+              <label for="type-other" class="type-label">
+                <span class="type-label-icon">✨</span>
+                <span class="type-label-text">Other</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Name & Email -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Jane" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Doe" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="jane.doe@example.com" required>
+          </div>
+
+          <!-- Campaign name -->
+          <div class="form-group">
+            <label>Campaign Name</label>
+            <input type="text" placeholder="e.g. Jane's Birthday Fundraiser for Uganda Schools" required>
+          </div>
+
+          <!-- Goal -->
+          <div class="form-group">
+            <label>Fundraising Goal</label>
+            <div class="goal-input-wrap">
+              <span class="goal-prefix">$</span>
+              <input type="number" id="goalInput" placeholder="5,000" min="100" required>
+            </div>
+            <div class="goal-presets">
+              <button type="button" class="goal-preset" onclick="setGoal(500)">$500</button>
+              <button type="button" class="goal-preset" onclick="setGoal(1000)">$1,000</button>
+              <button type="button" class="goal-preset active" onclick="setGoal(5000)">$5,000</button>
+              <button type="button" class="goal-preset" onclick="setGoal(10000)">$10,000</button>
+              <button type="button" class="goal-preset" onclick="setGoal(25000)">$25,000</button>
+            </div>
+          </div>
+
+          <!-- Program area -->
+          <div class="form-group">
+            <label>Direct Funds To</label>
+            <select>
+              <option value="">Where it's needed most (recommended)</option>
+              <option>Education Access — School Building &amp; Scholarships</option>
+              <option>Child Welfare — Shelter &amp; Nutrition</option>
+              <option>Healthcare — Clinics &amp; Medical Supplies</option>
+              <option>Digital Learning — Tablets &amp; Internet Access</option>
+              <option>Emergency Response — Crisis Relief</option>
+            </select>
+          </div>
+
+          <!-- Deadline -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label>Campaign End Date</label>
+              <input type="date" id="endDate" required>
+            </div>
+            <div class="form-group">
+              <label>Country / Region</label>
+              <select>
+                <option>United States</option>
+                <option>United Kingdom</option>
+                <option>Canada</option>
+                <option>Australia</option>
+                <option>Germany</option>
+                <option>Kenya</option>
+                <option>Nigeria</option>
+                <option>Uganda</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Story -->
+          <div class="form-group">
+            <label>Your Campaign Story</label>
+            <textarea rows="5" placeholder="Tell people why you're fundraising for Volk Donations. What inspired you? What do you hope to achieve? A personal story is the #1 driver of donations." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            Launch My Campaign
+          </button>
+          <p class="form-note">By starting a campaign you agree to our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>. All funds are processed securely by Stripe.</p>
+        </form>
+      </div>
+      <div class="success-state" id="successState">
+        <div class="success-icon">🎉</div>
+        <h3>Your Campaign is Live!</h3>
+        <p>We've sent your campaign link to your email. Share it with your network and start collecting donations immediately.</p>
+        <a href="#" class="success-link">View Your Campaign Page →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+    <div class="section-eyebrow">Fundraiser Stories</div>
+    <h2 class="section-title">Hear From Our<br><em>Community</em></h2>
+    <p class="section-desc">Real people, real campaigns, real impact. Here's what our fundraisers have to say.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">I asked my network to skip buying me a birthday gift and donate instead. I honestly didn't expect much — but within 48 hours I'd raised more than $2,000. The Volk team sent me a report showing exactly how many children my fundraiser fed. I cried.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#c9a84c,#9a6e1e)">A</div>
+          <div>
+            <div class="testimonial-name">Amelia Thornton</div>
+            <div class="testimonial-role">Teacher · London, UK</div>
+          </div>
+        </div>
+        <div class="testimonial-raised">Total raised: <strong>$14,280</strong></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">We ran a company-wide campaign for two weeks. Our CEO matched all donations, so every dollar was doubled. The real-time dashboard meant our team could see progress and compete with each other. Incredible engagement — and $11,000 raised for Cambodian schools.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#1e3a5f,#00a86b)">J</div>
+          <div>
+            <div class="testimonial-name">James Osei</div>
+            <div class="testimonial-role">HR Director · Accra, Ghana</div>
+          </div>
+        </div>
+        <div class="testimonial-raised">Total raised: <strong>$11,640</strong></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">I cycled 400km over ten days and got friends to sponsor me per kilometre. The Volk page made it so easy — I shared updates, my donors got automatic receipts, and I could see my total climbing in real time. Best thing I've ever done.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#00a86b,#1e3a5f)">R</div>
+          <div>
+            <div class="testimonial-name">Raj Patel</div>
+            <div class="testimonial-role">Software Engineer · Chicago, USA</div>
+          </div>
+        </div>
+        <div class="testimonial-raised">Total raised: <strong>$8,920</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-eyebrow">Questions</div>
+    <h2 class="section-title">Frequently Asked<br><em>Questions</em></h2>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Is it free to start a fundraiser?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Yes, completely free. Volk Donations covers all platform fees and payment processing costs. 100% of money donated through your campaign reaches our programs. You will never be charged to create or run a campaign.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How do I receive the funds I raise?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">You don't receive the funds directly — all donations go straight to Volk Donations on your behalf. This is what allows donors to receive a tax-deductible receipt. At the close of your campaign, we send you and all your donors a full impact report showing exactly how the funds were used.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Are donations tax-deductible?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Yes. Volk Donations is a registered 501(c)(3) nonprofit (EIN: 45-1234567). All donations made through our platform — including through your fundraiser — are fully tax-deductible for US donors. We automatically issue official tax receipts to every donor on your behalf. International donors should consult local tax law.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Can I choose which program my fundraiser supports?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Yes. When setting up your campaign, you can direct funds to a specific program area — Education Access, Child Welfare, Healthcare, Digital Learning, or Emergency Response. You can also leave it as "Where it's needed most" and our team will allocate funds to the highest-priority programs at the time your campaign closes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How long can my campaign run?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Campaigns can run for any duration between 1 day and 90 days. Research shows that campaigns between 2–4 weeks perform best — long enough to build momentum, short enough to maintain urgency. Our team will advise on the best duration for your campaign type when you get in touch.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What support does Volk Donations provide?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Every fundraiser gets access to a personal campaign page, shareable graphics and email templates, a real-time donation dashboard, donor thank-you tools, and our fundraiser support team via email and phone. For campaigns over $5,000, you'll be assigned a dedicated fundraising advisor who will help you strategize and maximize your impact.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What happens if I don't reach my goal?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Every dollar counts regardless of whether you hit your goal. All funds raised — even if you fall short — are sent in full to your chosen program. Goals exist to motivate donors and create urgency; they are not a threshold you must hit for the money to matter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Ready to Make a <em>Difference?</em></h2>
+  <p>Join 8,400+ fundraisers who have turned their passion into real, lasting change for children worldwide.</p>
+  <div class="hero-actions" style="justify-content:center; margin-top:36px">
+    <a href="#start" class="btn-primary">
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+      Start Your Fundraiser — Free
+    </a>
+    <a href="/contact" class="btn-outline-white">Talk to Our Team</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-about">
+      <div class="footer-logo-row">
+        <img src="/images/logo.png" alt="Volk Donations">
+        <span class="footer-brand-name">Volk Donations</span>
+      </div>
+      <p>A registered 501(c)(3) nonprofit committed to improving the lives of orphaned children worldwide through education, healthcare, and community support.</p>
+    </div>
+    <div>
+      <h6>Organization</h6>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/partners">Partners</a></li>
+        <li><a href="/reports">Annual Reports</a></li>
+        <li><a href="/team">Our Team</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Get Involved</h6>
+      <ul>
+        <li><a href="/donate">Donate</a></li>
+        <li><a href="/fundraise">Fundraise</a></li>
+        <li><a href="/volunteer">Volunteer</a></li>
+        <li><a href="/events">Events</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Resources</h6>
+      <ul>
+        <li><a href="/press">Press Kit</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations, Inc. All rights reserved. EIN: 45-1234567</p>
+    <p>A registered 501(c)(3) nonprofit organization · Denver, Colorado, USA</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const btn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('mainNav');
+  btn.addEventListener('click', () => { btn.classList.toggle('active'); nav.classList.toggle('active'); });
+  document.addEventListener('click', e => {
+    if (!nav.contains(e.target) && !btn.contains(e.target) && nav.classList.contains('active')) {
+      btn.classList.remove('active'); nav.classList.remove('active');
+    }
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 768) { btn.classList.remove('active'); nav.classList.remove('active'); } });
+
+  // Set minimum date for end date field
+  const endDateInput = document.getElementById('endDate');
+  if (endDateInput) {
+    const minDate = new Date();
+    minDate.setDate(minDate.getDate() + 1);
+    endDateInput.min = minDate.toISOString().split('T')[0];
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 90);
+    endDateInput.max = maxDate.toISOString().split('T')[0];
+    const defaultDate = new Date();
+    defaultDate.setDate(defaultDate.getDate() + 21);
+    endDateInput.value = defaultDate.toISOString().split('T')[0];
+  }
+
+  // Goal presets
+  function setGoal(amount) {
+    document.getElementById('goalInput').value = amount;
+    document.querySelectorAll('.goal-preset').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+  document.getElementById('goalInput')?.addEventListener('input', () => {
+    document.querySelectorAll('.goal-preset').forEach(b => b.classList.remove('active'));
+  });
+
+  // FAQ toggle
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Form submit
+  document.getElementById('fundraiseForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('formBody').style.display = 'none';
+    document.getElementById('successState').classList.add('show');
+    // scroll to success
+    document.getElementById('start').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Animate bars on scroll (leaderboard)
+  const lbBars = document.querySelectorAll('.lb-bar-fill');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.transition = 'width 1s ease'; } });
+  }, { threshold: 0.3 });
+  lbBars.forEach(b => observer.observe(b));
+</script>
+</body>
+</html>

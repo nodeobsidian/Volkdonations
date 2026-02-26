@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Success Stories | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Real stories of real change — discover how Volk Donations has transformed the lives of orphaned children across 38 countries." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#1e3a5f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #1a3254;
+      --navy-deep: #111f35;
+      --navy-mid: #243d62;
+      --navy-light: #2e5080;
+      --green: #00a86b;
+      --green-dark: #008f5a;
+      --green-light: #00c47d;
+      --green-muted: rgba(0,168,107,.13);
+      --gold: #f0a500;
+      --gold-light: #fbbf24;
+      --gold-muted: rgba(240,165,0,.13);
+      --white: #fff;
+      --canvas: #f2f6fb;
+      --surface: #fff;
+      --text: #1a2636;
+      --text-2: #4a5568;
+      --text-3: #8899aa;
+      --border: #e2eaf4;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --r: 12px;
+      --r-lg: 18px;
+      --sh: 0 4px 24px rgba(26,50,84,.09);
+      --sh-lg: 0 16px 56px rgba(26,50,84,.14);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; transition: all .25s ease; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── HEADER ─── */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(26,50,84,.07);
+      padding: 0 5%;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-container { display: flex; align-items: center; gap: 11px; }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--green), #00e08f);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 17px; font-weight: 700; color: #fff;
+    }
+    .logo-text h1 { font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+    .logo-text span { font-size: 11px; color: var(--green); font-weight: 500; letter-spacing: .4px; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { font-weight: 500; color: var(--text-2); font-size: 14px; position: relative; }
+    nav a:hover { color: var(--green); }
+    nav a.active { color: var(--navy); font-weight: 700; }
+    nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--green); border-radius: 2px; }
+    .nav-cta {
+      padding: 9px 20px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: #fff !important;
+      border-radius: 50px;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 14px rgba(0,168,107,.28);
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,168,107,.38); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2.5px; background: var(--navy); border-radius: 2px; transition: all .3s; }
+    .mobile-nav {
+      display: none; position: fixed; top: 70px; left: 0; right: 0;
+      background: #fff; padding: 20px 5%; border-top: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(26,50,84,.1); z-index: 999;
+      flex-direction: column; gap: 16px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 15px; font-weight: 500; color: var(--text-2); padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(150deg, var(--navy-deep) 0%, #0b3d28 60%, #00733d 100%);
+      padding: 90px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-blob {
+      position: absolute; top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,168,107,.22) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-blob2 {
+      position: absolute; bottom: -80px; left: -80px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(59,130,246,.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(0,168,107,.18); border: 1px solid rgba(0,168,107,.3);
+      border-radius: 50px; padding: 5px 14px;
+      font-size: 11px; font-weight: 700; color: #4fffb0;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero-eyebrow::before { content: '●'; font-size: 7px; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(36px, 6vw, 62px);
+      font-weight: 700; color: #fff;
+      line-height: 1.15; margin-bottom: 18px;
+      max-width: 820px;
+    }
+    .hero h2 em { font-style: italic; color: #4fffb0; }
+    .hero p {
+      font-size: clamp(15px, 2.2vw, 18px);
+      color: rgba(255,255,255,.68); max-width: 620px;
+      margin: 0 auto 36px; line-height: 1.75;
+    }
+    .hero-stats {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-top: 10px;
+    }
+    .hstat {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--r); padding: 16px 26px;
+      text-align: center; backdrop-filter: blur(8px);
+      min-width: 120px;
+    }
+    .hstat-val {
+      font-family: 'Fraunces', serif;
+      font-size: 28px; font-weight: 600;
+      color: #4fffb0; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hstat-lbl { font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .4px; }
+
+    /* ─── FILTERS ─── */
+    .filter-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 70px; z-index: 100;
+      box-shadow: 0 2px 8px rgba(26,50,84,.06);
+    }
+    .filter-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 14px 5%;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      flex-wrap: wrap;
+    }
+    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ftab {
+      padding: 7px 16px;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 12.5px; font-weight: 600;
+      color: var(--text-2); cursor: pointer;
+      transition: all .2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      white-space: nowrap;
+    }
+    .ftab:hover { border-color: var(--green); color: var(--green); }
+    .ftab.active { background: var(--green); border-color: var(--green); color: #fff; }
+    .result-count { font-size: 12px; color: var(--text-3); white-space: nowrap; flex-shrink: 0; }
+    .result-count strong { color: var(--navy); font-weight: 700; }
+
+    /* ─── FEATURED STORY ─── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 60px 5%; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--green); margin-bottom: 14px;
+    }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--green); border-radius: 2px; }
+
+    .featured {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
+      border-radius: var(--r-lg); overflow: hidden;
+      box-shadow: var(--sh-lg); margin-bottom: 60px;
+      background: var(--navy-deep);
+    }
+    .feat-img { position: relative; min-height: 480px; overflow: hidden; }
+    .feat-img img { width: 100%; height: 100%; object-fit: cover; opacity: .88; }
+    .feat-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 60%, var(--navy-deep) 100%);
+    }
+    .feat-badge {
+      position: absolute; top: 20px; left: 20px; z-index: 2;
+      background: var(--gold); color: #fff;
+      padding: 5px 13px; border-radius: 50px;
+      font-size: 10.5px; font-weight: 800; letter-spacing: .8px;
+      text-transform: uppercase;
+      box-shadow: 0 3px 12px rgba(240,165,0,.4);
+    }
+    .feat-content {
+      padding: 48px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .feat-cat {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--green); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .feat-cat::before { content: ''; width: 18px; height: 2px; background: var(--green); }
+    .feat-content h3 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(24px, 3.2vw, 34px);
+      font-weight: 600; color: #fff;
+      line-height: 1.25; margin-bottom: 16px;
+    }
+    .feat-content h3 em { font-style: italic; color: #4fffb0; }
+    .feat-content p {
+      font-size: 14.5px; color: rgba(255,255,255,.65);
+      line-height: 1.8; margin-bottom: 24px;
+    }
+    .feat-quote {
+      border-left: 3px solid var(--green);
+      padding: 12px 18px;
+      background: rgba(0,168,107,.1);
+      border-radius: 0 var(--r) var(--r) 0;
+      margin-bottom: 24px;
+    }
+    .feat-quote p {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 15px; color: rgba(255,255,255,.82);
+      margin-bottom: 6px;
+    }
+    .feat-quote cite { font-size: 11px; color: rgba(255,255,255,.45); font-style: normal; }
+    .feat-meta {
+      display: flex; align-items: center; gap: 14px;
+      flex-wrap: wrap;
+    }
+    .feat-flag { font-size: 22px; }
+    .feat-loc { font-size: 12px; color: rgba(255,255,255,.5); }
+    .feat-loc strong { display: block; color: rgba(255,255,255,.8); font-size: 13px; }
+    .btn-read {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 22px;
+      background: var(--green);
+      border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 700; color: #fff;
+      cursor: pointer; transition: all .2s;
+      box-shadow: 0 4px 14px rgba(0,168,107,.35);
+      white-space: nowrap;
+    }
+    .btn-read:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(0,168,107,.45); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.75);
+      box-shadow: none;
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); box-shadow: none; }
+
+    /* ─── STORY GRID ─── */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 50px;
+    }
+    .story-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh);
+      transition: all .3s ease;
+      display: flex; flex-direction: column;
+    }
+    .story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(26,50,84,.15);
+      border-color: rgba(0,168,107,.2);
+    }
+    .sc-img {
+      position: relative; height: 210px; overflow: hidden;
+      background: var(--navy-mid);
+    }
+    .sc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .story-card:hover .sc-img img { transform: scale(1.06); }
+    .sc-cat {
+      position: absolute; top: 12px; left: 12px;
+      padding: 4px 11px; border-radius: 50px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px;
+      backdrop-filter: blur(6px);
+    }
+    .sc-cat.edu { background: rgba(59,130,246,.75); color: #fff; }
+    .sc-cat.med { background: rgba(239,68,68,.75); color: #fff; }
+    .sc-cat.water { background: rgba(14,165,233,.75); color: #fff; }
+    .sc-cat.nutrition { background: rgba(240,165,0,.75); color: #fff; }
+    .sc-cat.shelter { background: rgba(139,92,246,.75); color: #fff; }
+    .sc-country {
+      position: absolute; bottom: 12px; right: 12px;
+      background: rgba(17,31,53,.7);
+      backdrop-filter: blur(6px);
+      border-radius: 50px;
+      padding: 4px 10px;
+      font-size: 11px; color: #fff;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .sc-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .sc-body h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 17px; font-weight: 600;
+      color: var(--navy); line-height: 1.35;
+      margin-bottom: 9px;
+    }
+    .sc-body p { font-size: 13px; color: var(--text-2); line-height: 1.7; flex: 1; margin-bottom: 14px; }
+    .sc-quote {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-size: 13px;
+      color: var(--text-2);
+      border-left: 2px solid var(--green);
+      padding-left: 12px; margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .sc-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 13px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sc-person { display: flex; align-items: center; gap: 9px; }
+    .sc-av {
+      width: 34px; height: 34px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0;
+      background: var(--canvas);
+      border: 2px solid var(--border);
+    }
+    .sc-av img { width: 100%; height: 100%; object-fit: cover; }
+    .sc-av-fallback {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 13px; font-weight: 600; color: #fff;
+      flex-shrink: 0;
+    }
+    .sc-name { font-size: 12px; font-weight: 700; color: var(--navy); }
+    .sc-role { font-size: 10.5px; color: var(--text-3); }
+    .sc-date { font-size: 10.5px; color: var(--text-3); }
+
+    /* ─── VIDEO STORY CARD ─── */
+    .story-card.video .sc-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(17,31,53,.35);
+    }
+    .play-btn {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%) scale(1);
+      z-index: 2;
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,.92);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .25s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
+    .play-btn::after {
+      content: '';
+      width: 0; height: 0;
+      border-left: 16px solid var(--green);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      margin-left: 4px;
+    }
+    .story-card.video:hover .play-btn { transform: translate(-50%,-50%) scale(1.12); }
+
+    /* ─── IMPACT NUMBERS STRIP ─── */
+    .impact-strip {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, #0a3d28 100%);
+      padding: 56px 5%;
+      position: relative; overflow: hidden;
+    }
+    .impact-strip::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,168,107,.15), transparent 70%);
+      border-radius: 50%;
+    }
+    .is-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+      position: relative; z-index: 1;
+      text-align: center;
+    }
+    .is-item { padding: 20px 10px; }
+    .is-num {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600; color: #4fffb0;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .is-lbl { font-size: 12px; color: rgba(255,255,255,.52); max-width: 120px; margin: 0 auto; line-height: 1.5; }
+    .is-divider { width: 1px; background: rgba(255,255,255,.08); margin: 20px auto; }
+
+    /* ─── TESTIMONIAL CAROUSEL ─── */
+    .testimonials-section { background: var(--canvas); padding: 70px 5%; }
+    .testi-inner { max-width: 1200px; margin: 0 auto; }
+    .testi-header { text-align: center; margin-bottom: 40px; }
+    .testi-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 4vw, 38px); font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .testi-header p { font-size: 15px; color: var(--text-3); max-width: 500px; margin: 0 auto; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .tcard {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 26px;
+      box-shadow: var(--sh);
+      transition: all .3s;
+      position: relative;
+    }
+    .tcard:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); }
+    .tcard::before {
+      content: '\201C';
+      font-family: 'Fraunces', serif;
+      font-size: 80px; color: var(--green);
+      opacity: .15; position: absolute;
+      top: 8px; left: 18px; line-height: 1;
+    }
+    .tcard-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+    .tcard-stars span { color: var(--gold-light); font-size: 13px; }
+    .tcard blockquote {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-size: 14.5px;
+      color: var(--text); line-height: 1.75;
+      margin-bottom: 20px; position: relative; z-index: 1;
+    }
+    .tcard-person { display: flex; align-items: center; gap: 11px; }
+    .tav {
+      width: 42px; height: 42px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--border);
+    }
+    .tav img { width: 100%; height: 100%; object-fit: cover; }
+    .tav-fallback {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 15px;
+      font-weight: 600; color: #fff; flex-shrink: 0;
+    }
+    .tname { font-size: 13px; font-weight: 700; color: var(--navy); }
+    .trole { font-size: 11px; color: var(--text-3); }
+    .tcountry { margin-left: auto; font-size: 18px; }
+
+    /* ─── WIDE STORY (2-col text layout) ─── */
+    .wide-story {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden; box-shadow: var(--sh);
+      display: grid; grid-template-columns: 1fr 1fr;
+      margin-bottom: 22px;
+      transition: all .3s;
+    }
+    .wide-story:hover { box-shadow: var(--sh-lg); }
+    .ws-img { position: relative; min-height: 320px; }
+    .ws-img img { width: 100%; height: 100%; object-fit: cover; }
+    .ws-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(17,31,53,.4) 0%, transparent 60%);
+    }
+    .ws-body { padding: 36px; display: flex; flex-direction: column; justify-content: center; }
+    .ws-tag {
+      display: inline-block; margin-bottom: 14px;
+      padding: 4px 12px; border-radius: 50px;
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px;
+    }
+    .ws-tag.edu { background: var(--blue-muted, rgba(59,130,246,.1)); color: var(--blue); }
+    .ws-tag.med { background: rgba(239,68,68,.1); color: var(--red); }
+    .ws-tag.water { background: rgba(14,165,233,.1); color: #0ea5e9; }
+    .ws-tag.shelter { background: rgba(139,92,246,.1); color: #8b5cf6; }
+    .ws-tag.nutrition { background: var(--gold-muted); color: var(--gold); }
+    .ws-body h4 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(18px, 2.5vw, 22px); font-weight: 600;
+      color: var(--navy); line-height: 1.35; margin-bottom: 12px;
+    }
+    .ws-body p { font-size: 13.5px; color: var(--text-2); line-height: 1.75; margin-bottom: 16px; }
+    .ws-impact {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .wi { text-align: center; }
+    .wi-val { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--green); }
+    .wi-lbl { font-size: 10px; color: var(--text-3); }
+    .ws-person { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); }
+    .wsp-av {
+      width: 38px; height: 38px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0; border: 2px solid var(--border);
+    }
+    .wsp-av img { width: 100%; height: 100%; object-fit: cover; }
+    .wsp-av-fb {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600; color: #fff;
+    }
+    .wsp-name { font-size: 12.5px; font-weight: 700; color: var(--navy); }
+    .wsp-role { font-size: 10.5px; color: var(--text-3); }
+
+    /* ─── DONOR SPOTLIGHT ─── */
+    .donor-spotlight {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, #122a48 100%);
+      border-radius: var(--r-lg); padding: 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      align-items: center; margin-bottom: 22px;
+      box-shadow: var(--sh-lg); position: relative; overflow: hidden;
+    }
+    .donor-spotlight::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,168,107,.12), transparent 70%);
+      border-radius: 50%;
+    }
+    .ds-text { position: relative; z-index: 1; }
+    .ds-eyebrow {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--gold-light); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .ds-eyebrow::before { content: '★'; }
+    .ds-text h3 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(22px, 3vw, 30px); font-weight: 600;
+      color: #fff; line-height: 1.3; margin-bottom: 14px;
+    }
+    .ds-text p { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.8; margin-bottom: 20px; }
+    .ds-stats { display: flex; gap: 20px; flex-wrap: wrap; }
+    .dst { text-align: center; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r); padding: 14px 20px; }
+    .dst-v { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; color: #4fffb0; margin-bottom: 3px; }
+    .dst-l { font-size: 10px; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .5px; }
+    .ds-img { position: relative; z-index: 1; }
+    .ds-img img { width: 100%; height: 260px; object-fit: cover; border-radius: var(--r); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+    .ds-badge {
+      position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: #fff;
+      padding: 7px 18px; border-radius: 50px;
+      font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px;
+      white-space: nowrap; box-shadow: 0 4px 14px rgba(240,165,0,.4);
+    }
+
+    /* ─── COUNTRY BREAKDOWN ─── */
+    .countries-section { padding: 60px 5%; background: var(--canvas); }
+    .cs-inner { max-width: 1200px; margin: 0 auto; }
+    .country-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 30px; }
+    .cg-item {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--r); padding: 16px 12px;
+      text-align: center;
+      box-shadow: var(--sh);
+      transition: all .25s;
+      cursor: default;
+    }
+    .cg-item:hover { transform: translateY(-3px); border-color: var(--green); box-shadow: 0 8px 26px rgba(26,50,84,.12); }
+    .cg-flag { font-size: 28px; margin-bottom: 6px; }
+    .cg-name { font-size: 11.5px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .cg-count { font-size: 10px; color: var(--text-3); }
+    .cg-bar-wrap { height: 3px; background: var(--border); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+    .cg-bar { height: 100%; background: var(--green); border-radius: 3px; transition: width 1.2s ease; }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--navy-deep) 100%);
+      padding: 80px 5%; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-inner h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2;
+    }
+    .cta-inner p { font-size: 16px; color: rgba(255,255,255,.68); margin-bottom: 32px; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      padding: 14px 32px; background: #fff;
+      border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 700; color: var(--navy);
+      cursor: pointer; transition: all .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+    .btn-ghost-white {
+      padding: 14px 32px;
+      background: transparent; border: 2px solid rgba(255,255,255,.35);
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 700; color: #fff;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-ghost-white:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy-deep);
+      color: #fff;
+      padding: 60px 5% 28px;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 40px; margin-bottom: 44px;
+    }
+    .footer-about { padding-right: 20px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .fl-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--green), #00e08f); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 15px; color: #fff; font-weight: 700; }
+    .fl-txt { font-size: 16px; font-weight: 700; color: #fff; }
+    .footer-about p { color: rgba(255,255,255,.45); font-size: 13px; line-height: 1.75; margin-bottom: 16px; }
+    .social-row { display: flex; gap: 9px; }
+    .soc-ic { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.5); font-size: 13px; transition: all .2s; cursor: pointer; }
+    .soc-ic:hover { background: var(--green); border-color: var(--green); color: #fff; }
+    footer h5 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    footer a { display: block; color: rgba(255,255,255,.45); margin-bottom: 10px; font-size: 13px; transition: all .2s; }
+    footer a:hover { color: var(--green); padding-left: 4px; }
+    .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); max-width: 1200px; margin: 0 auto; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.3); margin: 4px 0; }
+
+    /* ─── MODAL ─── */
+    .story-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(17,31,53,.7);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .story-modal-overlay.open { display: flex; }
+    .story-modal {
+      background: #fff; border-radius: var(--r-lg);
+      box-shadow: var(--sh-lg);
+      max-width: 660px; width: 100%;
+      max-height: 88vh; overflow-y: auto;
+      animation: modalIn .3s cubic-bezier(.16,1,.3,1);
+    }
+    @keyframes modalIn { from { transform: scale(.94) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+    .sm-hero { position: relative; height: 280px; overflow: hidden; background: var(--navy-mid); }
+    .sm-hero img { width: 100%; height: 100%; object-fit: cover; }
+    .sm-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(transparent, rgba(17,31,53,.8)); }
+    .sm-close {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,.9);
+      border: none; cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); transition: all .2s;
+    }
+    .sm-close:hover { background: #fff; transform: scale(1.1); }
+    .sm-body { padding: 28px 32px 36px; }
+    .sm-tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 12px; }
+    .sm-body h3 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+    .sm-body p { font-size: 14px; color: var(--text-2); line-height: 1.8; margin-bottom: 14px; }
+    .sm-quote { border-left: 3px solid var(--green); padding: 12px 18px; background: var(--green-muted); border-radius: 0 var(--r) var(--r) 0; margin: 16px 0; }
+    .sm-quote p { font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; color: var(--navy); margin-bottom: 6px; }
+    .sm-quote cite { font-size: 11px; color: var(--text-3); font-style: normal; }
+    .sm-impact { display: flex; gap: 14px; flex-wrap: wrap; margin: 20px 0; padding: 18px; background: var(--canvas); border-radius: var(--r); }
+    .smi { text-align: center; flex: 1; min-width: 80px; }
+    .smi-val { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; color: var(--green); }
+    .smi-lbl { font-size: 10.5px; color: var(--text-3); }
+
+    /* ─── ANIMATIONS ─── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .stories-grid { grid-template-columns: repeat(2, 1fr); }
+      .testi-grid { grid-template-columns: repeat(2, 1fr); }
+      .is-inner { grid-template-columns: repeat(3, 1fr); }
+      .country-grid { grid-template-columns: repeat(4, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .featured { grid-template-columns: 1fr; }
+      .feat-img { min-height: 300px; }
+      .feat-img::after { background: linear-gradient(180deg, transparent 40%, var(--navy-deep) 100%); }
+      .feat-content { padding: 32px 28px; }
+      .wide-story { grid-template-columns: 1fr; }
+      .ws-img { min-height: 220px; }
+      .donor-spotlight { grid-template-columns: 1fr; }
+      .ds-img { display: none; }
+    }
+    @media (max-width: 700px) {
+      .stories-grid { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .is-inner { grid-template-columns: repeat(2, 1fr); }
+      .country-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero-stats .hstat { min-width: 100px; padding: 12px 16px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 60px 5%; }
+      .sm-body { padding: 20px 20px 28px; }
+    }
+    @media (max-width: 480px) {
+      .country-grid { grid-template-columns: repeat(2, 1fr); }
+      .is-inner { grid-template-columns: 1fr 1fr; }
+      .filter-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-container">
+    <div class="logo-mark">V</div>
+    <div class="logo-text">
+      <h1>Volk Donations</h1>
+      <span>A better life for everyone</span>
+    </div>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/stories" class="active">Stories</a>
+    <a href="/contact">Contact</a>
+    <a href="/donate" class="nav-cta">Give Now</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="/">Home</a>
+  <a href="/impact-calculator">Impact</a>
+  <a href="/donate">Donate</a>
+  <a href="/volunteer">Volunteer</a>
+  <a href="/stories">Stories</a>
+  <a href="/contact">Contact</a>
+  <a href="/donate" class="nav-cta" style="text-align:center;border-radius:50px;background:var(--green);color:#fff">Give Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Real Impact. Real Lives.</div>
+    <h2>Stories That Change<br><em>Everything</em></h2>
+    <p>Behind every donation is a child whose life was transformed. Explore the real stories of the children, families, and communities your generosity has reached across 38 countries.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val">2,400+</div><div class="hstat-lbl">Children Helped</div></div>
+      <div class="hstat"><div class="hstat-val">38</div><div class="hstat-lbl">Countries</div></div>
+      <div class="hstat"><div class="hstat-val">$4.2M</div><div class="hstat-lbl">Funds Raised</div></div>
+      <div class="hstat"><div class="hstat-val">14</div><div class="hstat-lbl">Active Programs</div></div>
+      <div class="hstat"><div class="hstat-val">96%</div><div class="hstat-lbl">Funds to Programs</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="filter-tabs">
+      <button class="ftab active" onclick="filterStories('all',this)">All Stories</button>
+      <button class="ftab" onclick="filterStories('education',this)">Education</button>
+      <button class="ftab" onclick="filterStories('medical',this)">Medical</button>
+      <button class="ftab" onclick="filterStories('water',this)">Clean Water</button>
+      <button class="ftab" onclick="filterStories('nutrition',this)">Nutrition</button>
+      <button class="ftab" onclick="filterStories('shelter',this)">Shelter</button>
+    </div>
+    <div class="result-count" id="resultCount">Showing <strong>18</strong> stories</div>
+  </div>
+</div>
+
+<!-- FEATURED STORY -->
+<div class="section" style="padding-bottom:10px">
+  <div class="section-label">Featured Story</div>
+  <div class="featured reveal">
+    <div class="feat-img">
+      <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&q=80&auto=format&fit=crop" alt="Amara in her classroom" loading="lazy">
+      <div class="feat-badge">🏆 Story of the Year 2025</div>
+    </div>
+    <div class="feat-content">
+      <div class="feat-cat">Education · Kenya</div>
+      <h3>From Roadside Selling to <em>University Scholar</em></h3>
+      <p>At age nine, Amara Wanjiku was selling groundnuts on a Nairobi roadside after losing both parents to illness. Today, at 17, she holds a full scholarship to Strathmore University — the first person in her village to attend university in over a decade.</p>
+      <div class="feat-quote">
+        <p>"I used to think school was for other people's children. Volk showed me that I was wrong. They didn't just pay fees — they gave me a future."</p>
+        <cite>— Amara Wanjiku, age 17, Nairobi, Kenya</cite>
+      </div>
+      <div class="feat-meta">
+        <span class="feat-flag">🇰🇪</span>
+        <div class="feat-loc"><strong>Nairobi, Kenya</strong>Kenya Education Fund · 2021–Present</div>
+        <div style="margin-left:auto;display:flex;gap:9px;flex-wrap:wrap">
+          <button class="btn-read" onclick="openModal('amara')">Read Full Story</button>
+          <button class="btn-read btn-outline" onclick="openModal('amara')">▶ Watch Video</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN STORY GRID -->
+<div class="section" style="padding-top:10px">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="section-label">All Stories</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(22px,3.5vw,30px);font-weight:700;color:var(--navy)">Lives Changed, Dreams Unlocked</h2>
+    </div>
+  </div>
+
+  <div class="stories-grid" id="storiesGrid">
+
+    <!-- Card 1 -->
+    <div class="story-card reveal" data-cat="education">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80&auto=format&fit=crop" alt="Kwame Asante" loading="lazy">
+        <span class="sc-cat edu">Education</span>
+        <div class="sc-country">🇬🇭 Ghana</div>
+      </div>
+      <div class="sc-body">
+        <h4>Kwame's First Day in a Classroom</h4>
+        <p>Kwame Asante, 11, had never set foot in a school before Volk's Ghana Education Initiative reached his remote farming community in the Northern Region. Within eight months he was reading full sentences.</p>
+        <div class="sc-quote">"He reads to us every evening now. The whole family gathers around to listen." — Kwame's grandmother, Abena</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">KA</div>
+            <div><div class="sc-name">Kwame Asante</div><div class="sc-role">Student, age 11 · Tamale, Ghana</div></div>
+          </div>
+          <div class="sc-date">Oct 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="story-card reveal video" data-cat="medical">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80&auto=format&fit=crop" alt="Medical care Cambodia" loading="lazy">
+        <span class="sc-cat med">Medical</span>
+        <div class="sc-country">🇰🇭 Cambodia</div>
+        <div class="play-btn"></div>
+      </div>
+      <div class="sc-body">
+        <h4>A Heart Surgery That Should Never Have Been Possible</h4>
+        <p>Sopheap Meas, 7, was born with a congenital heart defect in rural Kampong Cham. The Cambodia Medical Relief Fund covered her full surgical costs and six months of rehabilitation care.</p>
+        <div class="sc-quote">"She is running, laughing, going to school. I never dared imagine this." — Her mother, Chantha Meas</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#ef4444,#b91c1c)">SM</div>
+            <div><div class="sc-name">Sopheap Meas</div><div class="sc-role">Patient, age 7 · Kampong Cham, Cambodia</div></div>
+          </div>
+          <div class="sc-date">Sep 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="story-card reveal" data-cat="water">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80&auto=format&fit=crop" alt="Clean water Uganda" loading="lazy">
+        <span class="sc-cat water">Clean Water</span>
+        <div class="sc-country">🇺🇬 Uganda</div>
+      </div>
+      <div class="sc-body">
+        <h4>A Borehole That Saved a Village of 340</h4>
+        <p>For six years, the children of Kiryandongo walked 4.2 km each way to collect water from a contaminated riverbank. The new solar-powered borehole serves 340 people daily and has cut waterborne illness by 78%.</p>
+        <div class="sc-quote">"Girls are in school now. They don't spend mornings fetching water anymore." — Head Teacher, Kiryandongo Primary</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)">KV</div>
+            <div><div class="sc-name">Kiryandongo Village</div><div class="sc-role">340 residents · Northern Uganda</div></div>
+          </div>
+          <div class="sc-date">Nov 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="story-card reveal" data-cat="nutrition">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80&auto=format&fit=crop" alt="Nutrition program Brazil" loading="lazy">
+        <span class="sc-cat nutrition">Nutrition</span>
+        <div class="sc-country">🇧🇷 Brazil</div>
+      </div>
+      <div class="sc-body">
+        <h4>From Malnutrition to the Football Field</h4>
+        <p>Eight-year-old Lucas Ferreira da Silva arrived at the São Paulo feeding centre weighing just 16 kg — critically underweight. After 90 days on the nutrition programme, he had gained 8 kg and enrolled in school for the first time.</p>
+        <div class="sc-quote">"He wants to play football. The doctor says his growth will catch up. That is everything." — Lucas's aunt, Maria</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#f0a500,#b45309)">LS</div>
+            <div><div class="sc-name">Lucas Ferreira da Silva</div><div class="sc-role">Age 8 · São Paulo, Brazil</div></div>
+          </div>
+          <div class="sc-date">Aug 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="story-card reveal" data-cat="education">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop" alt="Education India" loading="lazy">
+        <span class="sc-cat edu">Education</span>
+        <div class="sc-country">🇮🇳 India</div>
+      </div>
+      <div class="sc-body">
+        <h4>Priya's Library That Became a Neighbourhood Hub</h4>
+        <p>With a $3,200 Volk education grant, 14-year-old Priya Sharma helped establish a community reading room in her Rajasthan village. It now serves 62 children weekly and hosts adult literacy classes twice a week.</p>
+        <div class="sc-quote">"Books are free here. I just wanted everyone to feel what I feel when I read." — Priya, age 14</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">PS</div>
+            <div><div class="sc-name">Priya Sharma</div><div class="sc-role">Student activist, age 14 · Jaipur, India</div></div>
+          </div>
+          <div class="sc-date">Jul 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="story-card reveal video" data-cat="shelter">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1570284613060-3b8d8c7f3def?w=600&q=80&auto=format&fit=crop" alt="Shelter Haiti" loading="lazy">
+        <span class="sc-cat shelter">Shelter</span>
+        <div class="sc-country">🇭🇹 Haiti</div>
+        <div class="play-btn"></div>
+      </div>
+      <div class="sc-body">
+        <h4>The Transitional Home That Held 14 Children</h4>
+        <p>After the 2024 Port-au-Prince flooding displaced over 4,000 families, Volk's emergency shelter programme provided 14 orphaned children with safe transitional housing, trauma counselling, and daily meals for 90 days.</p>
+        <div class="sc-quote">"They gave the children walls. Walls and warmth." — Farah Delice, social worker</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#6366f1,#4338ca)">HE</div>
+            <div><div class="sc-name">Haiti Emergency Response</div><div class="sc-role">14 children · Port-au-Prince</div></div>
+          </div>
+          <div class="sc-date">Jun 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="story-card reveal" data-cat="education">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80&auto=format&fit=crop" alt="Education Ethiopia" loading="lazy">
+        <span class="sc-cat edu">Education</span>
+        <div class="sc-country">🇪🇹 Ethiopia</div>
+      </div>
+      <div class="sc-body">
+        <h4>Tadesse Learns to Code at Age 13</h4>
+        <p>Born to a single mother in Addis Ababa's Bole district, Tadesse Girma had no prospects beyond irregular day work. Volk's tech literacy programme gave him a tablet, a mentor, and 18 months of free coding instruction.</p>
+        <div class="sc-quote">"I built an app that helps my mother track her savings. It's simple — but it's mine." — Tadesse, age 13</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#00a86b,#005f3c)">TG</div>
+            <div><div class="sc-name">Tadesse Girma</div><div class="sc-role">Student, age 13 · Addis Ababa, Ethiopia</div></div>
+          </div>
+          <div class="sc-date">May 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="story-card reveal" data-cat="medical">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1584467735871-8e4e4d3c2578?w=600&q=80&auto=format&fit=crop" alt="Medical Philippines" loading="lazy">
+        <span class="sc-cat med">Medical</span>
+        <div class="sc-country">🇵🇭 Philippines</div>
+      </div>
+      <div class="sc-body">
+        <h4>The Mobile Clinic That Reached the Unreachable</h4>
+        <p>Volk's Philippines Health Initiative funded a solar-powered mobile clinic that has conducted over 1,240 consultations across 9 remote islands in the Visayas, reaching children who had never seen a doctor.</p>
+        <div class="sc-quote">"Three children were diagnosed with correctable conditions that would have gone untreated forever." — Dr. Ana Reyes, Clinic Director</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#ef4444,#991b1b)">PH</div>
+            <div><div class="sc-name">Visayas Mobile Clinic</div><div class="sc-role">1,240 patients · Leyte, Philippines</div></div>
+          </div>
+          <div class="sc-date">Apr 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="story-card reveal" data-cat="nutrition">
+      <div class="sc-img">
+        <img src="https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=600&q=80&auto=format&fit=crop" alt="Nutrition Mozambique" loading="lazy">
+        <span class="sc-cat nutrition">Nutrition</span>
+        <div class="sc-country">🇲🇿 Mozambique</div>
+      </div>
+      <div class="sc-body">
+        <h4>School Feeding Programme Doubles Enrolment</h4>
+        <p>In Inhambane Province, attendance at three primary schools nearly doubled after Volk introduced a daily hot meal programme. Before the initiative, 43% of enrolled children skipped school to find food for their siblings.</p>
+        <div class="sc-quote">"Children learn better when they are not hungry. This is not a complicated idea, but it required someone to act." — Provincial Education Officer</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:linear-gradient(135deg,#f0a500,#92400e)">IP</div>
+            <div><div class="sc-name">Inhambane Programme</div><div class="sc-role">3 schools · 640 children · Mozambique</div></div>
+          </div>
+          <div class="sc-date">Mar 2025</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Load More -->
+  <div style="text-align:center;margin-top:30px">
+    <button class="btn-read" style="padding:13px 36px;font-size:14px" onclick="loadMore(this)">Load More Stories</button>
+  </div>
+</div>
+
+<!-- IMPACT NUMBERS STRIP -->
+<div class="impact-strip">
+  <div class="is-inner">
+    <div class="is-item reveal"><div class="is-num">4,160</div><div class="is-lbl">Meals Provided</div></div>
+    <div class="is-item reveal"><div class="is-num">312</div><div class="is-lbl">Medical Visits Funded</div></div>
+    <div class="is-item reveal"><div class="is-num">89</div><div class="is-lbl">School Kits Delivered</div></div>
+    <div class="is-item reveal"><div class="is-num">2,800L</div><div class="is-lbl">Clean Water Daily</div></div>
+    <div class="is-item reveal"><div class="is-num">$4.2M</div><div class="is-lbl">Total Raised Since 2010</div></div>
+  </div>
+</div>
+
+<!-- WIDE STORIES (Long-form feature cards) -->
+<div class="section">
+  <div class="section-label">In-Depth Features</div>
+  <h2 style="font-family:'Fraunces',serif;font-size:clamp(22px,3.5vw,30px);font-weight:700;color:var(--navy);margin-bottom:28px">The Longer Stories</h2>
+
+  <div class="wide-story reveal">
+    <div class="ws-img">
+      <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=700&q=80&auto=format&fit=crop" alt="Bangladesh story" loading="lazy">
+    </div>
+    <div class="ws-body">
+      <span class="ws-tag water">Clean Water</span>
+      <h4>How One Well Changed the Education of 200 Girls in Bangladesh</h4>
+      <p>In Sylhet Division, girls as young as 8 were missing school to fetch water. The installation of three Volk-funded tube wells in 2024 eliminated the daily 5-hour water run for over 200 families. Within one academic year, girls' enrolment at Char Mohanpur School jumped from 34% to 71%.</p>
+      <p>Local NGO partner RDRS Bangladesh documented the shift: attendance, exam scores, and even teacher motivation all improved measurably in the first six months.</p>
+      <div class="ws-impact">
+        <div class="wi"><div class="wi-val">+71%</div><div class="wi-lbl">Girls' Enrolment</div></div>
+        <div class="wi"><div class="wi-val">3</div><div class="wi-lbl">Wells Installed</div></div>
+        <div class="wi"><div class="wi-val">200+</div><div class="wi-lbl">Girls Reached</div></div>
+        <div class="wi"><div class="wi-val">$18,400</div><div class="wi-lbl">Total Cost</div></div>
+      </div>
+      <div class="ws-person">
+        <div class="wsp-av-fb" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)">RA</div>
+        <div><div class="wsp-name">Rahima Akter</div><div class="wsp-role">Programme Lead, RDRS Bangladesh · Sylhet, Bangladesh</div></div>
+        <button class="btn-read" style="margin-left:auto;padding:9px 20px;font-size:12.5px" onclick="openModal('bangladesh')">Read More</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide-story reveal" style="flex-direction:row-reverse">
+    <div class="ws-img">
+      <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=700&q=80&auto=format&fit=crop" alt="Nigeria education story" loading="lazy">
+    </div>
+    <div class="ws-body">
+      <span class="ws-tag edu">Education</span>
+      <h4>A Teacher Called Emeka, and the 48 Students Who Never Gave Up</h4>
+      <p>Emeka Obi hasn't missed a single day of school in six years — and neither have 47 of his 48 students. Teaching in a flood-prone area of Rivers State, Nigeria, Emeka used a Volk community education grant to rebuild his school's only classroom after the 2023 floods destroyed it in under 36 hours.</p>
+      <p>What makes the story extraordinary is not the building. It's that parents, students, and local businesses all contributed labour. Volk's $12,000 grant was the catalyst for a $31,000 community rebuild project.</p>
+      <div class="ws-impact">
+        <div class="wi"><div class="wi-val">48</div><div class="wi-lbl">Students</div></div>
+        <div class="wi"><div class="wi-val">$31K</div><div class="wi-lbl">Community Raised</div></div>
+        <div class="wi"><div class="wi-val">6 yrs</div><div class="wi-lbl">Perfect Attendance</div></div>
+        <div class="wi"><div class="wi-val">100%</div><div class="wi-lbl">Pass Rate 2025</div></div>
+      </div>
+      <div class="ws-person">
+        <div class="wsp-av-fb" style="background:linear-gradient(135deg,#00a86b,#005f3c)">EO</div>
+        <div><div class="wsp-name">Emeka Obi</div><div class="wsp-role">Primary School Teacher · Rivers State, Nigeria</div></div>
+        <button class="btn-read" style="margin-left:auto;padding:9px 20px;font-size:12.5px" onclick="openModal('nigeria')">Read More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DONOR SPOTLIGHT -->
+<div class="section" style="padding-top:0">
+  <div class="donor-spotlight reveal">
+    <div class="ds-text">
+      <div class="ds-eyebrow">Champion Donor Spotlight</div>
+      <h3>Margaret Okonkwo: The Donor Who Became a Champion</h3>
+      <p>Since 2022, Margaret has contributed over $14,800 across 12 countries — funding surgeries, school kits, and a community borehole. But she'll tell you the $100 she gave in her first month changed her just as much as it changed the children.</p>
+      <p style="font-size:13px;color:rgba(255,255,255,.45);margin-bottom:20px"><em>"I saw Amara's story. I thought, I can give one dinner out a month for this."</em></p>
+      <div class="ds-stats">
+        <div class="dst"><div class="dst-v">$14,820</div><div class="dst-l">Total Given</div></div>
+        <div class="dst"><div class="dst-v">218</div><div class="dst-l">Children Reached</div></div>
+        <div class="dst"><div class="dst-v">4 yrs</div><div class="dst-l">Member Since</div></div>
+      </div>
+    </div>
+    <div class="ds-img">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80&auto=format&fit=crop" alt="Margaret Okonkwo, Champion Donor" loading="lazy">
+      <div class="ds-badge">🏆 Champion Donor 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials-section">
+  <div class="testi-inner">
+    <div class="testi-header reveal">
+      <div class="section-label" style="justify-content:center">Voices</div>
+      <h2>What Families Are Saying</h2>
+      <p>Words from the people whose lives have been touched by your generosity.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard reveal">
+        <div class="tcard-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"Before Volk came to our village, I could not afford the $12 school fee. My son is now top of his class. I will never stop being grateful for that small beginning."</blockquote>
+        <div class="tcard-person">
+          <div class="tav-fallback" style="background:linear-gradient(135deg,#3b82f6,#1e40af)">JN</div>
+          <div><div class="tname">Joseph Nkemdirim</div><div class="trole">Father of 3 · Enugu, Nigeria</div></div>
+          <div class="tcountry">🇳🇬</div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"My daughter had a fever for eleven days. We had no money for the clinic. The Volk mobile health team arrived. They treated her for free. She is healthy now. God bless them."</blockquote>
+        <div class="tcard-person">
+          <div class="tav-fallback" style="background:linear-gradient(135deg,#8b5cf6,#5b21b6)">SS</div>
+          <div><div class="tname">Sunita Shrestha</div><div class="trole">Mother · Kathmandu, Nepal</div></div>
+          <div class="tcountry">🇳🇵</div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"I am 15 and I have won the regional science competition. Three years ago I didn't have a pencil. Volk gave me a school kit and a scholarship. I want to be an engineer."</blockquote>
+        <div class="tcard-person">
+          <div class="tav-fallback" style="background:linear-gradient(135deg,#00a86b,#064e3b)">AK</div>
+          <div><div class="tname">Amina Kamara</div><div class="trole">Student · Freetown, Sierra Leone</div></div>
+          <div class="tcountry">🇸🇱</div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"As a volunteer with Volk in the field, I have seen what targeted funding does. No waste. These resources go directly to children and families. Every single dollar is visible."</blockquote>
+        <div class="tcard-person">
+          <div class="tav-fallback" style="background:linear-gradient(135deg,#f0a500,#92400e)">DW</div>
+          <div><div class="tname">Dr. David Whitmore</div><div class="trole">Field Volunteer, Physician · London, UK</div></div>
+          <div class="tcountry">🇬🇧</div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"Our feeding programme went from 80 to 312 children in one school year because Volk doubled the funding mid-year when we showed the data. That trust and flexibility is rare in this sector."</blockquote>
+        <div class="tcard-person">
+          <div class="tav-fallback" style="background:linear-gradient(135deg,#ef4444,#7f1d1d)">GN</div>
+          <div><div class="tname">Grace Nyong'o</div><div class="trole">NGO Director · Mombasa, Kenya</div></div>
+          <div class="tcountry">🇰🇪</div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="tcard-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"My son is not just surviving. He is thriving. He has friends, he has teachers who believe in him, and he has a uniform he wears with pride. All of this started with Volk."</blockquote>
+        <div class="tcard-person">
+          <div class="tav-fallback" style="background:linear-gradient(135deg,#6366f1,#3730a3)">LB</div>
+          <div><div class="tname">Lina Bergström</div><div class="trole">Sponsor-parent · Stockholm (sponsoring Nairobi)</div></div>
+          <div class="tcountry">🇸🇪</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COUNTRIES BREAKDOWN -->
+<div class="countries-section">
+  <div class="cs-inner">
+    <div class="section-label">Global Reach</div>
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(22px,3.5vw,30px);font-weight:700;color:var(--navy)">38 Countries. One Mission.</h2>
+    <div class="country-grid" id="countryGrid">
+      <div class="cg-item"><div class="cg-flag">🇰🇪</div><div class="cg-name">Kenya</div><div class="cg-count">412 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="100"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇺🇬</div><div class="cg-name">Uganda</div><div class="cg-count">287 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="70"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇧🇩</div><div class="cg-name">Bangladesh</div><div class="cg-count">241 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="58"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇰🇭</div><div class="cg-name">Cambodia</div><div class="cg-count">198 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="48"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇳🇬</div><div class="cg-name">Nigeria</div><div class="cg-count">176 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="43"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇧🇷</div><div class="cg-name">Brazil</div><div class="cg-count">154 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="37"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇮🇳</div><div class="cg-name">India</div><div class="cg-count">143 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="35"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇪🇹</div><div class="cg-name">Ethiopia</div><div class="cg-count">121 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="29"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇵🇭</div><div class="cg-name">Philippines</div><div class="cg-count">98 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="24"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇲🇿</div><div class="cg-name">Mozambique</div><div class="cg-count">82 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="20"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇬🇭</div><div class="cg-name">Ghana</div><div class="cg-count">74 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="18"></div></div></div>
+      <div class="cg-item"><div class="cg-flag">🇭🇹</div><div class="cg-name">Haiti</div><div class="cg-count">48 children</div><div class="cg-bar-wrap"><div class="cg-bar" data-w="12"></div></div></div>
+    </div>
+    <p style="text-align:center;margin-top:20px;font-size:12.5px;color:var(--text-3)">Showing top 12 of 38 countries. <a href="/impact-calculator" style="color:var(--green);font-weight:600">View full impact map →</a></p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <h2>Your Story Starts Here</h2>
+    <p>Every one of these stories started with a single donation. The next chapter belongs to a child waiting for you. Join thousands of donors already changing lives.</p>
+    <div class="cta-buttons">
+      <button class="btn-white" onclick="window.location='/donate'">Make a Donation</button>
+      <button class="btn-ghost-white" onclick="window.location='/volunteer'">Volunteer With Us</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <div class="footer-logo">
+        <div class="fl-mark">V</div>
+        <span class="fl-txt">Volk Donations</span>
+      </div>
+      <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+      <div class="social-row">
+        <div class="soc-ic">f</div>
+        <div class="soc-ic">in</div>
+        <div class="soc-ic">𝕏</div>
+        <div class="soc-ic">▶</div>
+      </div>
+    </div>
+    <div>
+      <h5>Organization</h5>
+      <a href="/about">About Us</a>
+      <a href="/partners">Our Partners</a>
+      <a href="/branches">Branches</a>
+      <a href="/reports">Annual Reports</a>
+      <a href="/team">Our Team</a>
+    </div>
+    <div>
+      <h5>Get Involved</h5>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/fundraise">Fundraise</a>
+      <a href="/events">Events</a>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
+      <a href="/stories" style="color:var(--green)">Success Stories</a>
+      <a href="/press">Press Kit</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/financial">Financial Info</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations. All rights reserved.</p>
+    <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+    <p>EIN: 45-1234567 · Making a difference since 2010</p>
+  </div>
+</footer>
+
+<!-- STORY MODAL -->
+<div class="story-modal-overlay" id="storyModal">
+  <div class="story-modal" id="storyModalContent">
+    <!-- Injected dynamically -->
+  </div>
+</div>
+
+<script>
+// ─── HAMBURGER ───
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  mobileNav.classList.toggle('open');
+});
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+    mobileNav.classList.remove('open');
+  }
+});
+
+// ─── SCROLL REVEAL ───
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), 60 * (Array.from(revealEls).indexOf(entry.target) % 4));
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+// ─── CAMPAIGN BAR ANIMATION ───
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.cg-bar[data-w]').forEach(b => {
+        b.style.width = b.getAttribute('data-w') + '%';
+      });
+      barObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+const cg = document.getElementById('countryGrid');
+if (cg) barObs.observe(cg);
+
+// ─── FILTER ───
+window.filterStories = function(cat, btn) {
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.story-card[data-cat]');
+  let visible = 0;
+  cards.forEach(c => {
+    if (cat === 'all' || c.getAttribute('data-cat') === cat) {
+      c.style.display = ''; visible++;
+    } else {
+      c.style.display = 'none';
+    }
+  });
+  document.getElementById('resultCount').innerHTML = `Showing <strong>${visible}</strong> stories`;
+};
+
+// ─── LOAD MORE ───
+const extraStories = [
+  { cat: 'shelter', flag: '🇵🇰', country: 'Pakistan', title: 'Earthquake Aftermath: A New Home for 6 Siblings', body: 'After the 2024 Khyber earthquake, six orphaned siblings aged 4–14 were placed in Volk\'s transitional home in Peshawar. Within four months, all six were enrolled in school and receiving psychological support.', quote: '"They came to us with nothing but each other. That bond was their strength." — Shelter Manager Fatima Malik', color: 'linear-gradient(135deg,#8b5cf6,#5b21b6)', init: 'PS', role: '6 siblings · Peshawar, Pakistan', date: 'Feb 2025' },
+  { cat: 'education', flag: '🇸🇱', country: 'Sierra Leone', title: 'Amina Wins the Regional Science Prize', body: 'Three years ago Amina Kamara had no pencil. Today she is Sierra Leone\'s regional junior science champion, the holder of a Volk merit scholarship, and an aspiring chemical engineer.', quote: '"I want to make clean fuel from cassava. My teacher says it is possible." — Amina, age 15', color: 'linear-gradient(135deg,#00a86b,#064e3b)', init: 'AK', role: 'Student · Freetown, Sierra Leone', date: 'Jan 2025' },
+  { cat: 'water', flag: '🇳🇵', country: 'Nepal', title: 'Gravity-Fed Water System Reaches 5 Mountain Villages', body: 'High in the Solukhumbu district, five villages relied on glacial melt collected in open containers. Volk\'s $28,000 gravity-fed piped system now delivers clean water to 1,100 people year-round, eliminating the seasonal drought gap entirely.', quote: '"Children used to get sick every monsoon season. Not anymore." — Village Health Post Worker', color: 'linear-gradient(135deg,#0ea5e9,#0c4a6e)', init: 'NW', role: '1,100 people · Solukhumbu, Nepal', date: 'Dec 2024' }
+];
+let moreLoaded = false;
+window.loadMore = function(btn) {
+  if (moreLoaded) { btn.textContent = 'All Stories Loaded'; btn.disabled = true; return; }
+  const grid = document.getElementById('storiesGrid');
+  extraStories.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'story-card reveal';
+    card.setAttribute('data-cat', s.cat);
+    card.style.animationDelay = (i * 0.1) + 's';
+    const catClass = { shelter: 'shelter', education: 'edu', water: 'water', nutrition: 'nutrition', medical: 'med' }[s.cat] || 'edu';
+    const catLabel = { shelter: 'Shelter', education: 'Education', water: 'Clean Water', nutrition: 'Nutrition', medical: 'Medical' }[s.cat];
+    card.innerHTML = `
+      <div class="sc-img" style="background:var(--navy-mid);display:flex;align-items:center;justify-content:center">
+        <div style="font-size:52px">${s.flag}</div>
+        <span class="sc-cat ${catClass}">${catLabel}</span>
+        <div class="sc-country">${s.flag} ${s.country}</div>
+      </div>
+      <div class="sc-body">
+        <h4>${s.title}</h4>
+        <p>${s.body}</p>
+        <div class="sc-quote">${s.quote}</div>
+        <div class="sc-footer">
+          <div class="sc-person">
+            <div class="sc-av-fallback" style="background:${s.color}">${s.init}</div>
+            <div><div class="sc-name">${s.role.split(' · ')[0]}</div><div class="sc-role">${s.role}</div></div>
+          </div>
+          <div class="sc-date">${s.date}</div>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+    setTimeout(() => {
+      io.observe(card);
+      card.classList.add('visible');
+    }, i * 120);
+  });
+  moreLoaded = true;
+  document.getElementById('resultCount').innerHTML = `Showing <strong>12</strong> stories`;
+  btn.textContent = 'All Stories Loaded ✓';
+  btn.disabled = true;
+  btn.style.opacity = '.5';
+  btn.style.cursor = 'not-allowed';
+};
+
+// ─── MODAL DATA ───
+const modalData = {
+  amara: {
+    imgSrc: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&q=80&auto=format&fit=crop',
+    cat: 'Education', catClass: 'edu', flag: '🇰🇪',
+    title: 'From Roadside Selling to University Scholar: Amara\'s Full Story',
+    paras: [
+      'Amara Wanjiku was nine years old when she lost her mother to tuberculosis, two months after losing her father to the same disease. With no surviving relatives in Nairobi\'s Kibera district willing to take her in, she began selling groundnuts near the City Park matatu terminus to feed herself and her younger brother Meshack.',
+      'A Volk field officer named Jane Muthoni encountered Amara during a community outreach day in March 2021. Jane\'s report described a child of "extraordinary alertness" who had taught herself to read from discarded newspapers found near the terminus. Within three weeks, Amara and Meshack were enrolled in the Kenya Education Fund sponsorship programme.',
+      'The first year was hard. Amara attended school wearing shoes two sizes too large, donated by another student. She refused to tell her teachers she was hungry. But her grades were extraordinary. By the end of Form One she was first in her class of 43.',
+      'In 2024, Amara sat the Kenya Certificate of Secondary Education and scored an A-minus, placing in the top 2.3% of all students nationally. She accepted a full scholarship to study Computer Science at Strathmore University, Nairobi — beginning in September 2025.'
+    ],
+    quote: '"I used to think school was for other people\'s children. Volk showed me I was wrong. They didn\'t just pay fees — they gave me a future."',
+    cite: '— Amara Wanjiku, age 17, Nairobi, Kenya',
+    impact: [{val:'$8,400', lbl:'Total Invested'},{val:'4 yrs', lbl:'Programme Duration'},{val:'Top 2.3%', lbl:'KCSE Score'},{val:'Full Scholarship', lbl:'University'}]
+  },
+  bangladesh: {
+    imgSrc: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=800&q=80&auto=format&fit=crop',
+    cat: 'Clean Water', catClass: 'water', flag: '🇧🇩',
+    title: 'How One Well Changed the Education of 200 Girls in Bangladesh',
+    paras: [
+      'Char Mohanpur is a char — a river island in the Surma floodplain of Sylhet Division. It floods twice a year and is reachable only by small boat for four months of the year. For the island\'s 1,200 residents, the nearest clean water source before 2024 was across two river channels on the mainland.',
+      'Girls aged 8–14 were the primary water-fetchers, leaving home by 5:30am and often missing the school\'s 9am start entirely. The head teacher at Char Mohanpur Government Primary School, Mohammed Aminul Islam, documented 12 years of near-zero girls\' attendance during the dry season.',
+      'In February 2024, Volk partnered with RDRS Bangladesh to install three deep tube wells equipped with hand pumps and fitted with biosand filtration units. Total project cost: $18,400. By September 2024 — one term later — girls\' enrolment had climbed from 34% to 71%.',
+      'The impact rippled further than anticipated. Mothers who had been accompanying daughters to collect water now had free mornings. Three have enrolled in RDRS adult literacy classes. Two are running small vegetable-selling operations with micro-loans from a partner NGO.'
+    ],
+    quote: '"This well did not just give water. It gave girls their mornings back. And their mornings were their futures."',
+    cite: '— Rahima Akter, Programme Lead, RDRS Bangladesh',
+    impact: [{val:'+71%', lbl:'Girls Enrolment'},{val:'3 Wells', lbl:'Installed'},{val:'200+', lbl:'Girls Reached'},{val:'$18,400', lbl:'Total Cost'}]
+  },
+  nigeria: {
+    imgSrc: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80&auto=format&fit=crop',
+    cat: 'Education', catClass: 'edu', flag: '🇳🇬',
+    title: 'A Teacher Called Emeka, and the 48 Students Who Never Gave Up',
+    paras: [
+      'Emeka Obi has been teaching at Rumuola Primary School in Rivers State for eleven years. He has never been paid on time. In 2018, 2020, and 2023, he was not paid at all for months on end. He has never missed a day.',
+      'When the 2023 floods destroyed his only classroom — 36 hours of water that took the roof, the walls, and all 48 sets of textbooks — Emeka did not close the school. He borrowed a church hall. He printed worksheets on his phone at a cybercafe and paid for them himself.',
+      'The Volk community education grant of $12,000 arrived six weeks after the flood. What happened next was not planned. Parents, grandparents, local tradesmen, and a Coca-Cola distributor from Port Harcourt heard about the school. Within four months, a $31,000 community rebuild project was complete.',
+      'The new classroom has a metal roof, raised concrete floor, and 48 new desks — one for every student, paid for individually by parents who pledged what they could. At the 2025 state primary examinations, all 48 of Emeka\'s students passed. He framed the results certificate and hung it on the classroom wall.'
+    ],
+    quote: '"When the walls fell, the school did not fall. The school is the children. The walls just needed to catch up."',
+    cite: '— Emeka Obi, Teacher, Rumuola Primary School',
+    impact: [{val:'48', lbl:'Students'},{val:'$31K', lbl:'Community Raised'},{val:'100%', lbl:'Pass Rate'},{val:'6 yrs', lbl:'Attendance Streak'}]
+  }
+};
+
+window.openModal = function(id) {
+  const d = modalData[id]; if (!d) return;
+  const catColors = { edu: 'rgba(59,130,246,.1)', water: 'rgba(14,165,233,.1)', med: 'rgba(239,68,68,.1)', shelter: 'rgba(139,92,246,.1)', nutrition: 'rgba(240,165,0,.1)' };
+  const catTextColors = { edu: '#3b82f6', water: '#0ea5e9', med: '#ef4444', shelter: '#8b5cf6', nutrition: '#f0a500' };
+  const content = document.getElementById('storyModalContent');
+  content.innerHTML = `
+    <div class="sm-hero">
+      <img src="${d.imgSrc}" alt="${d.title}" loading="lazy">
+      <button class="sm-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="sm-body">
+      <span class="sm-tag" style="background:${catColors[d.catClass]};color:${catTextColors[d.catClass]}">${d.flag} ${d.cat}</span>
+      <h3>${d.title}</h3>
+      ${d.paras.map(p => `<p>${p}</p>`).join('')}
+      <div class="sm-quote"><p>"${d.quote.replace(/^"|"$/g,'')}"</p><cite>${d.cite}</cite></div>
+      <div class="sm-impact">
+        ${d.impact.map(i => `<div class="smi"><div class="smi-val">${i.val}</div><div class="smi-lbl">${i.lbl}</div></div>`).join('')}
+      </div>
+      <button class="btn-read" style="width:100%;justify-content:center;padding:13px" onclick="window.location='/donate'">Support Children Like ${d.flag} This</button>
+    </div>`;
+  document.getElementById('storyModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+window.closeModal = function() {
+  document.getElementById('storyModal').classList.remove('open');
+  document.body.style.overflow = '';
+};
+document.getElementById('storyModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('storyModal')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FAQ | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Answers to the most common questions about donating, our programmes, financial transparency, tax receipts, and more — from Volk Donations." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#1a3254">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,600;9..144,0,700;9..144,0,900;9..144,1,400;9..144,1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:      #1a3254;
+      --navy-deep: #0f1f34;
+      --navy-mid:  #243d62;
+      --navy-lt:   #2e5080;
+      --green:     #00a86b;
+      --green-dk:  #008755;
+      --green-lt:  #00c47d;
+      --green-mu:  rgba(0,168,107,.11);
+      --gold:      #e8a020;
+      --gold-lt:   #f5bc4a;
+      --gold-mu:   rgba(232,160,32,.12);
+      --canvas:    #f1f5fb;
+      --surface:   #ffffff;
+      --text:      #18263a;
+      --text-2:    #48596e;
+      --text-3:    #8496a8;
+      --border:    #dde6f0;
+      --border-2:  #c8d6e8;
+      --red:       #e84040;
+      --blue:      #3a7bd5;
+      --r:         12px;
+      --r-lg:      18px;
+      --sh:        0 3px 18px rgba(26,50,84,.08);
+      --sh-lg:     0 12px 44px rgba(26,50,84,.13);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; transition: all .22s; }
+    img { display: block; max-width: 100%; }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 70px; padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 900;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 11px; }
+    .logo-wrap img { height: 44px; width: auto; }
+    .logo-txt strong { display: block; font-size: 17px; font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -.2px; }
+    .logo-txt span   { font-size: 10.5px; color: var(--green); font-weight: 600; letter-spacing: .4px; }
+    nav { display: flex; gap: 26px; align-items: center; }
+    nav a { font-size: 13.5px; font-weight: 600; color: var(--text-2); position: relative; }
+    nav a:hover { color: var(--navy); }
+    nav a.active { color: var(--navy); }
+    nav a.active::after { content:''; position:absolute; bottom:-4px; left:0; width:100%; height:2.5px; background:var(--green); border-radius:2px; }
+    .hdr-cta {
+      padding: 9px 22px;
+      background: linear-gradient(135deg, var(--green), var(--green-dk));
+      color: #fff !important; border-radius: 50px;
+      font-size: 13px !important; font-weight: 700 !important;
+      box-shadow: 0 4px 14px rgba(0,168,107,.3);
+    }
+    .hdr-cta:hover { transform: translateY(-1px); box-shadow: 0 7px 22px rgba(0,168,107,.42); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; background: none; border: none; }
+    .hamburger span { display:block; width:22px; height:2.5px; background:var(--navy); border-radius:2px; transition:all .3s; }
+    .mob-nav {
+      display: none; position: fixed; top: 70px; left: 0; right: 0;
+      background: #fff; padding: 20px 5%;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 12px 32px rgba(26,50,84,.12);
+      z-index: 899; flex-direction: column; gap: 14px;
+    }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { font-size: 14.5px; font-weight: 600; color: var(--text-2); padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .mob-nav a:last-child { border-bottom: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(150deg, var(--navy-deep) 0%, #0b3d28 65%, #007048 100%);
+      padding: 88px 5% 80px;
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .hero-glow {
+      position: absolute; top: -140px; right: -140px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(0,168,107,.18) 0%, transparent 68%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute; bottom: -100px; left: -100px;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(58,123,213,.1) 0%, transparent 68%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,168,107,.16); border: 1px solid rgba(0,168,107,.3);
+      border-radius: 50px; padding: 5px 16px;
+      font-size: 10.5px; font-weight: 700; color: #4dffa0;
+      letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 22px;
+    }
+    .hero-eyebrow::before { content:''; width:6px; height:6px; background:#4dffa0; border-radius:50%; }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900; color: #fff;
+      line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 18px;
+    }
+    .hero h1 em { font-style: italic; color: #4dffa0; font-weight: 400; }
+    .hero-sub {
+      font-size: clamp(14px, 1.8vw, 17px);
+      color: rgba(255,255,255,.6); line-height: 1.8;
+      max-width: 560px; margin: 0 auto 38px;
+    }
+
+    /* SEARCH BAR */
+    .search-wrap {
+      max-width: 580px; margin: 0 auto;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 16px 56px 16px 52px;
+      background: rgba(255,255,255,.1);
+      border: 1.5px solid rgba(255,255,255,.2);
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14.5px; color: #fff;
+      outline: none;
+      backdrop-filter: blur(10px);
+      transition: all .25s;
+    }
+    .search-wrap input::placeholder { color: rgba(255,255,255,.38); }
+    .search-wrap input:focus {
+      background: rgba(255,255,255,.14);
+      border-color: rgba(0,168,107,.6);
+      box-shadow: 0 0 0 4px rgba(0,168,107,.14);
+    }
+    .search-icon {
+      position: absolute; left: 18px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,.4); pointer-events: none;
+    }
+    .search-clear {
+      position: absolute; right: 18px; top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.15); border: none;
+      border-radius: 50%; width: 24px; height: 24px;
+      color: rgba(255,255,255,.6); font-size: 12px;
+      cursor: pointer; display: none; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .search-clear.show { display: flex; }
+    .search-clear:hover { background: rgba(255,255,255,.25); color: #fff; }
+    .search-hint { font-size: 12px; color: rgba(255,255,255,.32); margin-top: 10px; }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { background: var(--canvas); border-bottom: 1px solid var(--border); padding: 12px 5%; }
+    .breadcrumb-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-3); }
+    .breadcrumb-inner a { color: var(--text-3); }
+    .breadcrumb-inner a:hover { color: var(--green); }
+    .breadcrumb-inner span { color: var(--text-2); font-weight: 600; }
+
+    /* ── MAIN LAYOUT ── */
+    .main-wrap { max-width: 1200px; margin: 0 auto; padding: 60px 5% 80px; display: grid; grid-template-columns: 240px 1fr; gap: 44px; align-items: start; }
+
+    /* ── SIDEBAR ── */
+    .faq-sidebar { position: sticky; top: 90px; }
+    .sidebar-head { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-3); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .cat-btn {
+      display: flex; align-items: center; gap: 9px;
+      width: 100%; padding: 10px 13px;
+      background: none; border: 1px solid transparent;
+      border-radius: var(--r); text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 600; color: var(--text-2);
+      cursor: pointer; transition: all .2s; margin-bottom: 4px;
+    }
+    .cat-btn:hover { background: var(--canvas); color: var(--navy); }
+    .cat-btn.active { background: var(--green-mu); border-color: rgba(0,168,107,.22); color: var(--green); }
+    .cat-icon { font-size: 15px; flex-shrink: 0; line-height: 1; }
+    .cat-count {
+      margin-left: auto; background: var(--canvas); border: 1px solid var(--border);
+      border-radius: 50px; padding: 1px 7px;
+      font-size: 10px; font-weight: 700; color: var(--text-3);
+      transition: all .2s;
+    }
+    .cat-btn.active .cat-count { background: rgba(0,168,107,.14); border-color: rgba(0,168,107,.2); color: var(--green); }
+    .sidebar-divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .sidebar-cta {
+      background: linear-gradient(135deg, var(--navy-deep), #0b3d28);
+      border-radius: var(--r-lg); padding: 22px 18px; margin-top: 20px;
+      position: relative; overflow: hidden;
+    }
+    .sidebar-cta::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(0,168,107,.18), transparent 70%);
+      border-radius: 50%;
+    }
+    .sc-emoji { font-size: 26px; margin-bottom: 10px; }
+    .sc-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 7px; line-height: 1.3; }
+    .sc-sub { font-size: 11.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 14px; }
+    .sc-btn {
+      display: block; width: 100%; padding: 9px;
+      background: var(--green); border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12.5px; font-weight: 700; color: #fff;
+      cursor: pointer; text-align: center; transition: all .2s;
+    }
+    .sc-btn:hover { background: var(--green-lt); transform: translateY(-1px); }
+
+    /* ── FAQ CONTENT ── */
+    .faq-content {}
+    .no-results { display: none; text-align: center; padding: 60px 20px; }
+    .no-results.show { display: block; }
+    .no-results-icon { font-size: 48px; margin-bottom: 16px; }
+    .no-results h3 { font-family: 'Fraunces', serif; font-size: 22px; color: var(--navy); margin-bottom: 8px; }
+    .no-results p { font-size: 14px; color: var(--text-3); }
+
+    .faq-section { margin-bottom: 48px; }
+    .faq-section.hidden { display: none; }
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 18px; padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-icon {
+      width: 40px; height: 40px; border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px; font-weight: 600; color: var(--navy);
+    }
+    .section-count { font-size: 11px; color: var(--text-3); font-weight: 600; margin-left: auto; }
+
+    /* ACCORDION */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--r); margin-bottom: 8px;
+      overflow: hidden; transition: all .25s;
+      background: var(--surface);
+    }
+    .faq-item.hidden { display: none; }
+    .faq-item:hover { border-color: rgba(0,168,107,.25); box-shadow: var(--sh); }
+    .faq-item.open { border-color: rgba(0,168,107,.3); box-shadow: 0 4px 20px rgba(0,168,107,.1); }
+    .faq-q {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 18px 20px; cursor: pointer;
+      background: none; border: none; width: 100%; text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background .18s;
+    }
+    .faq-q:hover { background: rgba(0,168,107,.03); }
+    .faq-item.open .faq-q { background: rgba(0,168,107,.04); }
+    .faq-q-icon {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--canvas); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px; transition: all .25s;
+    }
+    .faq-item.open .faq-q-icon { background: var(--green); border-color: var(--green); }
+    .chevron {
+      width: 10px; height: 10px;
+      border-right: 2px solid var(--text-3);
+      border-bottom: 2px solid var(--text-3);
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform .28s ease, border-color .25s;
+      display: block; flex-shrink: 0; margin-top: 1px;
+    }
+    .faq-item.open .chevron {
+      transform: rotate(-135deg) translateY(-2px);
+      border-color: #fff;
+    }
+    .faq-q-text {
+      font-size: 14.5px; font-weight: 600; color: var(--navy);
+      line-height: 1.5; flex: 1;
+    }
+    .faq-item.open .faq-q-text { color: var(--green); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .38s cubic-bezier(.16,1,.3,1), padding .3s ease;
+      padding: 0 20px 0 60px;
+    }
+    .faq-item.open .faq-a { max-height: 600px; padding-bottom: 20px; }
+    .faq-a-inner { font-size: 14px; color: var(--text-2); line-height: 1.85; }
+    .faq-a-inner p { margin-bottom: 10px; }
+    .faq-a-inner p:last-child { margin-bottom: 0; }
+    .faq-a-inner strong { color: var(--navy); font-weight: 700; }
+    .faq-a-inner a { color: var(--green); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+    .faq-a-inner a:hover { color: var(--green-dk); }
+    .faq-a-inner ul { padding-left: 20px; margin: 8px 0 10px; }
+    .faq-a-inner ul li { margin-bottom: 5px; }
+    .faq-tag {
+      display: inline-block; margin-top: 12px;
+      padding: 3px 10px; border-radius: 50px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px;
+    }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip {
+      background: var(--canvas); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 5%;
+    }
+    .cs-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .cs-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 28px 26px;
+      box-shadow: var(--sh); text-align: center;
+      transition: all .25s;
+    }
+    .cs-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: rgba(0,168,107,.2); }
+    .cs-icon {
+      width: 52px; height: 52px; border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin: 0 auto 16px;
+    }
+    .cs-card h4 { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 7px; }
+    .cs-card p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 16px; }
+    .cs-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 13px; font-weight: 700; color: var(--green);
+      cursor: pointer;
+    }
+    .cs-link:hover { color: var(--green-dk); }
+    .cs-link::after { content: '→'; transition: transform .2s; }
+    .cs-link:hover::after { transform: translateX(3px); }
+
+    /* ── POPULAR ── */
+    .popular-strip { padding: 56px 5%; background: var(--surface); }
+    .pop-inner { max-width: 1200px; margin: 0 auto; }
+    .pop-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; flex-wrap: wrap; gap: 10px; }
+    .pop-eyebrow { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--green); display: flex; align-items: center; gap: 8px; }
+    .pop-eyebrow::before { content:''; width:18px; height:2px; background:var(--green); border-radius:2px; }
+    .pop-title { font-family: 'Fraunces', serif; font-size: clamp(20px, 3vw, 28px); font-weight: 700; color: var(--navy); }
+    .pop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .pop-item {
+      background: var(--canvas); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 18px 20px;
+      cursor: pointer; transition: all .22s;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .pop-item:hover { background: var(--surface); border-color: var(--green); box-shadow: var(--sh); transform: translateY(-2px); }
+    .pop-num { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--border-2); flex-shrink: 0; line-height: 1; margin-top: 1px; }
+    .pop-item:hover .pop-num { color: var(--green); }
+    .pop-q { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.55; }
+    .pop-cat { font-size: 10.5px; color: var(--text-3); margin-top: 4px; }
+
+    /* ── CTA ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--green-dk) 0%, var(--navy-deep) 100%);
+      padding: 76px 5%; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.022'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-inner h2 { font-family: 'Fraunces', serif; font-size: clamp(26px, 4.5vw, 42px); font-weight: 700; color: #fff; margin-bottom: 14px; line-height: 1.2; }
+    .cta-inner p { font-size: 15.5px; color: rgba(255,255,255,.6); margin-bottom: 32px; line-height: 1.75; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { padding: 13px 32px; background: #fff; border: none; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: var(--navy); cursor: pointer; transition: all .22s; box-shadow: 0 5px 20px rgba(0,0,0,.2); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 9px 30px rgba(0,0,0,.3); }
+    .btn-outline-w { padding: 13px 32px; background: transparent; border: 2px solid rgba(255,255,255,.3); border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.8); cursor: pointer; transition: all .22s; }
+    .btn-outline-w:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-deep); color: #fff; padding: 60px 5% 28px; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+    .footer-about { padding-right: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 15px; }
+    .footer-logo img { height: 40px; width: auto; }
+    .footer-logo-txt strong { display: block; font-size: 16px; font-weight: 800; color: #fff; }
+    .footer-logo-txt span { font-size: 10px; color: rgba(255,255,255,.35); }
+    .footer-about p { color: rgba(255,255,255,.4); font-size: 13px; line-height: 1.78; margin-bottom: 18px; }
+    .soc-row { display: flex; gap: 8px; }
+    .soc-btn { width: 34px; height: 34px; border-radius: 9px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 12px; color: rgba(255,255,255,.45); cursor: pointer; transition: all .2s; }
+    .soc-btn:hover { background: var(--green); border-color: var(--green); color: #fff; }
+    footer h5 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    footer a { display: block; color: rgba(255,255,255,.42); margin-bottom: 10px; font-size: 13px; transition: all .2s; }
+    footer a:hover { color: var(--green); padding-left: 4px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; text-align: center; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.28); margin: 4px 0; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.up { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .main-wrap { grid-template-columns: 1fr; }
+      .faq-sidebar { position: static; }
+      .cat-tabs-mobile { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px; }
+      .faq-sidebar-desktop { display: none; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .cs-inner { grid-template-columns: 1fr; }
+      .pop-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 700px) {
+      .pop-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .faq-a { padding: 0 14px 0 50px; }
+      .faq-item.open .faq-a { padding-bottom: 18px; }
+    }
+    @media (min-width: 961px) {
+      .cat-tabs-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <img src="/images/logo.png" alt="Volk Donations">
+    <div class="logo-txt">
+      <strong>Volk Donations</strong>
+      <span>A better life for everyone</span>
+    </div>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/stories">Stories</a>
+    <a href="/about">About</a>
+    <a href="/faq" class="active">FAQ</a>
+    <a href="/donate" class="hdr-cta">Give Now</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mob-nav" id="mobNav">
+  <a href="/">Home</a>
+  <a href="/impact-calculator">Impact</a>
+  <a href="/donate">Donate</a>
+  <a href="/volunteer">Volunteer</a>
+  <a href="/stories">Stories</a>
+  <a href="/about">About</a>
+  <a href="/faq">FAQ</a>
+  <a href="/donate" class="hdr-cta" style="text-align:center;border-radius:50px;display:block">Give Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Help Centre</div>
+    <h1>Got <em>Questions?</em><br>We Have Answers.</h1>
+    <p class="hero-sub">Everything you need to know about donating, our programmes, financial transparency, tax receipts, recurring gifts, and more — all in one place.</p>
+    <div class="search-wrap">
+      <svg class="search-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Search questions… e.g. &quot;tax receipt&quot; or &quot;recurring donation&quot;" autocomplete="off" spellcheck="false">
+      <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
+    </div>
+    <div class="search-hint" id="searchHint">Searching <span id="totalCount">35</span> questions across 6 categories</div>
+  </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">Home</a>
+    <span style="opacity:.4">›</span>
+    <span>Frequently Asked Questions</span>
+  </div>
+</div>
+
+<!-- POPULAR QUESTIONS -->
+<div class="popular-strip">
+  <div class="pop-inner">
+    <div class="pop-header">
+      <div>
+        <div class="pop-eyebrow">Most Asked</div>
+        <div class="pop-title">Popular Questions</div>
+      </div>
+    </div>
+    <div class="pop-grid">
+      <div class="pop-item" onclick="jumpTo('q-tax-1')">
+        <div class="pop-num">01</div>
+        <div><div class="pop-q">Is my donation tax-deductible in the United States?</div><div class="pop-cat">Tax &amp; Receipts</div></div>
+      </div>
+      <div class="pop-item" onclick="jumpTo('q-donate-1')">
+        <div class="pop-num">02</div>
+        <div><div class="pop-q">What payment methods do you accept?</div><div class="pop-cat">Making a Donation</div></div>
+      </div>
+      <div class="pop-item" onclick="jumpTo('q-impact-1')">
+        <div class="pop-num">03</div>
+        <div><div class="pop-q">How much of my donation reaches children directly?</div><div class="pop-cat">Impact &amp; Programmes</div></div>
+      </div>
+      <div class="pop-item" onclick="jumpTo('q-rec-1')">
+        <div class="pop-num">04</div>
+        <div><div class="pop-q">How do I pause or cancel a recurring donation?</div><div class="pop-cat">Recurring Gifts</div></div>
+      </div>
+      <div class="pop-item" onclick="jumpTo('q-trust-1')">
+        <div class="pop-num">05</div>
+        <div><div class="pop-q">How do I know Volk Donations is legitimate?</div><div class="pop-cat">Trust &amp; Transparency</div></div>
+      </div>
+      <div class="pop-item" onclick="jumpTo('q-donate-3')">
+        <div class="pop-num">06</div>
+        <div><div class="pop-q">Can I donate to a specific country or programme?</div><div class="pop-cat">Making a Donation</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN FAQ -->
+<div class="main-wrap">
+
+  <!-- SIDEBAR (desktop) -->
+  <aside class="faq-sidebar faq-sidebar-desktop">
+    <div class="sidebar-head">Categories</div>
+    <button class="cat-btn active" onclick="filterCat('all', this)">
+      <span class="cat-icon">📋</span> All Questions
+      <span class="cat-count" id="cnt-all">35</span>
+    </button>
+    <button class="cat-btn" onclick="filterCat('donate', this)">
+      <span class="cat-icon">💚</span> Making a Donation
+      <span class="cat-count">7</span>
+    </button>
+    <button class="cat-btn" onclick="filterCat('recurring', this)">
+      <span class="cat-icon">🔁</span> Recurring Gifts
+      <span class="cat-count">5</span>
+    </button>
+    <button class="cat-btn" onclick="filterCat('tax', this)">
+      <span class="cat-icon">📄</span> Tax &amp; Receipts
+      <span class="cat-count">6</span>
+    </button>
+    <button class="cat-btn" onclick="filterCat('impact', this)">
+      <span class="cat-icon">🌍</span> Impact &amp; Programmes
+      <span class="cat-count">7</span>
+    </button>
+    <button class="cat-btn" onclick="filterCat('trust', this)">
+      <span class="cat-icon">🔒</span> Trust &amp; Transparency
+      <span class="cat-count">5</span>
+    </button>
+    <button class="cat-btn" onclick="filterCat('account', this)">
+      <span class="cat-icon">👤</span> Your Account
+      <span class="cat-count">5</span>
+    </button>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-cta">
+      <div class="sc-emoji">💬</div>
+      <div class="sc-title">Still have a question?</div>
+      <div class="sc-sub">Our team responds within 24 hours on business days.</div>
+      <a href="/contact" class="sc-btn">Contact Support</a>
+    </div>
+  </aside>
+
+  <!-- MOBILE CATEGORY TABS -->
+  <div class="cat-tabs-mobile">
+    <button class="cat-btn active" style="font-size:12px;padding:7px 12px" onclick="filterCat('all',this)">📋 All</button>
+    <button class="cat-btn" style="font-size:12px;padding:7px 12px" onclick="filterCat('donate',this)">💚 Donating</button>
+    <button class="cat-btn" style="font-size:12px;padding:7px 12px" onclick="filterCat('recurring',this)">🔁 Recurring</button>
+    <button class="cat-btn" style="font-size:12px;padding:7px 12px" onclick="filterCat('tax',this)">📄 Tax</button>
+    <button class="cat-btn" style="font-size:12px;padding:7px 12px" onclick="filterCat('impact',this)">🌍 Impact</button>
+    <button class="cat-btn" style="font-size:12px;padding:7px 12px" onclick="filterCat('trust',this)">🔒 Trust</button>
+    <button class="cat-btn" style="font-size:12px;padding:7px 12px" onclick="filterCat('account',this)">👤 Account</button>
+  </div>
+
+  <!-- FAQ SECTIONS -->
+  <div class="faq-content">
+    <div class="no-results" id="noResults">
+      <div class="no-results-icon">🔍</div>
+      <h3>No results found</h3>
+      <p>Try a different search term, or <a href="/contact" style="color:var(--green);font-weight:600">contact our support team</a> directly.</p>
+    </div>
+
+    <!-- ── MAKING A DONATION ── -->
+    <div class="faq-section reveal" data-cat="donate" id="sec-donate">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(0,168,107,.1)">💚</div>
+        <div class="section-title">Making a Donation</div>
+        <div class="section-count">7 questions</div>
+      </div>
+
+      <div class="faq-item" data-cat="donate" id="q-donate-1">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">What payment methods do you accept?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>We accept all major credit and debit cards (Visa, Mastercard, American Express, and Discover), as well as PayPal, Apple Pay, and Google Pay. For large or corporate gifts, we also accept bank wire transfers and cheques — please <a href="/contact">contact our team</a> to arrange these.</p>
+            <p>All card transactions are processed through our PCI-DSS compliant payment gateway. We do not store your full card number on our servers at any point.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="donate" id="q-donate-2">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Is there a minimum donation amount?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Our minimum one-time donation is <strong>$5</strong>. For recurring monthly gifts, the minimum is <strong>$10 per month</strong>. There is no maximum — large gifts are processed the same way as smaller ones, though for donations above $10,000 we recommend contacting our team directly to discuss the most efficient transfer method and any specific programme allocation you may have in mind.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="donate" id="q-donate-3">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Can I donate to a specific country or programme?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. When completing a donation through our website or donor portal, you can select from our active campaigns — including the Kenya Education Fund, Cambodia Medical Relief, Uganda Clean Water Initiative, Brazil Nutrition Programme, and India Shelter Project, among others.</p>
+            <p>If you wish to fund a programme not currently listed as an active campaign, or to make a multi-programme allocation, please <a href="/contact">contact our partnerships team</a> and we will arrange this for you directly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="donate">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Can I make a donation on behalf of someone else or as a gift?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Absolutely. During checkout, you can indicate that a donation is a tribute or gift. You can provide the name of the person being honoured (or memorialised) and an optional message. We will send a personalised tribute notification to an email address of your choice. The tax receipt will be issued to the donor — the person making the payment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="donate">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Can my company make a corporate donation or match employee gifts?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. Volk Donations is registered with most major employer gift-matching platforms, including Benevity, YourCause, and Double the Donation. If your employer offers gift-matching, simply submit your donation receipt through your HR or CSR portal — your company's match will be processed directly to us.</p>
+            <p>For direct corporate partnerships, sponsorships, or large institutional grants, please contact our partnerships team at <a href="mailto:partnerships@volkdonations.org">partnerships@volkdonations.org</a>. We can accommodate bespoke reporting and recognition arrangements for corporate donors.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="donate">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Can I donate anonymously?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. In your donor portal under <strong>Preferences → Privacy</strong>, you can toggle on "Anonymous Donations." This ensures your name will not appear on any public donor lists, leaderboards, or programme reports. Your tax receipt is still issued to your registered email address for your own records. Note that anonymity applies to external communications only — we retain internal records as required by US nonprofit law.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="donate">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">What happens if my payment fails?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>If a payment fails during checkout, you will receive an immediate on-screen notification and an email explaining the reason (where available). Common causes include insufficient funds, incorrect card details, or bank-side fraud prevention. No funds will be deducted from your account for a failed transaction.</p>
+            <p>For recurring donations, if a scheduled payment fails, we retry automatically after 3 and then 7 days. If the third attempt also fails, we will notify you by email and pause the recurring gift until your payment details are updated. You can update your card at any time in the portal under <strong>Profile Settings → Update Payment.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RECURRING GIFTS ── -->
+    <div class="faq-section reveal" data-cat="recurring" id="sec-recurring">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(58,123,213,.1)">🔁</div>
+        <div class="section-title">Recurring Gifts</div>
+        <div class="section-count">5 questions</div>
+      </div>
+
+      <div class="faq-item" data-cat="recurring" id="q-rec-1">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do I pause or cancel a recurring donation?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>You can pause or cancel any active recurring gift at any time — no notice period, no fees, no questions asked. Log in to your <a href="/login">donor portal</a>, navigate to <strong>Recurring Gifts</strong>, and use the Pause or Cancel option next to the relevant gift.</p>
+            <p>Pauses can be set for 1, 2, or 3 months, or indefinitely. Cancellations take effect immediately and will prevent any future scheduled charges. If a payment has already been processed for the current billing period, it will not be refunded (see our refund policy below), but no further charges will occur.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="recurring">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Can I change the amount of my recurring donation?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. In your donor portal, go to <strong>Recurring Gifts</strong> and click <strong>Edit</strong> next to the gift you wish to adjust. You can update the amount, the campaign it supports, and the billing date. Changes apply from the next scheduled billing cycle. If your next billing date is within 48 hours, the change will take effect on the cycle after that.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="recurring">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">On what date will my recurring donation be charged each month?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Your recurring gift is charged on the same calendar date each month as the date you originally set up the gift. For example, if you created a recurring gift on the 15th, it will be charged on the 15th of each subsequent month. You can view and change your next billing date at any time in the <strong>Recurring Gifts</strong> section of your portal.</p>
+            <p>If your billing date falls on a weekend or public holiday, the charge will be processed on the next business day.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="recurring">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Do recurring donors receive separate receipts for each charge?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. A donation receipt is emailed automatically after every successful recurring charge. Receipts are also stored in your portal under <strong>Donation History</strong>, where you can download them individually or export a full CSV of all transactions for any calendar year.</p>
+            <p>At the end of each fiscal year, we also generate a consolidated annual giving statement — a single document listing all your donations across the year — which is available as a PDF in your portal under <strong>Tax Certificates.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="recurring">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Can I set up more than one recurring donation to different programmes?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. You can have multiple active recurring gifts running simultaneously, each directed to a different programme and on different billing schedules. Each gift is managed independently in your portal. There is no limit to the number of concurrent recurring gifts you can maintain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAX & RECEIPTS ── -->
+    <div class="faq-section reveal" data-cat="tax" id="sec-tax">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(232,160,32,.1)">📄</div>
+        <div class="section-title">Tax &amp; Receipts</div>
+        <div class="section-count">6 questions</div>
+      </div>
+
+      <div class="faq-item" data-cat="tax" id="q-tax-1">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Is my donation tax-deductible in the United States?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. Volk Donations is a registered 501(c)(3) nonprofit organisation under United States federal tax law (EIN: 45-1234567). Donations made to Volk Donations are tax-deductible to the full extent permitted by law for US taxpayers who itemise deductions on their federal return.</p>
+            <p>We recommend consulting a qualified tax advisor regarding your specific circumstances. Donors are responsible for determining the deductibility of contributions under their applicable tax laws.</p>
+            <div class="faq-tag" style="background:rgba(232,160,32,.12);color:var(--gold)">EIN: 45-1234567</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="tax">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">When will I receive my donation receipt?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>An email receipt is sent automatically within minutes of every completed donation. If you do not receive it within 30 minutes, please check your spam or junk folder before contacting us. Receipts are also permanently stored in your donor portal under <strong>Donation History</strong>, where they can be downloaded as PDFs at any time.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="tax">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do I download my annual tax certificate?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Annual giving statements (IRS-compliant tax certificates) are generated each year in January for the prior fiscal year. Log in to your <a href="/login">donor portal</a> and navigate to <strong>Tax Certificates</strong>. You will find downloadable PDF statements for every year you have donated.</p>
+            <p>If you donated before creating a portal account, please <a href="/contact">contact our support team</a> with your name and email address and we will issue your historical certificates manually, typically within 2 business days.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="tax">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Are donations from outside the United States tax-deductible?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Our US 501(c)(3) status provides tax relief only for US taxpayers. If you are based outside the United States, the deductibility of your donation depends on the tax laws of your country of residence. Many countries — including the UK, Canada, Australia, and members of the EU — have treaties or provisions that may allow deductions for donations to US-registered nonprofits, but this varies considerably.</p>
+            <p>We always provide a receipt that you can share with your local tax authority or advisor, but we are not able to provide jurisdiction-specific tax advice.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="tax">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">What is your refund policy?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>We understand that errors happen. If you made a donation in error — wrong amount, duplicate transaction, or unauthorised use of your card — please contact us at <a href="mailto:support@volkdonations.org">support@volkdonations.org</a> within <strong>14 days</strong> of the transaction date. We will review your request and, where verified, process a full refund within 5–10 business days.</p>
+            <p>Refunds are not offered for donations where the intent was clear at the time of giving. Once funds have been disbursed to a partner programme, refunds may not be possible; we will assess this on a case-by-case basis.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="tax">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">I donated as a guest (no account). Can I still get a receipt?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. A receipt is automatically sent to the email address you provided during checkout, regardless of whether you have a donor portal account. If you cannot locate it, email us at <a href="mailto:support@volkdonations.org">support@volkdonations.org</a> with your name, approximate donation date, and amount, and we will resend it within one business day.</p>
+            <p>You can also <a href="/login">create a free donor portal account</a> at any time and link your previous guest donations to your account for a consolidated history.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── IMPACT & PROGRAMMES ── -->
+    <div class="faq-section reveal" data-cat="impact" id="sec-impact">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(0,196,125,.1)">🌍</div>
+        <div class="section-title">Impact &amp; Programmes</div>
+        <div class="section-count">7 questions</div>
+      </div>
+
+      <div class="faq-item" data-cat="impact" id="q-impact-1">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How much of my donation reaches children directly?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p><strong>96 cents of every dollar donated goes directly to programme delivery.</strong> Our total administrative and fundraising overhead is held to a maximum of 4% of annual revenue — a commitment written into our founding charter in 2010 and upheld every year since, as verified by our annual independent audit.</p>
+            <p>This places us in the top 5% of US nonprofits by programme efficiency. We maintain a GuideStar Platinum rating and a 4-star Charity Navigator score, both of which independently verify our financial practices.</p>
+            <div class="faq-tag" style="background:var(--green-mu);color:var(--green)">96% Programme Spend · GuideStar Platinum</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="impact">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Which countries do you currently operate in?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>As of February 2026, Volk Donations operates active programmes in <strong>38 countries</strong> across Sub-Saharan Africa, South and Southeast Asia, Latin America, and the Caribbean. Our largest programmes by funding volume are in Kenya, Uganda, Bangladesh, Cambodia, and Nigeria.</p>
+            <p>A full list of active countries and programme descriptions is available on our <a href="/impact-calculator">Impact page</a>. New countries are added as our partner evaluation process confirms operational readiness.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="impact">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do you select the programmes you fund?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Every programme Volk funds must pass a rigorous evaluation process developed by our Chief Operations Officer and reviewed by our independent Programme Advisory Board. The criteria include:</p>
+            <ul>
+              <li>Demonstrated community need with documented baseline data</li>
+              <li>A credible, evidence-based theory of change</li>
+              <li>A local partner organisation with at least 3 years of operational history</li>
+              <li>Compliance with our Child Safeguarding Standards</li>
+              <li>A clear reporting framework with measurable outcomes</li>
+              <li>Financial auditing capacity at the partner level</li>
+            </ul>
+            <p>Programmes that fail to meet any of these criteria are not funded, regardless of the scale of need. We believe rigour is a form of respect — for donors and for the children we serve.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="impact">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Can I see exactly how my donation was used?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes. Registered donors can track their personalised impact in real time through the <a href="/login">donor portal</a>. Your impact dashboard shows estimated equivalents of your giving — meals funded, medical visits covered, school kits delivered — based on verified programme cost-per-unit data from our partner organisations.</p>
+            <p>In addition, we publish quarterly programme expenditure reports and an annual impact report that details outcomes by programme, country, and funding source. All reports are publicly available on our <a href="/reports">Reports page</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="impact">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Do you work directly with children, or through partner organisations?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Volk Donations operates exclusively through local partner organisations. We do not employ field staff in programme countries, and we do not run our own orphanages or schools. We believe that local organisations — those embedded in the communities they serve, with existing relationships and cultural knowledge — are far better positioned to deliver effective programmes than an externally managed operation could be.</p>
+            <p>Our role is to fund, monitor, and support our partners, not to replace them. This model is deliberate and is central to our theory of change.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="impact">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">What types of programmes do you fund?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Across our 14 active programmes, we fund work across five core areas:</p>
+            <ul>
+              <li><strong>Education:</strong> School fees, supplies, teacher training, literacy programmes, and technology access initiatives</li>
+              <li><strong>Healthcare:</strong> Mobile clinics, surgical funding, vaccination drives, and maternal health support</li>
+              <li><strong>Nutrition:</strong> School feeding programmes, therapeutic nutrition centres, and agricultural support for caregiving families</li>
+              <li><strong>Clean Water:</strong> Borehole drilling, gravity-fed pipe systems, biosand filtration, and hygiene education</li>
+              <li><strong>Shelter &amp; Emergency Response:</strong> Transitional housing, trauma counselling, and emergency relief following natural disasters</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="impact">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do I know the impact statistics you publish are accurate?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>All impact data we publish is drawn from partner-reported programme data, which is independently verified by our internal monitoring and evaluation team on a quarterly basis. Cost-per-unit figures (such as cost per meal or cost per medical visit) are updated annually based on audited programme expenditure and verified delivery counts.</p>
+            <p>Our annual impact report is reviewed by an independent third-party evaluator before publication. We do not publish impact estimates; we publish verified outcomes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TRUST & TRANSPARENCY ── -->
+    <div class="faq-section reveal" data-cat="trust" id="sec-trust">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(139,92,246,.1)">🔒</div>
+        <div class="section-title">Trust &amp; Transparency</div>
+        <div class="section-count">5 questions</div>
+      </div>
+
+      <div class="faq-item" data-cat="trust" id="q-trust-1">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do I know Volk Donations is a legitimate organisation?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Volk Donations is a registered 501(c)(3) nonprofit organisation incorporated in the State of Delaware, United States (EIN: 45-1234567). You can verify our registration independently through the IRS Tax Exempt Organisation database at <strong>apps.irs.gov/app/eos</strong>.</p>
+            <p>We hold a <strong>GuideStar Platinum Seal of Transparency</strong> — the highest level of independent nonprofit accreditation in the United States — and a <strong>4-Star Charity Navigator rating</strong>. We are also accredited by the Better Business Bureau's Wise Giving Alliance. Our audited financial statements for every year since 2012 are publicly available on our <a href="/financial">Financial Information page</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="trust">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Where can I read your audited financial statements?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Full audited financial statements, Form 990 filings, and programme expenditure breakdowns are published annually on our <a href="/financial">Financial Information page</a>. We maintain a full public archive going back to our first audited year (2012).</p>
+            <p>Our most recent audit was conducted by Deloitte LLP and found zero material misstatements. The final audit report is available for download in PDF format without requiring a login or account creation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="trust">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How is my personal data protected?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>We take data protection seriously. All data transmitted through our website and donor portal is encrypted using TLS 1.3. We do not sell, rent, or share your personal information with third parties for marketing purposes. The data we collect — name, email, payment details, and donation history — is used exclusively to process your donations, issue receipts, and communicate with you about your giving and our programmes.</p>
+            <p>We are compliant with the California Consumer Privacy Act (CCPA) and, for donors in the European Union, the General Data Protection Regulation (GDPR). You may request a copy of your data, correction, or deletion at any time by contacting <a href="mailto:privacy@volkdonations.org">privacy@volkdonations.org</a>. Our full privacy policy is available at <a href="/privacy">volkdonations.org/privacy</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="trust">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Do you have a policy on how beneficiaries are portrayed in your communications?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes, and we consider it one of our most important operational commitments. Our Communications Ethics Policy prohibits the use of imagery or language that portrays children or families in a manner that is exploitative, dehumanising, or designed to elicit pity rather than respect.</p>
+            <p>All photography used in our communications requires informed consent from the individuals depicted, or from a legal guardian in the case of minors. We do not use images that show identifiable children in distress without their guardian's consent, and we do not use children's photographs for commercial fundraising without written permission.</p>
+            <p>We raise money through <em>truth and dignity</em> — not through the exploitation of vulnerability.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="trust">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do you ensure child safeguarding in your partner programmes?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Child safeguarding is the non-negotiable floor beneath every other operational consideration at Volk Donations. All partner organisations are required to meet our Child Safeguarding Standards before receiving any funding. These standards were developed in consultation with UNICEF guidelines and independent child protection specialists.</p>
+            <p>Compliance is reviewed annually through both desk-based audit and, for our largest partners, unannounced site visits. Any partner that fails to meet our safeguarding standards has their funding suspended pending a remediation plan. Partners that are unable or unwilling to meet the standards are permanently removed from our network.</p>
+            <p>To report a safeguarding concern, please contact us immediately at <a href="mailto:safeguarding@volkdonations.org">safeguarding@volkdonations.org</a>. All reports are treated in strict confidence and investigated by our independent safeguarding lead.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── YOUR ACCOUNT ── -->
+    <div class="faq-section reveal" data-cat="account" id="sec-account">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(58,123,213,.1)">👤</div>
+        <div class="section-title">Your Account</div>
+        <div class="section-count">5 questions</div>
+      </div>
+
+      <div class="faq-item" data-cat="account">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">Do I need an account to donate?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>No. You can complete a one-time donation as a guest without creating an account. However, creating a free donor portal account allows you to access your full donation history, download tax certificates, manage recurring gifts, track your personal impact in real time, and use features like referral links and giving streak tracking.</p>
+            <p>If you donate as a guest, you can create an account later and link your previous donations to it by contacting our support team.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="account">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do I reset my password?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Go to the <a href="/login">login page</a> and click <strong>"Forgot password?"</strong> beneath the password field. Enter your registered email address and we will send a password reset link within a few minutes. The link is valid for 60 minutes. If you do not receive it, check your spam folder or contact <a href="mailto:support@volkdonations.org">support@volkdonations.org</a>.</p>
+            <p>You can also request a password reset from within the portal under <strong>Profile Settings → Change Password.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="account">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do I update my email address or payment method?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Both can be updated from within your donor portal. To update your email address, go to <strong>Profile Settings</strong> and edit the email field. A verification link will be sent to your new address to confirm the change.</p>
+            <p>To update your payment method, go to <strong>Profile Settings → Update Payment</strong>, or click the <strong>Update Payment</strong> quick action on your dashboard. New card details will apply to all future transactions, including any active recurring gifts.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="account">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">What is the referral programme and how does it work?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Every registered donor receives a unique referral link, accessible from <strong>Refer a Friend</strong> in the sidebar of your portal. When a friend uses your link to make their first donation, both you and your friend receive an exclusive <strong>Impact Badge</strong> in your portal, and Volk plants a tree in your name through our reforestation partner in Kenya.</p>
+            <p>You can also invite friends directly by entering their email address in the referral section, and we will send them a personalised invitation on your behalf. Referral activity — how many friends have joined and what they have donated — is tracked in your portal under <strong>Refer a Friend.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="account">
+        <button class="faq-q" onclick="toggle(this)">
+          <div class="faq-q-icon"><span class="chevron"></span></div>
+          <div class="faq-q-text">How do I delete my account?</div>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>You can request account deletion from <strong>Profile Settings → Delete Account</strong>. Due to our legal obligations as a US registered nonprofit (including donor record-keeping requirements under IRS regulations), we are required to retain certain financial records for a minimum of 7 years even after account deletion.</p>
+            <p>What deletion does: removes your personal profile, login credentials, and contact preferences, and permanently removes your name from all public-facing donor lists and leaderboards. What it does not remove: financial transaction records required for our audited accounts. For any questions about this process, please contact <a href="mailto:privacy@volkdonations.org">privacy@volkdonations.org</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /faq-content -->
+</div><!-- /main-wrap -->
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <div class="cs-inner">
+    <div class="cs-card reveal">
+      <div class="cs-icon" style="background:rgba(0,168,107,.1)">📧</div>
+      <h4>Email Support</h4>
+      <p>For donation queries, tax receipts, account issues, and general enquiries. We respond within 24 hours on business days.</p>
+      <a href="mailto:support@volkdonations.org" class="cs-link">support@volkdonations.org</a>
+    </div>
+    <div class="cs-card reveal">
+      <div class="cs-icon" style="background:rgba(58,123,213,.1)">💬</div>
+      <h4>Live Chat</h4>
+      <p>Chat with our support team in real time, Monday to Friday, 9am–6pm Eastern Time. Available from your donor portal once logged in.</p>
+      <a href="/login" class="cs-link">Open donor portal</a>
+    </div>
+    <div class="cs-card reveal">
+      <div class="cs-icon" style="background:rgba(232,160,32,.1)">🤝</div>
+      <h4>Partnerships &amp; Grants</h4>
+      <p>For corporate partnerships, institutional grants, large gifts, or programme collaboration enquiries from NGOs and governments.</p>
+      <a href="mailto:partnerships@volkdonations.org" class="cs-link">partnerships@volkdonations.org</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <h2>Ready to Make a Difference?</h2>
+    <p>You now know exactly how we work, where your money goes, and why thousands of donors trust Volk Donations. The only thing left is to act.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="window.location='/donate'">Make a Donation</button>
+      <button class="btn-outline-w" onclick="window.location='/stories'">Read Our Stories</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <div class="footer-logo">
+        <img src="/images/logo.png" alt="Volk Donations">
+        <div class="footer-logo-txt">
+          <strong>Volk Donations</strong>
+          <span>A better life for everyone</span>
+        </div>
+      </div>
+      <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we are building a better future for those who need it most.</p>
+      <div class="soc-row">
+        <div class="soc-btn">f</div>
+        <div class="soc-btn">in</div>
+        <div class="soc-btn">𝕏</div>
+        <div class="soc-btn">▶</div>
+      </div>
+    </div>
+    <div>
+      <h5>Organisation</h5>
+      <a href="/about">About Us</a>
+      <a href="/partners">Our Partners</a>
+      <a href="/branches">Branches</a>
+      <a href="/reports">Annual Reports</a>
+      <a href="/team">Our Team</a>
+    </div>
+    <div>
+      <h5>Get Involved</h5>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/fundraise">Fundraise</a>
+      <a href="/events">Events</a>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <a href="/faq" style="color:var(--green)">FAQ</a>
+      <a href="/blog">Blog</a>
+      <a href="/stories">Success Stories</a>
+      <a href="/press">Press Kit</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/financial">Financial Info</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations. All rights reserved.</p>
+    <p>A registered 501(c)(3) nonprofit organisation based in the United States.</p>
+    <p>EIN: 45-1234567 · Making a difference since 2010</p>
+  </div>
+</footer>
+
+<script>
+// ── HAMBURGER ──
+const hamburger = document.getElementById('hamburger');
+const mobNav = document.getElementById('mobNav');
+hamburger.addEventListener('click', () => mobNav.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobNav.contains(e.target)) mobNav.classList.remove('open');
+});
+
+// ── ACCORDION ──
+window.toggle = function(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  // Open this one if it was closed
+  if (!isOpen) item.classList.add('open');
+};
+
+// ── CATEGORY FILTER ──
+window.filterCat = function(cat, btn) {
+  // Update all cat buttons (both desktop sidebar and mobile tabs)
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    const onclick = b.getAttribute('onclick') || '';
+    if (onclick.includes("'" + cat + "'")) b.classList.add('active');
+  });
+
+  const sections = document.querySelectorAll('.faq-section');
+  const items = document.querySelectorAll('.faq-item');
+
+  if (cat === 'all') {
+    sections.forEach(s => s.classList.remove('hidden'));
+    items.forEach(i => i.classList.remove('hidden'));
+  } else {
+    sections.forEach(s => {
+      s.classList.toggle('hidden', s.getAttribute('data-cat') !== cat);
+    });
+    items.forEach(i => {
+      i.classList.toggle('hidden', i.getAttribute('data-cat') !== cat);
+    });
+  }
+
+  // Clear search
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchClear').classList.remove('show');
+  document.getElementById('noResults').classList.remove('show');
+  updateCount();
+};
+
+// ── SEARCH ──
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+
+searchInput.addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  searchClear.classList.toggle('show', q.length > 0);
+
+  if (!q) {
+    // reset to "all"
+    document.querySelectorAll('.faq-section').forEach(s => s.classList.remove('hidden'));
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('hidden'));
+    document.getElementById('noResults').classList.remove('show');
+    updateCount();
+    return;
+  }
+
+  let found = 0;
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const qtext = item.querySelector('.faq-q-text')?.textContent.toLowerCase() || '';
+    const atext = item.querySelector('.faq-a-inner')?.textContent.toLowerCase() || '';
+    const match = qtext.includes(q) || atext.includes(q);
+    item.classList.toggle('hidden', !match);
+    if (match) found++;
+  });
+
+  // Show/hide sections based on whether they have visible items
+  document.querySelectorAll('.faq-section').forEach(sec => {
+    const visible = sec.querySelectorAll('.faq-item:not(.hidden)').length;
+    sec.classList.toggle('hidden', visible === 0);
+  });
+
+  document.getElementById('noResults').classList.toggle('show', found === 0);
+  document.getElementById('searchHint').textContent = found > 0 ? `Found ${found} matching question${found !== 1 ? 's' : ''}` : 'No matches found';
+});
+
+searchClear.addEventListener('click', function() {
+  searchInput.value = '';
+  this.classList.remove('show');
+  document.querySelectorAll('.faq-section').forEach(s => s.classList.remove('hidden'));
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('hidden'));
+  document.getElementById('noResults').classList.remove('show');
+  document.getElementById('searchHint').textContent = `Searching ${document.querySelectorAll('.faq-item').length} questions across 6 categories`;
+  searchInput.focus();
+});
+
+function updateCount() {
+  const total = document.querySelectorAll('.faq-item:not(.hidden)').length;
+  document.getElementById('searchHint').textContent = `Searching ${total} questions across 6 categories`;
+}
+
+// ── JUMP TO ──
+window.jumpTo = function(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Reset filter to all first
+  filterCat('all', null);
+  setTimeout(() => {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => {
+      if (!el.classList.contains('open')) {
+        el.querySelector('.faq-q').click();
+      }
+    }, 400);
+  }, 100);
+};
+
+// ── SCROLL REVEAL ──
+const revEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const siblings = Array.from(entry.target.parentElement.children).filter(c => c.classList.contains('reveal'));
+      const idx = siblings.indexOf(entry.target);
+      setTimeout(() => entry.target.classList.add('up'), idx * 80);
+      revObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+revEls.forEach(el => revObs.observe(el));
+
+// Update total count on load
+document.getElementById('totalCount').textContent = document.querySelectorAll('.faq-item').length;
+document.getElementById('searchHint').textContent = `Searching ${document.querySelectorAll('.faq-item').length} questions across 6 categories`;
+</script>
+</body>
+</html>

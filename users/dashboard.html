@@ -7,1767 +7,874 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
-
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <meta name="theme-color" content="#1e3a5f">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.45.2/apexcharts.min.js"></script>
-
   <style>
-    :root {
-      --navy:         #1a3254;
-      --navy-deep:    #111f35;
-      --navy-mid:     #243d62;
-      --navy-light:   #2e5080;
-      --green:        #00a86b;
-      --green-dark:   #008f5a;
-      --green-light:  #00c47d;
-      --green-muted:  rgba(0,168,107,0.15);
-      --gold:         #f0a500;
-      --gold-light:   #fbbf24;
-      --gold-muted:   rgba(240,165,0,0.15);
-      --white:        #ffffff;
-      --canvas:       #f4f7fb;
-      --surface:      #ffffff;
-      --surface-2:    #f9fafb;
-      --text:         #1a2636;
-      --text-2:       #4a5568;
-      --text-3:       #8899aa;
-      --border:       #e2eaf4;
-      --border-2:     #d0dcea;
-      --red:          #ef4444;
-      --red-muted:    rgba(239,68,68,0.12);
-      --blue:         #3b82f6;
-      --blue-muted:   rgba(59,130,246,0.12);
-
-      --sidebar-w:    260px;
-      --topbar-h:     68px;
-      --radius-sm:    8px;
-      --radius:       12px;
-      --radius-lg:    18px;
-      --shadow-sm:    0 1px 4px rgba(26,50,84,0.08);
-      --shadow:       0 4px 20px rgba(26,50,84,0.10);
-      --shadow-lg:    0 12px 40px rgba(26,50,84,0.14);
-    }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { height: 100%; }
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--canvas);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* ── AUTH GATE OVERLAY ── */
-    #authGate {
-      position: fixed; inset: 0;
-      background: var(--navy-deep);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.4s ease;
-    }
-
-    #authGate.hidden { opacity: 0; pointer-events: none; }
-
-    .auth-spinner {
-      display: flex; flex-direction: column; align-items: center; gap: 18px;
-    }
-
-    .auth-spinner-ring {
-      width: 48px; height: 48px;
-      border: 3px solid rgba(255,255,255,0.1);
-      border-top-color: var(--green);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    .auth-spinner p {
-      color: rgba(255,255,255,0.5);
-      font-size: 13px;
-      letter-spacing: 0.5px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      width: var(--sidebar-w);
-      min-height: 100vh;
-      background: var(--navy-deep);
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      z-index: 200;
-      overflow: hidden;
-    }
-
-    .sidebar::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -80px;
-      width: 280px; height: 280px;
-      background: radial-gradient(circle, rgba(0,168,107,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .sidebar::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; left: -60px;
-      width: 220px; height: 220px;
-      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .sidebar-logo {
-      padding: 24px 24px 20px;
-      display: flex; align-items: center; gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: relative; z-index: 1;
-    }
-
-    .sidebar-logo-mark {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--green), #00e08f);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      color: white;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .sidebar-logo-text {
-      display: flex; flex-direction: column;
-    }
-
-    .sidebar-logo-text strong {
-      font-size: 14px;
-      font-weight: 700;
-      color: white;
-      line-height: 1.2;
-    }
-
-    .sidebar-logo-text span {
-      font-size: 10px;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 0.5px;
-    }
-
-    /* Donor profile block */
-    .sidebar-profile {
-      padding: 20px 20px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: relative; z-index: 1;
-    }
-
-    .profile-avatar {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--navy-light), var(--green-dark));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', serif;
-      font-size: 20px;
-      color: white;
-      font-weight: 600;
-      margin-bottom: 10px;
-      border: 2px solid rgba(255,255,255,0.1);
-    }
-
-    .profile-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: white;
-      line-height: 1.3;
-      margin-bottom: 2px;
-    }
-
-    .profile-email {
-      font-size: 11px;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .donor-tier {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--gold-muted);
-      border: 1px solid rgba(240,165,0,0.3);
-      border-radius: 50px;
-      padding: 4px 10px;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--gold-light);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-    }
-
-    .tier-dot {
-      width: 5px; height: 5px;
-      background: var(--gold-light);
-      border-radius: 50%;
-    }
-
-    /* Sidebar nav */
-    .sidebar-nav {
-      flex: 1;
-      padding: 12px 12px;
-      position: relative; z-index: 1;
-      overflow-y: auto;
-    }
-
-    .nav-section-label {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      padding: 10px 12px 6px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.55);
-      cursor: pointer;
-      transition: all 0.18s ease;
-      margin-bottom: 2px;
-      text-decoration: none;
-    }
-
-    .nav-item:hover {
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.85);
-    }
-
-    .nav-item.active {
-      background: rgba(0,168,107,0.15);
-      color: var(--green-light);
-      font-weight: 600;
-    }
-
-    .nav-item svg { flex-shrink: 0; }
-
-    .nav-badge {
-      margin-left: auto;
-      background: var(--green);
-      color: white;
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 50px;
-    }
-
-    /* Sidebar stat cards */
-    .sidebar-stats {
-      padding: 16px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      position: relative; z-index: 1;
-    }
-
-    .sidebar-stat {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-sm);
-      padding: 10px;
-    }
-
-    .sidebar-stat-val {
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      color: white;
-      font-weight: 600;
-      line-height: 1;
-      margin-bottom: 3px;
-    }
-
-    .sidebar-stat-label {
-      font-size: 9px;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-    }
-
-    .sidebar-logout {
-      padding: 14px 16px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      position: relative; z-index: 1;
-    }
-
-    .btn-logout {
-      width: 100%;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 9px;
-      background: rgba(239,68,68,0.08);
-      border: 1px solid rgba(239,68,68,0.18);
-      border-radius: var(--radius-sm);
-      color: rgba(239,68,68,0.8);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.18s ease;
-    }
-
-    .btn-logout:hover {
-      background: rgba(239,68,68,0.15);
-      color: #ef4444;
-    }
-
-    /* ── MAIN CONTENT ── */
-    .main {
-      margin-left: var(--sidebar-w);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* ── TOPBAR ── */
-    .topbar {
-      height: var(--topbar-h);
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky; top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .topbar-left h2 {
-      font-family: 'Fraunces', serif;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.2;
-    }
-
-    .topbar-left p {
-      font-size: 12px;
-      color: var(--text-3);
-      margin-top: 1px;
-    }
-
-    .topbar-right {
-      display: flex; align-items: center; gap: 12px;
-    }
-
-    .topbar-action {
-      width: 38px; height: 38px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      color: var(--text-2);
-      transition: all 0.18s;
-      position: relative;
-    }
-
-    .topbar-action:hover { background: var(--canvas); border-color: var(--border-2); }
-
-    .notif-dot {
-      position: absolute; top: 6px; right: 6px;
-      width: 7px; height: 7px;
-      background: var(--red);
-      border-radius: 50%;
-      border: 1.5px solid var(--surface);
-    }
-
-    .topbar-btn-donate {
-      display: flex; align-items: center; gap: 7px;
-      padding: 9px 18px;
-      background: linear-gradient(135deg, var(--green), var(--green-dark));
-      color: white;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.18s;
-      box-shadow: 0 4px 14px rgba(0,168,107,0.3);
-    }
-
-    .topbar-btn-donate:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(0,168,107,0.38);
-    }
-
-    /* ── PAGE CONTENT ── */
-    .content {
-      padding: 28px 32px;
-      flex: 1;
-    }
-
-    /* ── KPI CARDS ── */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .kpi-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 22px 24px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp 0.5s ease forwards;
-    }
-
-    .kpi-card:nth-child(1) { animation-delay: 0.05s; }
-    .kpi-card:nth-child(2) { animation-delay: 0.12s; }
-    .kpi-card:nth-child(3) { animation-delay: 0.19s; }
-    .kpi-card:nth-child(4) { animation-delay: 0.26s; }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .kpi-card::before {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
-      width: 100px; height: 100px;
-      border-radius: 50%;
-      transform: translate(30px, -30px);
-      opacity: 0.5;
-    }
-
-    .kpi-card.green::before { background: radial-gradient(circle, var(--green-muted), transparent 70%); }
-    .kpi-card.gold::before  { background: radial-gradient(circle, var(--gold-muted), transparent 70%); }
-    .kpi-card.blue::before  { background: radial-gradient(circle, var(--blue-muted), transparent 70%); }
-    .kpi-card.red::before   { background: radial-gradient(circle, var(--red-muted), transparent 70%); }
-
-    .kpi-top {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .kpi-icon {
-      width: 40px; height: 40px;
-      border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-    }
-
-    .kpi-icon.green { background: var(--green-muted); }
-    .kpi-icon.gold  { background: var(--gold-muted); }
-    .kpi-icon.blue  { background: var(--blue-muted); }
-    .kpi-icon.red   { background: var(--red-muted); }
-
-    .kpi-badge {
-      display: flex; align-items: center; gap: 3px;
-      font-size: 11px; font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 50px;
-    }
-
-    .kpi-badge.up   { background: rgba(0,168,107,0.1); color: var(--green); }
-    .kpi-badge.down { background: var(--red-muted); color: var(--red); }
-
-    .kpi-value {
-      font-family: 'Fraunces', serif;
-      font-size: 32px;
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 5px;
-    }
-
-    .kpi-label {
-      font-size: 12px;
-      color: var(--text-3);
-      font-weight: 500;
-    }
-
-    /* ── GRID LAYOUTS ── */
-    .row { display: grid; gap: 20px; margin-bottom: 20px; }
-    .row-2-1 { grid-template-columns: 2fr 1fr; }
-    .row-3-2 { grid-template-columns: 3fr 2fr; }
-    .row-equal { grid-template-columns: 1fr 1fr; }
-    .row-3col  { grid-template-columns: 1fr 1fr 1fr; }
-
-    /* ── SECTION CARD ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(12px);
-      animation: fadeUp 0.5s ease forwards;
-    }
-
-    .card:nth-child(1) { animation-delay: 0.3s; }
-    .card:nth-child(2) { animation-delay: 0.38s; }
-    .card:nth-child(3) { animation-delay: 0.46s; }
-
-    .card-header {
-      padding: 20px 24px 0;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-
-    .card-title {
-      font-family: 'Fraunces', serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    .card-subtitle {
-      font-size: 12px;
-      color: var(--text-3);
-      margin-top: 2px;
-    }
-
-    .card-action {
-      font-size: 12px;
-      color: var(--green);
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .card-action:hover { color: var(--green-dark); }
-
-    .card-body { padding: 16px 24px 20px; }
-
-    /* ── CHART CONTAINERS ── */
-    .chart-wrap { padding: 0 8px; }
-    #barChart, #donutChart { min-height: 240px; }
-
-    /* ── IMPACT METRICS ── */
-    .impact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .impact-item {
-      background: var(--canvas);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      display: flex; align-items: center; gap: 12px;
-    }
-
-    .impact-emoji {
-      font-size: 26px;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-
-    .impact-val {
-      font-family: 'Fraunces', serif;
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1;
-    }
-
-    .impact-lbl {
-      font-size: 11px;
-      color: var(--text-3);
-      margin-top: 2px;
-    }
-
-    /* ── CAMPAIGN PROGRESS ── */
-    .campaign-item {
-      margin-bottom: 20px;
-    }
-
-    .campaign-item:last-child { margin-bottom: 0; }
-
-    .campaign-top {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .campaign-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .campaign-flag { font-size: 14px; margin-right: 5px; }
-
-    .campaign-pct {
-      font-family: 'Fraunces', serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    .campaign-bar-track {
-      height: 8px;
-      background: var(--canvas);
-      border-radius: 50px;
-      overflow: hidden;
-      margin-bottom: 6px;
-    }
-
-    .campaign-bar-fill {
-      height: 100%;
-      border-radius: 50px;
-      width: 0;
-      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .campaign-bar-fill.green { background: linear-gradient(90deg, var(--green), var(--green-light)); }
-    .campaign-bar-fill.gold  { background: linear-gradient(90deg, #d97706, var(--gold-light)); }
-    .campaign-bar-fill.blue  { background: linear-gradient(90deg, #2563eb, #60a5fa); }
-
-    .campaign-meta {
-      display: flex; justify-content: space-between;
-      font-size: 11px; color: var(--text-3);
-    }
-
-    .campaign-mine {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 10px; font-weight: 600;
-      color: var(--green);
-      background: var(--green-muted);
-      padding: 2px 7px;
-      border-radius: 50px;
-    }
-
-    /* ── DONATION TABLE ── */
-    .table-wrap { overflow-x: auto; }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    thead th {
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-3);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      border-bottom: 1px solid var(--border);
-      background: var(--canvas);
-      white-space: nowrap;
-    }
-
-    thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
-    thead th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
-
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-    }
-
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--canvas); }
-
-    tbody td {
-      padding: 12px 14px;
-      color: var(--text);
-      vertical-align: middle;
-    }
-
-    .tx-amount {
-      font-family: 'Fraunces', serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    .tx-status {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 11px; font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 50px;
-    }
-
-    .tx-status.completed { background: rgba(0,168,107,0.1); color: var(--green); }
-    .tx-status.recurring { background: var(--blue-muted); color: var(--blue); }
-    .tx-status.pending   { background: var(--gold-muted); color: var(--gold); }
-
-    .tx-status-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .receipt-btn {
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-3);
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    .receipt-btn:hover {
-      background: var(--canvas);
-      color: var(--text);
-      border-color: var(--border-2);
-    }
-
-    /* ── ACTIVITY FEED ── */
-    .feed-header {
-      display: flex; align-items: center; gap: 8px;
-    }
-
-    .live-pill {
-      display: flex; align-items: center; gap: 5px;
-      background: rgba(239,68,68,0.1);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-radius: 50px;
-      padding: 3px 9px;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--red);
-      letter-spacing: 0.5px;
-    }
-
-    .live-dot {
-      width: 6px; height: 6px;
-      background: var(--red);
-      border-radius: 50%;
-      animation: pulse-red 1.8s ease-in-out infinite;
-    }
-
-    @keyframes pulse-red {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.6); }
-    }
-
-    .feed-list { display: flex; flex-direction: column; gap: 0; }
-
-    .feed-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .feed-item:last-child { border-bottom: none; }
-    .feed-item.visible { opacity: 1; transform: translateX(0); }
-
-    .feed-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: white;
-      flex-shrink: 0;
-      font-family: 'Fraunces', serif;
-    }
-
-    .feed-body { flex: 1; min-width: 0; }
-
-    .feed-text {
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    .feed-text strong { color: var(--navy); font-weight: 600; }
-    .feed-text .feed-amount { color: var(--green); font-weight: 700; font-family: 'Fraunces', serif; }
-
-    .feed-time {
-      font-size: 11px;
-      color: var(--text-3);
-      margin-top: 2px;
-    }
-
-    /* ── QUICK ACTIONS ── */
-    .action-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .action-btn {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 8px;
-      padding: 18px 12px;
-      background: var(--canvas);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: all 0.18s;
-      text-align: center;
-    }
-
-    .action-btn:hover {
-      background: var(--surface);
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px var(--green-muted);
-      transform: translateY(-2px);
-    }
-
-    .action-icon {
-      width: 38px; height: 38px;
-      border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px;
-    }
-
-    .action-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* ── SCROLL ANIMATIONS ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-
-    /* ── TOAST ── */
-    .toast {
-      position: fixed; bottom: 28px; right: 28px;
-      background: var(--navy-deep);
-      color: white;
-      padding: 12px 20px;
-      border-radius: var(--radius);
-      font-size: 13px;
-      font-weight: 500;
-      box-shadow: var(--shadow-lg);
-      display: flex; align-items: center; gap: 10px;
-      z-index: 9000;
-      transform: translateY(80px);
-      opacity: 0;
-      transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .toast.show { transform: translateY(0); opacity: 1; }
-    .toast-icon { font-size: 16px; }
-
-    /* ── FOOTER ── */
-    .dashboard-footer {
-      margin-left: var(--sidebar-w);
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 16px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .dashboard-footer p {
-      font-size: 11px;
-      color: var(--text-3);
-    }
-
-    .dashboard-footer a {
-      font-size: 11px;
-      color: var(--text-3);
-      text-decoration: none;
-      margin-left: 16px;
-      transition: color 0.15s;
-    }
-
-    .dashboard-footer a:hover { color: var(--green); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1200px) {
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-      .row-2-1, .row-3-2 { grid-template-columns: 1fr; }
-      .row-3col { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 900px) {
-      :root { --sidebar-w: 0px; }
-      .sidebar { transform: translateX(-260px); }
-      .main, .dashboard-footer { margin-left: 0; }
-      .content { padding: 20px 16px; }
-      .topbar { padding: 0 16px; }
-      .row-equal, .row-3col { grid-template-columns: 1fr; }
-    }
+    :root{
+      --navy:#1a3254;--navy-deep:#111f35;--navy-mid:#243d62;--navy-light:#2e5080;
+      --green:#00a86b;--green-dark:#008f5a;--green-light:#00c47d;--green-muted:rgba(0,168,107,.14);
+      --gold:#f0a500;--gold-light:#fbbf24;--gold-muted:rgba(240,165,0,.14);
+      --white:#fff;--canvas:#f2f6fb;--surface:#fff;--surface-2:#f8fafc;
+      --text:#1a2636;--text-2:#4a5568;--text-3:#8899aa;
+      --border:#e2eaf4;--border-2:#cdd9ea;
+      --red:#ef4444;--red-muted:rgba(239,68,68,.12);
+      --blue:#3b82f6;--blue-muted:rgba(59,130,246,.12);
+      --purple:#8b5cf6;--purple-muted:rgba(139,92,246,.12);
+      --sidebar-w:252px;--topbar-h:64px;
+      --r-sm:8px;--r:12px;--r-lg:16px;
+      --sh-sm:0 1px 4px rgba(26,50,84,.07);--sh:0 4px 18px rgba(26,50,84,.09);--sh-lg:0 12px 40px rgba(26,50,84,.14);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{height:100%;scroll-behavior:smooth}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--canvas);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+    /* AUTH GATE */
+    #authGate{position:fixed;inset:0;background:var(--navy-deep);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s ease}
+    #authGate.hidden{opacity:0;pointer-events:none}
+    .ag-inner{display:flex;flex-direction:column;align-items:center;gap:20px}
+    .ag-ring{width:52px;height:52px;border:3px solid rgba(255,255,255,.08);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}
+    .ag-logo{font-family:'Fraunces',serif;font-size:28px;color:#fff;opacity:.9}
+    .ag-text{font-size:13px;color:rgba(255,255,255,.4);letter-spacing:.5px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(17,31,53,.6);backdrop-filter:blur(4px);z-index:800;display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.open{display:flex}
+    .modal{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--sh-lg);width:100%;max-width:480px;overflow:hidden;animation:popIn .25s cubic-bezier(.175,.885,.32,1.275);max-height:90vh;overflow-y:auto}
+    @keyframes popIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+    .modal-hd{padding:22px 24px 0;display:flex;align-items:center;justify-content:space-between}
+    .modal-title{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--navy)}
+    .modal-x{width:30px;height:30px;border:none;background:var(--canvas);border-radius:var(--r-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:15px;transition:all .15s}
+    .modal-x:hover{background:var(--border);color:var(--text)}
+    .modal-bd{padding:18px 24px 24px}
+    .modal-bd p{font-size:13.5px;color:var(--text-2);line-height:1.7;margin-bottom:13px}
+    .mfield{margin-bottom:13px}
+    .mfield label{display:block;font-size:11px;font-weight:600;color:var(--text-2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+    .mfield input,.mfield select,.mfield textarea{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;color:var(--text);background:var(--surface-2);outline:none;transition:border-color .2s}
+    .mfield input:focus,.mfield select:focus{border-color:var(--navy)}
+    .mfooter{display:flex;gap:9px;justify-content:flex-end;padding-top:6px}
+    .btn-mcancel{padding:8px 16px;background:var(--canvas);border:1px solid var(--border);border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text-2);cursor:pointer;transition:all .15s}
+    .btn-mcancel:hover{background:var(--border)}
+    .btn-mprim{padding:8px 18px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border:none;border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;cursor:pointer;transition:all .15s;box-shadow:0 3px 12px rgba(26,50,84,.2)}
+    .btn-mprim:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(26,50,84,.28)}
+    .btn-mgrn{background:linear-gradient(135deg,var(--green),var(--green-dark));box-shadow:0 3px 12px rgba(0,168,107,.26)}
+    .btn-mgrn:hover{box-shadow:0 5px 16px rgba(0,168,107,.36)}
+    .info-row{display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 13px;margin-bottom:10px}
+    .ir-ic{font-size:19px;flex-shrink:0}
+    .ir-txt{font-size:13px;color:var(--text-2);line-height:1.5}
+    .ir-txt strong{color:var(--navy);font-weight:600}
+    .ref-box{background:var(--canvas);border:1.5px dashed var(--border-2);border-radius:var(--r-sm);padding:11px 15px;font-family:'Fraunces',serif;font-size:13.5px;color:var(--navy);word-break:break-all;margin-bottom:12px}
+    .btn-copy{width:100%;padding:9px;background:var(--green-muted);border:1px solid rgba(0,168,107,.24);border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--green);cursor:pointer;transition:all .15s}
+    .btn-copy:hover{background:rgba(0,168,107,.22)}
+    .amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:13px}
+    .amt-btn{padding:11px;background:var(--canvas);border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--navy);cursor:pointer;transition:all .15s;text-align:center}
+    .amt-btn:hover,.amt-btn.sel{background:var(--green-muted);border-color:var(--green);color:var(--green)}
+    .psteps{display:flex;align-items:center;gap:6px;margin-bottom:16px}
+    .pstep{flex:1;height:3px;background:var(--border);border-radius:3px;transition:background .3s}
+    .pstep.done{background:var(--green)}
+    .dstep{display:none}.dstep.active{display:block}
+
+    /* LAYOUT */
+    .layout{display:flex;min-height:100vh}
+
+    /* SIDEBAR */
+    .sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--navy-deep);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:200;overflow:hidden;transition:transform .3s ease}
+    .sidebar::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(0,168,107,.1),transparent 70%);pointer-events:none}
+    .sidebar::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(59,130,246,.07),transparent 70%);pointer-events:none}
+    .sb-logo{padding:18px 18px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;z-index:1;flex-shrink:0}
+    .lmark{width:32px;height:32px;background:linear-gradient(135deg,var(--green),#00e08f);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;color:#fff;font-weight:700;flex-shrink:0}
+    .ltxt strong{display:block;font-size:13px;font-weight:700;color:#fff;line-height:1.2}
+    .ltxt span{font-size:10px;color:rgba(255,255,255,.32);letter-spacing:.4px}
+    .sb-prof{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;z-index:1;flex-shrink:0}
+    .sb-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--navy-light),var(--green-dark));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:17px;color:#fff;font-weight:600;margin-bottom:8px;border:2px solid rgba(255,255,255,.1)}
+    .sb-name{font-size:13px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:2px}
+    .sb-email{font-size:10px;color:rgba(255,255,255,.33);margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .tier{display:inline-flex;align-items:center;gap:4px;background:var(--gold-muted);border:1px solid rgba(240,165,0,.26);border-radius:50px;padding:3px 9px;font-size:9px;font-weight:700;color:var(--gold-light);letter-spacing:.8px;text-transform:uppercase}
+    .tdot{width:5px;height:5px;background:var(--gold-light);border-radius:50%;animation:blink 2.2s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .sb-nav{flex:1;padding:8px;overflow-y:auto;position:relative;z-index:1}
+    .sb-nav::-webkit-scrollbar{width:3px}
+    .sb-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+    .nav-lbl{font-size:9px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.2);padding:9px 10px 5px}
+    .ni{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:var(--r-sm);font-size:12.5px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s;margin-bottom:1px;border:none;background:none;width:100%;text-align:left;font-family:'Plus Jakarta Sans',sans-serif}
+    .ni:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.82)}
+    .ni.active{background:rgba(0,168,107,.15);color:var(--green-light);font-weight:600}
+    .ni svg{flex-shrink:0;opacity:.7}
+    .ni.active svg{opacity:1}
+    .nbadge{margin-left:auto;background:var(--green);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px}
+    .sb-stats{padding:12px 14px;border-top:1px solid rgba(255,255,255,.06);display:grid;grid-template-columns:1fr 1fr;gap:7px;position:relative;z-index:1;flex-shrink:0}
+    .mstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-sm);padding:9px}
+    .mstat-v{font-family:'Fraunces',serif;font-size:17px;color:#fff;font-weight:600;line-height:1;margin-bottom:2px}
+    .mstat-l{font-size:8.5px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.6px}
+    .sb-foot{padding:11px 13px;border-top:1px solid rgba(255,255,255,.06);position:relative;z-index:1;flex-shrink:0}
+    .btn-lo{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:var(--r-sm);color:rgba(239,68,68,.75);font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+    .btn-lo:hover{background:rgba(239,68,68,.15);color:#ef4444}
+
+    /* MAIN */
+    .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
+
+    /* TOPBAR */
+    .topbar{height:var(--topbar-h);background:var(--surface);border-bottom:1px solid var(--border);padding:0 26px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--sh-sm);flex-shrink:0}
+    .tb-left h2{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--navy)}
+    .tb-left p{font-size:11px;color:var(--text-3);margin-top:1px}
+    .tb-right{display:flex;align-items:center;gap:9px}
+    .tb-ic{width:36px;height:36px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-2);transition:all .15s;position:relative}
+    .tb-ic:hover{background:var(--canvas);border-color:var(--border-2)}
+    .ndot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--red);border-radius:50%;border:1.5px solid var(--surface)}
+    .btn-dnew{display:flex;align-items:center;gap:6px;padding:8px 15px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border:none;border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;box-shadow:0 3px 12px rgba(0,168,107,.28)}
+    .btn-dnew:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(0,168,107,.36)}
+
+    /* PAGE VIEWS */
+    .pv{display:none;padding:24px 26px;flex:1;animation:fadeIn .22s ease}
+    .pv.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    .ph{margin-bottom:20px}
+    .ph h1{font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:var(--navy);margin-bottom:3px}
+    .ph p{font-size:13px;color:var(--text-3)}
+
+    /* KPI */
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
+    .kc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;position:relative;overflow:hidden;box-shadow:var(--sh-sm);opacity:0;transform:translateY(13px);animation:fadeUp .5s ease forwards}
+    .kc:nth-child(1){animation-delay:.05s}.kc:nth-child(2){animation-delay:.11s}.kc:nth-child(3){animation-delay:.17s}.kc:nth-child(4){animation-delay:.23s}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+    .kc::after{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;opacity:.6}
+    .kc.g::after{background:radial-gradient(circle,var(--green-muted),transparent 70%)}.kc.o::after{background:radial-gradient(circle,var(--gold-muted),transparent 70%)}.kc.b::after{background:radial-gradient(circle,var(--blue-muted),transparent 70%)}.kc.p::after{background:radial-gradient(circle,var(--purple-muted),transparent 70%)}
+    .kctop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:13px}
+    .kcic{width:36px;height:36px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:16px}
+    .kcic.g{background:var(--green-muted)}.kcic.o{background:var(--gold-muted)}.kcic.b{background:var(--blue-muted)}.kcic.p{background:var(--purple-muted)}
+    .kchip{font-size:10px;font-weight:700;padding:2px 7px;border-radius:50px}
+    .kchip.up{background:rgba(0,168,107,.1);color:var(--green)}.kchip.na{background:var(--canvas);color:var(--text-3)}
+    .kcval{font-family:'Fraunces',serif;font-size:28px;font-weight:600;color:var(--navy);line-height:1;margin-bottom:3px}
+    .kclbl{font-size:11px;color:var(--text-3);font-weight:500}
+
+    /* GRID */
+    .gr{display:grid;gap:16px;margin-bottom:16px}
+    .gr21{grid-template-columns:2fr 1fr}.gr32{grid-template-columns:3fr 2fr}.gr11{grid-template-columns:1fr 1fr}.gr111{grid-template-columns:1fr 1fr 1fr}
+
+    /* CARD */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden}
+    .chd{padding:17px 20px 0;display:flex;align-items:center;justify-content:space-between}
+    .ctl{font-family:'Fraunces',serif;font-size:14.5px;font-weight:600;color:var(--navy)}
+    .csl{font-size:11px;color:var(--text-3);margin-top:1px}
+    .clink{font-size:12px;color:var(--green);font-weight:600;cursor:pointer;background:none;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:color .15s}
+    .clink:hover{color:var(--green-dark)}
+    .cbd{padding:13px 20px 18px}
+
+    /* CHARTS */
+    #barChart,#donutChart,#impactLine,#impactRadial{min-height:220px}
+
+    /* IMPACT */
+    .ig{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .ii{background:var(--canvas);border:1px solid var(--border);border-radius:var(--r);padding:13px;display:flex;align-items:center;gap:10px}
+    .iemoji{font-size:22px;line-height:1;flex-shrink:0}
+    .ival{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--navy);line-height:1}
+    .ilbl{font-size:10px;color:var(--text-3);margin-top:2px}
+    .ngift{margin-top:12px;padding:12px 14px;background:linear-gradient(135deg,rgba(0,168,107,.07),rgba(0,168,107,.02));border:1px solid rgba(0,168,107,.17);border-radius:var(--r);display:flex;align-items:center;justify-content:space-between}
+    .ngl{font-size:9.5px;color:var(--text-3);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+    .ngv{font-size:13px;font-weight:700;color:var(--navy)}
+    .ngic{font-family:'Fraunces',serif;font-size:20px;color:var(--green)}
+
+    /* CAMPAIGNS */
+    .ci{margin-bottom:16px}.ci:last-child{margin-bottom:0}
+    .citop{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+    .cin{font-size:12.5px;font-weight:600;color:var(--text)}
+    .cmine{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;color:var(--green);background:var(--green-muted);padding:2px 7px;border-radius:50px}
+    .cnums{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+    .cpct{font-family:'Fraunces',serif;font-size:12.5px;font-weight:600;color:var(--navy)}
+    .crsd{font-size:10px;color:var(--text-3)}
+    .ctrack{height:7px;background:var(--canvas);border-radius:50px;overflow:hidden;margin-bottom:5px}
+    .cfill{height:100%;border-radius:50px;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+    .cfill.g{background:linear-gradient(90deg,var(--green),var(--green-light))}.cfill.o{background:linear-gradient(90deg,#d97706,var(--gold-light))}.cfill.b{background:linear-gradient(90deg,#2563eb,#60a5fa)}
+    .cmeta{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3)}
+
+    /* TABLE */
+    .tw{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    thead th{padding:9px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid var(--border);background:var(--canvas);white-space:nowrap}
+    tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+    tbody tr:last-child{border-bottom:none}
+    tbody tr:hover{background:var(--canvas)}
+    tbody td{padding:10px 12px;vertical-align:middle}
+    .tamt{font-family:'Fraunces',serif;font-size:13px;font-weight:600;color:var(--navy)}
+    .spill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:50px}
+    .spill.completed{background:rgba(0,168,107,.1);color:var(--green)}.spill.recurring{background:var(--blue-muted);color:var(--blue)}.spill.pending{background:var(--gold-muted);color:var(--gold)}
+    .sdot{width:5px;height:5px;border-radius:50%;background:currentColor}
+    .bpdf{background:none;border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-size:10.5px;font-weight:600;color:var(--text-3);cursor:pointer;transition:all .12s;font-family:'Plus Jakarta Sans',sans-serif}
+    .bpdf:hover{background:var(--canvas);color:var(--text)}
+
+    /* FEED */
+    .lpill{display:flex;align-items:center;gap:5px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:50px;padding:3px 9px;font-size:9.5px;font-weight:700;color:var(--red);letter-spacing:.4px}
+    .ldot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pls 1.8s ease-in-out infinite}
+    @keyframes pls{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+    .fi{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);opacity:0;transform:translateX(-6px);transition:opacity .33s,transform .33s}
+    .fi:last-child{border-bottom:none}
+    .fi.vis{opacity:1;transform:translateX(0)}
+    .fav{width:33px;height:33px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;font-family:'Fraunces',serif}
+    .ftxt{font-size:12.5px;color:var(--text);line-height:1.5}
+    .ftxt strong{color:var(--navy);font-weight:600}
+    .famt{color:var(--green);font-weight:700;font-family:'Fraunces',serif}
+    .ftime{font-size:10px;color:var(--text-3);margin-top:2px}
+
+    /* ACTIONS */
+    .agrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .abtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 8px;background:var(--canvas);border:1px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .15s;text-align:center;font-family:'Plus Jakarta Sans',sans-serif}
+    .abtn:hover{background:var(--surface);border-color:var(--green);box-shadow:0 0 0 3px var(--green-muted);transform:translateY(-1px)}
+    .aic{width:34px;height:34px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:15px}
+    .albl{font-size:11px;font-weight:600;color:var(--text)}
+
+    /* IMPACT PAGE */
+    .ibg{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:18px}
+    .ibc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;text-align:center;box-shadow:var(--sh-sm)}
+    .ibem{font-size:36px;margin-bottom:9px}
+    .ibval{font-family:'Fraunces',serif;font-size:32px;font-weight:600;color:var(--navy);margin-bottom:3px}
+    .iblbl{font-size:11px;color:var(--text-3)}
+    .cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+    .ccard{background:var(--canvas);border:1px solid var(--border);border-radius:var(--r);padding:13px;text-align:center}
+    .cflag{font-size:26px;margin-bottom:5px}
+    .ccname{font-size:11px;font-weight:600;color:var(--navy)}
+    .ccamt{font-size:10px;color:var(--text-3)}
+
+    /* PROFILE PAGE */
+    .ppc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;box-shadow:var(--sh-sm);margin-bottom:16px}
+    .pav-big{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--navy-light),var(--green-dark));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:28px;color:#fff;font-weight:600;border:3px solid var(--border);margin-bottom:12px}
+    .pnb{font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:var(--navy);margin-bottom:3px}
+    .peb{font-size:13px;color:var(--text-3);margin-bottom:12px}
+    .pbadges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+    .pb{display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:50px;font-size:10.5px;font-weight:600}
+    .pb.gold{background:var(--gold-muted);color:var(--gold-light);border:1px solid rgba(240,165,0,.22)}
+    .pb.green{background:var(--green-muted);color:var(--green);border:1px solid rgba(0,168,107,.18)}
+    .pb.blue{background:var(--blue-muted);color:var(--blue);border:1px solid rgba(59,130,246,.18)}
+    .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .ff{margin-bottom:0}
+    .ff label{display:block;font-size:10.5px;font-weight:600;color:var(--text-2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+    .ff input,.ff select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface-2);outline:none;transition:border-color .2s}
+    .ff input:focus,.ff select:focus{border-color:var(--navy)}
+    .btn-save{padding:9px 20px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border:none;border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;cursor:pointer;transition:all .15s;box-shadow:0 3px 12px rgba(26,50,84,.18)}
+    .btn-save:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(26,50,84,.26)}
+    .sdiv{height:1px;background:var(--border);margin:18px 0}
+    .pr{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+    .pr:last-child{border-bottom:none}
+    .prl{font-size:13px;font-weight:600;color:var(--text)}
+    .prs{font-size:10.5px;color:var(--text-3);margin-top:2px}
+    .tgl{position:relative;width:40px;height:22px;flex-shrink:0}
+    .tgl input{opacity:0;width:0;height:0;position:absolute}
+    .tsl{position:absolute;inset:0;background:var(--border-2);border-radius:50px;cursor:pointer;transition:background .2s}
+    .tsl::before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+    .tgl input:checked+.tsl{background:var(--green)}
+    .tgl input:checked+.tsl::before{transform:translateX(18px)}
+
+    /* RECURRING */
+    .rcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;box-shadow:var(--sh-sm);margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .rinfo{display:flex;align-items:center;gap:12px}
+    .ric{width:40px;height:40px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .rtitle{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:2px}
+    .rmeta{font-size:10.5px;color:var(--text-3)}
+    .ramt{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--navy);text-align:right;flex-shrink:0}
+    .rfreq{font-size:10px;color:var(--text-3);text-align:right}
+    .racts{display:flex;gap:7px;flex-shrink:0}
+    .brc{padding:6px 12px;border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;border:1px solid var(--border);background:var(--canvas);color:var(--text-2)}
+    .brc:hover{background:var(--border)}
+    .brc.red{border-color:rgba(239,68,68,.22);background:var(--red-muted);color:var(--red)}
+    .brc.red:hover{background:rgba(239,68,68,.2)}
+
+    /* TAX CERTS */
+    .citem{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--border);gap:12px}
+    .citem:last-child{border-bottom:none}
+    .cinfo{display:flex;align-items:center;gap:12px}
+    .cicn{font-size:26px}
+    .cyear{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:2px}
+    .cmeta2{font-size:10.5px;color:var(--text-3)}
+    .bdl{display:flex;align-items:center;gap:5px;padding:7px 14px;background:var(--green-muted);border:1px solid rgba(0,168,107,.2);border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:11.5px;font-weight:600;color:var(--green);cursor:pointer;transition:all .15s}
+    .bdl:hover{background:rgba(0,168,107,.22)}
+
+    /* REFER */
+    .rhero{background:linear-gradient(135deg,var(--navy-deep),#0b5238);border-radius:var(--r-lg);padding:32px;text-align:center;margin-bottom:18px;position:relative;overflow:hidden}
+    .rhero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 20%,rgba(0,168,107,.25),transparent)}
+    .rhero h2{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:7px;position:relative}
+    .rhero p{font-size:13.5px;color:rgba(255,255,255,.62);max-width:380px;margin:0 auto 18px;position:relative}
+    .rldisplay{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.17);border-radius:var(--r-sm);padding:11px 16px;font-family:'Fraunces',serif;font-size:13.5px;color:#fff;word-break:break-all;margin-bottom:12px;position:relative}
+    .btn-cbig{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;background:var(--green);border:none;border-radius:var(--r-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#fff;cursor:pointer;transition:all .15s;box-shadow:0 4px 14px rgba(0,168,107,.33);position:relative}
+    .btn-cbig:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,168,107,.43)}
+    .rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+    .rscard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;text-align:center;box-shadow:var(--sh-sm)}
+    .rsval{font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:var(--navy);margin-bottom:3px}
+    .rslbl{font-size:11px;color:var(--text-3)}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:22px;right:22px;background:var(--navy-deep);color:#fff;padding:10px 16px;border-radius:var(--r);box-shadow:var(--sh-lg);display:flex;align-items:center;gap:8px;z-index:9000;transform:translateY(70px);opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);font-size:13px;font-weight:500;max-width:310px}
+    .toast.show{transform:translateY(0);opacity:1}
+
+    /* HAMBURGER */
+    .hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;background:none;border:none;border-radius:var(--r-sm);align-items:center;justify-content:center}
+    .hbg span{display:block;width:17px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+
+    /* FOOTER */
+    .dfooter{margin-left:var(--sidebar-w);background:var(--surface);border-top:1px solid var(--border);padding:13px 26px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+    .dfooter p,.dfooter a{font-size:11px;color:var(--text-3);text-decoration:none;transition:color .15s}
+    .dfooter a:hover{color:var(--green)}
+    .dflinks{display:flex;gap:15px}
+
+    @media(max-width:1200px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.gr21,.gr32{grid-template-columns:1fr}.ibg{grid-template-columns:repeat(2,1fr)}.cgrid{grid-template-columns:repeat(2,1fr)}.fgrid{grid-template-columns:1fr}}
+    @media(max-width:900px){.sidebar{transform:translateX(-260px)}.sidebar.open{transform:translateX(0)}.main,.dfooter{margin-left:0}.hbg{display:flex}.gr11,.gr111,.rstats{grid-template-columns:1fr}.rcard{flex-direction:column;align-items:flex-start}}
+    @media(max-width:600px){.kpi-grid{grid-template-columns:1fr}.pv{padding:16px 13px}.topbar{padding:0 13px}.ibg{grid-template-columns:1fr}.agrid{grid-template-columns:1fr}.amt-grid{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
 
-<!-- Auth loading gate -->
+<!-- AUTH GATE -->
 <div id="authGate">
-  <div class="auth-spinner">
-    <div class="auth-spinner-ring"></div>
-    <p>Verifying session…</p>
+  <div class="ag-inner">
+    <div class="ag-logo">Volk</div>
+    <div class="ag-ring"></div>
+    <p>Verifying your session…</p>
   </div>
 </div>
 
-<!-- Toast -->
-<div class="toast" id="toast">
-  <span class="toast-icon">📋</span>
-  <span id="toastMsg">Receipt downloaded.</span>
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="tic">✓</span><span id="tmsg"></span></div>
+
+<!-- MODALS ─────────────────────────────────────────── -->
+<!-- Donate -->
+<div class="modal-overlay" id="mDonate">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Make a Donation</div><button class="modal-x" onclick="cm('mDonate')">✕</button></div>
+    <div class="modal-bd">
+      <div class="psteps"><div class="pstep done" id="ps1"></div><div class="pstep" id="ps2"></div><div class="pstep" id="ps3"></div></div>
+      <div class="dstep active" id="ds1">
+        <div class="mfield"><label>Campaign</label><select id="dCamp"><option>🇰🇪 Kenya Education Fund</option><option>🇨🇲 Cambodia Medical Relief</option><option>🇧🇷 Brazil Nutrition Programme</option><option>🇺🇬 Uganda Clean Water</option><option>🇮🇳 India Shelter Project</option></select></div>
+        <p style="margin-bottom:10px">Choose amount:</p>
+        <div class="amt-grid">
+          <div class="amt-btn" onclick="sa(this,'25')">$25</div><div class="amt-btn" onclick="sa(this,'50')">$50</div><div class="amt-btn sel" onclick="sa(this,'100')">$100</div>
+          <div class="amt-btn" onclick="sa(this,'250')">$250</div><div class="amt-btn" onclick="sa(this,'500')">$500</div><div class="amt-btn" onclick="sa(this,'1000')">$1,000</div>
+        </div>
+        <div class="mfield"><label>Custom amount ($)</label><input type="number" id="dAmt" value="100" min="1"></div>
+        <div class="mfooter"><button class="btn-mcancel" onclick="cm('mDonate')">Cancel</button><button class="btn-mprim btn-mgrn" onclick="dn(2)">Continue →</button></div>
+      </div>
+      <div class="dstep" id="ds2">
+        <p>Payment on file:</p>
+        <div class="info-row"><div class="ir-ic">💳</div><div class="ir-txt"><strong>Visa •••• 4821</strong><br>Expires 09/2028 · Nairobi, KE</div></div>
+        <div class="mfield"><label>Donation type</label><select><option>One-time gift</option><option>Monthly recurring</option><option>Annual recurring</option></select></div>
+        <div class="mfooter"><button class="btn-mcancel" onclick="dn(1)">← Back</button><button class="btn-mprim btn-mgrn" onclick="dn(3)">Review →</button></div>
+      </div>
+      <div class="dstep" id="ds3">
+        <div style="text-align:center;padding:8px 0 16px">
+          <div style="font-size:42px;margin-bottom:9px">💚</div>
+          <div style="font-family:'Fraunces',serif;font-size:22px;color:var(--navy);margin-bottom:5px" id="dCA">$100.00</div>
+          <div style="font-size:13px;color:var(--text-3)">to <span id="dCC">Kenya Education Fund</span></div>
+        </div>
+        <div class="info-row"><div class="ir-ic">📄</div><div class="ir-txt">Receipt will be emailed to <strong id="dCE">m.okonkwo@bridgepointcapital.com</strong></div></div>
+        <div class="mfooter"><button class="btn-mcancel" onclick="dn(2)">← Back</button><button class="btn-mprim btn-mgrn" onclick="submitDonate()">Confirm ✓</button></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SIDEBAR
-════════════════════════════════════════════ -->
-<aside class="sidebar">
-
-  <div class="sidebar-logo">
-    <div class="sidebar-logo-mark">V</div>
-    <div class="sidebar-logo-text">
-      <strong>Volk Donations</strong>
-      <span>Donor Portal</span>
+<!-- Notifications -->
+<div class="modal-overlay" id="mNotifs">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Notifications</div><button class="modal-x" onclick="cm('mNotifs')">✕</button></div>
+    <div class="modal-bd">
+      <div class="info-row"><div class="ir-ic">🎉</div><div class="ir-txt"><strong>Kenya Education Fund reached 83%!</strong><br><span style="font-size:11px;color:var(--text-3)">2 hours ago</span></div></div>
+      <div class="info-row"><div class="ir-ic">📄</div><div class="ir-txt"><strong>Your FY 2025 tax certificate is ready</strong><br><span style="font-size:11px;color:var(--text-3)">Yesterday at 09:14</span></div></div>
+      <div class="info-row"><div class="ir-ic">💳</div><div class="ir-txt"><strong>Recurring donation processed — $150.00</strong><br><span style="font-size:11px;color:var(--text-3)">Feb 1, 2026</span></div></div>
+      <div class="info-row"><div class="ir-ic">🌍</div><div class="ir-txt"><strong>Your 2025 impact report is available</strong><br><span style="font-size:11px;color:var(--text-3)">Jan 15, 2026</span></div></div>
+      <div class="mfooter"><button class="btn-mprim" onclick="cm('mNotifs');showToast('✓','All notifications marked as read.')">Mark all read</button></div>
     </div>
   </div>
+</div>
 
-  <div class="sidebar-profile">
-    <div class="profile-avatar" id="sidebarAvatar">M</div>
-    <div class="profile-name" id="sidebarName">Margaret Okonkwo</div>
-    <div class="profile-email" id="sidebarEmail">m.okonkwo@bridgepointcapital.com</div>
-    <div class="donor-tier">
-      <div class="tier-dot"></div>
-      Champion Donor
+<!-- Payment -->
+<div class="modal-overlay" id="mPayment">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Update Payment Method</div><button class="modal-x" onclick="cm('mPayment')">✕</button></div>
+    <div class="modal-bd">
+      <div class="info-row" style="margin-bottom:14px"><div class="ir-ic">💳</div><div class="ir-txt"><strong>Current: Visa •••• 4821</strong><br>Expires 09/2028</div></div>
+      <div class="mfield"><label>Card Number</label><input type="text" placeholder="•••• •••• •••• ••••" maxlength="19"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="mfield"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"></div>
+        <div class="mfield"><label>CVV</label><input type="password" placeholder="•••" maxlength="4"></div>
+      </div>
+      <div class="mfield"><label>Name on Card</label><input type="text" placeholder="Margaret Okonkwo"></div>
+      <div class="mfooter"><button class="btn-mcancel" onclick="cm('mPayment')">Cancel</button><button class="btn-mprim btn-mgrn" onclick="cm('mPayment');showToast('💳','Payment method updated successfully.')">Save Card</button></div>
     </div>
   </div>
+</div>
 
-  <nav class="sidebar-nav">
-    <div class="nav-section-label">Main</div>
-    <a href="#" class="nav-item active">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-        <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-      </svg>
-      Dashboard
-    </a>
-    <a href="#" class="nav-item">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>
-      My Impact
-    </a>
-    <a href="#" class="nav-item">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-      </svg>
-      Donation History
-      <span class="nav-badge">10</span>
-    </a>
-    <a href="#" class="nav-item">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-        <polyline points="22,6 12,13 2,6"/>
-      </svg>
-      Recurring Gifts
-    </a>
-    <a href="#" class="nav-item">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-      </svg>
-      Tax Certificates
-    </a>
+<!-- Edit Recurring -->
+<div class="modal-overlay" id="mEditRec">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Edit Recurring Donation</div><button class="modal-x" onclick="cm('mEditRec')">✕</button></div>
+    <div class="modal-bd">
+      <div class="mfield"><label>Campaign</label><select><option>🇰🇪 Kenya Education Fund</option><option>🇨🇲 Cambodia Medical Relief</option><option>🇧🇷 Brazil Nutrition Programme</option></select></div>
+      <div class="mfield"><label>Monthly Amount ($)</label><input type="number" value="150" min="1"></div>
+      <div class="mfield"><label>Next Billing Date</label><input type="date" value="2026-03-01"></div>
+      <div class="mfooter"><button class="btn-mcancel" onclick="cm('mEditRec')">Cancel</button><button class="btn-mprim btn-mgrn" onclick="cm('mEditRec');showToast('✓','Recurring donation updated.')">Save Changes</button></div>
+    </div>
+  </div>
+</div>
 
-    <div class="nav-section-label" style="margin-top:8px;">Account</div>
-    <a href="#" class="nav-item">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
-      </svg>
-      Profile Settings
-    </a>
-    <a href="#" class="nav-item">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-      </svg>
-      Preferences
-    </a>
-    <a href="#" class="nav-item">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-      </svg>
-      Refer a Friend
-    </a>
+<!-- Pause -->
+<div class="modal-overlay" id="mPause">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Pause Recurring Donation</div><button class="modal-x" onclick="cm('mPause')">✕</button></div>
+    <div class="modal-bd">
+      <div class="info-row"><div class="ir-ic">⏸️</div><div class="ir-txt">Your <strong>$150/month</strong> to Kenya Education Fund will be paused. Resume anytime.</div></div>
+      <div class="mfield"><label>Pause duration</label><select><option>1 month</option><option>2 months</option><option>3 months</option><option>Indefinitely</option></select></div>
+      <div class="mfooter"><button class="btn-mcancel" onclick="cm('mPause')">Cancel</button><button class="btn-mprim" style="background:linear-gradient(135deg,#d97706,#f59e0b);box-shadow:0 3px 12px rgba(217,119,6,.25)" onclick="cm('mPause');showToast('⏸️','Recurring donation paused.')">Confirm Pause</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Refer Modal -->
+<div class="modal-overlay" id="mRefer">
+  <div class="modal">
+    <div class="modal-hd"><div class="modal-title">Refer a Friend</div><button class="modal-x" onclick="cm('mRefer')">✕</button></div>
+    <div class="modal-bd">
+      <p>Share your link. When a friend donates for the first time, you both earn an Impact Badge and we plant a tree in your name.</p>
+      <div class="ref-box" id="mRefLink">https://volkdonations.website/referrer?id=loading</div>
+      <button class="btn-copy" onclick="copyLink('mRefLink')">📋 Copy Link to Clipboard</button>
+      <div style="margin-top:13px"><div class="mfield"><label>Invite via email</label><input type="email" placeholder="friend@email.com"></div></div>
+      <div class="mfooter"><button class="btn-mcancel" onclick="cm('mRefer')">Close</button><button class="btn-mprim btn-mgrn" onclick="cm('mRefer');showToast('📨','Invitation email sent!')">Send Invitation</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo"><div class="lmark">V</div><div class="ltxt"><strong>Volk Donations</strong><span>Donor Portal</span></div></div>
+  <div class="sb-prof">
+    <div class="sb-av" id="sbAv">MO</div>
+    <div class="sb-name" id="sbNm">Margaret Okonkwo</div>
+    <div class="sb-email" id="sbEm">m.okonkwo@bridgepointcapital.com</div>
+    <div class="tier"><div class="tdot"></div>Champion Donor</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="nav-lbl">Main</div>
+    <button class="ni active" onclick="gp('dashboard',this)"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</button>
+    <button class="ni" onclick="gp('impact',this)"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>My Impact</button>
+    <button class="ni" onclick="gp('history',this)"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Donation History<span class="nbadge">10</span></button>
+    <button class="ni" onclick="gp('recurring',this)"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>Recurring Gifts</button>
+    <button class="ni" onclick="gp('taxcerts',this)"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Tax Certificates</button>
+    <div class="nav-lbl" style="margin-top:6px">Account</div>
+    <button class="ni" onclick="gp('profile',this)"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile Settings</button>
+    <button class="ni" onclick="gp('prefs',this)"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Preferences</button>
+    <button class="ni" onclick="openRefer()"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Refer a Friend</button>
   </nav>
-
-  <div class="sidebar-stats">
-    <div class="sidebar-stat">
-      <div class="sidebar-stat-val" id="statStreak">7</div>
-      <div class="sidebar-stat-label">Month Streak</div>
-    </div>
-    <div class="sidebar-stat">
-      <div class="sidebar-stat-val">38</div>
-      <div class="sidebar-stat-label">Countries</div>
-    </div>
-    <div class="sidebar-stat">
-      <div class="sidebar-stat-val">🥇</div>
-      <div class="sidebar-stat-label">Top 5% Donor</div>
-    </div>
-    <div class="sidebar-stat">
-      <div class="sidebar-stat-val">2022</div>
-      <div class="sidebar-stat-label">Member Since</div>
-    </div>
+  <div class="sb-stats">
+    <div class="mstat"><div class="mstat-v">7</div><div class="mstat-l">Month Streak</div></div>
+    <div class="mstat"><div class="mstat-v">38</div><div class="mstat-l">Countries</div></div>
+    <div class="mstat"><div class="mstat-v">🥇</div><div class="mstat-l">Top 5%</div></div>
+    <div class="mstat"><div class="mstat-v">2022</div><div class="mstat-l">Member Since</div></div>
   </div>
-
-  <div class="sidebar-logout">
-    <button class="btn-logout" onclick="handleLogout()">
-      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
-        <polyline points="16 17 21 12 16 7"/>
-        <line x1="21" y1="12" x2="9" y2="12"/>
-      </svg>
-      Sign Out
-    </button>
-  </div>
+  <div class="sb-foot"><button class="btn-lo" onclick="handleLogout()"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign Out</button></div>
 </aside>
 
-<!-- ═══════════════════════════════════════════
-     MAIN
-════════════════════════════════════════════ -->
+<!-- MAIN -->
 <div class="main">
 
-  <!-- TOPBAR -->
-  <header class="topbar">
-    <div class="topbar-left">
-      <h2 id="topbarGreeting">Good morning, Margaret ☀️</h2>
-      <p id="topbarDate">Thursday, 26 February 2026</p>
-    </div>
-    <div class="topbar-right">
-      <div class="topbar-action" title="Notifications">
-        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-          <path d="M13.73 21a2 2 0 01-3.46 0"/>
-        </svg>
-        <div class="notif-dot"></div>
-      </div>
-      <div class="topbar-action" title="Download Tax Certificate">
-        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-      </div>
-      <button class="topbar-btn-donate">
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-        </svg>
-        New Donation
-      </button>
-    </div>
-  </header>
-
-  <!-- PAGE CONTENT -->
-  <div class="content">
-
-    <!-- KPI CARDS -->
-    <div class="kpi-grid">
-      <div class="kpi-card green">
-        <div class="kpi-top">
-          <div class="kpi-icon green">💚</div>
-          <div class="kpi-badge up">↑ 18%</div>
-        </div>
-        <div class="kpi-value" id="kpiTotal">$0</div>
-        <div class="kpi-label">Total Donated (All Time)</div>
-      </div>
-      <div class="kpi-card gold">
-        <div class="kpi-top">
-          <div class="kpi-icon gold">📅</div>
-          <div class="kpi-badge up">↑ 24%</div>
-        </div>
-        <div class="kpi-value" id="kpiYear">$0</div>
-        <div class="kpi-label">Donated in 2026</div>
-      </div>
-      <div class="kpi-card blue">
-        <div class="kpi-top">
-          <div class="kpi-icon blue">👶</div>
-          <div class="kpi-badge up">↑ 9%</div>
-        </div>
-        <div class="kpi-value" id="kpiKids">0</div>
-        <div class="kpi-label">Children Reached</div>
-      </div>
-      <div class="kpi-card red">
-        <div class="kpi-top">
-          <div class="kpi-icon red">🔥</div>
-          <div class="kpi-badge up">Active</div>
-        </div>
-        <div class="kpi-value" id="kpiStreak">0</div>
-        <div class="kpi-label">Month Giving Streak</div>
-      </div>
-    </div>
-
-    <!-- CHARTS ROW -->
-    <div class="row row-2-1 reveal">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Monthly Giving Overview</div>
-            <div class="card-subtitle">Your donation history for the past 12 months</div>
-          </div>
-          <a href="#" class="card-action">View all →</a>
-        </div>
-        <div class="card-body chart-wrap">
-          <div id="barChart"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Giving by Cause</div>
-            <div class="card-subtitle">How your donations are allocated</div>
-          </div>
-        </div>
-        <div class="card-body chart-wrap">
-          <div id="donutChart"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- IMPACT + CAMPAIGNS ROW -->
-    <div class="row row-equal reveal">
-      <!-- Impact Metrics -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Your Real-World Impact</div>
-            <div class="card-subtitle">What your donations have funded directly</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="impact-grid">
-            <div class="impact-item">
-              <div class="impact-emoji">🍱</div>
-              <div>
-                <div class="impact-val" id="impactMeals">0</div>
-                <div class="impact-lbl">Meals Funded</div>
-              </div>
-            </div>
-            <div class="impact-item">
-              <div class="impact-emoji">🏥</div>
-              <div>
-                <div class="impact-val" id="impactMedical">0</div>
-                <div class="impact-lbl">Medical Visits</div>
-              </div>
-            </div>
-            <div class="impact-item">
-              <div class="impact-emoji">📚</div>
-              <div>
-                <div class="impact-val" id="impactBooks">0</div>
-                <div class="impact-lbl">School Kits</div>
-              </div>
-            </div>
-            <div class="impact-item">
-              <div class="impact-emoji">🌍</div>
-              <div>
-                <div class="impact-val">12</div>
-                <div class="impact-lbl">Countries Supported</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Next donation -->
-          <div style="margin-top:16px; padding:14px 16px; background:linear-gradient(135deg,rgba(0,168,107,0.06),rgba(0,168,107,0.02)); border:1px solid rgba(0,168,107,0.18); border-radius:var(--radius); display:flex; align-items:center; justify-content:space-between;">
-            <div>
-              <div style="font-size:11px;color:var(--text-3);font-weight:600;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:3px;">Next Recurring Gift</div>
-              <div style="font-size:14px;font-weight:700;color:var(--navy);">$150 · March 1, 2026</div>
-            </div>
-            <div style="font-family:'Fraunces',serif;font-size:24px;color:var(--green);">↻</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Campaign Progress -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Active Campaigns</div>
-            <div class="card-subtitle">Live fundraising goals you're supporting</div>
-          </div>
-          <a href="#" class="card-action">Explore →</a>
-        </div>
-        <div class="card-body">
-          <div class="campaign-item">
-            <div class="campaign-top">
-              <div class="campaign-name">
-                <span class="campaign-flag">🇰🇪</span>Kenya Education Fund
-              </div>
-              <span class="campaign-mine">✓ Your cause</span>
-            </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-              <div class="campaign-pct">83%</div>
-              <div style="font-size:11px;color:var(--text-3);">$124,500 of $150,000</div>
-            </div>
-            <div class="campaign-bar-track">
-              <div class="campaign-bar-fill green" data-width="83"></div>
-            </div>
-            <div class="campaign-meta">
-              <span>1,240 donors</span><span>14 days left</span>
-            </div>
-          </div>
-
-          <div class="campaign-item">
-            <div class="campaign-top">
-              <div class="campaign-name">
-                <span class="campaign-flag">🇨🇲</span>Cambodia Medical Relief
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-              <div class="campaign-pct">61%</div>
-              <div style="font-size:11px;color:var(--text-3);">$30,500 of $50,000</div>
-            </div>
-            <div class="campaign-bar-track">
-              <div class="campaign-bar-fill gold" data-width="61"></div>
-            </div>
-            <div class="campaign-meta">
-              <span>487 donors</span><span>31 days left</span>
-            </div>
-          </div>
-
-          <div class="campaign-item">
-            <div class="campaign-top">
-              <div class="campaign-name">
-                <span class="campaign-flag">🇧🇷</span>Brazil Nutrition Programme
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-              <div class="campaign-pct">42%</div>
-              <div style="font-size:11px;color:var(--text-3);">$42,000 of $100,000</div>
-            </div>
-            <div class="campaign-bar-track">
-              <div class="campaign-bar-fill blue" data-width="42"></div>
-            </div>
-            <div class="campaign-meta">
-              <span>821 donors</span><span>58 days left</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- DONATION TABLE + ACTIVITY FEED ROW -->
-    <div class="row row-3-2 reveal">
-      <!-- Donation History -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Donation History</div>
-            <div class="card-subtitle">Your 10 most recent transactions</div>
-          </div>
-          <a href="#" class="card-action">Download CSV →</a>
-        </div>
-        <div class="card-body" style="padding-left:0;padding-right:0;padding-bottom:0;">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Campaign</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Receipt</th>
-                </tr>
-              </thead>
-              <tbody id="donationTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Activity Feed + Quick Actions stacked -->
-      <div style="display:flex;flex-direction:column;gap:20px;">
-
-        <!-- Activity Feed -->
-        <div class="card" style="animation-delay:0.5s">
-          <div class="card-header">
-            <div class="feed-header">
-              <div class="card-title">Live Activity</div>
-              <div class="live-pill"><div class="live-dot"></div>LIVE</div>
-            </div>
-          </div>
-          <div class="card-body" style="padding-top:10px;">
-            <div class="feed-list" id="feedList"></div>
-          </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="card" style="animation-delay:0.6s">
-          <div class="card-header">
-            <div class="card-title">Quick Actions</div>
-          </div>
-          <div class="card-body">
-            <div class="action-grid">
-              <div class="action-btn" onclick="showToast('💳','Payment method updated.')">
-                <div class="action-icon" style="background:var(--blue-muted);">💳</div>
-                <div class="action-label">Update Payment</div>
-              </div>
-              <div class="action-btn" onclick="showToast('📄','Tax certificate downloaded for FY 2025.')">
-                <div class="action-icon" style="background:var(--green-muted);">📄</div>
-                <div class="action-label">Download Tax Cert</div>
-              </div>
-              <div class="action-btn" onclick="showToast('📨','Referral link copied to clipboard!')">
-                <div class="action-icon" style="background:var(--gold-muted);">📨</div>
-                <div class="action-label">Refer a Friend</div>
-              </div>
-              <div class="action-btn" onclick="showToast('⏸️','Recurring donation paused.')">
-                <div class="action-icon" style="background:var(--red-muted);">⏸️</div>
-                <div class="action-label">Pause Recurring</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div><!-- /content -->
-</div><!-- /main -->
-
-<!-- FOOTER -->
-<footer class="dashboard-footer">
-  <p>© 2026 Volk Donations · 501(c)(3) Nonprofit · EIN: 45-1234567</p>
-  <div>
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Use</a>
-    <a href="/contact">Support</a>
+<!-- TOPBAR -->
+<header class="topbar">
+  <div style="display:flex;align-items:center;gap:9px">
+    <button class="hbg" id="hbg" onclick="toggleSB()"><span></span><span></span><span></span></button>
+    <div class="tb-left"><h2 id="tgr">Good morning, Margaret ☀️</h2><p id="tdt">Thursday, 26 February 2026</p></div>
   </div>
+  <div class="tb-right">
+    <div class="tb-ic" onclick="om('mNotifs')" title="Notifications"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><div class="ndot"></div></div>
+    <div class="tb-ic" onclick="showToast('📄','Downloading FY 2025 tax certificate…')" title="Download Tax Cert"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+    <button class="btn-dnew" onclick="om('mDonate')"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New Donation</button>
+  </div>
+</header>
+
+<!-- PAGE: DASHBOARD -->
+<div class="pv active" id="pv-dashboard">
+  <div class="kpi-grid">
+    <div class="kc g"><div class="kctop"><div class="kcic g">💚</div><div class="kchip up">↑ 18%</div></div><div class="kcval" id="k1">$0</div><div class="kclbl">Total Donated (All Time)</div></div>
+    <div class="kc o"><div class="kctop"><div class="kcic o">📅</div><div class="kchip up">↑ 24%</div></div><div class="kcval" id="k2">$0</div><div class="kclbl">Donated in 2026</div></div>
+    <div class="kc b"><div class="kctop"><div class="kcic b">👶</div><div class="kchip up">↑ 9%</div></div><div class="kcval" id="k3">0</div><div class="kclbl">Children Reached</div></div>
+    <div class="kc p"><div class="kctop"><div class="kcic p">🔥</div><div class="kchip na">Active</div></div><div class="kcval" id="k4">0</div><div class="kclbl">Month Giving Streak</div></div>
+  </div>
+  <div class="gr gr21">
+    <div class="card"><div class="chd"><div><div class="ctl">Monthly Giving Overview</div><div class="csl">Donation activity — last 12 months</div></div><button class="clink" onclick="gp('history',null)">View all →</button></div><div class="cbd" style="padding-bottom:6px"><div id="barChart"></div></div></div>
+    <div class="card"><div class="chd"><div><div class="ctl">Giving by Cause</div><div class="csl">Allocation of your funds</div></div></div><div class="cbd" style="padding-bottom:6px"><div id="donutChart"></div></div></div>
+  </div>
+  <div class="gr gr11">
+    <div class="card">
+      <div class="chd"><div><div class="ctl">Your Real-World Impact</div><div class="csl">What your generosity has funded</div></div><button class="clink" onclick="gp('impact',null)">Full report →</button></div>
+      <div class="cbd">
+        <div class="ig">
+          <div class="ii"><div class="iemoji">🍱</div><div><div class="ival" id="im1">0</div><div class="ilbl">Meals Funded</div></div></div>
+          <div class="ii"><div class="iemoji">🏥</div><div><div class="ival" id="im2">0</div><div class="ilbl">Medical Visits</div></div></div>
+          <div class="ii"><div class="iemoji">📚</div><div><div class="ival" id="im3">0</div><div class="ilbl">School Kits</div></div></div>
+          <div class="ii"><div class="iemoji">🌍</div><div><div class="ival">12</div><div class="ilbl">Countries</div></div></div>
+        </div>
+        <div class="ngift"><div><div class="ngl">Next Recurring Gift</div><div class="ngv">$150 · March 1, 2026</div></div><div class="ngic">↻</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="chd"><div><div class="ctl">Active Campaigns</div><div class="csl">Live fundraising goals</div></div><button class="clink" onclick="om('mDonate')">Donate →</button></div>
+      <div class="cbd">
+        <div class="ci"><div class="citop"><div class="cin">🇰🇪 Kenya Education Fund</div><div class="cmine">✓ Your cause</div></div><div class="cnums"><div class="cpct">83%</div><div class="crsd">$124,500 of $150,000</div></div><div class="ctrack"><div class="cfill g" data-w="83"></div></div><div class="cmeta"><span>1,240 donors</span><span>14 days left</span></div></div>
+        <div class="ci"><div class="citop"><div class="cin">🇨🇲 Cambodia Medical Relief</div></div><div class="cnums"><div class="cpct">61%</div><div class="crsd">$30,500 of $50,000</div></div><div class="ctrack"><div class="cfill o" data-w="61"></div></div><div class="cmeta"><span>487 donors</span><span>31 days left</span></div></div>
+        <div class="ci"><div class="citop"><div class="cin">🇧🇷 Brazil Nutrition Programme</div></div><div class="cnums"><div class="cpct">42%</div><div class="crsd">$42,000 of $100,000</div></div><div class="ctrack"><div class="cfill b" data-w="42"></div></div><div class="cmeta"><span>821 donors</span><span>58 days left</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="gr gr32">
+    <div class="card">
+      <div class="chd"><div><div class="ctl">Recent Donations</div><div class="csl">Last 10 transactions</div></div><button class="clink" onclick="showToast('📥','Generating CSV export…')">Export CSV →</button></div>
+      <div class="cbd" style="padding:0"><div class="tw"><table><thead><tr><th>Date</th><th>Campaign</th><th>Amount</th><th>Status</th><th>Receipt</th></tr></thead><tbody id="tb1"></tbody></table></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="chd" style="padding-bottom:2px"><div style="display:flex;align-items:center;gap:7px"><div class="ctl">Live Activity</div><div class="lpill"><div class="ldot"></div>LIVE</div></div></div>
+        <div class="cbd" style="padding-top:7px"><div id="feedList"></div></div>
+      </div>
+      <div class="card">
+        <div class="chd"><div class="ctl">Quick Actions</div></div>
+        <div class="cbd">
+          <div class="agrid">
+            <button class="abtn" onclick="om('mPayment')"><div class="aic" style="background:var(--blue-muted)">💳</div><div class="albl">Update Payment</div></button>
+            <button class="abtn" onclick="showToast('📄','Preparing FY 2025 tax certificate…')"><div class="aic" style="background:var(--green-muted)">📄</div><div class="albl">Download Tax Cert</div></button>
+            <button class="abtn" onclick="openRefer()"><div class="aic" style="background:var(--gold-muted)">📨</div><div class="albl">Refer a Friend</div></button>
+            <button class="abtn" onclick="om('mPause')"><div class="aic" style="background:var(--red-muted)">⏸️</div><div class="albl">Pause Recurring</div></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: IMPACT -->
+<div class="pv" id="pv-impact">
+  <div class="ph"><h1>My Impact Report</h1><p>Everything your donations have funded across all campaigns and countries</p></div>
+  <div class="ibg">
+    <div class="ibc"><div class="ibem">🍱</div><div class="ibval">4,160</div><div class="iblbl">Meals Provided</div></div>
+    <div class="ibc"><div class="ibem">🏥</div><div class="ibval">312</div><div class="iblbl">Medical Visits Funded</div></div>
+    <div class="ibc"><div class="ibem">📚</div><div class="ibval">89</div><div class="iblbl">School Kits Delivered</div></div>
+    <div class="ibc"><div class="ibem">💧</div><div class="ibval">2,800</div><div class="iblbl">Litres of Clean Water</div></div>
+    <div class="ibc"><div class="ibem">👶</div><div class="ibval">218</div><div class="iblbl">Children Reached</div></div>
+    <div class="ibc"><div class="ibem">🏠</div><div class="ibval">14</div><div class="iblbl">Emergency Shelter Nights</div></div>
+  </div>
+  <div class="gr gr11" style="margin-bottom:16px">
+    <div class="card"><div class="chd"><div><div class="ctl">Giving Trend</div><div class="csl">12-month history</div></div></div><div class="cbd"><div id="impactLine"></div></div></div>
+    <div class="card"><div class="chd"><div><div class="ctl">Cause Distribution</div><div class="csl">Where your money goes</div></div></div><div class="cbd"><div id="impactRadial"></div></div></div>
+  </div>
+  <div class="card">
+    <div class="chd"><div><div class="ctl">Countries You've Supported</div><div class="csl">12 countries reached through your giving</div></div></div>
+    <div class="cbd">
+      <div class="cgrid">
+        <div class="ccard"><div class="cflag">🇰🇪</div><div class="ccname">Kenya</div><div class="ccamt">$8,200 donated</div></div>
+        <div class="ccard"><div class="cflag">🇨🇲</div><div class="ccname">Cambodia</div><div class="ccamt">$2,100 donated</div></div>
+        <div class="ccard"><div class="cflag">🇺🇬</div><div class="ccname">Uganda</div><div class="ccamt">$1,400 donated</div></div>
+        <div class="ccard"><div class="cflag">🇧🇷</div><div class="ccname">Brazil</div><div class="ccamt">$1,100 donated</div></div>
+        <div class="ccard"><div class="cflag">🇮🇳</div><div class="ccname">India</div><div class="ccamt">$620 donated</div></div>
+        <div class="ccard"><div class="cflag">🇵🇭</div><div class="ccname">Philippines</div><div class="ccamt">$480 donated</div></div>
+        <div class="ccard"><div class="cflag">🇪🇹</div><div class="ccname">Ethiopia</div><div class="ccamt">$320 donated</div></div>
+        <div class="ccard"><div class="cflag">🇧🇩</div><div class="ccname">Bangladesh</div><div class="ccamt">$280 donated</div></div>
+        <div class="ccard"><div class="cflag">🇳🇬</div><div class="ccname">Nigeria</div><div class="ccamt">$180 donated</div></div>
+        <div class="ccard"><div class="cflag">🇲🇿</div><div class="ccname">Mozambique</div><div class="ccamt">$80 donated</div></div>
+        <div class="ccard"><div class="cflag">🇵🇰</div><div class="ccname">Pakistan</div><div class="ccamt">$40 donated</div></div>
+        <div class="ccard"><div class="cflag">🇭🇹</div><div class="ccname">Haiti</div><div class="ccamt">$20 donated</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: HISTORY -->
+<div class="pv" id="pv-history">
+  <div class="ph"><h1>Donation History</h1><p>Complete record of all your transactions</p></div>
+  <div class="card">
+    <div class="chd"><div><div class="ctl">All Transactions</div><div class="csl">10 donations on record</div></div><button class="clink" onclick="showToast('📥','Generating full export…')">Export CSV →</button></div>
+    <div class="cbd" style="padding:0"><div class="tw"><table><thead><tr><th>Date</th><th>Campaign</th><th>Country</th><th>Amount</th><th>Type</th><th>Status</th><th>Receipt</th></tr></thead><tbody id="tb2"></tbody></table></div></div>
+  </div>
+</div>
+
+<!-- PAGE: RECURRING -->
+<div class="pv" id="pv-recurring">
+  <div class="ph"><h1>Recurring Gifts</h1><p>Manage your automatic monthly donations</p></div>
+  <div class="rcard">
+    <div class="rinfo"><div class="ric" style="background:var(--green-muted)">🇰🇪</div><div><div class="rtitle">Kenya Education Fund</div><div class="rmeta">Monthly · Next: March 1, 2026 · Visa •••• 4821</div></div></div>
+    <div style="display:flex;align-items:center;gap:11px"><div><div class="ramt">$150</div><div class="rfreq">/ month</div></div><div class="racts"><button class="brc" onclick="om('mEditRec')">Edit</button><button class="brc red" onclick="om('mPause')">Pause</button></div></div>
+  </div>
+  <div class="rcard">
+    <div class="rinfo"><div class="ric" style="background:var(--blue-muted)">🇺🇬</div><div><div class="rtitle">Uganda Clean Water Initiative</div><div class="rmeta">Quarterly · Next: April 1, 2026 · Visa •••• 4821</div></div></div>
+    <div style="display:flex;align-items:center;gap:11px"><div><div class="ramt">$75</div><div class="rfreq">/ quarter</div></div><div class="racts"><button class="brc" onclick="om('mEditRec')">Edit</button><button class="brc red" onclick="om('mPause')">Pause</button></div></div>
+  </div>
+  <div style="margin-top:6px"><button class="btn-dnew" onclick="om('mDonate')">+ Add New Recurring Gift</button></div>
+</div>
+
+<!-- PAGE: TAX CERTS -->
+<div class="pv" id="pv-taxcerts">
+  <div class="ph"><h1>Tax Certificates</h1><p>Download your annual tax-deductible giving statements</p></div>
+  <div class="card"><div class="cbd">
+    <div class="citem"><div class="cinfo"><div class="cicn">📄</div><div><div class="cyear">FY 2025</div><div class="cmeta2">Jan 1 – Dec 31, 2025 · Total: $11,570.00</div></div></div><button class="bdl" onclick="showToast('📄','FY 2025 certificate downloaded.')">⬇ Download PDF</button></div>
+    <div class="citem"><div class="cinfo"><div class="cicn">📄</div><div><div class="cyear">FY 2024</div><div class="cmeta2">Jan 1 – Dec 31, 2024 · Total: $2,100.00</div></div></div><button class="bdl" onclick="showToast('📄','FY 2024 certificate downloaded.')">⬇ Download PDF</button></div>
+    <div class="citem"><div class="cinfo"><div class="cicn">📄</div><div><div class="cyear">FY 2023</div><div class="cmeta2">Jan 1 – Dec 31, 2023 · Total: $1,050.00</div></div></div><button class="bdl" onclick="showToast('📄','FY 2023 certificate downloaded.')">⬇ Download PDF</button></div>
+    <div class="citem" style="opacity:.55"><div class="cinfo"><div class="cicn">📄</div><div><div class="cyear">FY 2022</div><div class="cmeta2">Jan 1 – Dec 31, 2022 · Total: $100.00</div></div></div><button class="bdl" onclick="showToast('📄','FY 2022 certificate downloaded.')">⬇ Download PDF</button></div>
+  </div></div>
+</div>
+
+<!-- PAGE: PROFILE -->
+<div class="pv" id="pv-profile">
+  <div class="ph"><h1>Profile Settings</h1><p>Manage your personal information and account details</p></div>
+  <div class="ppc">
+    <div class="pav-big" id="pavBig">MO</div>
+    <div class="pnb" id="pnBig">Margaret Okonkwo</div>
+    <div class="peb" id="peBig">m.okonkwo@bridgepointcapital.com</div>
+    <div class="pbadges"><div class="pb gold">🏆 Champion Donor</div><div class="pb green">✓ Email Verified</div><div class="pb blue">🌍 Global Supporter</div></div>
+    <div class="sdiv"></div>
+    <div class="fgrid">
+      <div class="ff"><label>First Name</label><input type="text" id="pfF" value="Margaret"></div>
+      <div class="ff"><label>Last Name</label><input type="text" id="pfL" value="Okonkwo"></div>
+      <div class="ff"><label>Email</label><input type="email" id="pfE" value="m.okonkwo@bridgepointcapital.com"></div>
+      <div class="ff"><label>Phone</label><input type="tel" value="+254 712 345 678"></div>
+      <div class="ff"><label>Country</label><select><option selected>Kenya</option><option>Uganda</option><option>United States</option><option>United Kingdom</option><option>Germany</option></select></div>
+      <div class="ff"><label>Currency</label><select><option>USD – US Dollar</option><option>KES – Kenyan Shilling</option><option>EUR – Euro</option></select></div>
+    </div>
+    <div style="margin-top:18px;display:flex;gap:9px;flex-wrap:wrap">
+      <button class="btn-save" onclick="saveProf()">Save Changes</button>
+      <button class="btn-mcancel" style="padding:9px 16px;border-radius:var(--r-sm);cursor:pointer" onclick="om('mPayment')">Update Payment</button>
+    </div>
+    <div class="sdiv"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div><div style="font-size:13px;font-weight:600;color:var(--text)">Change Password</div><div style="font-size:11px;color:var(--text-3)">Last changed 6 months ago</div></div>
+      <button class="brc" onclick="showToast('🔐','Password reset email sent.')">Send Reset Email</button>
+    </div>
+    <div style="margin-top:13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div><div style="font-size:13px;font-weight:600;color:var(--red)">Delete Account</div><div style="font-size:11px;color:var(--text-3)">Permanently remove your account and data</div></div>
+      <button class="brc red" onclick="showToast('⚠️','Please contact support to delete your account.')">Request Deletion</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: PREFERENCES -->
+<div class="pv" id="pv-prefs">
+  <div class="ph"><h1>Preferences</h1><p>Customise notifications and privacy settings</p></div>
+  <div class="ppc">
+    <div class="ctl" style="margin-bottom:14px">Email Notifications</div>
+    <div class="pr"><div><div class="prl">Donation receipts</div><div class="prs">Receive a receipt after each donation</div></div><label class="tgl"><input type="checkbox" checked onchange="pc(this,'Donation receipts')"><div class="tsl"></div></label></div>
+    <div class="pr"><div><div class="prl">Campaign updates</div><div class="prs">Progress updates on campaigns you support</div></div><label class="tgl"><input type="checkbox" checked onchange="pc(this,'Campaign updates')"><div class="tsl"></div></label></div>
+    <div class="pr"><div><div class="prl">Monthly impact reports</div><div class="prs">Summary of your impact each month</div></div><label class="tgl"><input type="checkbox" checked onchange="pc(this,'Monthly impact reports')"><div class="tsl"></div></label></div>
+    <div class="pr"><div><div class="prl">New campaign alerts</div><div class="prs">Notify me when new campaigns launch</div></div><label class="tgl"><input type="checkbox" onchange="pc(this,'New campaign alerts')"><div class="tsl"></div></label></div>
+    <div class="pr"><div><div class="prl">Referral activity</div><div class="prs">Updates when referred friends donate</div></div><label class="tgl"><input type="checkbox" checked onchange="pc(this,'Referral activity')"><div class="tsl"></div></label></div>
+    <div class="sdiv"></div>
+    <div class="ctl" style="margin-bottom:14px">Privacy</div>
+    <div class="pr"><div><div class="prl">Show on public leaderboard</div><div class="prs">Your name may appear on our donor wall</div></div><label class="tgl"><input type="checkbox" checked onchange="pc(this,'Public leaderboard')"><div class="tsl"></div></label></div>
+    <div class="pr"><div><div class="prl">Anonymous donations</div><div class="prs">Make individual donations anonymous</div></div><label class="tgl"><input type="checkbox" onchange="pc(this,'Anonymous donations')"><div class="tsl"></div></label></div>
+    <div style="margin-top:18px"><button class="btn-save" onclick="showToast('✓','Preferences saved.')">Save Preferences</button></div>
+  </div>
+</div>
+
+<!-- PAGE: REFER -->
+<div class="pv" id="pv-refer">
+  <div class="ph"><h1>Refer a Friend</h1><p>Invite friends and colleagues to join Volk Donations</p></div>
+  <div class="rhero">
+    <h2>Share the Gift of Giving 💚</h2>
+    <p>When a friend donates for the first time using your link, you both earn an exclusive Impact Badge and we plant a tree in your name.</p>
+    <div class="rldisplay" id="rlDisplay">https://volkdonations.website/referrer?id=MO-364928</div>
+    <button class="btn-cbig" onclick="copyLink('rlDisplay')">📋 Copy Referral Link</button>
+  </div>
+  <div class="rstats">
+    <div class="rscard"><div class="rsval">3</div><div class="rslbl">Friends Referred</div></div>
+    <div class="rscard"><div class="rsval">2</div><div class="rslbl">Active Donors</div></div>
+    <div class="rscard"><div class="rsval">$420</div><div class="rslbl">Donations from Referrals</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="chd"><div class="ctl">Your Referred Friends</div></div>
+    <div class="cbd" style="padding-top:8px">
+      <div class="citem"><div class="cinfo"><div class="cicn">👤</div><div><div class="cyear" style="font-size:13px">James Whitfield</div><div class="cmeta2">james.whitfield@yahoo.com · Joined Jan 2026 · $200 donated</div></div></div><div class="pb green" style="font-size:10px">Active</div></div>
+      <div class="citem"><div class="cinfo"><div class="cicn">👤</div><div><div class="cyear" style="font-size:13px">Rajesh Patel</div><div class="cmeta2">rajesh.patel@outlook.com · Joined Dec 2025 · $220 donated</div></div></div><div class="pb green" style="font-size:10px">Active</div></div>
+      <div class="citem" style="opacity:.65"><div class="cinfo"><div class="cicn">👤</div><div><div class="cyear" style="font-size:13px">Invited Contact</div><div class="cmeta2">friend@email.com · Invitation sent Feb 2026 · Pending</div></div></div><div class="pb gold" style="font-size:10px;border:none">Pending</div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+</div><!-- /layout -->
+
+<footer class="dfooter">
+  <p>© 2026 Volk Donations · 501(c)(3) Nonprofit · EIN: 45-1234567</p>
+  <div class="dflinks"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Support</a></div>
 </footer>
 
 <script>
-(function () {
-  'use strict';
+(function(){
+'use strict';
 
-  // ═══════════════════════════════════════════════════════════
-  // SESSION AUTH — calls /api/me, redirects if not authenticated
-  // ═══════════════════════════════════════════════════════════
+// AUTH
+async function checkSession(){
+  try{
+    const r=await fetch('/api/me',{method:'GET',credentials:'same-origin',headers:{'Accept':'application/json'}});
+    if(r.status===401||r.status===403){window.location.replace('/auth/login');return null;}
+    if(!r.ok)return null;
+    try{return await r.json();}catch{return null;}
+  }catch{return null;}
+}
 
-  async function checkSession() {
-    try {
-      const res = await fetch('/api/me', {
-        method: 'GET',
-        credentials: 'same-origin',
-        headers: { 'Accept': 'application/json' },
-      });
+// DATA
+const D={name:'Margaret Okonkwo',email:'m.okonkwo@bridgepointcapital.com',total:14820,year:3250,kids:218,streak:7,meals:4160,medical:312,books:89};
+const REFERID='MO-'+Math.floor(100000+Math.random()*900000);
+const REFERURL='https://volkdonations.website/referrer?id='+REFERID;
+['rlDisplay','mRefLink'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=REFERURL;});
 
-      if (res.status === 401 || res.status === 403) {
-        window.location.replace('/auth/login');
-        return null;
-      }
+const TXS=[
+  {d:'Feb 01, 2026',c:'Kenya Education Fund',f:'🇰🇪',a:'$150.00',t:'Recurring',s:'recurring'},
+  {d:'Jan 15, 2026',c:'Cambodia Medical Relief',f:'🇨🇲',a:'$75.00',t:'One-time',s:'completed'},
+  {d:'Jan 01, 2026',c:'Kenya Education Fund',f:'🇰🇪',a:'$150.00',t:'Recurring',s:'recurring'},
+  {d:'Dec 18, 2025',c:'Brazil Nutrition Prog.',f:'🇧🇷',a:'$200.00',t:'One-time',s:'completed'},
+  {d:'Dec 01, 2025',c:'Kenya Education Fund',f:'🇰🇪',a:'$150.00',t:'Recurring',s:'recurring'},
+  {d:'Nov 22, 2025',c:'Uganda Clean Water',f:'🇺🇬',a:'$100.00',t:'One-time',s:'completed'},
+  {d:'Nov 01, 2025',c:'Kenya Education Fund',f:'🇰🇪',a:'$150.00',t:'Recurring',s:'recurring'},
+  {d:'Oct 14, 2025',c:'India Shelter Project',f:'🇮🇳',a:'$50.00',t:'One-time',s:'completed'},
+  {d:'Oct 01, 2025',c:'Kenya Education Fund',f:'🇰🇪',a:'$150.00',t:'Recurring',s:'recurring'},
+  {d:'Sep 30, 2025',c:'Philippines Relief Fund',f:'🇵🇭',a:'$275.00',t:'One-time',s:'completed'},
+];
+const FEED=[
+  {n:'David Chen',a:'$50',c:'Kenya Education Fund',f:'🇰🇪',col:'#3b82f6',t:'just now'},
+  {n:'Amara Diallo',a:'$200',c:'Cambodia Medical Relief',f:'🇨🇲',col:'#8b5cf6',t:'2 min ago'},
+  {n:'Stefan Müller',a:'$500',c:'Brazil Nutrition Prog.',f:'🇧🇷',col:'#f0a500',t:'5 min ago'},
+  {n:'Priya Nair',a:'$100',c:'Uganda Clean Water',f:'🇺🇬',col:'#00a86b',t:'9 min ago'},
+  {n:'James Whitfield',a:'$30',c:'India Shelter Project',f:'🇮🇳',col:'#ef4444',t:'12 min ago'},
+  {n:'Chioma Adeyemi',a:'$1,000',c:'Kenya Education Fund',f:'🇰🇪',col:'#00c47d',t:'18 min ago'},
+  {n:'Rajesh Patel',a:'$75',c:'Philippines Relief Fund',f:'🇵🇭',col:'#6366f1',t:'23 min ago'},
+  {n:'Lucía Fernández',a:'$250',c:'Brazil Nutrition Prog.',f:'🇧🇷',col:'#ec4899',t:'29 min ago'},
+];
 
-      if (!res.ok) {
-        return null;
-      }
+// COUNTER
+function cu(el,target,pre,suf,dur){pre=pre||'';suf=suf||'';dur=dur||1400;const s=performance.now();function t(n){const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,4);el.textContent=pre+Math.round(target*e).toLocaleString()+suf;if(p<1)requestAnimationFrame(t);else el.textContent=pre+target.toLocaleString()+suf;}requestAnimationFrame(t);}
 
-      let data;
-      try { data = await res.json(); } catch { return null; }
-      return data; // { name, email, userId }
+// PROFILE
+function setProfile(srv){
+  const nm=(srv&&typeof srv.name==='string')?srv.name.replace(/[<>]/g,''):D.name;
+  const em=(srv&&typeof srv.email==='string')?srv.email.replace(/[<>]/g,''):D.email;
+  const pts=nm.trim().split(/\s+/);
+  const ini=((pts[0]?.[0]||'')+(pts[1]?.[0]||'')).toUpperCase()||'D';
+  const first=pts[0]||'Donor';
+  ['sbAv','pavBig'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=ini;});
+  ['sbNm','pnBig'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=nm;});
+  ['sbEm','peBig'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=em;});
+  document.getElementById('dCE').textContent=em;
+  const h=new Date().getHours();
+  const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  const emoji=h<12?'☀️':h<17?'🌤️':'🌙';
+  document.getElementById('tgr').textContent=g+', '+first+' '+emoji;
+  document.getElementById('tdt').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
 
-    } catch {
-      return null;
-    }
+// KPIs
+function renderKPIs(){setTimeout(()=>{cu(document.getElementById('k1'),D.total,'$','',1600);cu(document.getElementById('k2'),D.year,'$','',1400);cu(document.getElementById('k3'),D.kids,'','',1200);cu(document.getElementById('k4'),D.streak,'',' mo',800);cu(document.getElementById('im1'),D.meals,'','',1600);cu(document.getElementById('im2'),D.medical,'','',1400);cu(document.getElementById('im3'),D.books,'','',1200);},500);}
+
+// CHARTS
+const CR={bar:0,donut:0,line:0,rad:0};
+function renderMainCharts(){
+  if(!CR.bar){new ApexCharts(document.getElementById('barChart'),{series:[{name:'Donated',data:[200,150,300,150,200,250,150,400,200,350,250,450]}],chart:{type:'bar',height:220,toolbar:{show:false},fontFamily:'Plus Jakarta Sans,sans-serif',animations:{speed:800}},plotOptions:{bar:{borderRadius:5,columnWidth:'50%'}},colors:['#00a86b'],fill:{type:'gradient',gradient:{shade:'light',type:'vertical',gradientToColors:['#00c47d'],opacityFrom:1,opacityTo:.7}},dataLabels:{enabled:false},grid:{borderColor:'#e2eaf4',strokeDashArray:4,xaxis:{lines:{show:false}}},xaxis:{categories:['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],axisBorder:{show:false},axisTicks:{show:false},labels:{style:{colors:'#8899aa',fontSize:'10px'}}},yaxis:{labels:{formatter:v=>'$'+v,style:{colors:'#8899aa',fontSize:'10px'}}},tooltip:{y:{formatter:v=>'$'+v.toLocaleString()},theme:'light'}}).render();CR.bar=1;}
+  if(!CR.donut){new ApexCharts(document.getElementById('donutChart'),{series:[38,22,18,13,9],chart:{type:'donut',height:220,fontFamily:'Plus Jakarta Sans,sans-serif',animations:{speed:800}},labels:['Education','Medical','Nutrition','Clean Water','Shelter'],colors:['#00a86b','#3b82f6','#f0a500','#8b5cf6','#ef4444'],dataLabels:{enabled:false},legend:{position:'bottom',fontSize:'10px',markers:{width:7,height:7,radius:7},labels:{colors:'#4a5568'}},plotOptions:{pie:{donut:{size:'65%',labels:{show:true,total:{show:true,label:'Total',formatter:()=>'$'+D.total.toLocaleString(),color:'#1a3254',fontSize:'14px',fontFamily:'Fraunces,serif',fontWeight:600}}}}},stroke:{width:2,colors:['#fff']},tooltip:{y:{formatter:v=>v+'%'},theme:'light'}}).render();CR.donut=1;}
+}
+function renderImpactCharts(){
+  if(!CR.line){new ApexCharts(document.getElementById('impactLine'),{series:[{name:'Donated',data:[200,150,300,150,200,250,150,400,200,350,250,450]}],chart:{type:'area',height:210,toolbar:{show:false},fontFamily:'Plus Jakarta Sans,sans-serif',animations:{speed:800}},stroke:{curve:'smooth',width:2.5},colors:['#00a86b'],fill:{type:'gradient',gradient:{shadeIntensity:1,opacityFrom:.35,opacityTo:.02,stops:[0,90,100]}},dataLabels:{enabled:false},grid:{borderColor:'#e2eaf4',strokeDashArray:4},xaxis:{categories:['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],axisBorder:{show:false},axisTicks:{show:false},labels:{style:{colors:'#8899aa',fontSize:'10px'}}},yaxis:{labels:{formatter:v=>'$'+v,style:{colors:'#8899aa',fontSize:'10px'}}},tooltip:{y:{formatter:v=>'$'+v.toLocaleString()},theme:'light'}}).render();CR.line=1;}
+  if(!CR.rad){new ApexCharts(document.getElementById('impactRadial'),{series:[38,22,18,13,9],chart:{type:'radialBar',height:210,fontFamily:'Plus Jakarta Sans,sans-serif',animations:{speed:800}},labels:['Education','Medical','Nutrition','Water','Shelter'],colors:['#00a86b','#3b82f6','#f0a500','#8b5cf6','#ef4444'],plotOptions:{radialBar:{hollow:{size:'28%'},dataLabels:{name:{fontSize:'10px'},value:{fontSize:'11px',fontFamily:'Fraunces,serif'}}}},legend:{show:true,position:'bottom',fontSize:'10px',labels:{colors:'#4a5568'}}}).render();CR.rad=1;}
+}
+
+// TABLE
+function renderTable(tbId,full){
+  const tb=document.getElementById(tbId);if(!tb)return;tb.innerHTML='';
+  TXS.forEach(tx=>{
+    const tr=document.createElement('tr');
+    let h=`<td style="color:var(--text-3);white-space:nowrap;font-size:11.5px">${tx.d}</td><td>${tx.f} ${tx.c}</td>`;
+    if(full)h+=`<td style="font-size:12px">${tx.f}</td>`;
+    h+=`<td><span class="tamt">${tx.a}</span></td>`;
+    if(full)h+=`<td style="font-size:11.5px;color:var(--text-3)">${tx.t}</td>`;
+    h+=`<td><span class="spill ${tx.s}"><span class="sdot"></span>${tx.s.charAt(0).toUpperCase()+tx.s.slice(1)}</span></td><td><button class="bpdf" onclick="showToast('📋','Receipt for ${tx.a} downloaded.')">PDF</button></td>`;
+    tr.innerHTML=h;tb.appendChild(tr);
+  });
+}
+
+// FEED
+let fi=0;
+function renderFeed(){
+  const list=document.getElementById('feedList');if(!list)return;
+  list.innerHTML='';
+  for(let i=0;i<5;i++){
+    const e=FEED[(fi+i)%FEED.length];
+    const ini=e.n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const d=document.createElement('div');d.className='fi';
+    d.innerHTML=`<div class="fav" style="background:${e.col}">${ini}</div><div><div class="ftxt"><strong>${e.n}</strong> donated <span class="famt">${e.a}</span> to ${e.f} ${e.c}</div><div class="ftime">${e.t}</div></div>`;
+    list.appendChild(d);
+    setTimeout(()=>d.classList.add('vis'),i*70);
   }
+}
+function rotateFeed(){fi=(fi+1)%FEED.length;FEED.forEach((e,i)=>{const m=[0,1,3,6,10,16,22,29];const v=m[(i+fi)%m.length];e.t=v===0?'just now':v+' min ago';});renderFeed();}
 
-  // ═══════════════════════════════════════════════════════════
-  // DONOR PROFILE & DASHBOARD DATA
-  // ═══════════════════════════════════════════════════════════
+// CAMPAIGN BARS
+function animBars(){document.querySelectorAll('.cfill[data-w]').forEach(b=>{setTimeout(()=>{b.style.width=b.getAttribute('data-w')+'%';},600);});}
 
-  const DONOR = {
-    name:      'Margaret Okonkwo',
-    email:     'm.okonkwo@bridgepointcapital.com',
-    initials:  'MO',
-    since:     2022,
-    tier:      'Champion Donor',
-    total:     14820,
-    yearTotal: 3250,
-    kidsReached: 218,
-    streak:    7,
-    meals:     4160,
-    medical:   312,
-    books:     89,
-  };
+// NAV
+window.gp=function(page,btn){
+  document.querySelectorAll('.pv').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  const pv=document.getElementById('pv-'+page);if(pv)pv.classList.add('active');
+  if(btn)btn.classList.add('active');
+  else document.querySelectorAll('.ni').forEach(n=>{if(n.textContent.toLowerCase().includes(page.replace('-',' ')))n.classList.add('active');});
+  if(page==='dashboard')renderMainCharts();
+  if(page==='impact'){renderImpactCharts();}
+  if(page==='history'){renderTable('tb2',true);}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(window.innerWidth<=900)document.getElementById('sidebar').classList.remove('open');
+};
 
-  const MONTHLY_DATA = {
-    months:  ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb'],
-    amounts: [200, 150, 300, 150, 200, 250, 150, 400, 200, 350, 250, 450],
-  };
+// MODAL
+window.om=function(id){document.getElementById(id).classList.add('open');};
+window.cm=function(id){document.getElementById(id).classList.remove('open');};
+document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));});
 
-  const CAUSE_DATA = {
-    labels: ['Education','Medical','Nutrition','Clean Water','Shelter'],
-    series: [38, 22, 18, 13, 9],
-    colors: ['#00a86b','#3b82f6','#f0a500','#8b5cf6','#ef4444'],
-  };
+// DONATE FLOW
+let selAmt='100';
+window.sa=function(btn,amt){document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');selAmt=amt;document.getElementById('dAmt').value=amt;};
+window.dn=function(step){[1,2,3].forEach(s=>{document.getElementById('ds'+s).classList.toggle('active',s===step);document.getElementById('ps'+s).classList.toggle('done',s<=step);});if(step===3){const a=document.getElementById('dAmt').value||selAmt;const c=document.getElementById('dCamp').value;document.getElementById('dCA').textContent='$'+parseFloat(a).toFixed(2);document.getElementById('dCC').textContent=c;}};
+window.submitDonate=function(){cm('mDonate');dn(1);showToast('💚','Donation confirmed! Thank you for your generosity.');};
 
-  const TRANSACTIONS = [
-    { date:'Feb 01, 2026', campaign:'Kenya Education Fund',    amount:'$150.00', status:'recurring', flag:'🇰🇪' },
-    { date:'Jan 15, 2026', campaign:'Cambodia Medical Relief', amount:'$75.00',  status:'completed', flag:'🇨🇲' },
-    { date:'Jan 01, 2026', campaign:'Kenya Education Fund',    amount:'$150.00', status:'recurring', flag:'🇰🇪' },
-    { date:'Dec 18, 2025', campaign:'Brazil Nutrition Prog.',  amount:'$200.00', status:'completed', flag:'🇧🇷' },
-    { date:'Dec 01, 2025', campaign:'Kenya Education Fund',    amount:'$150.00', status:'recurring', flag:'🇰🇪' },
-    { date:'Nov 22, 2025', campaign:'Uganda Clean Water',      amount:'$100.00', status:'completed', flag:'🇺🇬' },
-    { date:'Nov 01, 2025', campaign:'Kenya Education Fund',    amount:'$150.00', status:'recurring', flag:'🇰🇪' },
-    { date:'Oct 14, 2025', campaign:'India Shelter Project',   amount:'$50.00',  status:'completed', flag:'🇮🇳' },
-    { date:'Oct 01, 2025', campaign:'Kenya Education Fund',    amount:'$150.00', status:'recurring', flag:'🇰🇪' },
-    { date:'Sep 30, 2025', campaign:'Philippines Relief Fund', amount:'$275.00', status:'completed', flag:'🇵🇭' },
-  ];
+// REFER
+window.openRefer=function(){document.getElementById('mRefLink').textContent=REFERURL;om('mRefer');};
+window.copyLink=function(srcId){const txt=document.getElementById(srcId).textContent;if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>showToast('📋','Referral link copied to clipboard!'));}else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('📋','Referral link copied to clipboard!');}};
 
-  const FEED_ENTRIES = [
-    { name:'David Chen',       email:'d.chen@gmail.com',                      amount:'$50',   campaign:'Kenya Education Fund',    flag:'🇰🇪', color:'#3b82f6', ago:'just now' },
-    { name:'Amara Diallo',     email:'adiallo@meridianfoundation.org',         amount:'$200',  campaign:'Cambodia Medical Relief',  flag:'🇨🇲', color:'#8b5cf6', ago:'2 min ago' },
-    { name:'Stefan Müller',    email:'s.mueller@volkswagen-stiftung.de',       amount:'$500',  campaign:'Brazil Nutrition Prog.',   flag:'🇧🇷', color:'#f0a500', ago:'5 min ago' },
-    { name:'Priya Nair',       email:'p.nair@tatacharitabletrust.in',          amount:'$100',  campaign:'Uganda Clean Water',       flag:'🇺🇬', color:'#00a86b', ago:'9 min ago' },
-    { name:'James Whitfield',  email:'james.whitfield@yahoo.com',              amount:'$30',   campaign:'India Shelter Project',    flag:'🇮🇳', color:'#ef4444', ago:'12 min ago' },
-    { name:'Chioma Adeyemi',   email:'c.adeyemi@lafargeholcim-foundation.org', amount:'$1,000',campaign:'Kenya Education Fund',    flag:'🇰🇪', color:'#00c47d', ago:'18 min ago' },
-    { name:'Rajesh Patel',     email:'rajesh.patel@outlook.com',               amount:'$75',   campaign:'Philippines Relief Fund',  flag:'🇵🇭', color:'#6366f1', ago:'23 min ago' },
-    { name:'Lucía Fernández',  email:'l.fernandez@iberostar-foundation.org',   amount:'$250',  campaign:'Brazil Nutrition Prog.',   flag:'🇧🇷', color:'#ec4899', ago:'29 min ago' },
-  ];
+// PROFILE SAVE
+window.saveProf=function(){
+  const n=(document.getElementById('pfF').value+' '+document.getElementById('pfL').value).trim();
+  const em=document.getElementById('pfE').value;
+  if(n){['sbNm','pnBig'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=n;});}
+  if(em){['sbEm','peBig'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=em;});}
+  showToast('✓','Profile updated successfully.');
+};
 
-  // ═══════════════════════════════════════════════════════════
-  // UTILITY — animated counter
-  // ═══════════════════════════════════════════════════════════
+// PREFS
+window.pc=function(el,lbl){showToast(el.checked?'🔔':'🔕',lbl+' '+(el.checked?'enabled':'disabled')+'.');};
 
-  function countUp(el, target, prefix, suffix, duration) {
-    prefix  = prefix  || '';
-    suffix  = suffix  || '';
-    duration = duration || 1400;
-    const start    = performance.now();
-    const isFloat  = String(target).includes('.');
+// TOAST
+let tT=null;
+window.showToast=function(ic,msg){const t=document.getElementById('toast');document.getElementById('tic').textContent=ic;document.getElementById('tmsg').textContent=msg;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),3400);};
 
-    function step(now) {
-      const elapsed  = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease     = 1 - Math.pow(1 - progress, 4);
-      const current  = Math.round(target * ease);
-      el.textContent = prefix + current.toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = prefix + target.toLocaleString() + suffix;
-    }
-    requestAnimationFrame(step);
-  }
+// LOGOUT
+window.handleLogout=async function(){try{await fetch('/api/logout',{method:'POST',credentials:'same-origin'});}catch{}window.location.replace('/auth/login');};
 
-  // ═══════════════════════════════════════════════════════════
-  // RENDER — populate donor profile
-  // ═══════════════════════════════════════════════════════════
+// HAMBURGER
+window.toggleSB=function(){document.getElementById('sidebar').classList.toggle('open');};
 
-  function renderProfile(serverData) {
-    const d = serverData || DONOR;
-    const name  = typeof d.name  === 'string' ? d.name.replace(/[<>]/g,'')  : DONOR.name;
-    const email = typeof d.email === 'string' ? d.email.replace(/[<>]/g,'') : DONOR.email;
-
-    const parts    = name.trim().split(/\s+/);
-    const initials = ((parts[0]?.[0] || '') + (parts[1]?.[0] || '')).toUpperCase();
-    const first    = parts[0] || 'Donor';
-
-    document.getElementById('sidebarName').textContent   = name;
-    document.getElementById('sidebarEmail').textContent  = email;
-    document.getElementById('sidebarAvatar').textContent = initials || 'D';
-
-    const hour = new Date().getHours();
-    const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-    const emoji    = hour < 12 ? '☀️' : hour < 17 ? '🌤️' : '🌙';
-    document.getElementById('topbarGreeting').textContent =
-      `${greeting}, ${first} ${emoji}`;
-
-    const now = new Date();
-    document.getElementById('topbarDate').textContent = now.toLocaleDateString('en-GB', {
-      weekday:'long', day:'numeric', month:'long', year:'numeric'
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // RENDER — KPI counters
-  // ═══════════════════════════════════════════════════════════
-
-  function renderKPIs() {
-    setTimeout(() => {
-      countUp(document.getElementById('kpiTotal'),  DONOR.total,       '$', '', 1600);
-      countUp(document.getElementById('kpiYear'),   DONOR.yearTotal,   '$', '', 1400);
-      countUp(document.getElementById('kpiKids'),   DONOR.kidsReached, '',  '', 1200);
-      countUp(document.getElementById('kpiStreak'), DONOR.streak,       '', ' mo', 800);
-      countUp(document.getElementById('impactMeals'),   DONOR.meals,   '', '', 1600);
-      countUp(document.getElementById('impactMedical'), DONOR.medical, '', '', 1400);
-      countUp(document.getElementById('impactBooks'),   DONOR.books,   '', '', 1200);
-    }, 400);
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // RENDER — ApexCharts
-  // ═══════════════════════════════════════════════════════════
-
-  function renderCharts() {
-    // Bar chart — monthly giving
-    const barOptions = {
-      series: [{ name: 'Donated', data: MONTHLY_DATA.amounts }],
-      chart: {
-        type: 'bar', height: 240,
-        toolbar: { show: false },
-        fontFamily: 'Plus Jakarta Sans, sans-serif',
-        animations: { enabled: true, easing: 'easeinout', speed: 900 },
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 6,
-          columnWidth: '52%',
-          distributed: false,
-        },
-      },
-      colors: ['#00a86b'],
-      fill: {
-        type: 'gradient',
-        gradient: { shade:'light', type:'vertical', shadeIntensity:0.3,
-          gradientToColors:['#00c47d'], opacityFrom:1, opacityTo:0.75 },
-      },
-      dataLabels: { enabled: false },
-      grid: {
-        borderColor: '#e2eaf4',
-        strokeDashArray: 4,
-        xaxis: { lines: { show: false } },
-      },
-      xaxis: {
-        categories: MONTHLY_DATA.months,
-        axisBorder: { show: false },
-        axisTicks: { show: false },
-        labels: { style: { colors: '#8899aa', fontSize: '11px' } },
-      },
-      yaxis: {
-        labels: {
-          formatter: v => '$' + v,
-          style: { colors: '#8899aa', fontSize: '11px' },
-        },
-      },
-      tooltip: {
-        y: { formatter: v => '$' + v.toLocaleString() },
-        theme: 'light',
-      },
-    };
-    new ApexCharts(document.getElementById('barChart'), barOptions).render();
-
-    // Donut chart — cause split
-    const donutOptions = {
-      series: CAUSE_DATA.series,
-      chart: {
-        type: 'donut', height: 240,
-        fontFamily: 'Plus Jakarta Sans, sans-serif',
-        animations: { enabled: true, easing: 'easeinout', speed: 900 },
-      },
-      labels: CAUSE_DATA.labels,
-      colors: CAUSE_DATA.colors,
-      dataLabels: { enabled: false },
-      legend: {
-        position: 'bottom',
-        fontSize: '11px',
-        markers: { width: 8, height: 8, radius: 8 },
-        labels: { colors: '#4a5568' },
-      },
-      plotOptions: {
-        pie: {
-          donut: {
-            size: '68%',
-            labels: {
-              show: true,
-              total: {
-                show: true,
-                label: 'Total',
-                formatter: () => '$' + DONOR.total.toLocaleString(),
-                color: '#1a3254',
-                fontSize: '16px',
-                fontFamily: 'Fraunces, serif',
-                fontWeight: 600,
-              },
-            },
-          },
-        },
-      },
-      stroke: { width: 2, colors: ['#ffffff'] },
-      tooltip: {
-        y: { formatter: v => v + '%' },
-        theme: 'light',
-      },
-    };
-    new ApexCharts(document.getElementById('donutChart'), donutOptions).render();
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // RENDER — Donation history table
-  // ═══════════════════════════════════════════════════════════
-
-  function renderTable() {
-    const tbody = document.getElementById('donationTableBody');
-    tbody.innerHTML = '';
-
-    TRANSACTIONS.forEach((tx, i) => {
-      const statusMap = {
-        recurring: ['recurring', 'Recurring'],
-        completed: ['completed', 'Completed'],
-        pending:   ['pending',   'Pending'],
-      };
-      const [cls, label] = statusMap[tx.status] || ['completed','Completed'];
-
-      const tr = document.createElement('tr');
-      tr.innerHTML =
-        `<td style="color:var(--text-3);white-space:nowrap;">${tx.date}</td>` +
-        `<td><span style="margin-right:5px;">${tx.flag}</span>${tx.campaign}</td>` +
-        `<td><span class="tx-amount">${tx.amount}</span></td>` +
-        `<td><span class="tx-status ${cls}"><span class="tx-status-dot"></span>${label}</span></td>` +
-        `<td><button class="receipt-btn" onclick="showToast('📋','Receipt for ${tx.amount} downloaded.')">PDF</button></td>`;
-      tbody.appendChild(tr);
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // RENDER — Live activity feed
-  // ═══════════════════════════════════════════════════════════
-
-  let feedIndex = 0;
-  const FEED_VISIBLE = 5;
-
-  function renderFeed() {
-    const list = document.getElementById('feedList');
-    list.innerHTML = '';
-
-    const entries = [];
-    for (let i = 0; i < FEED_VISIBLE; i++) {
-      entries.push(FEED_ENTRIES[(feedIndex + i) % FEED_ENTRIES.length]);
-    }
-
-    entries.forEach((e, i) => {
-      const initials = e.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
-      const item = document.createElement('div');
-      item.className = 'feed-item';
-      item.innerHTML =
-        `<div class="feed-avatar" style="background:${e.color};">${initials}</div>` +
-        `<div class="feed-body">` +
-          `<div class="feed-text"><strong>${e.name}</strong> donated <span class="feed-amount">${e.amount}</span> to ${e.flag} ${e.campaign}</div>` +
-          `<div class="feed-time">${e.ago}</div>` +
-        `</div>`;
-      list.appendChild(item);
-
-      setTimeout(() => item.classList.add('visible'), i * 80);
-    });
-  }
-
-  function rotateFeed() {
-    feedIndex = (feedIndex + 1) % FEED_ENTRIES.length;
-    // Update times to feel live
-    FEED_ENTRIES.forEach((e, i) => {
-      const mins = [0,1,3,6,10,16,22,29];
-      const m    = mins[(i + feedIndex) % mins.length];
-      e.ago = m === 0 ? 'just now' : m + ' min ago';
-    });
-    renderFeed();
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // RENDER — Campaign progress bars
-  // ═══════════════════════════════════════════════════════════
-
-  function animateCampaignBars() {
-    document.querySelectorAll('.campaign-bar-fill').forEach(bar => {
-      const target = bar.getAttribute('data-width');
-      setTimeout(() => { bar.style.width = target + '%'; }, 600);
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // SCROLL REVEAL
-  // ═══════════════════════════════════════════════════════════
-
-  function initScrollReveal() {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // TOAST
-  // ═══════════════════════════════════════════════════════════
-
-  let toastTimeout = null;
-
-  window.showToast = function(icon, msg) {
-    const toast = document.getElementById('toast');
-    document.getElementById('toastMsg').textContent = msg;
-    toast.querySelector('.toast-icon').textContent  = icon;
-    toast.classList.add('show');
-    clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => toast.classList.remove('show'), 3200);
-  };
-
-  // ═══════════════════════════════════════════════════════════
-  // LOGOUT
-  // ═══════════════════════════════════════════════════════════
-
-  window.handleLogout = async function() {
-    try {
-      await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' });
-    } catch {}
-    window.location.replace('/auth/login');
-  };
-
-  // ═══════════════════════════════════════════════════════════
-  // INIT
-  // ═══════════════════════════════════════════════════════════
-
-  async function init() {
-    const serverData = await checkSession();
-    // If checkSession redirected, execution stops here
-
-    // Hide auth gate
-    const gate = document.getElementById('authGate');
-    gate.classList.add('hidden');
-    setTimeout(() => gate.remove(), 500);
-
-    // Render everything
-    renderProfile(serverData);
-    renderKPIs();
-    renderCharts();
-    renderTable();
-    renderFeed();
-    animateCampaignBars();
-    initScrollReveal();
-
-    // Rotate feed every 8 seconds
-    setInterval(rotateFeed, 8000);
-  }
-
-  init();
-
+// INIT
+async function init(){
+  const srv=await checkSession();
+  const gate=document.getElementById('authGate');gate.classList.add('hidden');setTimeout(()=>gate.remove(),500);
+  setProfile(srv);renderKPIs();renderMainCharts();renderTable('tb1',false);renderFeed();animBars();
+  setInterval(rotateFeed,8000);
+}
+init();
 })();
 </script>
 </body>

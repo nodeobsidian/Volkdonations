@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Events | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Join Volk Donations at our upcoming fundraising galas, community walks, donor briefings, and field visits. Every event brings us closer to the children who need us most." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#1e3a5f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,600;9..144,0,700;9..144,0,900;9..144,1,400;9..144,1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:       #1a3254;
+      --navy-deep:  #0f1f34;
+      --navy-mid:   #243d62;
+      --navy-light: #2e5080;
+      --green:      #00a86b;
+      --green-dk:   #008755;
+      --green-lt:   #00c47d;
+      --green-mu:   rgba(0,168,107,.12);
+      --gold:       #e8a020;
+      --gold-lt:    #f5bc4a;
+      --gold-mu:    rgba(232,160,32,.13);
+      --canvas:     #f1f5fb;
+      --surface:    #ffffff;
+      --text:       #18263a;
+      --text-2:     #48596e;
+      --text-3:     #8496a8;
+      --border:     #dde6f0;
+      --r:          12px;
+      --r-lg:       20px;
+      --sh:         0 4px 22px rgba(26,50,84,.08);
+      --sh-lg:      0 14px 54px rgba(26,50,84,.13);
+      --sh-xl:      0 28px 80px rgba(26,50,84,.18);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; transition: all .25s; }
+    img { display: block; max-width: 100%; }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 70px; padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 900;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 11px; }
+    .logo-icon { width:44px;height:44px;background:linear-gradient(135deg,var(--navy-deep),var(--navy-mid));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px; }
+    .logo-txt strong { display:block;font-size:17px;font-weight:800;color:var(--navy);line-height:1.15;letter-spacing:-.2px; }
+    .logo-txt span   { font-size:10.5px;color:var(--green);font-weight:600;letter-spacing:.4px; }
+    nav { display:flex;gap:26px;align-items:center; }
+    nav a { font-size:13.5px;font-weight:600;color:var(--text-2);position:relative; }
+    nav a:hover { color:var(--navy); }
+    nav a.active { color:var(--navy); }
+    nav a.active::after { content:'';position:absolute;bottom:-4px;left:0;width:100%;height:2.5px;background:var(--green);border-radius:2px; }
+    .hdr-cta { padding:9px 22px;background:linear-gradient(135deg,var(--green),var(--green-dk));color:#fff!important;border-radius:50px;font-size:13px!important;font-weight:700!important;box-shadow:0 4px 14px rgba(0,168,107,.3); }
+    .hdr-cta:hover { transform:translateY(-1px);box-shadow:0 7px 22px rgba(0,168,107,.42); }
+    .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none; }
+    .hamburger span { display:block;width:22px;height:2.5px;background:var(--navy);border-radius:2px;transition:all .3s; }
+    .mob-nav { display:none;position:fixed;top:70px;left:0;right:0;background:#fff;padding:20px 5%;border-top:1px solid var(--border);box-shadow:0 12px 32px rgba(26,50,84,.12);z-index:899;flex-direction:column;gap:14px; }
+    .mob-nav.open { display:flex; }
+    .mob-nav a { font-size:14.5px;font-weight:600;color:var(--text-2);padding:6px 0;border-bottom:1px solid var(--border); }
+    .mob-nav a:last-child { border-bottom:none; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; min-height:560px;
+      display:flex;align-items:center; overflow:hidden;
+      background:var(--navy-deep);
+    }
+    .hero-bg { position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80&auto=format&fit=crop');background-size:cover;background-position:center 35%;opacity:.16; }
+    .hero-overlay { position:absolute;inset:0;background:linear-gradient(135deg,var(--navy-deep) 0%,rgba(8,42,28,.92) 55%,rgba(0,90,55,.5) 100%); }
+    .hero-grid { position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:52px 52px; }
+    .hero-glow { position:absolute;top:-160px;right:-160px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,168,107,.18) 0%,transparent 68%);border-radius:50%;pointer-events:none; }
+    .hero-inner { position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:100px 5% 90px;width:100%;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center; }
+    .hero-badge { display:inline-flex;align-items:center;gap:8px;background:rgba(0,168,107,.16);border:1px solid rgba(0,168,107,.32);border-radius:50px;padding:5px 15px;font-size:10.5px;font-weight:700;color:#4dffa0;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:24px; }
+    .hero-badge::before { content:'';width:6px;height:6px;background:#4dffa0;border-radius:50%;animation:pulse 2.2s infinite; }
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.7)}}
+    .hero h1 { font-family:'Fraunces',serif;font-size:clamp(36px,5vw,60px);font-weight:900;color:#fff;line-height:1.08;letter-spacing:-1.5px;margin-bottom:20px;max-width:600px; }
+    .hero h1 em { font-style:italic;color:#4dffa0;font-weight:400; }
+    .hero-lead { font-size:clamp(14px,1.7vw,16px);color:rgba(255,255,255,.58);line-height:1.8;max-width:520px;margin-bottom:32px; }
+    .hero-btns { display:flex;gap:12px;flex-wrap:wrap; }
+    .btn-primary { padding:13px 30px;background:linear-gradient(135deg,var(--green),var(--green-dk));border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;font-weight:700;color:#fff;cursor:pointer;transition:all .22s;box-shadow:0 5px 18px rgba(0,168,107,.35); }
+    .btn-primary:hover { transform:translateY(-2px);box-shadow:0 9px 28px rgba(0,168,107,.48); }
+    .btn-ghost { padding:13px 30px;background:transparent;border:1.5px solid rgba(255,255,255,.28);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.78);cursor:pointer;transition:all .22s; }
+    .btn-ghost:hover { border-color:rgba(255,255,255,.6);color:#fff; }
+
+    /* featured next event card in hero */
+    .hero-featured {
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--r-lg);
+      backdrop-filter:blur(12px);
+      overflow:hidden;
+    }
+    .hf-img { height:160px;overflow:hidden; }
+    .hf-img img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+    .hero-featured:hover .hf-img img { transform:scale(1.05); }
+    .hf-body { padding:22px; }
+    .hf-label { font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#4dffa0;margin-bottom:10px; }
+    .hf-title { font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:12px; }
+    .hf-meta { display:flex;flex-direction:column;gap:6px;margin-bottom:18px; }
+    .hf-meta-item { display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5); }
+    .hf-meta-item span { font-size:13px; }
+    .hf-progress-wrap { margin-bottom:16px; }
+    .hf-progress-label { display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px; }
+    .hf-progress-bar { height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden; }
+    .hf-progress-fill { height:100%;background:linear-gradient(90deg,var(--green),var(--green-lt));border-radius:3px;width:74%; }
+    .hf-btn { width:100%;padding:11px;background:linear-gradient(135deg,var(--green),var(--green-dk));border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;transition:all .22s;box-shadow:0 4px 14px rgba(0,168,107,.3); }
+    .hf-btn:hover { transform:translateY(-2px);box-shadow:0 7px 22px rgba(0,168,107,.45); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { background:var(--canvas);border-bottom:1px solid var(--border);padding:12px 5%; }
+    .breadcrumb-inner { max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-3); }
+    .breadcrumb-inner a { color:var(--text-3); }
+    .breadcrumb-inner a:hover { color:var(--green); }
+    .breadcrumb-inner span { color:var(--text-2);font-weight:600; }
+    .bc-sep { opacity:.4; }
+
+    /* ── FILTER / SEARCH BAR ── */
+    .filter-bar { background:var(--surface);border-bottom:1px solid var(--border);padding:18px 5%;position:sticky;top:70px;z-index:800; }
+    .filter-inner { max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap; }
+    .search-box { display:flex;align-items:center;gap:10px;background:var(--canvas);border:1.5px solid var(--border);border-radius:50px;padding:9px 18px;flex:1;min-width:200px;max-width:320px;transition:border-color .2s; }
+    .search-box:focus-within { border-color:var(--green); }
+    .search-box input { border:none;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--text);outline:none;width:100%; }
+    .search-box input::placeholder { color:var(--text-3); }
+    .filter-tabs { display:flex;gap:0;overflow-x:auto;scrollbar-width:none; }
+    .filter-tabs::-webkit-scrollbar { display:none; }
+    .ftab { padding:8px 18px;background:none;border:1.5px solid var(--border);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;font-weight:600;color:var(--text-3);cursor:pointer;white-space:nowrap;transition:all .2s;margin-right:8px; }
+    .ftab:hover { border-color:var(--navy);color:var(--navy); }
+    .ftab.active { background:var(--navy-deep);border-color:var(--navy-deep);color:#fff; }
+    .filter-count-badge { margin-left:auto;font-size:12px;color:var(--text-3);white-space:nowrap; }
+    .filter-count-badge strong { color:var(--navy); }
+
+    /* ── SECTION UTIL ── */
+    .section-eyebrow { display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--green);margin-bottom:14px; }
+    .section-eyebrow::before { content:'';width:22px;height:2px;background:var(--green);border-radius:2px; }
+    .section-title { font-family:'Fraunces',serif;font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--navy);line-height:1.18;letter-spacing:-.5px; }
+    .section-title em { font-style:italic;color:var(--green); }
+    .section-sub { font-size:clamp(14px,1.6vw,15.5px);color:var(--text-2);line-height:1.8;max-width:640px;margin-top:12px; }
+
+    /* ── FEATURED EVENTS (2-UP) ── */
+    .featured-section { padding:60px 5%; background:var(--canvas);border-bottom:1px solid var(--border); }
+    .featured-inner { max-width:1200px;margin:0 auto; }
+    .featured-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px; }
+    .feat-card {
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--r-lg);
+      overflow:hidden;
+      box-shadow:var(--sh);
+      transition:all .35s cubic-bezier(.2,.8,.2,1);
+      position:relative;
+    }
+    .feat-card:hover { transform:translateY(-6px);box-shadow:var(--sh-xl);border-color:rgba(0,168,107,.2); }
+    .feat-img { position:relative;height:240px;overflow:hidden;background:var(--navy-mid); }
+    .feat-img img { width:100%;height:100%;object-fit:cover;transition:transform .6s; }
+    .feat-card:hover .feat-img img { transform:scale(1.05); }
+    .feat-img::after { content:'';position:absolute;bottom:0;left:0;right:0;height:140px;background:linear-gradient(transparent,rgba(15,31,52,.75)); }
+    .feat-cat-badge { position:absolute;top:14px;left:14px;z-index:2;padding:4px 13px;border-radius:50px;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#fff; }
+    .feat-cat-badge.gala    { background:var(--gold); }
+    .feat-cat-badge.walk    { background:var(--green); }
+    .feat-cat-badge.briefing{ background:var(--blue, #3a7bd5); }
+    .feat-cat-badge.field   { background:#9c59d1; }
+    .feat-cat-badge.virtual { background:#e05c5c; }
+    .feat-cat-badge.summit  { background:#0f8a8a; }
+    .feat-sold-badge { position:absolute;top:14px;right:14px;z-index:2;padding:4px 11px;border-radius:50px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:rgba(232,64,64,.85);backdrop-filter:blur(6px);color:#fff; }
+    .feat-almost-badge { position:absolute;top:14px;right:14px;z-index:2;padding:4px 11px;border-radius:50px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:rgba(232,160,32,.9);backdrop-filter:blur(6px);color:#fff; }
+    .feat-date-pill { position:absolute;bottom:14px;left:14px;z-index:2;background:rgba(15,31,52,.8);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:8px 14px;text-align:center; }
+    .fdp-day { font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:#fff;line-height:1; }
+    .fdp-mon { font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px; }
+    .feat-body { padding:24px; }
+    .feat-location { font-size:11.5px;color:var(--text-3);margin-bottom:8px;display:flex;align-items:center;gap:5px; }
+    .feat-title { font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:10px; }
+    .feat-desc { font-size:13px;color:var(--text-2);line-height:1.75;margin-bottom:18px; }
+    .feat-meta-row { display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px; }
+    .fm-item { display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-3); }
+    .fm-item strong { color:var(--text);font-weight:600; }
+    .feat-progress-wrap { margin-bottom:20px; }
+    .fp-label { display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-bottom:5px; }
+    .fp-bar { height:5px;background:var(--canvas);border-radius:3px;overflow:hidden; }
+    .fp-fill { height:100%;background:linear-gradient(90deg,var(--green),var(--green-lt));border-radius:3px; }
+    .feat-footer { display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border); }
+    .feat-price { font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--navy); }
+    .feat-price span { font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;color:var(--text-3);display:block; }
+    .feat-btn { padding:10px 22px;background:linear-gradient(135deg,var(--green),var(--green-dk));border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;font-weight:700;color:#fff;cursor:pointer;transition:all .22s;box-shadow:0 4px 12px rgba(0,168,107,.28); }
+    .feat-btn:hover { transform:translateY(-2px);box-shadow:0 7px 20px rgba(0,168,107,.42); }
+    .feat-btn.disabled { background:var(--canvas);color:var(--text-3);box-shadow:none;cursor:default; }
+    .feat-btn.disabled:hover { transform:none; }
+
+    /* ── ALL EVENTS GRID ── */
+    .events-section { padding:70px 5%;background:var(--surface); }
+    .events-inner { max-width:1200px;margin:0 auto; }
+    .events-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px; }
+
+    .ev-card {
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--r-lg);
+      overflow:hidden;
+      box-shadow:var(--sh);
+      transition:all .3s cubic-bezier(.2,.8,.2,1);
+      display:flex;flex-direction:column;
+    }
+    .ev-card:hover { transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:rgba(0,168,107,.18); }
+    .ev-img { position:relative;height:180px;overflow:hidden;background:var(--navy-mid); }
+    .ev-img img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+    .ev-card:hover .ev-img img { transform:scale(1.06); }
+    .ev-cat { position:absolute;top:12px;left:12px;z-index:2;padding:3px 11px;border-radius:50px;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#fff; }
+    .ev-cat.gala    { background:var(--gold); }
+    .ev-cat.walk    { background:var(--green); }
+    .ev-cat.briefing{ background:#3a7bd5; }
+    .ev-cat.field   { background:#9c59d1; }
+    .ev-cat.virtual { background:#e05c5c; }
+    .ev-cat.summit  { background:#0f8a8a; }
+    .ev-date-strip { position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(transparent,rgba(15,31,52,.82));padding:14px 14px 10px;display:flex;align-items:flex-end;gap:10px; }
+    .evd-box { background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:5px 10px;text-align:center; }
+    .evd-d { font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:#fff;line-height:1; }
+    .evd-m { font-size:9px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.55);letter-spacing:.4px; }
+    .evd-loc { font-size:11px;color:rgba(255,255,255,.65); }
+    .ev-body { padding:18px 20px;flex:1;display:flex;flex-direction:column; }
+    .ev-title { font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--navy);line-height:1.3;margin-bottom:8px; }
+    .ev-desc { font-size:12.5px;color:var(--text-2);line-height:1.72;flex:1;margin-bottom:14px; }
+    .ev-meta { display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px; }
+    .ev-meta-tag { display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-3); }
+    .ev-footer { display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border); }
+    .ev-price { font-size:15px;font-weight:800;color:var(--navy); }
+    .ev-price small { font-size:10px;font-weight:500;color:var(--text-3);display:block; }
+    .ev-register { padding:8px 18px;background:linear-gradient(135deg,var(--green),var(--green-dk));border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11.5px;font-weight:700;color:#fff;cursor:pointer;transition:all .2s;box-shadow:0 3px 10px rgba(0,168,107,.25); }
+    .ev-register:hover { transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,168,107,.4); }
+    .ev-register.sold { background:var(--canvas);color:var(--text-3);box-shadow:none;cursor:default; }
+    .ev-register.sold:hover { transform:none; }
+
+    /* ── PAST EVENTS ── */
+    .past-section { padding:70px 5%;background:var(--canvas);border-top:1px solid var(--border); }
+    .past-inner { max-width:1200px;margin:0 auto; }
+    .past-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px; }
+    .past-card {
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;
+      box-shadow:var(--sh);transition:all .3s;position:relative;
+    }
+    .past-card:hover { transform:translateY(-4px);box-shadow:var(--sh-lg); }
+    .past-img { height:150px;overflow:hidden;position:relative; }
+    .past-img img { width:100%;height:100%;object-fit:cover;filter:grayscale(30%);transition:all .5s; }
+    .past-card:hover .past-img img { filter:grayscale(0%);transform:scale(1.04); }
+    .past-overlay { position:absolute;inset:0;background:rgba(15,31,52,.35); }
+    .past-badge { position:absolute;top:10px;left:10px;z-index:2;background:rgba(15,31,52,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:4px 10px;font-size:9px;font-weight:700;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.5px; }
+    .past-body { padding:16px 18px; }
+    .past-title { font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px;line-height:1.3; }
+    .past-stat { font-size:11px;color:var(--text-3);margin-bottom:10px; }
+    .past-raised { display:flex;align-items:baseline;gap:4px; }
+    .pr-val { font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--green); }
+    .pr-lbl { font-size:10.5px;color:var(--text-3); }
+    .past-recap-btn { display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--green);margin-top:10px;cursor:pointer;transition:gap .2s; }
+    .past-recap-btn:hover { gap:8px; }
+
+    /* ── NEWSLETTER STRIP ── */
+    .newsletter-strip {
+      background:linear-gradient(135deg,var(--navy-deep),#0a3d25);
+      padding:60px 5%;
+      position:relative;overflow:hidden;
+    }
+    .newsletter-strip::before { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:48px 48px; }
+    .ns-glow { position:absolute;top:-80px;right:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(0,168,107,.15),transparent 70%);border-radius:50%;pointer-events:none; }
+    .ns-inner { max-width:1200px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center; }
+    .ns-text {}
+    .ns-eyebrow { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:#4dffa0;margin-bottom:14px; }
+    .ns-text h2 { font-family:'Fraunces',serif;font-size:clamp(24px,3.5vw,36px);font-weight:700;color:#fff;margin-bottom:12px; }
+    .ns-text p { font-size:14.5px;color:rgba(255,255,255,.5);line-height:1.8; }
+    .ns-form { display:flex;flex-direction:column;gap:14px; }
+    .ns-row { display:flex;gap:10px; }
+    .ns-input { flex:1;padding:13px 18px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.14);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:#fff;outline:none;transition:border-color .2s; }
+    .ns-input::placeholder { color:rgba(255,255,255,.3); }
+    .ns-input:focus { border-color:var(--green); }
+    .ns-submit { padding:13px 26px;background:linear-gradient(135deg,var(--green),var(--green-dk));border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;white-space:nowrap;transition:all .22s;box-shadow:0 4px 14px rgba(0,168,107,.3); }
+    .ns-submit:hover { transform:translateY(-2px);box-shadow:0 7px 22px rgba(0,168,107,.45); }
+    .ns-note { font-size:11px;color:rgba(255,255,255,.28); }
+
+    /* ── NUMBERS STRIP ── */
+    .numbers-strip { background:var(--navy-deep);padding:60px 5%;position:relative;overflow:hidden; }
+    .numbers-strip::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(0,168,107,.12),transparent); }
+    .numbers-inner { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;z-index:1; }
+    .num-item { text-align:center;padding:20px 10px;border-right:1px solid rgba(255,255,255,.07); }
+    .num-item:last-child { border-right:none; }
+    .num-val { font-family:'Fraunces',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:#4dffa0;line-height:1;margin-bottom:7px; }
+    .num-lbl { font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.5;max-width:110px;margin:0 auto; }
+
+    /* ── CTA ── */
+    .cta-band { background:linear-gradient(135deg,var(--green-dk) 0%,var(--navy-deep) 100%);padding:80px 5%;text-align:center;position:relative;overflow:hidden; }
+    .cta-band::before { content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.022'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E"); }
+    .cta-inner { max-width:660px;margin:0 auto;position:relative;z-index:1; }
+    .cta-inner h2 { font-family:'Fraunces',serif;font-size:clamp(28px,5vw,46px);font-weight:700;color:#fff;margin-bottom:16px;line-height:1.18; }
+    .cta-inner p { font-size:16px;color:rgba(255,255,255,.62);margin-bottom:34px;line-height:1.7; }
+    .cta-btns { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+    .btn-white { padding:14px 34px;background:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:var(--navy);cursor:pointer;transition:all .22s;box-shadow:0 5px 20px rgba(0,0,0,.2); }
+    .btn-white:hover { transform:translateY(-2px);box-shadow:0 9px 30px rgba(0,0,0,.3); }
+    .btn-outline-w { padding:14px 34px;background:transparent;border:2px solid rgba(255,255,255,.32);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);cursor:pointer;transition:all .22s; }
+    .btn-outline-w:hover { border-color:rgba(255,255,255,.7);color:#fff; }
+
+    /* ── FOOTER ── */
+    footer { background:var(--navy-deep);color:#fff;padding:60px 5% 28px; }
+    .footer-grid { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px; }
+    .footer-about { padding-right:16px; }
+    .footer-logo { display:flex;align-items:center;gap:11px;margin-bottom:15px; }
+    .footer-logo-icon { width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px; }
+    .footer-logo-txt strong { display:block;font-size:16px;font-weight:800;color:#fff; }
+    .footer-logo-txt span { font-size:10px;color:rgba(255,255,255,.35); }
+    .footer-about p { color:rgba(255,255,255,.4);font-size:13px;line-height:1.78;margin-bottom:18px; }
+    .soc-row { display:flex;gap:8px; }
+    .soc-btn { width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.45);cursor:pointer;transition:all .2s; }
+    .soc-btn:hover { background:var(--green);border-color:var(--green);color:#fff; }
+    footer h5 { font-size:13px;font-weight:700;color:#fff;margin-bottom:16px; }
+    footer a { display:block;color:rgba(255,255,255,.42);margin-bottom:10px;font-size:13px;transition:all .2s; }
+    footer a:hover { color:var(--green);padding-left:4px; }
+    .footer-bottom { max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.07);padding-top:24px;text-align:center; }
+    .footer-bottom p { font-size:12px;color:rgba(255,255,255,.28);margin:4px 0; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease; }
+    .reveal.up { opacity:1;transform:translateY(0); }
+    .reveal-l { opacity:0;transform:translateX(-24px);transition:opacity .65s ease,transform .65s ease; }
+    .reveal-l.up { opacity:1;transform:translateX(0); }
+    .reveal-r { opacity:0;transform:translateX(24px);transition:opacity .65s ease,transform .65s ease; }
+    .reveal-r.up { opacity:1;transform:translateX(0); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1100px){
+      .hero-inner{grid-template-columns:1fr;}
+      .hero-featured{display:none;}
+      .featured-grid{grid-template-columns:1fr;}
+      .events-grid{grid-template-columns:repeat(2,1fr);}
+      .past-grid{grid-template-columns:repeat(2,1fr);}
+      .ns-inner{grid-template-columns:1fr;gap:36px;}
+      .numbers-inner{grid-template-columns:repeat(3,1fr);}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:30px;}
+    }
+    @media(max-width:900px){
+      nav{display:none;}.hamburger{display:flex;}
+    }
+    @media(max-width:700px){
+      .events-grid{grid-template-columns:1fr;}
+      .past-grid{grid-template-columns:1fr;}
+      .numbers-inner{grid-template-columns:repeat(2,1fr);}
+      .footer-grid{grid-template-columns:1fr;}
+      .ns-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon">🌍</div>
+    <div class="logo-txt"><strong>Volk Donations</strong><span>A better life for everyone</span></div>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/stories">Stories</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/donate" class="hdr-cta">Give Now</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+<div class="mob-nav" id="mobNav">
+  <a href="/">Home</a><a href="/impact-calculator">Impact</a><a href="/donate">Donate</a>
+  <a href="/volunteer">Volunteer</a><a href="/stories">Stories</a><a href="/about">About</a>
+  <a href="/contact">Contact</a>
+  <a href="/donate" class="hdr-cta" style="text-align:center;border-radius:50px;display:block">Give Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Events &amp; Gatherings</div>
+      <h1>Show Up.<br><em>Change Lives.</em></h1>
+      <p class="hero-lead">From black-tie fundraising galas in New York to community charity walks in Nairobi — every Volk Donations event is designed to bring our community together, raise vital funds, and remind us why this work matters.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('upcoming').scrollIntoView({behavior:'smooth'})">Browse Events</button>
+        <button class="btn-ghost" onclick="document.getElementById('host').scrollIntoView({behavior:'smooth'})">Host an Event</button>
+      </div>
+    </div>
+    <div class="hero-featured">
+      <div class="hf-img">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=700&q=85&auto=format&fit=crop" alt="Annual Gala">
+      </div>
+      <div class="hf-body">
+        <div class="hf-label">⭐ Next Flagship Event</div>
+        <div class="hf-title">Annual Hope Gala 2026 — New York City</div>
+        <div class="hf-meta">
+          <div class="hf-meta-item"><span>📅</span> Saturday, 18 April 2026 · 7:00 PM EST</div>
+          <div class="hf-meta-item"><span>📍</span> The Pierre Hotel, Fifth Avenue</div>
+          <div class="hf-meta-item"><span>🎟</span> 280 seats · 74% reserved</div>
+        </div>
+        <div class="hf-progress-wrap">
+          <div class="hf-progress-label"><span>Seats Reserved</span><span>207 / 280</span></div>
+          <div class="hf-progress-bar"><div class="hf-progress-fill"></div></div>
+        </div>
+        <button class="hf-btn">Reserve Your Seat →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">Home</a><span class="bc-sep">›</span><span>Events</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="search-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8496a8" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search events…">
+    </div>
+    <div class="filter-tabs">
+      <button class="ftab active">All Events</button>
+      <button class="ftab">Galas &amp; Dinners</button>
+      <button class="ftab">Charity Walks</button>
+      <button class="ftab">Donor Briefings</button>
+      <button class="ftab">Field Visits</button>
+      <button class="ftab">Virtual</button>
+    </div>
+    <div class="filter-count-badge">Showing <strong>12 upcoming</strong> events</div>
+  </div>
+</div>
+
+<!-- FEATURED UPCOMING -->
+<div class="featured-section" id="upcoming">
+  <div class="featured-inner">
+    <div class="section-eyebrow">Not to Be Missed</div>
+    <h2 class="section-title">Flagship <em>Events</em></h2>
+    <p class="section-sub">Our two marquee events of 2026 — bringing together donors, advocates, and community members for evenings that fund real change.</p>
+    <div class="featured-grid">
+
+      <div class="feat-card reveal">
+        <div class="feat-img">
+          <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=900&q=85&auto=format&fit=crop" alt="Annual Hope Gala">
+          <div class="feat-cat-badge gala">Fundraising Gala</div>
+          <div class="feat-almost-badge">⚡ Selling Fast</div>
+          <div class="feat-date-pill"><div class="fdp-day">18</div><div class="fdp-mon">Apr 2026</div></div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-location">📍 The Pierre Hotel · New York City, USA</div>
+          <div class="feat-title">Annual Hope Gala 2026</div>
+          <div class="feat-desc">Our flagship black-tie fundraising event returns to New York City for its fifteenth edition. Join 280 donors, partners, and advocates for an evening of programme updates, a live auction, and a keynote from CEO James Okafor. All proceeds fund the East Africa School Meals campaign and the Girls Education Fund.</div>
+          <div class="feat-meta-row">
+            <div class="fm-item">🕖 <strong>7:00 PM – 11:30 PM EST</strong></div>
+            <div class="fm-item">🎟 <strong>280 seats</strong></div>
+            <div class="fm-item">🏆 <strong>Live auction</strong></div>
+          </div>
+          <div class="feat-progress-wrap">
+            <div class="fp-label"><span>207 seats reserved</span><span>73 remaining</span></div>
+            <div class="fp-bar"><div class="fp-fill" style="width:74%"></div></div>
+          </div>
+          <div class="feat-footer">
+            <div class="feat-price">$350 <span>per person · tables of 10 available</span></div>
+            <button class="feat-btn">Reserve a Seat</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card reveal">
+        <div class="feat-img">
+          <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=900&q=85&auto=format&fit=crop" alt="Walk for the Future">
+          <div class="feat-cat-badge walk">Charity Walk</div>
+          <div class="feat-date-pill"><div class="fdp-day">07</div><div class="fdp-mon">Jun 2026</div></div>
+        </div>
+        <div class="feat-body">
+          <div class="feat-location">📍 Uhuru Park · Nairobi, Kenya</div>
+          <div class="feat-title">Walk for the Future — Nairobi 2026</div>
+          <div class="feat-desc">Our largest community fundraising event of the year. A 10km sponsored walk through Nairobi, bringing together local supporters, corporate partners, and Volk field staff to raise funds for the Clean Wells Initiative in South Sudan. Every kilometre walked funds clean water for one more child for a full year.</div>
+          <div class="feat-meta-row">
+            <div class="fm-item">⏰ <strong>7:30 AM start</strong></div>
+            <div class="fm-item">👣 <strong>10km route</strong></div>
+            <div class="fm-item">🎯 <strong>$180K goal</strong></div>
+          </div>
+          <div class="feat-progress-wrap">
+            <div class="fp-label"><span>$38,400 raised in pledges</span><span>21% of goal</span></div>
+            <div class="fp-bar"><div class="fp-fill" style="width:21%"></div></div>
+          </div>
+          <div class="feat-footer">
+            <div class="feat-price">Free <span>registration · sponsorship welcomed</span></div>
+            <button class="feat-btn">Register Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ALL UPCOMING EVENTS -->
+<div class="events-section">
+  <div class="events-inner">
+    <div class="section-eyebrow">Full Calendar</div>
+    <h2 class="section-title">All <em>Upcoming Events</em></h2>
+    <p class="section-sub">From intimate donor briefings to international field visits — find the event that suits you and join the Volk community in person.</p>
+
+    <div class="events-grid">
+
+      <!-- 1 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=85&auto=format&fit=crop" alt="Donor Briefing">
+          <div class="ev-cat briefing">Donor Briefing</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">12</div><div class="evd-m">Mar</div></div>
+            <div class="evd-loc">Washington, D.C. — Ronald Reagan Building</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Q1 2026 Donor Impact Briefing</div>
+          <div class="ev-desc">Join CFO Marcus Webb and COO Priya Mehta for a 90-minute presentation of Q1 programme metrics, financial statements, and a live Q&A. In-person and livestream attendance available.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 2:00 PM – 3:30 PM</div>
+            <div class="ev-meta-tag">👥 80 seats</div>
+            <div class="ev-meta-tag">📡 Hybrid</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">Free <small>registered donors only</small></div>
+            <button class="ev-register">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=600&q=85&auto=format&fit=crop" alt="London Fundraiser">
+          <div class="ev-cat gala">Fundraising Dinner</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">25</div><div class="evd-m">Mar</div></div>
+            <div class="evd-loc">London — The Ivy, West Street</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">London Spring Fundraising Dinner</div>
+          <div class="ev-desc">An intimate evening for Volk's UK and European donor community. Director of Communications Claire Fontaine hosts a programme update dinner for 60 guests, with a special presentation on the Girls Education Fund in Bangladesh.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 7:00 PM – 10:00 PM GMT</div>
+            <div class="ev-meta-tag">👥 60 seats</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">£95 <small>per person</small></div>
+            <button class="ev-register">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1558008258-3256797b43f3?w=600&q=85&auto=format&fit=crop" alt="Virtual Summit">
+          <div class="ev-cat virtual">Virtual Summit</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">02</div><div class="evd-m">Apr</div></div>
+            <div class="evd-loc">Online · Global</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Global Giving Summit — Spring 2026</div>
+          <div class="ev-desc">A half-day virtual summit featuring panel discussions on child welfare trends, transparent fundraising practices, and field stories direct from South Sudan and Cambodia. Open to all registered donors and prospective supporters.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 10:00 AM – 2:00 PM UTC</div>
+            <div class="ev-meta-tag">🌐 Online · Zoom</div>
+            <div class="ev-meta-tag">🎙 4 panels</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">Free <small>open to all</small></div>
+            <button class="ev-register">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=85&auto=format&fit=crop" alt="Field Visit">
+          <div class="ev-cat field">Field Visit</div>
+          <div class="ev-almost-badge" style="position:absolute;top:12px;right:12px;z-index:2;padding:3px 10px;border-radius:50px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:rgba(232,160,32,.9);color:#fff;">3 spots left</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">14</div><div class="evd-m">Apr</div></div>
+            <div class="evd-loc">Kibera, Nairobi — Kenya</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Donor Field Visit — Kibera School Programme</div>
+          <div class="ev-desc">A guided two-day visit to the original Kibera school feeding programme. Meet local programme staff, see the impact of donor funding firsthand, and join a working dinner with Programme Director Amara Diallo.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">📅 2 days · 14–15 Apr</div>
+            <div class="ev-meta-tag">👥 12 guests max</div>
+            <div class="ev-meta-tag">✈️ Travel not included</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">$200 <small>contribution · covers ground costs</small></div>
+            <button class="ev-register">Apply</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=85&auto=format&fit=crop" alt="Chicago Gala">
+          <div class="ev-cat gala">Fundraising Gala</div>
+          <div class="ev-sold-badge" style="position:absolute;top:12px;right:12px;z-index:2;padding:3px 10px;border-radius:50px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:rgba(232,64,64,.85);color:#fff;">Sold Out</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">18</div><div class="evd-m">Apr</div></div>
+            <div class="evd-loc">Chicago — The Langham Hotel</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Midwest Chapter Gala 2026</div>
+          <div class="ev-desc">Annual Midwest chapter fundraising dinner hosted by Volk board member William Ashford. A sold-out evening for 150 guests, raising funds for the technology literacy programme in Addis Ababa. Waitlist is open.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 6:30 PM – 11:00 PM CDT</div>
+            <div class="ev-meta-tag">👥 150 guests</div>
+            <div class="ev-meta-tag">🔴 Sold out</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">$275 <small>per person · sold out</small></div>
+            <button class="ev-register sold">Join Waitlist</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=85&auto=format&fit=crop" alt="Youth Ambassador">
+          <div class="ev-cat briefing">Workshop</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">03</div><div class="evd-m">May</div></div>
+            <div class="evd-loc">Virtual — Zoom Webinar</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Youth Ambassador Training Day</div>
+          <div class="ev-desc">A full-day online training programme for young advocates aged 16–25 who want to represent Volk Donations in their schools, universities, and communities. Facilitated by our Communications team with guest sessions from field staff.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 9:00 AM – 5:00 PM UTC</div>
+            <div class="ev-meta-tag">🎓 Ages 16–25</div>
+            <div class="ev-meta-tag">🌐 Online</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">Free <small>application required</small></div>
+            <button class="ev-register">Apply</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&q=85&auto=format&fit=crop" alt="Corporate Summit">
+          <div class="ev-cat summit">Corporate Summit</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">22</div><div class="evd-m">May</div></div>
+            <div class="evd-loc">Singapore — Marina Bay Sands</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Asia Corporate Partners Summit 2026</div>
+          <div class="ev-desc">Volk's inaugural Asia-Pacific corporate partnerships summit. A one-day conference for corporate ESG and CSR teams exploring strategic philanthropic partnerships in child welfare. Keynote from COO Priya Mehta; roundtable sessions on programme co-funding models.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 9:00 AM – 6:00 PM SGT</div>
+            <div class="ev-meta-tag">👔 Corporate delegates</div>
+            <div class="ev-meta-tag">📊 6 sessions</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">$450 <small>per delegate</small></div>
+            <button class="ev-register">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=85&auto=format&fit=crop" alt="5K Run">
+          <div class="ev-cat walk">Charity Run</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">14</div><div class="evd-m">Jun</div></div>
+            <div class="evd-loc">Sydney — Centennial Parklands</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Run for Change — Sydney 2026</div>
+          <div class="ev-desc">Australia's premier Volk Donations charity run. A 5km and 10km course through Centennial Parklands for runners of all abilities, raising funds for the Cambodia Medical Relief programme. Medals, breakfast, and live results for all finishers.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 7:00 AM start</div>
+            <div class="ev-meta-tag">🏃 5K &amp; 10K</div>
+            <div class="ev-meta-tag">🎯 AUD $60K goal</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">AUD $35 <small>per runner</small></div>
+            <button class="ev-register">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="ev-card reveal">
+        <div class="ev-img">
+          <img src="https://images.unsplash.com/photo-1519750783826-e2420f4d687f?w=600&q=85&auto=format&fit=crop" alt="Major Donor">
+          <div class="ev-cat briefing">Major Donor</div>
+          <div class="ev-date-strip">
+            <div class="evd-box"><div class="evd-d">10</div><div class="evd-m">Jul</div></div>
+            <div class="evd-loc">Private venue · New York City</div>
+          </div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-title">Major Donor Circle Dinner — Summer 2026</div>
+          <div class="ev-desc">An exclusive invitation-only dinner for donors contributing $5,000 or more annually. Hosted by CEO James Okafor and Co-Founder Daniel Volk. A candid conversation on Volk's 2027 expansion strategy and one-on-one time with the leadership team.</div>
+          <div class="ev-meta">
+            <div class="ev-meta-tag">⏰ 7:30 PM – 10:30 PM</div>
+            <div class="ev-meta-tag">🔒 Invitation only</div>
+            <div class="ev-meta-tag">👥 30 guests max</div>
+          </div>
+          <div class="ev-footer">
+            <div class="ev-price">By invitation <small>major donors · $5K+ annually</small></div>
+            <button class="ev-register">Request Invite</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAST EVENTS -->
+<div class="past-section">
+  <div class="past-inner">
+    <div class="section-eyebrow">Looking Back</div>
+    <h2 class="section-title">Past Events & <em>Results</em></h2>
+    <p class="section-sub">Every event we host is a fundraising milestone. Here is what our community achieved together over the past 18 months.</p>
+    <div class="past-grid">
+
+      <div class="past-card reveal">
+        <div class="past-img">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80&auto=format&fit=crop" alt="2025 Gala">
+          <div class="past-overlay"></div>
+          <div class="past-badge">Apr 2025</div>
+        </div>
+        <div class="past-body">
+          <div class="past-title">Annual Hope Gala 2025 — New York</div>
+          <div class="past-stat">The Pierre Hotel · 280 guests attended</div>
+          <div class="past-raised"><div class="pr-val">$412,000</div><div class="pr-lbl">&nbsp;raised</div></div>
+          <div class="past-recap-btn">View Recap →</div>
+        </div>
+      </div>
+
+      <div class="past-card reveal">
+        <div class="past-img">
+          <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=500&q=80&auto=format&fit=crop" alt="Walk 2025">
+          <div class="past-overlay"></div>
+          <div class="past-badge">Jun 2025</div>
+        </div>
+        <div class="past-body">
+          <div class="past-title">Walk for the Future — Nairobi 2025</div>
+          <div class="past-stat">Uhuru Park · 1,840 participants</div>
+          <div class="past-raised"><div class="pr-val">$187,200</div><div class="pr-lbl">&nbsp;raised</div></div>
+          <div class="past-recap-btn">View Recap →</div>
+        </div>
+      </div>
+
+      <div class="past-card reveal">
+        <div class="past-img">
+          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=500&q=80&auto=format&fit=crop" alt="Corporate Summit 2025">
+          <div class="past-overlay"></div>
+          <div class="past-badge">Sep 2025</div>
+        </div>
+        <div class="past-body">
+          <div class="past-title">Corporate Partners Dinner — London 2025</div>
+          <div class="past-stat">The Shard, Level 31 · 95 delegates</div>
+          <div class="past-raised"><div class="pr-val">$224,500</div><div class="pr-lbl">&nbsp;pledged</div></div>
+          <div class="past-recap-btn">View Recap →</div>
+        </div>
+      </div>
+
+      <div class="past-card reveal">
+        <div class="past-img">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80&auto=format&fit=crop" alt="Year End Gala">
+          <div class="past-overlay"></div>
+          <div class="past-badge">Nov 2025</div>
+        </div>
+        <div class="past-body">
+          <div class="past-title">Year-End Benefit Evening — Washington D.C.</div>
+          <div class="past-stat">National Press Club · 160 guests</div>
+          <div class="past-raised"><div class="pr-val">$308,000</div><div class="pr-lbl">&nbsp;raised</div></div>
+          <div class="past-recap-btn">View Recap →</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- HOST AN EVENT (anchor) -->
+<div id="host"></div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-strip">
+  <div class="ns-glow"></div>
+  <div class="ns-inner">
+    <div class="ns-text reveal-l">
+      <div class="ns-eyebrow">Stay Connected</div>
+      <h2>Never Miss an Event.</h2>
+      <p>Join 3,200+ supporters who receive our monthly events newsletter — featuring early access to tickets, field visit applications, and exclusive donor briefings before they open to the public.</p>
+    </div>
+    <div class="ns-form reveal-r">
+      <div class="ns-row">
+        <input class="ns-input" type="text" placeholder="First name">
+        <input class="ns-input" type="text" placeholder="Last name">
+      </div>
+      <input class="ns-input" type="email" placeholder="Your email address" style="border-radius:50px;">
+      <button class="ns-submit">Subscribe to Events Newsletter →</button>
+      <div class="ns-note">We respect your privacy. Unsubscribe at any time. No spam, ever.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div class="numbers-strip">
+  <div class="numbers-inner">
+    <div class="num-item reveal"><div class="num-val">$1.13M</div><div class="num-lbl">Raised Through Events in 2025</div></div>
+    <div class="num-item reveal"><div class="num-val">24</div><div class="num-lbl">Events Hosted Last Year</div></div>
+    <div class="num-item reveal"><div class="num-val">4,200+</div><div class="num-lbl">Event Attendees in 2025</div></div>
+    <div class="num-item reveal"><div class="num-val">18</div><div class="num-lbl">Countries with Events</div></div>
+    <div class="num-item reveal"><div class="num-val">96%</div><div class="num-lbl">Attendee Satisfaction Rate</div></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <h2>Every Event Is a Child's Future.</h2>
+    <p>The money raised at every dinner, walk, and briefing translates directly into meals, clean water, school places, and medical care for children who have nothing else. Come and be part of it.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="document.getElementById('upcoming').scrollIntoView({behavior:'smooth'})">Browse All Events</button>
+      <button class="btn-outline-w" onclick="window.location='/donate'">Donate Instead</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">🌍</div>
+        <div class="footer-logo-txt"><strong>Volk Donations</strong><span>A better life for everyone</span></div>
+      </div>
+      <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we are building a better future for those who need it most.</p>
+      <div class="soc-row">
+        <div class="soc-btn">f</div>
+        <div class="soc-btn">in</div>
+        <div class="soc-btn">𝕏</div>
+        <div class="soc-btn">▶</div>
+      </div>
+    </div>
+    <div>
+      <h5>Organisation</h5>
+      <a href="/about">About Us</a><a href="/partners">Our Partners</a>
+      <a href="/branches">Branches</a><a href="/reports">Annual Reports</a><a href="/team">Our Team</a>
+    </div>
+    <div>
+      <h5>Get Involved</h5>
+      <a href="/donate">Donate</a><a href="/volunteer">Volunteer</a>
+      <a href="/fundraise">Fundraise</a>
+      <a href="/events" style="color:var(--green)">Events</a>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <a href="/faq">FAQ</a><a href="/blog">Blog</a>
+      <a href="/stories">Success Stories</a><a href="/press">Press Kit</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a>
+      <a href="/financial">Financial Info</a><a href="/contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations. All rights reserved.</p>
+    <p>A registered 501(c)(3) nonprofit organisation based in the United States.</p>
+    <p>EIN: 45-1234567 · Making a difference since 2010</p>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobNav = document.getElementById('mobNav');
+  hamburger.addEventListener('click', () => mobNav.classList.toggle('open'));
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobNav.contains(e.target)) mobNav.classList.remove('open');
+  });
+
+  document.querySelectorAll('.ftab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  const allReveal = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const siblings = Array.from(el.parentElement.children).filter(c =>
+          c.classList.contains('reveal') || c.classList.contains('reveal-l') || c.classList.contains('reveal-r')
+        );
+        const idx = siblings.indexOf(el);
+        setTimeout(() => el.classList.add('up'), idx * 90);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.08 });
+  allReveal.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

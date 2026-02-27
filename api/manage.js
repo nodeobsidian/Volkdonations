@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const { neon } = require("@neondatabase/serverless");
 
 const DEBUG = true;
 const log = (...args) => { if (DEBUG) console.log("[manage]", ...args); };
@@ -13,6 +14,8 @@ module.exports = async (req, res) => {
     return res.status(405).send("Method Not Allowed");
   }
 
+  const sql = neon(process.env.NEON_DATABASE_URL);
+
   // ---- RATE LIMIT ----
   const ip =
     req.headers["x-forwarded-for"]?.split(",")[0] ||
@@ -20,56 +23,33 @@ module.exports = async (req, res) => {
     "unknown";
 
   log("ip resolved:", ip);
-  log("NEON_HTTP_URL set:", !!process.env.NEON_HTTP_URL);
-  log("NEON_API_KEY set:", !!process.env.NEON_API_KEY);
+  log("NEON_DATABASE_URL set:", !!process.env.NEON_DATABASE_URL);
   log("SUPABASE_URL set:", !!process.env.SUPABASE_URL);
   log("SUPABASE_SERVICE_KEY set:", !!process.env.SUPABASE_SERVICE_KEY);
 
   try {
-    log("attempting neon rate limit fetch...");
-    const neonRes = await fetch(process.env.NEON_HTTP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEON_API_KEY}`,
-      },
-      body: JSON.stringify({
-        query: `
-          insert into admin_rate_limit (ip, count, reset_at)
-          values ($1, 1, now() + interval '15 minutes')
-          on conflict (ip)
-          do update set
-            count = admin_rate_limit.count + 1
-          where admin_rate_limit.reset_at > now()
-          returning count;
-        `,
-        params: [ip],
-      }),
-    });
+    log("attempting rate limit check...");
+    const rows = await sql`
+      insert into admin_rate_limit (ip, count, reset_at)
+      values (${ip}, 1, now() + interval '15 minutes')
+      on conflict (ip)
+      do update set
+        count = admin_rate_limit.count + 1
+      where admin_rate_limit.reset_at > now()
+      returning count;
+    `;
 
-    log("neon http status:", neonRes.status);
-    const neonRaw = await neonRes.text();
-    log("neon raw response:", neonRaw);
+    log("rate limit rows:", JSON.stringify(rows));
 
-    let neon;
-    try {
-      neon = JSON.parse(neonRaw);
-    } catch (parseErr) {
-      err("failed to parse neon response as JSON:", parseErr.message);
-      return res.status(503).json({ error: "Service temporarily unavailable" });
-    }
-
-    log("neon parsed:", JSON.stringify(neon));
-
-    if (neon.rows?.[0]?.count > 10) {
+    if (rows[0]?.count > 10) {
       log("rate limit exceeded for ip:", ip);
       return res.status(429).json({ error: "Too many requests" });
     }
 
-    log("rate limit ok, count:", neon.rows?.[0]?.count ?? "no row returned");
+    log("rate limit ok, count:", rows[0]?.count ?? "no row returned");
 
   } catch (e) {
-    err("rate limit fetch threw:", e.message);
+    err("rate limit threw:", e.message);
     err("stack:", e.stack);
     return res.status(503).json({ error: "Service temporarily unavailable" });
   }
@@ -139,25 +119,16 @@ module.exports = async (req, res) => {
     log("session token generated (first 16 chars):", sessionToken.slice(0, 16));
 
     try {
-      const sessionRes = await fetch(process.env.NEON_HTTP_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEON_API_KEY}`,
-        },
-        body: JSON.stringify({
-          query: `
-            insert into admin_sessions (token, admin_id, role, expires_at)
-            values ($1, $2, $3, now() + interval '2 hours');
-          `,
-          params: [sessionToken, admin.id, admin.role],
-        }),
-      });
-
-      log("session insert http status:", sessionRes.status);
-      const sessionRaw = await sessionRes.text();
-      log("session insert response:", sessionRaw);
-
+      await sql`
+        insert into admin_sessions (token, admin_id, role, expires_at)
+        values (
+          ${sessionToken},
+          ${admin.id},
+          ${admin.role},
+          now() + interval '2 hours'
+        );
+      `;
+      log("session inserted successfully");
     } catch (sessionErr) {
       err("session insert threw:", sessionErr.message);
       return res.status(500).json({ error: "Server error" });

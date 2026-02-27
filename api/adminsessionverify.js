@@ -1,70 +1,61 @@
-// /api/adminsessionverify.js
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
   }
 
-  // ---- EXTRACT COOKIES ----
+  // ---- EXTRACT SESSION COOKIE ----
   const cookies = req.headers.cookie || "";
   const cookieObj = {};
-  
   cookies.split(";").forEach(cookie => {
-    const [key, value] = cookie.trim().split("=");
-    if (key && value) {
-      cookieObj[key] = value;
-    }
+    const [key, ...rest] = cookie.trim().split("=");
+    if (key) cookieObj[key] = rest.join("=");
   });
 
-  const adminSession = cookieObj.admin_session;
-  const role = cookieObj.role;
+  const sessionToken = cookieObj.admin_session;
 
-  // ---- CHECK IF SESSION EXISTS ----
-  if (!adminSession || !adminSession.startsWith("admin_")) {
-    return res.status(401).json({ 
-      authenticated: false, 
-      error: "No valid session" 
-    });
+  if (!sessionToken) {
+    return res.status(401).json({ authenticated: false, error: "No valid session" });
   }
 
-  // ---- EXTRACT ADMIN ID FROM SESSION ----
-  const adminId = adminSession.replace("admin_", "");
-
-  // ---- VERIFY ADMIN EXISTS IN DATABASE ----
+  // ---- VERIFY SESSION AGAINST SERVER-SIDE STORE ----
   try {
-    const adminRes = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/admins?id=eq.${adminId}&select=*`,
-      {
-        headers: {
-          apikey: process.env.SUPABASE_SERVICE_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`
-        }
-      }
-    );
+    const neonRes = await fetch(process.env.NEON_HTTP_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.NEON_API_KEY}`,
+      },
+      body: JSON.stringify({
+        query: `
+          select s.admin_id, s.role, s.expires_at, a.email
+          from admin_sessions s
+          join admins a on a.id = s.admin_id
+          where s.token = $1
+            and s.expires_at > now()
+          limit 1;
+        `,
+        params: [sessionToken],
+      }),
+    });
 
-    const admins = await adminRes.json();
-    const admin = admins[0];
+    const neon = await neonRes.json();
+    const session = neon.rows?.[0];
 
-    if (!admin) {
-      return res.status(401).json({ 
-        authenticated: false, 
-        error: "Invalid session" 
-      });
+    if (!session) {
+      return res.status(401).json({ authenticated: false, error: "Invalid session" });
     }
 
     // ---- SUCCESS ----
-    return res.status(200).json({ 
+    return res.status(200).json({
       authenticated: true,
       admin: {
-        id: admin.id,
-        email: admin.email,
-        role: admin.role
-      }
+        id: session.admin_id,
+        email: session.email,
+        role: session.role,
+      },
     });
 
   } catch (e) {
-    return res.status(500).json({ 
-      authenticated: false, 
-      error: "Server error" 
-    });
+    return res.status(500).json({ authenticated: false, error: "Server error" });
   }
 };

@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Team | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meet the dedicated team behind Volk Donations — the people driving transparent, accountable change for orphaned children across 38 countries." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#1e3a5f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,600;9..144,0,700;9..144,0,900;9..144,1,400;9..144,1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:       #1a3254;
+      --navy-deep:  #0f1f34;
+      --navy-mid:   #243d62;
+      --navy-light: #2e5080;
+      --green:      #00a86b;
+      --green-dk:   #008755;
+      --green-lt:   #00c47d;
+      --green-mu:   rgba(0,168,107,.12);
+      --gold:       #e8a020;
+      --gold-lt:    #f5bc4a;
+      --gold-mu:    rgba(232,160,32,.13);
+      --canvas:     #f1f5fb;
+      --surface:    #ffffff;
+      --text:       #18263a;
+      --text-2:     #48596e;
+      --text-3:     #8496a8;
+      --border:     #dde6f0;
+      --border-2:   #c8d6e8;
+      --red:        #e84040;
+      --blue:       #3a7bd5;
+      --r:          12px;
+      --r-lg:       20px;
+      --sh:         0 4px 22px rgba(26,50,84,.08);
+      --sh-lg:      0 14px 54px rgba(26,50,84,.13);
+      --sh-xl:      0 28px 80px rgba(26,50,84,.18);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; transition: all .25s; }
+    img { display: block; max-width: 100%; }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 70px;
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 900;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 11px; }
+    .logo-wrap img { height: 44px; width: auto; }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy-mid));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .logo-txt strong { display: block; font-size: 17px; font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -.2px; }
+    .logo-txt span  { font-size: 10.5px; color: var(--green); font-weight: 600; letter-spacing: .4px; }
+    nav { display: flex; gap: 26px; align-items: center; }
+    nav a { font-size: 13.5px; font-weight: 600; color: var(--text-2); position: relative; }
+    nav a:hover { color: var(--navy); }
+    nav a.active { color: var(--navy); }
+    nav a.active::after { content:''; position:absolute; bottom:-4px; left:0; width:100%; height:2.5px; background:var(--green); border-radius:2px; }
+    .hdr-cta {
+      padding: 9px 22px;
+      background: linear-gradient(135deg, var(--green), var(--green-dk));
+      color: #fff !important;
+      border-radius: 50px; font-size: 13px !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 14px rgba(0,168,107,.3);
+    }
+    .hdr-cta:hover { transform: translateY(-1px); box-shadow: 0 7px 22px rgba(0,168,107,.42); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; background: none; border: none; }
+    .hamburger span { display:block; width:22px; height:2.5px; background:var(--navy); border-radius:2px; transition:all .3s; }
+    .mob-nav {
+      display: none; position:fixed; top:70px; left:0; right:0;
+      background:#fff; padding:20px 5%;
+      border-top:1px solid var(--border);
+      box-shadow: 0 12px 32px rgba(26,50,84,.12);
+      z-index:899; flex-direction:column; gap:14px;
+    }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { font-size:14.5px; font-weight:600; color:var(--text-2); padding:6px 0; border-bottom:1px solid var(--border); }
+    .mob-nav a:last-child { border-bottom:none; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 540px;
+      display: flex; align-items: center;
+      overflow: hidden;
+      background: var(--navy-deep);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80&auto=format&fit=crop');
+      background-size: cover; background-position: center 40%;
+      opacity: .14;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--navy-deep) 0%, rgba(10,50,35,.9) 60%, rgba(0,80,50,.5) 100%);
+    }
+    .hero-grid-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+    .hero-glow {
+      position: absolute; top: -160px; right: -160px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,168,107,.18) 0%, transparent 68%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 100px 5% 90px;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,168,107,.16);
+      border: 1px solid rgba(0,168,107,.32);
+      border-radius: 50px; padding: 5px 15px;
+      font-size: 10.5px; font-weight: 700; color: #4dffa0;
+      letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .hero-badge::before { content:''; width:6px; height:6px; background:#4dffa0; border-radius:50%; animation: pulse 2.2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(1.7)} }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 900; color: #fff;
+      line-height: 1.08; letter-spacing: -1.5px;
+      margin-bottom: 20px; max-width: 700px;
+    }
+    .hero h1 em { font-style: italic; color: #4dffa0; font-weight: 400; }
+    .hero-lead {
+      font-size: clamp(14px, 1.7vw, 16.5px);
+      color: rgba(255,255,255,.6);
+      line-height: 1.8; max-width: 580px; margin-bottom: 36px;
+    }
+    .hero-meta {
+      display: flex; gap: 36px; flex-wrap: wrap;
+    }
+    .hm-item { display: flex; align-items: center; gap: 10px; }
+    .hm-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
+    .hm-txt { font-size: 13px; color: rgba(255,255,255,.5); font-weight: 500; }
+    .hm-txt strong { color: rgba(255,255,255,.85); font-weight: 700; }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      background: var(--canvas);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 5%;
+    }
+    .breadcrumb-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-3);
+    }
+    .breadcrumb-inner a { color: var(--text-3); }
+    .breadcrumb-inner a:hover { color: var(--green); }
+    .breadcrumb-inner span { color: var(--text-2); font-weight: 600; }
+    .bc-sep { opacity: .4; }
+
+    /* ── SECTION UTILITY ── */
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.3px; color: var(--green); margin-bottom: 14px;
+    }
+    .section-eyebrow::before { content:''; width:22px; height:2px; background:var(--green); border-radius:2px; }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700; color: var(--navy);
+      line-height: 1.18; letter-spacing: -.5px;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+    .section-sub {
+      font-size: clamp(14px, 1.6vw, 15.5px);
+      color: var(--text-2); line-height: 1.8;
+      max-width: 640px; margin-top: 12px;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      background: var(--canvas);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      position: sticky; top: 70px; z-index: 800;
+    }
+    .filter-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; gap: 0; overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      padding: 16px 24px;
+      background: none; border: none; border-bottom: 3px solid transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 600; color: var(--text-3);
+      cursor: pointer; white-space: nowrap; transition: all .22s;
+      position: relative;
+    }
+    .filter-btn:hover { color: var(--navy); }
+    .filter-btn.active { color: var(--navy); border-bottom-color: var(--green); }
+    .filter-count {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--green-mu); color: var(--green);
+      font-size: 9px; font-weight: 800; margin-left: 6px;
+    }
+    .filter-btn.active .filter-count { background: var(--green); color: #fff; }
+
+    /* ── LEADERSHIP SECTION ── */
+    .leadership-section {
+      background: var(--surface);
+      padding: 80px 5%;
+    }
+    .leadership-inner { max-width: 1200px; margin: 0 auto; }
+
+    /* ── EXECUTIVE ROW ── */
+    .exec-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .exec-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh);
+      transition: all .35s cubic-bezier(.2,.8,.2,1);
+      position: relative;
+    }
+    .exec-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--sh-xl);
+      border-color: rgba(0,168,107,.2);
+    }
+    .ec-photo {
+      position: relative; height: 280px; overflow: hidden;
+      background: var(--navy-mid);
+    }
+    .ec-photo img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      transition: transform .6s ease;
+      filter: grayscale(8%);
+    }
+    .exec-card:hover .ec-photo img { transform: scale(1.06); filter: grayscale(0%); }
+    .ec-photo::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+      background: linear-gradient(transparent, rgba(15,31,52,.7));
+    }
+    .ec-role-badge {
+      position: absolute; bottom: 14px; left: 14px; z-index: 2;
+      background: var(--green);
+      padding: 4px 13px; border-radius: 50px;
+      font-size: 9.5px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .8px; color: #fff;
+      box-shadow: 0 3px 12px rgba(0,168,107,.45);
+    }
+    .ec-years {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      background: rgba(15,31,52,.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 4px 10px; border-radius: 50px;
+      font-size: 9px; font-weight: 700; color: rgba(255,255,255,.7);
+      letter-spacing: .5px;
+    }
+    .ec-body { padding: 22px 22px 24px; }
+    .ec-name {
+      font-family: 'Fraunces', serif;
+      font-size: 19px; font-weight: 600; color: var(--navy);
+      margin-bottom: 2px; line-height: 1.25;
+    }
+    .ec-title { font-size: 11.5px; font-weight: 700; color: var(--green); margin-bottom: 4px; letter-spacing: .2px; }
+    .ec-location { font-size: 11px; color: var(--text-3); margin-bottom: 14px; display: flex; align-items: center; gap: 4px; }
+    .ec-location::before { content: '📍'; font-size: 10px; }
+    .ec-bio { font-size: 12.5px; color: var(--text-2); line-height: 1.75; margin-bottom: 18px; }
+    .ec-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .ec-tag {
+      padding: 3px 10px; border-radius: 50px;
+      background: var(--canvas); border: 1px solid var(--border);
+      font-size: 10px; font-weight: 600; color: var(--text-3);
+    }
+    .ec-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .ec-socials { display: flex; gap: 7px; }
+    .ec-soc {
+      width: 30px; height: 30px;
+      background: var(--canvas); border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--text-3);
+      cursor: pointer; transition: all .2s;
+    }
+    .ec-soc:hover { background: var(--navy-deep); color: #fff; border-color: var(--navy-deep); }
+    .ec-profile-btn {
+      font-size: 11px; font-weight: 700; color: var(--green);
+      display: flex; align-items: center; gap: 4px;
+      cursor: pointer; background: none; border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 0; transition: gap .2s;
+    }
+    .ec-profile-btn:hover { gap: 8px; }
+
+    /* ── DEPARTMENT SECTIONS ── */
+    .dept-section {
+      background: var(--canvas);
+      padding: 80px 5%;
+      border-top: 1px solid var(--border);
+    }
+    .dept-inner { max-width: 1200px; margin: 0 auto; }
+    .dept-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 40px; flex-wrap: wrap; gap: 16px;
+    }
+    .dept-icon {
+      width: 50px; height: 50px; border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 14px;
+    }
+
+    /* ── STAFF GRID ── */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .staff-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex;
+      box-shadow: var(--sh);
+      transition: all .3s cubic-bezier(.2,.8,.2,1);
+    }
+    .staff-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sh-lg);
+      border-color: rgba(0,168,107,.18);
+    }
+    .sc-photo {
+      width: 110px; flex-shrink: 0;
+      overflow: hidden; background: var(--navy-mid);
+    }
+    .sc-photo img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      transition: transform .5s ease;
+      filter: grayscale(10%);
+    }
+    .staff-card:hover .sc-photo img { transform: scale(1.06); filter: grayscale(0%); }
+    .sc-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+    .sc-name {
+      font-family: 'Fraunces', serif;
+      font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 2px;
+    }
+    .sc-title { font-size: 11px; font-weight: 700; color: var(--green); margin-bottom: 6px; }
+    .sc-location { font-size: 10.5px; color: var(--text-3); margin-bottom: 10px; }
+    .sc-bio { font-size: 12px; color: var(--text-2); line-height: 1.7; flex: 1; }
+    .sc-footer { display: flex; gap: 6px; margin-top: 12px; }
+    .sc-soc {
+      width: 26px; height: 26px;
+      background: var(--canvas); border: 1px solid var(--border);
+      border-radius: 7px; display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--text-3); cursor: pointer; transition: all .2s;
+    }
+    .sc-soc:hover { background: var(--navy-deep); color: #fff; border-color: var(--navy-deep); }
+
+    /* ── BOARD SECTION ── */
+    .board-section {
+      background: var(--surface);
+      padding: 80px 5%;
+      border-top: 1px solid var(--border);
+    }
+    .board-inner { max-width: 1200px; margin: 0 auto; }
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .board-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px 24px;
+      transition: all .3s;
+      position: relative; overflow: hidden;
+    }
+    .board-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--green-lt));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s;
+    }
+    .board-card:hover::before { transform: scaleX(1); }
+    .board-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sh-lg);
+      background: var(--surface);
+    }
+    .bc-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      overflow: hidden; margin-bottom: 16px;
+      border: 3px solid var(--border);
+      transition: border-color .3s;
+    }
+    .board-card:hover .bc-avatar { border-color: var(--green); }
+    .bc-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .bc-name {
+      font-family: 'Fraunces', serif;
+      font-size: 16.5px; font-weight: 600; color: var(--navy); margin-bottom: 3px;
+    }
+    .bc-role { font-size: 11px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+    .bc-org { font-size: 11px; color: var(--text-3); margin-bottom: 12px; }
+    .bc-bio { font-size: 12px; color: var(--text-2); line-height: 1.72; }
+
+    /* ── GLOBAL PRESENCE ── */
+    .presence-section {
+      background: linear-gradient(155deg, var(--navy-deep) 0%, #0a3d25 100%);
+      padding: 80px 5%;
+      position: relative; overflow: hidden;
+    }
+    .presence-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .presence-glow {
+      position: absolute; top: -100px; right: -100px;
+      width: 440px; height: 440px;
+      background: radial-gradient(circle, rgba(0,168,107,.14), transparent 70%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .presence-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .presence-header { text-align: center; margin-bottom: 54px; }
+    .presence-eyebrow {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.3px; color: #4dffa0; margin-bottom: 14px;
+    }
+    .presence-eyebrow::before,
+    .presence-eyebrow::after { content:''; width:22px; height:2px; background:var(--green); border-radius:2px; }
+    .presence-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700; color: #fff;
+    }
+    .presence-header p { font-size: 15px; color: rgba(255,255,255,.5); margin-top: 10px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .regions-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .region-card {
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--r-lg); padding: 28px 22px;
+      backdrop-filter: blur(8px);
+      transition: all .3s;
+    }
+    .region-card:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(0,168,107,.3);
+      transform: translateY(-3px);
+    }
+    .region-flag { font-size: 26px; margin-bottom: 14px; }
+    .region-name {
+      font-family: 'Fraunces', serif;
+      font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 6px;
+    }
+    .region-count { font-size: 11px; color: rgba(255,255,255,.45); margin-bottom: 14px; }
+    .region-members { display: flex; flex-direction: column; gap: 6px; }
+    .rm-item { display: flex; align-items: center; gap: 8px; }
+    .rm-dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+    .rm-name { font-size: 11.5px; color: rgba(255,255,255,.6); }
+    .rm-role { font-size: 10px; color: rgba(255,255,255,.3); margin-left: auto; }
+
+    /* ── JOIN SECTION ── */
+    .join-section {
+      background: var(--canvas);
+      padding: 80px 5%;
+      border-top: 1px solid var(--border);
+    }
+    .join-inner { max-width: 1200px; margin: 0 auto; }
+    .join-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 48px; }
+    .join-text p { font-size: 15px; color: var(--text-2); line-height: 1.85; margin-bottom: 18px; }
+    .join-perks { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .jp-item { display: flex; align-items: flex-start; gap: 14px; }
+    .jp-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--green-mu); border: 1px solid rgba(0,168,107,.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .jp-body {}
+    .jp-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .jp-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.7; }
+    .join-roles { display: flex; flex-direction: column; gap: 14px; }
+    .jr-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 24px;
+      box-shadow: var(--sh);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+      transition: all .3s;
+    }
+    .jr-card:hover { border-color: rgba(0,168,107,.25); transform: translateX(6px); box-shadow: var(--sh-lg); }
+    .jr-info {}
+    .jr-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .jr-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .jr-tag {
+      font-size: 10.5px; font-weight: 700; color: var(--text-3);
+      background: var(--canvas); border: 1px solid var(--border);
+      padding: 2px 9px; border-radius: 50px;
+    }
+    .jr-tag.green { background: var(--green-mu); border-color: rgba(0,168,107,.2); color: var(--green); }
+    .jr-btn {
+      padding: 9px 18px;
+      background: linear-gradient(135deg, var(--green), var(--green-dk));
+      border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px; font-weight: 700; color: #fff;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0,168,107,.28);
+      transition: all .22s;
+    }
+    .jr-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(0,168,107,.4); }
+
+    /* ── NUMBERS STRIP ── */
+    .numbers-strip {
+      background: var(--navy-deep);
+      padding: 60px 5%;
+      position: relative; overflow: hidden;
+    }
+    .numbers-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,168,107,.12), transparent);
+    }
+    .numbers-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      position: relative; z-index: 1;
+    }
+    .num-item { text-align: center; padding: 20px 10px; border-right: 1px solid rgba(255,255,255,.07); }
+    .num-item:last-child { border-right: none; }
+    .num-val {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700; color: #4dffa0; line-height: 1; margin-bottom: 7px;
+    }
+    .num-lbl { font-size: 11.5px; color: rgba(255,255,255,.45); line-height: 1.5; max-width: 110px; margin: 0 auto; }
+
+    /* ── CTA ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--green-dk) 0%, var(--navy-deep) 100%);
+      padding: 80px 5%; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.022'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-inner { max-width: 660px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-inner h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.18;
+    }
+    .cta-inner p { font-size: 16px; color: rgba(255,255,255,.62); margin-bottom: 34px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      padding: 14px 34px;
+      background: #fff; border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 700; color: var(--navy);
+      cursor: pointer; transition: all .22s;
+      box-shadow: 0 5px 20px rgba(0,0,0,.2);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 9px 30px rgba(0,0,0,.3); }
+    .btn-outline-w {
+      padding: 14px 34px;
+      background: transparent; border: 2px solid rgba(255,255,255,.32);
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 600; color: rgba(255,255,255,.8);
+      cursor: pointer; transition: all .22s;
+    }
+    .btn-outline-w:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-deep); color: #fff;
+      padding: 60px 5% 28px;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px;
+      margin-bottom: 44px;
+    }
+    .footer-about { padding-right: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 15px; }
+    .footer-logo-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,.07); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .footer-logo-txt strong { display:block; font-size:16px; font-weight:800; color:#fff; }
+    .footer-logo-txt span { font-size:10px; color:rgba(255,255,255,.35); }
+    .footer-about p { color: rgba(255,255,255,.4); font-size: 13px; line-height: 1.78; margin-bottom: 18px; }
+    .soc-row { display: flex; gap: 8px; }
+    .soc-btn {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: rgba(255,255,255,.45);
+      cursor: pointer; transition: all .2s;
+    }
+    .soc-btn:hover { background: var(--green); border-color: var(--green); color: #fff; }
+    footer h5 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    footer a { display: block; color: rgba(255,255,255,.42); margin-bottom: 10px; font-size: 13px; transition: all .2s; }
+    footer a:hover { color: var(--green); padding-left: 4px; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 24px; text-align: center;
+    }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.28); margin: 4px 0; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.up { opacity: 1; transform: translateY(0); }
+    .reveal-l { opacity: 0; transform: translateX(-24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal-l.up { opacity: 1; transform: translateX(0); }
+    .reveal-r { opacity: 0; transform: translateX(24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal-r.up { opacity: 1; transform: translateX(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .exec-grid { grid-template-columns: repeat(2, 1fr); }
+      .board-grid { grid-template-columns: repeat(2, 1fr); }
+      .regions-grid { grid-template-columns: repeat(2, 1fr); }
+      .staff-grid { grid-template-columns: repeat(2, 1fr); }
+      .numbers-inner { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .join-grid { grid-template-columns: 1fr; gap: 44px; }
+    }
+    @media (max-width: 700px) {
+      .exec-grid { grid-template-columns: 1fr; }
+      .board-grid { grid-template-columns: 1fr; }
+      .regions-grid { grid-template-columns: 1fr; }
+      .staff-grid { grid-template-columns: 1fr; }
+      .numbers-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon">🌍</div>
+    <div class="logo-txt">
+      <strong>Volk Donations</strong>
+      <span>A better life for everyone</span>
+    </div>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/stories">Stories</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/donate" class="hdr-cta">Give Now</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mob-nav" id="mobNav">
+  <a href="/">Home</a>
+  <a href="/impact-calculator">Impact</a>
+  <a href="/donate">Donate</a>
+  <a href="/volunteer">Volunteer</a>
+  <a href="/stories">Stories</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+  <a href="/donate" class="hdr-cta" style="text-align:center;border-radius:50px;display:block">Give Now</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Our People</div>
+    <h1>The Humans<br>Behind the <em>Mission.</em></h1>
+    <p class="hero-lead">From our executive suite in Washington D.C. to field coordinators on the ground in Juba, Dhaka, and Kampala — Volk Donations is powered by 47 full-time staff and an extended network of 200+ volunteers across 38 countries. Every one of them is here for one reason.</p>
+    <div class="hero-meta">
+      <div class="hm-item"><div class="hm-dot"></div><div class="hm-txt"><strong>47</strong> Full-Time Staff</div></div>
+      <div class="hm-item"><div class="hm-dot"></div><div class="hm-txt"><strong>200+</strong> Active Volunteers</div></div>
+      <div class="hm-item"><div class="hm-dot"></div><div class="hm-txt"><strong>38</strong> Countries Represented</div></div>
+      <div class="hm-item"><div class="hm-dot"></div><div class="hm-txt"><strong>16</strong> Languages Spoken</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BREADCRUMB ── -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">Home</a>
+    <span class="bc-sep">›</span>
+    <a href="/about">About</a>
+    <span class="bc-sep">›</span>
+    <span>Our Team</span>
+  </div>
+</div>
+
+<!-- ── FILTER BAR ── -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active">All Staff <span class="filter-count">47</span></button>
+    <button class="filter-btn">Executive Leadership <span class="filter-count">4</span></button>
+    <button class="filter-btn">Programmes & Operations <span class="filter-count">11</span></button>
+    <button class="filter-btn">Finance & Compliance <span class="filter-count">6</span></button>
+    <button class="filter-btn">Communications <span class="filter-count">5</span></button>
+    <button class="filter-btn">Field Teams <span class="filter-count">18</span></button>
+    <button class="filter-btn">Board of Directors <span class="filter-count">7</span></button>
+  </div>
+</div>
+
+<!-- ── EXECUTIVE LEADERSHIP ── -->
+<div class="leadership-section" id="leadership">
+  <div class="leadership-inner">
+    <div class="section-eyebrow">Executive Leadership</div>
+    <h2 class="section-title">Four Leaders.<br><em>One Direction.</em></h2>
+    <p class="section-sub">The senior leadership team that sets strategy, holds accountability, and ensures that every dollar raised reaches its intended destination.</p>
+    <div class="exec-grid">
+
+      <div class="exec-card reveal">
+        <div class="ec-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=85&auto=format&fit=crop&crop=top" alt="James Okafor">
+          <div class="ec-role-badge">Chief Executive Officer</div>
+          <div class="ec-years">Since 2018</div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-name">James Okafor</div>
+          <div class="ec-title">Chief Executive Officer</div>
+          <div class="ec-location">Washington, D.C., USA</div>
+          <div class="ec-bio">Eleven years at the World Food Programme leading emergency nutrition responses across Sub-Saharan Africa. Under James's leadership, Volk's annual programme reach has grown by 340%. Georgetown University and LSE graduate. Four languages.</div>
+          <div class="ec-tags">
+            <span class="ec-tag">Strategic Leadership</span>
+            <span class="ec-tag">International Dev.</span>
+            <span class="ec-tag">Nutrition Policy</span>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-socials">
+              <div class="ec-soc">in</div>
+              <div class="ec-soc">𝕏</div>
+            </div>
+            <button class="ec-profile-btn">Full Profile →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="exec-card reveal">
+        <div class="ec-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=85&auto=format&fit=crop&crop=top" alt="Daniel Volk">
+          <div class="ec-role-badge">Co-Founder & Chairman</div>
+          <div class="ec-years">Since 2010</div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-name">Daniel Volk</div>
+          <div class="ec-title">Co-Founder & Chairman Emeritus</div>
+          <div class="ec-location">New York, NY, USA</div>
+          <div class="ec-bio">Former investment banker who founded Volk Donations in 2010 following field work with orphanages in East Africa. Architected the founding charter and the 4% overhead commitment. Wharton MBA, Columbia Masters in International Development.</div>
+          <div class="ec-tags">
+            <span class="ec-tag">Governance</span>
+            <span class="ec-tag">Strategic Partnerships</span>
+            <span class="ec-tag">Board Development</span>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-socials">
+              <div class="ec-soc">in</div>
+              <div class="ec-soc">𝕏</div>
+            </div>
+            <button class="ec-profile-btn">Full Profile →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="exec-card reveal">
+        <div class="ec-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=85&auto=format&fit=crop&crop=top" alt="Priya Mehta">
+          <div class="ec-role-badge">Chief Operations Officer</div>
+          <div class="ec-years">Since 2013</div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-name">Priya Mehta</div>
+          <div class="ec-title">Chief Operations Officer</div>
+          <div class="ec-location">London, United Kingdom</div>
+          <div class="ec-bio">16 years at UNICEF's Regional Office for South Asia managing $40M+ annual budgets. Built Volk's partner evaluation framework and the Volk Impact Measurement Protocol used to assess all 14 active programmes. University of Edinburgh graduate.</div>
+          <div class="ec-tags">
+            <span class="ec-tag">Programme Design</span>
+            <span class="ec-tag">Safeguarding</span>
+            <span class="ec-tag">Impact Measurement</span>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-socials">
+              <div class="ec-soc">in</div>
+              <div class="ec-soc">𝕏</div>
+            </div>
+            <button class="ec-profile-btn">Full Profile →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="exec-card reveal">
+        <div class="ec-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=85&auto=format&fit=crop&crop=top" alt="Marcus Webb">
+          <div class="ec-role-badge">Chief Financial Officer</div>
+          <div class="ec-years">Since 2016</div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-name">Marcus Webb</div>
+          <div class="ec-title">Chief Financial Officer</div>
+          <div class="ec-location">Washington, D.C., USA</div>
+          <div class="ec-bio">CPA and CFE with 20 years in nonprofit and public sector finance. Eight years as Finance Director at Save the Children US overseeing $220M annual budgets. Architect of Volk's real-time donor reporting system. University of Michigan graduate.</div>
+          <div class="ec-tags">
+            <span class="ec-tag">Financial Reporting</span>
+            <span class="ec-tag">Audit & Compliance</span>
+            <span class="ec-tag">Donor Transparency</span>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-socials">
+              <div class="ec-soc">in</div>
+              <div class="ec-soc">𝕏</div>
+            </div>
+            <button class="ec-profile-btn">Full Profile →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── PROGRAMMES & OPERATIONS ── -->
+<div class="dept-section">
+  <div class="dept-inner">
+    <div class="dept-header">
+      <div>
+        <div class="dept-icon" style="background:rgba(0,168,107,.1)">🌐</div>
+        <div class="section-eyebrow">Department</div>
+        <h2 class="section-title">Programmes <em>&amp; Operations</em></h2>
+        <p class="section-sub">The team that designs, funds, monitors, and evaluates every active programme Volk runs across four continents.</p>
+      </div>
+    </div>
+    <div class="staff-grid">
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=85&auto=format&fit=crop&crop=top" alt="Amara Diallo">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Amara Diallo</div>
+          <div class="sc-title">Director of Programmes — Africa</div>
+          <div class="sc-location">📍 Nairobi, Kenya</div>
+          <div class="sc-bio">14 years managing child welfare programmes across East and West Africa. Formerly with Oxfam and CARE International. Oversees 8 active programmes across 21 countries. Fluent in French, Wolof, and Swahili.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&q=85&auto=format&fit=crop&crop=top" alt="Rafael Morales">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Rafael Morales</div>
+          <div class="sc-title">Director of Programmes — Latin America</div>
+          <div class="sc-location">📍 Bogotá, Colombia</div>
+          <div class="sc-bio">Joined Volk in 2017 from the Inter-American Development Bank. Leads programmes in Guatemala, Colombia, Haiti, and the Dominican Republic with a focus on education access and child nutrition. Universidad de los Andes graduate.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=85&auto=format&fit=crop&crop=top" alt="Nadia Hassan">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Nadia Hassan</div>
+          <div class="sc-title">Director of Programmes — Asia & Middle East</div>
+          <div class="sc-location">📍 Dhaka, Bangladesh</div>
+          <div class="sc-bio">Former UNICEF programme specialist with a decade of experience across Bangladesh, Cambodia, and Lebanon. Manages the Clean Wells Initiative and Girls Education Fund across South and Southeast Asia. LSE graduate.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=85&auto=format&fit=crop&crop=top" alt="Chioma Eze">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Chioma Eze</div>
+          <div class="sc-title">Programme Manager — Education</div>
+          <div class="sc-location">📍 Lagos, Nigeria</div>
+          <div class="sc-bio">Specialist in curriculum development for underfunded primary schools. Manages the East Africa School Meals campaign and oversees educational outcomes reporting for 14 partner schools. University of Ibadan, MSc UCL.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=85&auto=format&fit=crop&crop=top" alt="Kwame Asante">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Kwame Asante</div>
+          <div class="sc-title">Programme Manager — Health & WASH</div>
+          <div class="sc-location">📍 Accra, Ghana</div>
+          <div class="sc-bio">Public health specialist focused on water sanitation, hygiene, and preventive care for orphaned children under 12. Eight years with MSF before joining Volk in 2021. University of Ghana, MPH Johns Hopkins.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=85&auto=format&fit=crop&crop=top" alt="Leila Nazari">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Leila Nazari</div>
+          <div class="sc-title">Impact Measurement Lead</div>
+          <div class="sc-location">📍 Vienna, Austria</div>
+          <div class="sc-bio">Quantitative researcher specialising in impact evaluation for international development programmes. Developed the Volk Impact Measurement Protocol alongside Priya Mehta. PhD candidate, Vienna University of Economics and Business.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── FINANCE & COMPLIANCE ── -->
+<div class="dept-section" style="background:var(--surface)">
+  <div class="dept-inner">
+    <div class="dept-header">
+      <div>
+        <div class="dept-icon" style="background:rgba(58,123,213,.1)">📊</div>
+        <div class="section-eyebrow">Department</div>
+        <h2 class="section-title">Finance <em>&amp; Compliance</em></h2>
+        <p class="section-sub">The team responsible for maintaining Volk's GuideStar Platinum rating, sub-4% overhead commitment, and full financial transparency to donors and regulators.</p>
+      </div>
+    </div>
+    <div class="staff-grid">
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=85&auto=format&fit=crop&crop=top" alt="Thomas Bergmann">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Thomas Bergmann</div>
+          <div class="sc-title">Senior Finance Manager</div>
+          <div class="sc-location">📍 Frankfurt, Germany</div>
+          <div class="sc-bio">European operations finance lead. Manages multi-currency fund accounting for 11 European donor accounts and all EU regulatory compliance. CPA, 15 years in international nonprofit finance. Previously at Deutsche Gesellschaft für Internationale Zusammenarbeit.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&q=85&auto=format&fit=crop&crop=top" alt="Sonia Park">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Sonia Park</div>
+          <div class="sc-title">Compliance & Audit Manager</div>
+          <div class="sc-location">📍 Washington, D.C., USA</div>
+          <div class="sc-bio">Oversees internal audit cycles, GuideStar reporting submissions, and IRS Form 990 compliance. Five years at Ernst & Young's nonprofit practice before joining Volk in 2020. CFE, CPA, Georgetown Law certificate in Nonprofit Governance.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=85&auto=format&fit=crop&crop=top" alt="Emmanuel Tchouké">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Emmanuel Tchouké</div>
+          <div class="sc-title">Grants & Disbursements Officer</div>
+          <div class="sc-location">📍 Yaoundé, Cameroon</div>
+          <div class="sc-bio">Manages disbursement of programme grants to all 38 partner organisations, including fund-release conditions, milestone verification, and quarterly reconciliations. 9 years in development finance. Masters in Finance, Université de Yaoundé II.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── COMMUNICATIONS ── -->
+<div class="dept-section">
+  <div class="dept-inner">
+    <div class="dept-header">
+      <div>
+        <div class="dept-icon" style="background:rgba(232,160,32,.12)">📣</div>
+        <div class="section-eyebrow">Department</div>
+        <h2 class="section-title">Communications <em>&amp; Fundraising</em></h2>
+        <p class="section-sub">The storytellers, strategists, and relationship managers who connect donors with the children their giving reaches.</p>
+      </div>
+    </div>
+    <div class="staff-grid">
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=85&auto=format&fit=crop&crop=top" alt="Claire Fontaine">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Claire Fontaine</div>
+          <div class="sc-title">Director of Communications</div>
+          <div class="sc-location">📍 Paris, France</div>
+          <div class="sc-bio">Award-winning communications director with 12 years in international development journalism and NGO communications. Formerly at Médecins Sans Frontières and the Guardian's Global Development desk. Sciences Po Paris, MA Media Studies, LSE.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&q=85&auto=format&fit=crop&crop=top" alt="Darius Cole">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Darius Cole</div>
+          <div class="sc-title">Head of Donor Relations</div>
+          <div class="sc-location">📍 Atlanta, GA, USA</div>
+          <div class="sc-bio">Manages relationships with Volk's 1,400+ registered donors, including major donor stewardship and the recurring giving programme. Former Director of Individual Giving at American Red Cross. Morehouse College, MBA Emory Goizueta.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-card reveal">
+        <div class="sc-photo">
+          <img src="https://images.unsplash.com/photo-1592621385612-4d7129426394?w=400&q=85&auto=format&fit=crop&crop=top" alt="Yuki Tanaka">
+        </div>
+        <div class="sc-body">
+          <div class="sc-name">Yuki Tanaka</div>
+          <div class="sc-title">Digital & Content Lead</div>
+          <div class="sc-location">📍 Tokyo, Japan</div>
+          <div class="sc-bio">Leads digital fundraising strategy, content production, and the donor portal user experience. Grew Volk's email donor base by 280% over two years. Former UX lead at a Tokyo digital agency. Keio University, Product Design.</div>
+          <div class="sc-footer">
+            <div class="sc-soc">in</div>
+            <div class="sc-soc">𝕏</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── BOARD OF DIRECTORS ── -->
+<div class="board-section" id="board">
+  <div class="board-inner">
+    <div class="section-eyebrow">Governance</div>
+    <h2 class="section-title">Board of <em>Directors</em></h2>
+    <p class="section-sub">Seven independent directors who provide oversight, strategic guidance, and accountability to ensure Volk Donations operates to the highest standards of nonprofit governance.</p>
+    <div class="board-grid">
+
+      <div class="board-card reveal">
+        <div class="bc-avatar">
+          <img src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=200&q=85&auto=format&fit=crop&crop=top" alt="Robert Hargrove">
+        </div>
+        <div class="bc-name">Robert Hargrove</div>
+        <div class="bc-role">Board Chair</div>
+        <div class="bc-org">Former Deputy Director, USAID</div>
+        <div class="bc-bio">35 years in international development policy. Served at USAID under three administrations and chaired the bipartisan Advisory Committee on Voluntary Foreign Aid.</div>
+      </div>
+
+      <div class="board-card reveal">
+        <div class="bc-avatar">
+          <img src="https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=200&q=85&auto=format&fit=crop&crop=top" alt="Dr. Adaeze Okonkwo">
+        </div>
+        <div class="bc-name">Dr. Adaeze Okonkwo</div>
+        <div class="bc-role">Director — Child Welfare</div>
+        <div class="bc-org">Professor, University of Lagos</div>
+        <div class="bc-bio">Africa's leading academic voice in child protection law. Author of three peer-reviewed books on orphan rights and the UN Convention on the Rights of the Child.</div>
+      </div>
+
+      <div class="board-card reveal">
+        <div class="bc-avatar">
+          <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=200&q=85&auto=format&fit=crop&crop=top" alt="William Ashford">
+        </div>
+        <div class="bc-name">William Ashford</div>
+        <div class="bc-role">Director — Finance</div>
+        <div class="bc-org">Partner, Ashford & Keene LLP</div>
+        <div class="bc-bio">Audit committee chair. CPA and former PwC partner with deep expertise in nonprofit financial governance and international fund accounting standards.</div>
+      </div>
+
+      <div class="board-card reveal">
+        <div class="bc-avatar">
+          <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=200&q=85&auto=format&fit=crop&crop=top" alt="Dr. Fatima Al-Rashid">
+        </div>
+        <div class="bc-name">Dr. Fatima Al-Rashid</div>
+        <div class="bc-role">Director — Health Policy</div>
+        <div class="bc-org">WHO Senior Advisor (Ret.)</div>
+        <div class="bc-bio">Former World Health Organization Senior Advisor for child and maternal health across the MENA region. Brings 28 years of global health policy expertise.</div>
+      </div>
+
+      <div class="board-card reveal">
+        <div class="bc-avatar">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=85&auto=format&fit=crop&crop=top" alt="Samuel Klein">
+        </div>
+        <div class="bc-name">Samuel Klein</div>
+        <div class="bc-role">Director — Technology</div>
+        <div class="bc-org">CTO, Brightpath Technologies</div>
+        <div class="bc-bio">Technology governance and digital strategy advisor. Oversaw the technical architecture for the Volk Donor Portal and leads the board's technology and data privacy subcommittee.</div>
+      </div>
+
+      <div class="board-card reveal">
+        <div class="bc-avatar">
+          <img src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=200&q=85&auto=format&fit=crop&crop=top" alt="Grace Kimani">
+        </div>
+        <div class="bc-name">Grace Kimani</div>
+        <div class="bc-role">Director — Programmes</div>
+        <div class="bc-org">CEO, East Africa Futures Fund</div>
+        <div class="bc-bio">Award-winning Kenyan social entrepreneur and programme specialist. Chairs the programme effectiveness subcommittee and brings direct beneficiary community insight to board deliberations.</div>
+      </div>
+
+      <div class="board-card reveal">
+        <div class="bc-avatar">
+          <img src="https://images.unsplash.com/photo-1548142813-c348350df52b?w=200&q=85&auto=format&fit=crop&crop=top" alt="Elena Vasquez">
+        </div>
+        <div class="bc-name">Elena Vasquez</div>
+        <div class="bc-role">Director — Legal & Governance</div>
+        <div class="bc-org">Partner, Vasquez & Orellana</div>
+        <div class="bc-bio">International nonprofit law specialist with expertise in US, EU, and Latin American regulatory environments. Leads board governance review and Volk's global legal compliance oversight.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── GLOBAL PRESENCE ── -->
+<div class="presence-section">
+  <div class="presence-glow"></div>
+  <div class="presence-inner">
+    <div class="presence-header reveal">
+      <div class="presence-eyebrow">Where We Work</div>
+      <h2>Our People, Across <em style="font-family:'Fraunces',serif;font-style:italic;color:#4dffa0">the Globe</em></h2>
+      <p>A geographically distributed team ensuring that every region we operate in has dedicated staff who understand the local context, culture, and communities they serve.</p>
+    </div>
+    <div class="regions-grid">
+
+      <div class="region-card reveal">
+        <div class="region-flag">🌍</div>
+        <div class="region-name">Sub-Saharan Africa</div>
+        <div class="region-count">21 countries · 19 staff members</div>
+        <div class="region-members">
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Amara Diallo</div><div class="rm-role">Dir. Programmes</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Kwame Asante</div><div class="rm-role">Health & WASH Mgr</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Chioma Eze</div><div class="rm-role">Education Mgr</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Grace Kimani</div><div class="rm-role">Board Director</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">+15 field staff</div><div class="rm-role"></div></div>
+        </div>
+      </div>
+
+      <div class="region-card reveal">
+        <div class="region-flag">🌏</div>
+        <div class="region-name">Asia &amp; Pacific</div>
+        <div class="region-count">9 countries · 14 staff members</div>
+        <div class="region-members">
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Nadia Hassan</div><div class="rm-role">Dir. Programmes</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Yuki Tanaka</div><div class="rm-role">Digital Lead</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Dr. Fatima Al-Rashid</div><div class="rm-role">Board Director</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">+11 field staff</div><div class="rm-role"></div></div>
+        </div>
+      </div>
+
+      <div class="region-card reveal">
+        <div class="region-flag">🌎</div>
+        <div class="region-name">Latin America &amp; Caribbean</div>
+        <div class="region-count">6 countries · 8 staff members</div>
+        <div class="region-members">
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Rafael Morales</div><div class="rm-role">Dir. Programmes</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Elena Vasquez</div><div class="rm-role">Board Director</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">+6 field staff</div><div class="rm-role"></div></div>
+        </div>
+      </div>
+
+      <div class="region-card reveal">
+        <div class="region-flag">🌐</div>
+        <div class="region-name">Europe &amp; North America</div>
+        <div class="region-count">HQ + Regional Offices · 14 staff</div>
+        <div class="region-members">
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">James Okafor</div><div class="rm-role">CEO</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Marcus Webb</div><div class="rm-role">CFO</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Claire Fontaine</div><div class="rm-role">Dir. Comms</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">Thomas Bergmann</div><div class="rm-role">Sr. Finance Mgr</div></div>
+          <div class="rm-item"><div class="rm-dot"></div><div class="rm-name">+10 HQ staff</div><div class="rm-role"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── JOIN THE TEAM ── -->
+<div class="join-section">
+  <div class="join-inner">
+    <div class="section-eyebrow">Careers</div>
+    <h2 class="section-title">Work That <em>Matters.</em></h2>
+    <p class="section-sub">We hire people who are not looking for a job — they are looking for a cause. If you want your professional skills to move children's lives forward, we want to hear from you.</p>
+    <div class="join-grid">
+      <div class="join-text reveal-l">
+        <p>At Volk Donations, we believe that the quality of our people is the single greatest determinant of our impact. We hire across functions — from finance and technology to communications and field operations — and we invest seriously in our team's growth, wellbeing, and career development.</p>
+        <p>We are a remote-first organisation with staff in 22 time zones. We operate with radical trust, high accountability, and a genuine belief that diverse teams make better decisions.</p>
+        <div class="join-perks">
+          <div class="jp-item">
+            <div class="jp-icon">🌍</div>
+            <div class="jp-body">
+              <div class="jp-title">Remote-First, Globally Distributed</div>
+              <div class="jp-desc">Work from anywhere. We have staff in 22 countries and operate across time zones with asynchronous-first communication.</div>
+            </div>
+          </div>
+          <div class="jp-item">
+            <div class="jp-icon">📈</div>
+            <div class="jp-body">
+              <div class="jp-title">Structured Career Development</div>
+              <div class="jp-desc">Annual learning budgets, conference attendance, and a formal mentorship programme with senior leadership.</div>
+            </div>
+          </div>
+          <div class="jp-item">
+            <div class="jp-icon">❤️</div>
+            <div class="jp-body">
+              <div class="jp-title">Competitive Compensation & Wellness</div>
+              <div class="jp-desc">Sector-leading nonprofit salaries, comprehensive health coverage, and 28 days annual leave for all full-time staff.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="join-roles reveal-r">
+        <div class="jr-card">
+          <div class="jr-info">
+            <div class="jr-title">Senior Programme Manager — East Africa</div>
+            <div class="jr-meta">
+              <span class="jr-tag">Full-Time</span>
+              <span class="jr-tag">Remote</span>
+              <span class="jr-tag green">Now Hiring</span>
+            </div>
+          </div>
+          <button class="jr-btn">Apply</button>
+        </div>
+        <div class="jr-card">
+          <div class="jr-info">
+            <div class="jr-title">Finance Officer — Global Grants</div>
+            <div class="jr-meta">
+              <span class="jr-tag">Full-Time</span>
+              <span class="jr-tag">Washington D.C.</span>
+              <span class="jr-tag green">Now Hiring</span>
+            </div>
+          </div>
+          <button class="jr-btn">Apply</button>
+        </div>
+        <div class="jr-card">
+          <div class="jr-info">
+            <div class="jr-title">Digital Fundraising Specialist</div>
+            <div class="jr-meta">
+              <span class="jr-tag">Full-Time</span>
+              <span class="jr-tag">Remote</span>
+              <span class="jr-tag green">Now Hiring</span>
+            </div>
+          </div>
+          <button class="jr-btn">Apply</button>
+        </div>
+        <div class="jr-card">
+          <div class="jr-info">
+            <div class="jr-title">Field Coordinator — South Sudan</div>
+            <div class="jr-meta">
+              <span class="jr-tag">Full-Time</span>
+              <span class="jr-tag">Juba, South Sudan</span>
+              <span class="jr-tag green">Now Hiring</span>
+            </div>
+          </div>
+          <button class="jr-btn">Apply</button>
+        </div>
+        <div class="jr-card">
+          <div class="jr-info">
+            <div class="jr-title">Impact Measurement Analyst</div>
+            <div class="jr-meta">
+              <span class="jr-tag">Full-Time</span>
+              <span class="jr-tag">Remote</span>
+              <span class="jr-tag">Closing Soon</span>
+            </div>
+          </div>
+          <button class="jr-btn">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── NUMBERS ── -->
+<div class="numbers-strip">
+  <div class="numbers-inner">
+    <div class="num-item reveal"><div class="num-val">47</div><div class="num-lbl">Full-Time Staff</div></div>
+    <div class="num-item reveal"><div class="num-val">22</div><div class="num-lbl">Countries with Resident Staff</div></div>
+    <div class="num-item reveal"><div class="num-val">200+</div><div class="num-lbl">Active Volunteers</div></div>
+    <div class="num-item reveal"><div class="num-val">16</div><div class="num-lbl">Languages Spoken Internally</div></div>
+    <div class="num-item reveal"><div class="num-val">94%</div><div class="num-lbl">Staff Retention Rate (2025)</div></div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <h2>Our Team Works Hard.<br>Your Support Makes It Possible.</h2>
+    <p>Every person on this page chose to dedicate their career to children who have no one else. Every donation you make funds their ability to do that work. Join over 1,400 donors who have already made that decision.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="window.location='/donate'">Make a Donation</button>
+      <button class="btn-outline-w" onclick="window.location='/about'">Read Our Story</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">🌍</div>
+        <div class="footer-logo-txt">
+          <strong>Volk Donations</strong>
+          <span>A better life for everyone</span>
+        </div>
+      </div>
+      <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we are building a better future for those who need it most.</p>
+      <div class="soc-row">
+        <div class="soc-btn">f</div>
+        <div class="soc-btn">in</div>
+        <div class="soc-btn">𝕏</div>
+        <div class="soc-btn">▶</div>
+      </div>
+    </div>
+    <div>
+      <h5>Organisation</h5>
+      <a href="/about">About Us</a>
+      <a href="/partners">Our Partners</a>
+      <a href="/branches">Branches</a>
+      <a href="/reports">Annual Reports</a>
+      <a href="/team" style="color:var(--green)">Our Team</a>
+    </div>
+    <div>
+      <h5>Get Involved</h5>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/fundraise">Fundraise</a>
+      <a href="/events">Events</a>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
+      <a href="/stories">Success Stories</a>
+      <a href="/press">Press Kit</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/financial">Financial Info</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations. All rights reserved.</p>
+    <p>A registered 501(c)(3) nonprofit organisation based in the United States.</p>
+    <p>EIN: 45-1234567 · Making a difference since 2010</p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobNav = document.getElementById('mobNav');
+  hamburger.addEventListener('click', () => mobNav.classList.toggle('open'));
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobNav.contains(e.target)) mobNav.classList.remove('open');
+  });
+
+  // Filter tabs (UI only)
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const allReveal = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const siblings = Array.from(el.parentElement.children).filter(c =>
+          c.classList.contains('reveal') || c.classList.contains('reveal-l') || c.classList.contains('reveal-r')
+        );
+        const idx = siblings.indexOf(el);
+        setTimeout(() => el.classList.add('up'), idx * 90);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.08 });
+  allReveal.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

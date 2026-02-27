@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Privacy Policy | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Volk Donations Privacy Policy — how we collect, use, and protect your personal information." />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-container img { height: 50px; width: auto; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: #1e3a5f; margin: 0; }
+    .logo-text span { font-size: 12px; color: #00a86b; font-weight: 500; letter-spacing: 0.5px; }
+
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { font-weight: 500; color: #2c3e50; font-size: 15px; position: relative; }
+    nav a:hover { color: #00a86b; }
+    nav a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0;
+      width: 0; height: 2px; background: #00a86b; transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+
+    .mobile-menu-btn {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 5px;
+    }
+    .mobile-menu-btn span {
+      width: 28px; height: 3px; background: #1e3a5f;
+      transition: all 0.3s ease; border-radius: 2px;
+    }
+    .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    .page-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      color: #ffffff;
+      padding: 72px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+      background-size: cover; opacity: 0.3;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #ffffff;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .page-hero h2 {
+      font-size: 42px; font-weight: 700; margin-bottom: 14px; line-height: 1.2;
+    }
+    .page-hero p {
+      font-size: 16px; opacity: 0.88; line-height: 1.7; max-width: 700px;
+      margin-bottom: 24px;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 20px;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; color: rgba(255,255,255,0.80);
+    }
+    .hero-meta-item svg { opacity: 0.7; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 3%;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 86px;
+      padding: 40px 0 40px 0;
+      padding-right: 36px;
+      border-right: 1px solid #e8edf2;
+    }
+    .toc-title {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: #00a86b; margin-bottom: 16px;
+    }
+    .toc-list { list-style: none; }
+    .toc-list li { margin-bottom: 2px; }
+    .toc-list a {
+      display: block;
+      font-size: 13px; color: #5a6c7d;
+      padding: 6px 10px; border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+      line-height: 1.4;
+    }
+    .toc-list a:hover,
+    .toc-list a.active {
+      color: #1e3a5f;
+      background: #f0f7ff;
+      border-left-color: #00a86b;
+    }
+
+    .content {
+      padding: 50px 0 80px 48px;
+      min-width: 0;
+    }
+
+    .commitments-banner {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin-bottom: 52px;
+      color: #ffffff;
+    }
+    .commitments-banner h3 {
+      font-size: 18px; font-weight: 700; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .commitments-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 28px;
+    }
+    .commitment-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,0.88); line-height: 1.5;
+    }
+    .commitment-item::before {
+      content: '';
+      width: 18px; height: 18px; flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 1.5px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .org-card {
+      background: #f0f4f8;
+      border: 1px solid #d5e0ec;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .org-card-field label {
+      display: block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: #00a86b; margin-bottom: 3px;
+    }
+    .org-card-field span { font-size: 14px; color: #1e3a5f; font-weight: 600; }
+
+    .policy-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 100px;
+    }
+    .section-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #1e3a5f; color: #ffffff;
+      font-size: 13px; font-weight: 700;
+      margin-right: 12px; flex-shrink: 0;
+    }
+    .section-header {
+      display: flex; align-items: center; margin-bottom: 18px;
+      padding-bottom: 14px; border-bottom: 2px solid #e8edf2;
+    }
+    .section-header h2 {
+      font-size: 22px; font-weight: 700; color: #1e3a5f; line-height: 1.2;
+    }
+    .subsection-header {
+      font-size: 16px; font-weight: 700; color: #1e3a5f;
+      margin: 28px 0 12px;
+      padding-left: 14px;
+      border-left: 3px solid #00a86b;
+    }
+
+    .policy-section p {
+      font-size: 15px; color: #3d4f5f; line-height: 1.75; margin-bottom: 14px;
+    }
+
+    .policy-list {
+      list-style: none; margin: 12px 0 18px;
+    }
+    .policy-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: #3d4f5f; line-height: 1.65;
+      padding: 9px 0; border-bottom: 1px solid #f0f4f8;
+    }
+    .policy-list li:last-child { border-bottom: none; }
+    .policy-list li::before {
+      content: '';
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #00a86b; flex-shrink: 0; margin-top: 7px;
+    }
+    .policy-list li strong { color: #1e3a5f; }
+
+    .data-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0 24px; font-size: 14px;
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .data-table thead tr {
+      background: #1e3a5f; color: #ffffff;
+    }
+    .data-table thead th {
+      padding: 13px 16px; text-align: left;
+      font-weight: 600; font-size: 13px; letter-spacing: 0.3px;
+    }
+    .data-table tbody tr { border-bottom: 1px solid #e8edf2; }
+    .data-table tbody tr:nth-child(even) { background: #f8fafc; }
+    .data-table tbody tr:hover { background: #f0f7ff; }
+    .data-table tbody td {
+      padding: 12px 16px; color: #3d4f5f; vertical-align: top; line-height: 1.55;
+    }
+    .data-table tbody td:first-child { font-weight: 600; color: #1e3a5f; white-space: nowrap; }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px; border-radius: 50px;
+      font-size: 12px; font-weight: 600;
+    }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-navy  { background: #dbeafe; color: #1e40af; }
+    .badge-amber { background: #fef9c3; color: #854d0e; }
+
+    .info-box {
+      border-radius: 10px; padding: 18px 22px; margin: 18px 0;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .info-box-green {
+      background: #f0fdf4; border: 1px solid #bbf7d0;
+    }
+    .info-box-blue {
+      background: #eff6ff; border: 1px solid #bfdbfe;
+    }
+    .info-box-amber {
+      background: #fffbeb; border: 1px solid #fde68a;
+    }
+    .info-box svg { flex-shrink: 0; margin-top: 2px; }
+    .info-box p { font-size: 14px; line-height: 1.65; margin: 0; color: #374151; }
+    .info-box p strong { color: #1e3a5f; }
+
+    .never-sell-box {
+      background: linear-gradient(135deg, #1e3a5f, #00a86b);
+      color: #ffffff;
+      border-radius: 12px; padding: 24px 28px; margin: 20px 0;
+      display: flex; gap: 16px; align-items: center;
+    }
+    .never-sell-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .never-sell-box p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.9); margin: 0; }
+    .never-sell-box p strong { color: #ffffff; font-size: 15px; display: block; margin-bottom: 4px; }
+
+    .service-provider-list {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 14px 0 20px;
+    }
+    .sp-item {
+      background: #f8fafc; border: 1px solid #e8edf2;
+      border-radius: 8px; padding: 12px 16px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .sp-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #00a86b; margin-top: 5px; flex-shrink: 0;
+    }
+    .sp-item strong { font-size: 13px; color: #1e3a5f; display: block; }
+    .sp-item span { font-size: 12px; color: #5a6c7d; line-height: 1.4; }
+
+    .rights-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin: 18px 0;
+    }
+    .right-card {
+      background: #f8fafc; border: 1px solid #e8edf2;
+      border-radius: 10px; padding: 18px 20px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .right-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-color: #00a86b;
+    }
+    .right-card h4 {
+      font-size: 14px; font-weight: 700; color: #1e3a5f;
+      margin-bottom: 7px; display: flex; align-items: center; gap: 8px;
+    }
+    .right-card h4::before {
+      content: '';
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #00a86b; flex-shrink: 0;
+    }
+    .right-card p { font-size: 13px; color: #5a6c7d; line-height: 1.6; margin: 0; }
+
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin: 20px 0;
+    }
+    .contact-card {
+      background: #f0f4f8; border: 1px solid #d5e0ec;
+      border-radius: 12px; padding: 22px 20px; text-align: center;
+    }
+    .contact-card .contact-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: #1e3a5f; margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-card h4 { font-size: 13px; font-weight: 700; color: #1e3a5f; margin-bottom: 6px; }
+    .contact-card a, .contact-card p {
+      font-size: 13px; color: #00a86b; font-weight: 600;
+      display: block; margin-bottom: 4px; line-height: 1.5;
+    }
+    .contact-card span { font-size: 12px; color: #5a6c7d; }
+
+    .signature-box {
+      background: #f0f4f8; border: 1px solid #d5e0ec;
+      border-radius: 12px; padding: 24px 28px; margin-top: 24px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .signature-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, #1e3a5f, #00a86b);
+      display: flex; align-items: center; justify-content: center;
+      color: #ffffff; font-size: 20px; font-weight: 700; flex-shrink: 0;
+    }
+    .signature-text p { font-size: 14px; color: #3d4f5f; margin-bottom: 4px; }
+    .signature-text strong { font-size: 15px; color: #1e3a5f; display: block; margin-bottom: 2px; }
+    .signature-text span { font-size: 13px; color: #5a6c7d; }
+
+    .version-bar {
+      background: #1e3a5f; color: rgba(255,255,255,0.75);
+      padding: 10px 5%; text-align: center; font-size: 13px;
+    }
+    .version-bar span { color: #00a86b; font-weight: 600; }
+
+    footer {
+      background: #1e3a5f; color: #ffffff;
+      padding: 70px 5% 30px; margin-top: 0;
+    }
+    .footer-grid {
+      max-width: 1400px; margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 50px; margin-bottom: 50px;
+    }
+    .footer-about { padding-right: 30px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { height: 45px; width: auto; }
+    .footer-logo-text { font-size: 20px; font-weight: 700; color: #ffffff; }
+    .footer-about p { color: #b8c7d9; line-height: 1.8; margin-bottom: 20px; font-size: 14px; }
+    .social-links { display: flex; gap: 15px; margin-top: 20px; }
+    .social-links a {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover { background: #00a86b; transform: translateY(-3px); }
+    footer h5 { margin: 0 0 20px; font-size: 18px; font-weight: 600; color: #ffffff; }
+    footer a {
+      display: block; color: #b8c7d9; margin-bottom: 12px;
+      font-size: 14px; transition: all 0.3s ease;
+    }
+    footer a:hover { color: #00a86b; padding-left: 5px; }
+    .footer-bottom {
+      text-align: center; padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px; color: #b8c7d9;
+      max-width: 1400px; margin: auto;
+    }
+    .footer-bottom p { margin: 5px 0; }
+
+    @media (max-width: 968px) {
+      nav {
+        position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px;
+        height: calc(100vh - 86px); background: #ffffff;
+        flex-direction: column; padding: 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.3s ease; gap: 20px; align-items: flex-start;
+      }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .layout { grid-template-columns: 1fr; }
+      .toc { display: none; }
+      .content { padding: 40px 0 60px; }
+      .page-hero h2 { font-size: 30px; }
+      .commitments-grid { grid-template-columns: 1fr; }
+      .service-provider-list { grid-template-columns: 1fr; }
+      .rights-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-about { padding-right: 0; }
+      .data-table { font-size: 13px; display: block; overflow-x: auto; }
+    }
+
+    @media (max-width: 600px) {
+      .page-hero { padding: 52px 5% 44px; }
+      .page-hero h2 { font-size: 26px; }
+      .section-header h2 { font-size: 19px; }
+      .org-card { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </div>
+    <nav id="mainNav">
+      <a href="/">Home</a>
+      <a href="/impact-calculator">Impact</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/report-scam">Scam Check</a>
+      <a href="/contact">Contact</a>
+      <a href="/login">Login</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Legal &amp; Compliance</div>
+      <h2>Privacy Policy</h2>
+      <p>We believe in radical transparency. This policy explains exactly what data we collect, why we collect it, how we protect it, and the rights you hold over it.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Effective: March 1, 2026
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Version 4.2
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          GDPR &amp; CCPA Compliant
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          14 Sections
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <aside class="toc">
+      <p class="toc-title">Contents</p>
+      <ul class="toc-list">
+        <li><a href="#s1">1. Overview &amp; Who We Are</a></li>
+        <li><a href="#s2">2. Information We Collect</a></li>
+        <li><a href="#s3">3. How We Use Your Information</a></li>
+        <li><a href="#s4">4. Legal Basis for Processing</a></li>
+        <li><a href="#s5">5. Sharing &amp; Disclosure</a></li>
+        <li><a href="#s6">6. Cookies &amp; Tracking</a></li>
+        <li><a href="#s7">7. Data Retention</a></li>
+        <li><a href="#s8">8. Data Security</a></li>
+        <li><a href="#s9">9. Your Rights</a></li>
+        <li><a href="#s10">10. International Transfers</a></li>
+        <li><a href="#s11">11. Children's Privacy</a></li>
+        <li><a href="#s12">12. California Residents</a></li>
+        <li><a href="#s13">13. Policy Changes</a></li>
+        <li><a href="#s14">14. Contact Us</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+
+      <div class="commitments-banner">
+        <h3>
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Our Core Privacy Commitments
+        </h3>
+        <div class="commitments-grid">
+          <div class="commitment-item">We do not sell, rent, or trade your personal information to third parties for commercial purposes.</div>
+          <div class="commitment-item">We do not use your data for targeted advertising or behavioral profiling.</div>
+          <div class="commitment-item">We collect only what is necessary for our charitable mission.</div>
+          <div class="commitment-item">We retain your data only for as long as legally required or operationally necessary.</div>
+          <div class="commitment-item">We implement industry-standard encryption and security controls to protect your data.</div>
+        </div>
+      </div>
+
+      <section class="policy-section" id="s1">
+        <div class="section-header">
+          <span class="section-number">1</span>
+          <h2>Overview &amp; Who We Are</h2>
+        </div>
+        <div class="org-card">
+          <div class="org-card-field"><label>Organization</label><span>Volk Donations, Inc.</span></div>
+          <div class="org-card-field"><label>EIN</label><span>45-1234567</span></div>
+          <div class="org-card-field"><label>Status</label><span>501(c)(3) Nonprofit</span></div>
+          <div class="org-card-field"><label>Jurisdiction</label><span>Colorado, USA</span></div>
+        </div>
+        <p>Volk Donations, Inc. ("Volk Donations," "we," "us," or "our") is a United States-based 501(c)(3) nonprofit organization registered in the State of Colorado, headquartered at 1840 Blake Street, Suite 300, Denver, Colorado 80202. We operate the website at volkdonations.website and related subdomains (collectively, the "Platform"), through which we solicit charitable donations, recruit volunteers and fundraisers, and publish information about our programs.</p>
+        <p>This Privacy Policy applies to all personal information we collect through our Platform, by email, telephone, mail, at in-person events, and through partner organizations when they share your data with us in connection with fundraising or program activities. It does not apply to third-party websites linked from our Platform.</p>
+      </section>
+
+      <section class="policy-section" id="s2">
+        <div class="section-header">
+          <span class="section-number">2</span>
+          <h2>Information We Collect</h2>
+        </div>
+
+        <h3 class="subsection-header">2.1 Information You Provide Directly</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Category</th><th>Examples</th><th>When Collected</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Identity Data</td><td>Full name, date of birth, title, employer</td><td>Account registration, donation, volunteer application</td></tr>
+            <tr><td>Contact Data</td><td>Email address, phone number, mailing address</td><td>Any form submission, event registration</td></tr>
+            <tr><td>Financial Data</td><td>Payment card details (tokenized), billing address</td><td>Donation processing</td></tr>
+            <tr><td>Transaction Data</td><td>Donation history, amounts, dates, designated programs</td><td>Each donation or recurring gift</td></tr>
+            <tr><td>Profile Data</td><td>Username, password (hashed), fundraiser pages, preferences</td><td>Account creation, fundraiser setup</td></tr>
+            <tr><td>Communications</td><td>Support messages, survey responses, event feedback</td><td>Any communication with our team</td></tr>
+            <tr><td>Volunteer Data</td><td>Skills, availability, references, background check results</td><td>Volunteer application and onboarding</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-header">2.2 Information Collected Automatically</h3>
+        <p>When you visit our Platform, we automatically collect certain technical data through cookies, server logs, and similar technologies:</p>
+        <ul class="policy-list">
+          <li><strong>Device &amp; Browser Data:</strong> IP address, browser type and version, operating system, device identifiers, and screen resolution.</li>
+          <li><strong>Usage Data:</strong> Pages visited, time spent on pages, links clicked, referral URLs, and navigation paths within our Platform.</li>
+          <li><strong>Location Data:</strong> Approximate geographic location derived from your IP address (country and city level only). We do not collect precise GPS location.</li>
+          <li><strong>Cookie Data:</strong> Session identifiers, authentication tokens, and preference cookies. See Section 6 for full details.</li>
+        </ul>
+
+        <h3 class="subsection-header">2.3 Information from Third Parties</h3>
+        <p>We may receive information about you from the following third-party sources:</p>
+        <ul class="policy-list">
+          <li><strong>Payment Processors (Stripe):</strong> Transaction confirmation, payment method type, and fraud risk signals — not your full card number.</li>
+          <li><strong>Fundraising Platforms:</strong> When a fundraiser on a third-party platform directs donations to Volk Donations, we may receive your name, email, and gift amount from that platform.</li>
+          <li><strong>Partner Organizations:</strong> Our 180+ grassroots partner organizations may share program beneficiary data in aggregated, anonymized form for impact reporting only.</li>
+          <li><strong>Public Sources:</strong> Publicly available professional profiles, for major donor research purposes only (applicable to gifts above $10,000).</li>
+        </ul>
+      </section>
+
+      <section class="policy-section" id="s3">
+        <div class="section-header">
+          <span class="section-number">3</span>
+          <h2>How We Use Your Information</h2>
+        </div>
+        <p>We use your personal information only for the purposes set out below. We will not use your data in any manner incompatible with the purpose for which it was originally collected without your consent.</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>Purpose</th><th>Description</th><th>Legal Basis</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Process Donations</td><td>Facilitate one-time and recurring charitable gifts, issue tax receipts, and maintain gift records</td><td><span class="badge badge-navy">Contract</span> <span class="badge badge-amber">Legal Obligation</span></td></tr>
+            <tr><td>Account Management</td><td>Create and manage donor or fundraiser accounts, authenticate logins, provide account support</td><td><span class="badge badge-navy">Contract</span></td></tr>
+            <tr><td>Communications</td><td>Send donation confirmations, tax receipts, program updates, newsletters, and event invitations</td><td><span class="badge badge-green">Legitimate Interests</span> <span class="badge badge-navy">Consent</span></td></tr>
+            <tr><td>Legal Compliance</td><td>Meet IRS, Colorado Secretary of State, FINCEN, and other regulatory reporting obligations</td><td><span class="badge badge-amber">Legal Obligation</span></td></tr>
+            <tr><td>Fraud Prevention</td><td>Detect, investigate, and prevent fraudulent transactions and unauthorized access</td><td><span class="badge badge-green">Legitimate Interests</span></td></tr>
+            <tr><td>Impact Reporting</td><td>Produce anonymized program impact reports for donors, grantors, and the public</td><td><span class="badge badge-green">Legitimate Interests</span></td></tr>
+            <tr><td>Platform Improvement</td><td>Analyze usage patterns to improve website performance, accessibility, and user experience</td><td><span class="badge badge-green">Legitimate Interests</span></td></tr>
+          </tbody>
+        </table>
+        <div class="info-box info-box-blue">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#1d4ed8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <p><strong>Marketing Communications:</strong> We send program updates and impact stories to donors as part of our stewardship responsibilities. You may opt out at any time by clicking "Unsubscribe" in any email, updating your account communication preferences, or contacting us at <a href="mailto:privacy@volkdonations.website" style="color:#1d4ed8;">privacy@volkdonations.website</a>. Opt-out requests are processed within 10 business days. Transactional emails (donation receipts, tax documents) cannot be opted out of as they are legally required.</p>
+        </div>
+      </section>
+
+      <section class="policy-section" id="s4">
+        <div class="section-header">
+          <span class="section-number">4</span>
+          <h2>Legal Basis for Processing (GDPR)</h2>
+        </div>
+        <p>For individuals in the EEA, United Kingdom, or jurisdictions with equivalent data protection laws, we process your personal data under the following GDPR legal bases:</p>
+        <ul class="policy-list">
+          <li><strong>Performance of a Contract (Art. 6(1)(b)):</strong> Processing necessary to process your donation, manage your account, or provide services you have requested.</li>
+          <li><strong>Legal Obligation (Art. 6(1)(c)):</strong> Processing required to comply with tax law, anti-money laundering regulations, charity law, and other applicable legal obligations.</li>
+          <li><strong>Legitimate Interests (Art. 6(1)(f)):</strong> Processing for fraud prevention, security, platform analytics, and communications with existing donors about program updates, where our interests are not overridden by your rights.</li>
+          <li><strong>Consent (Art. 6(1)(a)):</strong> Processing for marketing to non-donor individuals, or for any purposes where we have specifically sought your permission. You may withdraw consent at any time.</li>
+        </ul>
+      </section>
+
+      <section class="policy-section" id="s5">
+        <div class="section-header">
+          <span class="section-number">5</span>
+          <h2>Sharing &amp; Disclosure of Your Information</h2>
+        </div>
+        <div class="never-sell-box">
+          <div class="never-sell-icon">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p><strong>We Never Sell Your Data</strong>Volk Donations does not and will never sell, rent, license, or monetize your personal information to data brokers, advertisers, or any third party for commercial gain. Your data exists solely to help us serve our mission.</p>
+        </div>
+
+        <h3 class="subsection-header">5.1 Service Providers</h3>
+        <p>We engage trusted third-party service providers under written data processing agreements that prohibit them from using your data for any purpose other than providing services to us:</p>
+        <div class="service-provider-list">
+          <div class="sp-item"><div class="sp-dot"></div><div><strong>Stripe, Inc.</strong><span>Payment processing and fraud detection</span></div></div>
+          <div class="sp-item"><div class="sp-dot"></div><div><strong>Mailchimp (Intuit Inc.)</strong><span>Email communication and newsletter delivery</span></div></div>
+          <div class="sp-item"><div class="sp-dot"></div><div><strong>Google LLC</strong><span>Analytics (GA4, anonymized) and Workspace tools</span></div></div>
+          <div class="sp-item"><div class="sp-dot"></div><div><strong>Salesforce, Inc.</strong><span>Donor relationship management (CRM)</span></div></div>
+          <div class="sp-item"><div class="sp-dot"></div><div><strong>Amazon Web Services (AWS)</strong><span>Cloud hosting and data storage</span></div></div>
+          <div class="sp-item"><div class="sp-dot"></div><div><strong>Neon Databases</strong><span>Database infrastructure</span></div></div>
+          <div class="sp-item"><div class="sp-dot"></div><div><strong>KPMG LLP</strong><span>Independent financial audit (transaction summaries only)</span></div></div>
+        </div>
+
+        <h3 class="subsection-header">5.2 Legal Requirements</h3>
+        <p>We may disclose your information when required by law, including to respond to valid legal process (subpoenas, court orders), comply with IRS charitable reporting requirements (Form 990), or respond to lawful requests from regulatory or law enforcement authorities.</p>
+
+        <h3 class="subsection-header">5.3 Organizational Transfers</h3>
+        <p>In the event of a merger, acquisition, dissolution, or transfer of our charitable assets to another nonprofit, your personal data may be transferred as part of that transaction. We will notify you via email and prominent website notice before your data is transferred and becomes subject to a different privacy policy.</p>
+      </section>
+
+      <section class="policy-section" id="s6">
+        <div class="section-header">
+          <span class="section-number">6</span>
+          <h2>Cookies &amp; Tracking Technologies</h2>
+        </div>
+        <p>Our Platform uses cookies and similar tracking technologies to provide functionality, analyze usage, and improve your experience. You may control cookies through your browser settings or our cookie preference center accessible via the "Cookie Settings" link in our website footer.</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>Cookie Type</th><th>Purpose</th><th>Can Opt Out?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Strictly Necessary</td><td>Session authentication, security tokens, load balancing. Required for the Platform to function.</td><td><span class="badge badge-amber">No</span></td></tr>
+            <tr><td>Functional</td><td>Remember your language preference, currency selection, and newsletter opt-in status.</td><td><span class="badge badge-green">Yes</span></td></tr>
+            <tr><td>Analytics</td><td>Google Analytics 4 (IP anonymized) to understand page performance and user flows. Data is aggregated and not used to identify individuals.</td><td><span class="badge badge-green">Yes</span></td></tr>
+            <tr><td>Performance</td><td>Measure page load speed, error rates, and infrastructure performance to improve reliability.</td><td><span class="badge badge-green">Yes</span></td></tr>
+          </tbody>
+        </table>
+        <div class="info-box info-box-green">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#15803d" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <p>We do not use advertising cookies, retargeting pixels, or any tracking technology designed to serve you ads on third-party websites. Our Platform does not display third-party advertisements.</p>
+        </div>
+      </section>
+
+      <section class="policy-section" id="s7">
+        <div class="section-header">
+          <span class="section-number">7</span>
+          <h2>Data Retention</h2>
+        </div>
+        <p>We retain personal data only for as long as necessary to fulfill the purpose for which it was collected, to comply with legal obligations, resolve disputes, and enforce our agreements.</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>Data Type</th><th>Retention Period</th><th>Reason</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Donation records &amp; tax receipts</td><td>7 years from date of gift</td><td>IRS requirements for charitable organizations</td></tr>
+            <tr><td>Account data (active)</td><td>Duration of account + 3 years</td><td>Donor stewardship, dispute resolution</td></tr>
+            <tr><td>Account data (deleted)</td><td>30 days post-deletion, then anonymized</td><td>Reversibility window, then right to erasure</td></tr>
+            <tr><td>Marketing communications</td><td>Until opt-out or 3 years of inactivity</td><td>Legitimate interests in supporter communication</td></tr>
+            <tr><td>Fraud detection logs</td><td>5 years</td><td>Security and legal defense</td></tr>
+            <tr><td>Website analytics (anonymized)</td><td>26 months (Google Analytics default)</td><td>Platform improvement</td></tr>
+            <tr><td>Support communications</td><td>3 years from last contact</td><td>Service continuity, dispute resolution</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="policy-section" id="s8">
+        <div class="section-header">
+          <span class="section-number">8</span>
+          <h2>Data Security</h2>
+        </div>
+        <p>We implement industry-standard technical and organizational security measures to protect your personal information against unauthorized access, disclosure, alteration, and destruction:</p>
+        <ul class="policy-list">
+          <li><strong>Encryption in Transit:</strong> All data transmitted between your browser and our servers is encrypted using TLS 1.3. Our website enforces HTTPS across all pages.</li>
+          <li><strong>Encryption at Rest:</strong> Sensitive data fields (including donor financial records) are encrypted at rest using AES-256 in our AWS-hosted infrastructure.</li>
+          <li><strong>Payment Security (PCI-DSS Level 1):</strong> We do not store full payment card numbers. All payment processing is handled by Stripe, certified to PCI-DSS Level 1 — the highest level of payment security certification.</li>
+          <li><strong>Access Controls:</strong> Access to personal data is restricted on a need-to-know basis, with role-based permissions, multi-factor authentication, and annual security training for all staff.</li>
+          <li><strong>Vulnerability Management:</strong> We conduct annual penetration testing and quarterly vulnerability assessments of our Platform and infrastructure.</li>
+          <li><strong>Incident Response:</strong> We maintain a documented Data Breach Response Plan. In the event of a breach, we will notify affected individuals and relevant authorities within 72 hours (GDPR) or as otherwise required by law.</li>
+        </ul>
+      </section>
+
+      <section class="policy-section" id="s9">
+        <div class="section-header">
+          <span class="section-number">9</span>
+          <h2>Your Rights</h2>
+        </div>
+        <p>Depending on your location, you may have some or all of the following rights regarding your personal information. To exercise any right, contact us at <a href="mailto:privacy@volkdonations.website" style="color:#00a86b; font-weight:600;">privacy@volkdonations.website</a> or through your account settings. We respond within 30 days (or 45 days for complex requests).</p>
+        <div class="rights-grid">
+          <div class="right-card"><h4>Right of Access</h4><p>Request a copy of all personal data we hold about you, including its source, purpose, and recipients.</p></div>
+          <div class="right-card"><h4>Right to Rectification</h4><p>Request correction of inaccurate or incomplete personal data we hold about you.</p></div>
+          <div class="right-card"><h4>Right to Erasure</h4><p>Request deletion of your personal data where we no longer have a legal basis to retain it (the "right to be forgotten").</p></div>
+          <div class="right-card"><h4>Right to Restrict Processing</h4><p>Request that we limit how we use your personal data while a dispute about accuracy or lawfulness is resolved.</p></div>
+          <div class="right-card"><h4>Right to Data Portability</h4><p>Receive your personal data in a structured, machine-readable format and transfer it to another controller.</p></div>
+          <div class="right-card"><h4>Right to Object</h4><p>Object to processing based on legitimate interests, including for direct marketing, at any time.</p></div>
+          <div class="right-card"><h4>Right to Withdraw Consent</h4><p>Withdraw consent for consent-based processing at any time, without affecting the lawfulness of prior processing.</p></div>
+          <div class="right-card"><h4>Right to Lodge a Complaint</h4><p>File a complaint with your local data protection authority (ICO in the UK; your national DPA in the EU/EEA).</p></div>
+        </div>
+      </section>
+
+      <section class="policy-section" id="s10">
+        <div class="section-header">
+          <span class="section-number">10</span>
+          <h2>International Data Transfers</h2>
+        </div>
+        <p>Volk Donations is headquartered in the United States. If you are located in the EEA, UK, or another jurisdiction outside the US, your personal data may be transferred to and processed in the United States. Where we transfer personal data from the EEA or UK, we ensure appropriate safeguards are in place including:</p>
+        <ul class="policy-list">
+          <li><strong>Standard Contractual Clauses:</strong> We use the European Commission-approved Standard Contractual Clauses (SCCs) for transfers from the EEA, and ICO-approved International Data Transfer Agreements (IDTAs) for transfers from the UK.</li>
+          <li><strong>Adequacy Decisions:</strong> Where the European Commission has determined that a third country provides adequate protection, we may rely on that adequacy decision.</li>
+          <li><strong>Binding Corporate Rules:</strong> For some service providers, we rely on approved Binding Corporate Rules (BCRs) governing data protection across their global operations.</li>
+        </ul>
+        <p>You may request a copy of our Standard Contractual Clauses by contacting <a href="mailto:privacy@volkdonations.website" style="color:#00a86b; font-weight:600;">privacy@volkdonations.website</a>.</p>
+      </section>
+
+      <section class="policy-section" id="s11">
+        <div class="section-header">
+          <span class="section-number">11</span>
+          <h2>Children's Privacy</h2>
+        </div>
+        <p>Our Platform is not directed to children under the age of 13 in the United States, or under the age of 16 in the EEA and UK. We do not knowingly collect personal information from children below these ages without verifiable parental or guardian consent.</p>
+        <p>If you are a parent or guardian and believe your child has provided us with personal information without your consent, please contact us immediately at <a href="mailto:privacy@volkdonations.website" style="color:#00a86b; font-weight:600;">privacy@volkdonations.website</a>. We will promptly delete such information upon verification.</p>
+        <div class="info-box info-box-green">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#15803d" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <p>In all cases, photographs and stories of beneficiary children published in our communications are produced with full consent of appropriate guardians in compliance with our Child Safeguarding Policy, available upon request.</p>
+        </div>
+      </section>
+
+      <section class="policy-section" id="s12">
+        <div class="section-header">
+          <span class="section-number">12</span>
+          <h2>California Residents — CCPA / CPRA Rights</h2>
+        </div>
+        <p>If you are a California resident, the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA) grant you specific rights regarding your personal information, in addition to those set out in Section 9:</p>
+        <ul class="policy-list">
+          <li><strong>Right to Know:</strong> Request disclosure of the categories and specific pieces of personal information we have collected, the purposes for collection, and the categories of third parties with whom we share it.</li>
+          <li><strong>Right to Delete:</strong> Request deletion of your personal information, subject to certain exceptions under California law.</li>
+          <li><strong>Right to Correct:</strong> Request correction of inaccurate personal information we hold about you.</li>
+          <li><strong>Right to Opt-Out of Sale / Sharing:</strong> We do not sell or share your personal information for cross-context behavioral advertising. No opt-out is currently required, but you may submit a request to confirm this at any time.</li>
+          <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising any of your CCPA rights — including by denying services, charging different prices, or providing a different quality of service.</li>
+        </ul>
+        <div class="info-box info-box-amber">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#92400e" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <p><strong>California "Shine the Light" (Civil Code § 1798.83):</strong> We do not disclose personal information to third parties for their direct marketing purposes. California residents may contact us at <a href="mailto:privacy@volkdonations.website" style="color:#92400e;">privacy@volkdonations.website</a> to confirm this at any time.</p>
+        </div>
+        <p style="margin-top:16px;">To submit a CCPA request, contact us at <a href="mailto:privacy@volkdonations.website" style="color:#00a86b; font-weight:600;">privacy@volkdonations.website</a> with subject line "CCPA Request," or call <a href="tel:+17208443920" style="color:#00a86b; font-weight:600;">+1 (720) 844-3920</a>. We will verify your identity before processing and respond within 45 days.</p>
+      </section>
+
+      <section class="policy-section" id="s13">
+        <div class="section-header">
+          <span class="section-number">13</span>
+          <h2>Changes to This Privacy Policy</h2>
+        </div>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or operational needs. When we make material changes, we will notify you by:</p>
+        <ul class="policy-list">
+          <li>Posting the updated policy on this page with a revised "Last Updated" date at the top.</li>
+          <li>Sending an email notification to donors and registered account holders at least 14 days before the changes take effect.</li>
+          <li>Displaying a prominent notice on our website homepage for 30 days following publication of the revised policy.</li>
+        </ul>
+        <p>Your continued use of our Platform after the effective date of any revised Privacy Policy constitutes your acceptance of those changes. Prior versions are archived and available upon request.</p>
+      </section>
+
+      <section class="policy-section" id="s14">
+        <div class="section-header">
+          <span class="section-number">14</span>
+          <h2>Contact Us</h2>
+        </div>
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or how we handle your personal information, please contact our Data Protection Officer. We aim to respond to all privacy inquiries within 5 business days.</p>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h4>Email</h4>
+            <a href="mailto:privacy@volkdonations.website">privacy@volkdonations.website</a>
+            <span>Preferred for detailed requests</span>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            </div>
+            <h4>Phone</h4>
+            <a href="tel:+17208443920">+1 (720) 844-3920</a>
+            <span>Mon–Fri, 8:00 AM – 6:00 PM MT</span>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h4>Postal</h4>
+            <p>Data Protection Officer</p>
+            <span>1840 Blake St, Suite 300<br>Denver, CO 80202</span>
+          </div>
+        </div>
+
+        <div class="signature-box">
+          <div class="signature-avatar">M</div>
+          <div class="signature-text">
+            <strong>Margaret Volk</strong>
+            <span>Co-Founder &amp; Executive Director, Volk Donations, Inc.</span>
+            <p style="margin-top:6px; font-size:13px; color:#5a6c7d;">This Privacy Policy was reviewed and adopted by the Volk Donations Board of Directors on February 15, 2026, and takes effect on March 1, 2026.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="version-bar">
+    Privacy Policy &nbsp;·&nbsp; <span>Version 4.2</span> &nbsp;·&nbsp; Effective March 1, 2026 &nbsp;·&nbsp; EIN: 45-1234567 &nbsp;·&nbsp; Volk Donations, Inc.
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h5>Organization</h5>
+        <a href="/about">About Us</a>
+        <a href="/partners">Our Partners</a>
+        <a href="/branches">Branches</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
+      </div>
+      <div>
+        <h5>Get Involved</h5>
+        <a href="/contribute">Contribute</a>
+        <a href="/volunteer">Volunteer</a>
+        <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy" style="color:#00a86b;">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuBtn.addEventListener('click', function () {
+      this.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 968) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const sections = document.querySelectorAll('.policy-section');
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(function (link) { link.classList.remove('active'); });
+          const active = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(function (s) { observer.observe(s); });
+  </script>
+
+</body>
+</html>

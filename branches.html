@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Branches | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Volk Donations operates regional offices and country branches across 38 countries, bringing direct support to orphaned children where they need it most." />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ffffff">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+    /* ── Header ── */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-container img { height: 50px; width: auto; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: #1e3a5f; margin: 0; }
+    .logo-text span { font-size: 12px; color: #00a86b; font-weight: 500; letter-spacing: 0.5px; }
+
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { font-weight: 500; color: #2c3e50; font-size: 15px; position: relative; }
+    nav a:hover { color: #00a86b; }
+    nav a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0;
+      width: 0; height: 2px; background: #00a86b; transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+
+    .mobile-menu-btn {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px;
+    }
+    .mobile-menu-btn span {
+      width: 28px; height: 3px; background: #1e3a5f;
+      transition: all 0.3s ease; border-radius: 2px;
+    }
+    .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px,8px); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-7px); }
+
+    /* ── Hero ── */
+    .page-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      color: #ffffff;
+      padding: 80px 5% 70px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+      background-size: cover; opacity: 0.3;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #ffffff; font-size: 12px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .page-hero h2 { font-size: 44px; font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
+    .page-hero p { font-size: 17px; opacity: 0.90; line-height: 1.75; margin-bottom: 36px; }
+
+    .hero-stats {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px; overflow: hidden; max-width: 680px; margin: 0 auto;
+    }
+    .hero-stat {
+      flex: 1; min-width: 130px;
+      padding: 20px 22px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-val { font-size: 30px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 4px; }
+    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.70); letter-spacing: 0.3px; }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      background: #f0f4f8;
+      border-bottom: 1px solid #d5e0ec;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-label {
+      font-size: 12px; font-weight: 700; color: #5a6c7d;
+      text-transform: uppercase; letter-spacing: 1px;
+      white-space: nowrap; margin-right: 8px; padding: 18px 0;
+    }
+    .filter-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: 1.5px solid #d5e0ec;
+      background: #ffffff; color: #5a6c7d;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: #1e3a5f; color: #1e3a5f; }
+    .filter-btn.active { background: #1e3a5f; color: #ffffff; border-color: #1e3a5f; }
+    .filter-btn .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Page content ── */
+    .page-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 64px 5% 80px;
+    }
+
+    /* ── Reach strip ── */
+    .reach-section {
+      background: #f0f4f8;
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+      gap: 0;
+      text-align: center;
+    }
+    .reach-item { padding: 0 24px; }
+    .reach-divider { background: #d5e0ec; align-self: stretch; }
+    .reach-val { font-size: 36px; font-weight: 700; color: #1e3a5f; line-height: 1; margin-bottom: 6px; }
+    .reach-label { font-size: 13px; color: #5a6c7d; line-height: 1.4; }
+
+    /* ── Section headings ── */
+    .section-heading {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 32px; padding-bottom: 16px;
+      border-bottom: 2px solid #e8edf2;
+    }
+    .section-heading-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-heading h2 { font-size: 22px; font-weight: 700; color: #1e3a5f; }
+    .section-heading p { font-size: 14px; color: #5a6c7d; margin-top: 2px; }
+    .section-count {
+      margin-left: auto;
+      background: #f0f4f8; border: 1px solid #d5e0ec;
+      color: #5a6c7d; font-size: 12px; font-weight: 700;
+      padding: 4px 12px; border-radius: 50px; white-space: nowrap;
+    }
+
+    .branch-section { margin-bottom: 64px; }
+    .branch-section.hidden { display: none; }
+
+    /* ── HQ card ── */
+    .hq-card {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0d5c3a 100%);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hq-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 90% 50%, rgba(0,168,107,0.2) 0%, transparent 60%);
+    }
+    .hq-left { position: relative; z-index: 1; }
+    .hq-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(0,168,107,0.2); border: 1px solid rgba(0,168,107,0.4);
+      color: #4fffb8; font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 5px 13px; border-radius: 50px; margin-bottom: 18px;
+    }
+    .hq-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #4fffb8;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+    .hq-left h2 { font-size: 26px; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+    .hq-left p { font-size: 15px; color: rgba(255,255,255,0.80); line-height: 1.7; margin-bottom: 22px; }
+    .hq-details { display: flex; flex-direction: column; gap: 10px; }
+    .hq-detail {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: rgba(255,255,255,0.75);
+    }
+    .hq-detail svg { opacity: 0.7; flex-shrink: 0; }
+    .hq-right {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .hq-stat-box {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 18px 20px;
+    }
+    .hq-stat-val { font-size: 26px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 4px; }
+    .hq-stat-label { font-size: 12px; color: rgba(255,255,255,0.60); }
+
+    /* ── Regional office cards (large) ── */
+    .regional-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+
+    .regional-card {
+      background: #ffffff;
+      border: 1px solid #e8edf2;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s;
+    }
+    .regional-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      border-color: #00a86b;
+      transform: translateY(-3px);
+    }
+
+    .regional-card-header {
+      padding: 22px 24px 18px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .region-flag {
+      width: 52px; height: 52px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+    }
+    .region-meta h3 { font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 3px; }
+    .region-sub {
+      font-size: 12px; color: #5a6c7d;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .region-sub svg { flex-shrink: 0; }
+
+    .region-type-badge {
+      margin-left: auto; flex-shrink: 0;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      padding: 4px 10px; border-radius: 50px;
+    }
+
+    .regional-card-body {
+      padding: 0 24px 20px;
+      border-top: 1px solid #f0f4f8;
+      margin-top: 0;
+    }
+    .regional-card-body p {
+      font-size: 14px; color: #4a5568; line-height: 1.68;
+      padding-top: 16px; margin-bottom: 16px;
+    }
+
+    .region-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: #e8edf2;
+      border-radius: 10px; overflow: hidden;
+    }
+    .region-stat {
+      background: #f8fafc;
+      padding: 12px 10px; text-align: center;
+    }
+    .region-stat-val { font-size: 18px; font-weight: 700; color: #1e3a5f; line-height: 1; margin-bottom: 3px; }
+    .region-stat-label { font-size: 11px; color: #5a6c7d; line-height: 1.3; }
+
+    .region-countries {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 14px 24px 20px;
+    }
+    .country-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #f0f4f8; border: 1px solid #d5e0ec;
+      color: #3d4f5f; font-size: 12px; font-weight: 500;
+      padding: 4px 10px; border-radius: 50px;
+    }
+    .country-chip span { font-size: 14px; }
+
+    /* ── Country branch cards (medium) ── */
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .country-card {
+      background: #ffffff;
+      border: 1px solid #e8edf2;
+      border-radius: 12px;
+      padding: 22px;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .country-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+      border-color: #00a86b;
+      transform: translateY(-2px);
+    }
+
+    .country-card-top {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    }
+    .country-flag-sm {
+      font-size: 24px; flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 10px;
+      background: #f0f4f8; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .country-card-top h4 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin-bottom: 2px; }
+    .country-card-top .city { font-size: 12px; color: #5a6c7d; }
+
+    .country-card p {
+      font-size: 13px; color: #4a5568; line-height: 1.65; margin-bottom: 14px;
+    }
+
+    .country-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 12px; border-top: 1px solid #f0f4f8;
+    }
+    .country-stat { text-align: center; }
+    .country-stat-val { font-size: 16px; font-weight: 700; color: #1e3a5f; line-height: 1; }
+    .country-stat-label { font-size: 11px; color: #5a6c7d; }
+    .country-stat-divider { width: 1px; height: 32px; background: #e8edf2; }
+
+    .status-dot {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600;
+    }
+    .status-dot::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    }
+    .status-active::before { background: #00a86b; }
+    .status-expanding::before { background: #f59e0b; animation: pulse 2s infinite; }
+    .status-new::before { background: #3b82f6; }
+
+    /* ── Contact CTA ── */
+    .branch-cta {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .branch-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(255,255,255,0.07) 0%, transparent 60%);
+    }
+    .branch-cta-content { position: relative; z-index: 1; }
+    .branch-cta h2 { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 14px; }
+    .branch-cta p { font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.7; max-width: 580px; margin: 0 auto 32px; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: #ffffff; color: #1e3a5f;
+      padding: 14px 34px; border-radius: 50px;
+      font-weight: 700; font-size: 15px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: #ffffff;
+      padding: 14px 34px; border-radius: 50px;
+      font-weight: 600; font-size: 15px; transition: all 0.3s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Footer ── */
+    footer {
+      background: #1e3a5f; color: #ffffff;
+      padding: 70px 5% 30px;
+    }
+    .footer-grid {
+      max-width: 1400px; margin: auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 50px; margin-bottom: 50px;
+    }
+    .footer-about { padding-right: 30px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { height: 45px; width: auto; }
+    .footer-logo-text { font-size: 20px; font-weight: 700; color: #ffffff; }
+    .footer-about p { color: #b8c7d9; line-height: 1.8; margin-bottom: 20px; font-size: 14px; }
+    .social-links { display: flex; gap: 15px; margin-top: 20px; }
+    .social-links a {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover { background: #00a86b; transform: translateY(-3px); }
+    footer h5 { margin: 0 0 20px; font-size: 18px; font-weight: 600; color: #ffffff; }
+    footer a { display: block; color: #b8c7d9; margin-bottom: 12px; font-size: 14px; transition: all 0.3s ease; }
+    footer a:hover { color: #00a86b; padding-left: 5px; }
+    .footer-bottom {
+      text-align: center; padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px; color: #b8c7d9;
+      max-width: 1400px; margin: auto;
+    }
+    .footer-bottom p { margin: 5px 0; }
+
+    @media (max-width: 968px) {
+      nav {
+        position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px;
+        height: calc(100vh - 86px); background: #ffffff;
+        flex-direction: column; padding: 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.3s ease; gap: 20px; align-items: flex-start;
+      }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .page-hero h2 { font-size: 32px; }
+      .hq-card { grid-template-columns: 1fr; }
+      .hq-right { grid-template-columns: repeat(4, 1fr); }
+      .regional-grid { grid-template-columns: 1fr; }
+      .country-grid { grid-template-columns: 1fr 1fr; }
+      .reach-section { grid-template-columns: 1fr 1fr; }
+      .reach-divider { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-about { padding-right: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .page-hero h2 { font-size: 26px; }
+      .hq-right { grid-template-columns: 1fr 1fr; }
+      .country-grid { grid-template-columns: 1fr; }
+      .reach-section { padding: 28px 20px; }
+      .branch-cta { padding: 40px 24px; }
+      .branch-cta h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </div>
+    <nav id="mainNav">
+      <a href="/">Home</a>
+      <a href="/impact-calculator">Impact</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/report-scam">Scam Check</a>
+      <a href="/contact">Contact</a>
+      <a href="/login">Login</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Global Presence</div>
+      <h2>Our Branches &amp; Offices</h2>
+      <p>From our headquarters in Denver to field offices on five continents, Volk Donations puts people on the ground where they are needed most — ensuring every dollar reaches the children it was meant for.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">1</div>
+          <div class="hero-stat-label">Global HQ</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">5</div>
+          <div class="hero-stat-label">Regional Offices</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">22</div>
+          <div class="hero-stat-label">Country Branches</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">38</div>
+          <div class="hero-stat-label">Countries Reached</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">340+</div>
+          <div class="hero-stat-label">Staff Worldwide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Filter by:</span>
+    <button class="filter-btn active" data-filter="all">
+      <span class="dot" style="background:#1e3a5f;"></span> All Locations
+    </button>
+    <button class="filter-btn" data-filter="africa">
+      <span class="dot" style="background:#00a86b;"></span> Africa
+    </button>
+    <button class="filter-btn" data-filter="asia">
+      <span class="dot" style="background:#2563eb;"></span> Asia &amp; Pacific
+    </button>
+    <button class="filter-btn" data-filter="latin">
+      <span class="dot" style="background:#d97706;"></span> Latin America
+    </button>
+    <button class="filter-btn" data-filter="europe">
+      <span class="dot" style="background:#7c3aed;"></span> Europe &amp; MENA
+    </button>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ── Global stats strip ── -->
+    <div class="reach-section">
+      <div class="reach-item">
+        <div class="reach-val">340+</div>
+        <div class="reach-label">Full-time staff across all offices</div>
+      </div>
+      <div class="reach-divider"></div>
+      <div class="reach-item">
+        <div class="reach-val">1,200+</div>
+        <div class="reach-label">Local volunteers coordinated globally</div>
+      </div>
+      <div class="reach-divider"></div>
+      <div class="reach-item">
+        <div class="reach-val">$6.2M</div>
+        <div class="reach-label">Total program spend in 2025</div>
+      </div>
+      <div class="reach-divider"></div>
+      <div class="reach-item">
+        <div class="reach-val">88¢</div>
+        <div class="reach-label">Of every dollar goes directly to programs</div>
+      </div>
+    </div>
+
+    <!-- ── Global HQ ── -->
+    <div class="hq-card">
+      <div class="hq-left">
+        <div class="hq-badge">
+          <div class="hq-badge-dot"></div>
+          Global Headquarters
+        </div>
+        <h2>Denver, Colorado — USA 🇺🇸</h2>
+        <p>Our founding home and global command center. The Denver office houses our executive leadership, finance, legal, donor relations, communications, and technology teams. All strategic decisions, partner vetting, and fund allocation are coordinated from here.</p>
+        <div class="hq-details">
+          <div class="hq-detail">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            1840 Blake Street, Suite 300, Denver, CO 80202
+          </div>
+          <div class="hq-detail">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            +1 (720) 844-3920
+          </div>
+          <div class="hq-detail">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            hello@volkdonations.website
+          </div>
+          <div class="hq-detail">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Mon – Fri, 8:00 AM – 6:00 PM MT
+          </div>
+        </div>
+      </div>
+      <div class="hq-right">
+        <div class="hq-stat-box">
+          <div class="hq-stat-val">2010</div>
+          <div class="hq-stat-label">Year founded</div>
+        </div>
+        <div class="hq-stat-box">
+          <div class="hq-stat-val">86</div>
+          <div class="hq-stat-label">HQ staff</div>
+        </div>
+        <div class="hq-stat-box">
+          <div class="hq-stat-val">38</div>
+          <div class="hq-stat-label">Countries served</div>
+        </div>
+        <div class="hq-stat-box">
+          <div class="hq-stat-val">501(c)(3)</div>
+          <div class="hq-stat-label">US nonprofit status</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Africa Regional Office ── -->
+    <div class="branch-section" id="section-africa">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#dcfce7;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#15803d" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </div>
+        <div>
+          <h2>Africa</h2>
+          <p>Our largest operational region — 1 regional office, 9 country branches</p>
+        </div>
+        <span class="section-count">10 Locations</span>
+      </div>
+
+      <div class="regional-grid" style="margin-bottom:28px;">
+        <div class="regional-card">
+          <div class="regional-card-header">
+            <div class="region-flag">🌍</div>
+            <div class="region-meta">
+              <h3>Africa Regional Office</h3>
+              <div class="region-sub">
+                <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Nairobi, Kenya &nbsp;·&nbsp; Est. 2012
+              </div>
+            </div>
+            <span class="region-type-badge" style="background:#dcfce7; color:#15803d;">Regional HQ</span>
+          </div>
+          <div class="regional-card-body">
+            <p>The Nairobi office serves as the operational hub for all Sub-Saharan Africa programs. It oversees partner relations, field audits, staff coordination, and grant disbursement across 9 country branches. The office also hosts our Africa-wide training center for child welfare professionals.</p>
+            <div class="region-stats">
+              <div class="region-stat"><div class="region-stat-val">74</div><div class="region-stat-label">Regional staff</div></div>
+              <div class="region-stat"><div class="region-stat-val">17</div><div class="region-stat-label">Countries</div></div>
+              <div class="region-stat"><div class="region-stat-val">6,800+</div><div class="region-stat-label">Children reached</div></div>
+            </div>
+          </div>
+          <div class="region-countries">
+            <div class="country-chip"><span>🇰🇪</span> Kenya</div>
+            <div class="country-chip"><span>🇹🇿</span> Tanzania</div>
+            <div class="country-chip"><span>🇺🇬</span> Uganda</div>
+            <div class="country-chip"><span>🇿🇲</span> Zambia</div>
+            <div class="country-chip"><span>🇿🇼</span> Zimbabwe</div>
+            <div class="country-chip"><span>🇿🇦</span> South Africa</div>
+            <div class="country-chip"><span>🇪🇹</span> Ethiopia</div>
+            <div class="country-chip"><span>🇬🇭</span> Ghana</div>
+            <div class="country-chip"><span>🇧🇫</span> Burkina Faso</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="country-grid">
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇰🇪</div>
+            <div>
+              <h4>Kenya Country Branch</h4>
+              <div class="city">Nairobi &amp; Mombasa</div>
+            </div>
+          </div>
+          <p>Co-located with the regional office. Oversees 3 direct program sites and coordinates with 14 grassroots partners across the country, including nutrition initiatives in Mombasa's coastal communities.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">28</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">2,100</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇹🇿</div>
+            <div>
+              <h4>Tanzania Country Branch</h4>
+              <div class="city">Dar es Salaam</div>
+            </div>
+          </div>
+          <p>Manages residential care programs in Dar es Salaam and Arusha. Runs a pioneering foster-family integration program that has successfully placed 180 children in stable family homes since 2019.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">19</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">1,340</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇺🇬</div>
+            <div>
+              <h4>Uganda Country Branch</h4>
+              <div class="city">Kampala</div>
+            </div>
+          </div>
+          <p>Focused on transitional housing and independence programs for youth aging out of institutional care. Partners with Zawadi Children's Trust on life-skills training and employment readiness in Kampala.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">14</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">740</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇿🇦</div>
+            <div>
+              <h4>South Africa Country Branch</h4>
+              <div class="city">Johannesburg</div>
+            </div>
+          </div>
+          <p>Supports community-based care groups and HIV/AIDS orphan programs. Works alongside the Amaney Ubuntu Network across Johannesburg, Durban, and Cape Town townships.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">16</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">920</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-expanding" style="color:#92400e;">Expanding</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇪🇹</div>
+            <div>
+              <h4>Ethiopia Country Branch</h4>
+              <div class="city">Addis Ababa</div>
+            </div>
+          </div>
+          <p>Oversees farm school partnerships and agri-education programs in Oromia and Amhara regions. Works closely with Green Roots Ethiopia to combine schooling with sustainable livelihoods training.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">11</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">680</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇬🇭</div>
+            <div>
+              <h4>Ghana Country Branch</h4>
+              <div class="city">Accra</div>
+            </div>
+          </div>
+          <p>Newest West African branch, opened in 2022 through partnership with the Lindiwe &amp; Kofi Foundation. Focused on early childhood development and maternal support programs in Greater Accra and Ashanti regions.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">8</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">420</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-new" style="color:#1d4ed8;">New</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Asia & Pacific ── -->
+    <div class="branch-section" id="section-asia">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#dbeafe;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#1d4ed8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </div>
+        <div>
+          <h2>Asia &amp; Pacific</h2>
+          <p>1 regional office, 6 country branches across South and Southeast Asia</p>
+        </div>
+        <span class="section-count">7 Locations</span>
+      </div>
+
+      <div class="regional-grid" style="margin-bottom:28px;">
+        <div class="regional-card">
+          <div class="regional-card-header">
+            <div class="region-flag">🌏</div>
+            <div class="region-meta">
+              <h3>Asia &amp; Pacific Regional Office</h3>
+              <div class="region-sub">
+                <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Bangkok, Thailand &nbsp;·&nbsp; Est. 2015
+              </div>
+            </div>
+            <span class="region-type-badge" style="background:#dbeafe; color:#1e40af;">Regional HQ</span>
+          </div>
+          <div class="regional-card-body">
+            <p>The Bangkok office coordinates all South and Southeast Asian operations, managing partner relationships with India, Cambodia, Philippines, Myanmar, and Nepal. The office leads our regional child trafficking prevention program and runs trauma-informed care certification training for frontline workers.</p>
+            <div class="region-stats">
+              <div class="region-stat"><div class="region-stat-val">48</div><div class="region-stat-label">Regional staff</div></div>
+              <div class="region-stat"><div class="region-stat-val">10</div><div class="region-stat-label">Countries</div></div>
+              <div class="region-stat"><div class="region-stat-val">3,900+</div><div class="region-stat-label">Children reached</div></div>
+            </div>
+          </div>
+          <div class="region-countries">
+            <div class="country-chip"><span>🇮🇳</span> India</div>
+            <div class="country-chip"><span>🇰🇭</span> Cambodia</div>
+            <div class="country-chip"><span>🇵🇭</span> Philippines</div>
+            <div class="country-chip"><span>🇲🇲</span> Myanmar</div>
+            <div class="country-chip"><span>🇳🇵</span> Nepal</div>
+            <div class="country-chip"><span>🇧🇩</span> Bangladesh</div>
+            <div class="country-chip"><span>🇱🇰</span> Sri Lanka</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="country-grid">
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇮🇳</div>
+            <div>
+              <h4>India Country Branch</h4>
+              <div class="city">Mumbai &amp; Kolkata</div>
+            </div>
+          </div>
+          <p>Our largest Asia branch with dual offices in Mumbai and Kolkata. Funds 31 community learning centers through Solaris Education Trust and 8 after-school centers through Asha Pratishthan, reaching over 2,200 children.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">22</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">2,200</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇰🇭</div>
+            <div>
+              <h4>Cambodia Country Branch</h4>
+              <div class="city">Phnom Penh</div>
+            </div>
+          </div>
+          <p>Focuses on anti-trafficking prevention, family-based care, and reintegration services. Works with Hope Village Cambodia on host-family support networks for children affected by parental trafficking or incarceration.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">12</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">640</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇵🇭</div>
+            <div>
+              <h4>Philippines Country Branch</h4>
+              <div class="city">Cebu City</div>
+            </div>
+          </div>
+          <p>Oversees small-group home programs and community outreach in the Visayas and Mindanao regions. Partners with Riverbend Haven Philippines on family-model residential care for children from infancy through school age.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">9</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">480</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇳🇵</div>
+            <div>
+              <h4>Nepal Country Branch</h4>
+              <div class="city">Kathmandu</div>
+            </div>
+          </div>
+          <p>Earthquake recovery and orphan support programs in rural Gorkha and Sindhupalchok districts. Manages school reconstruction grants and provides psychosocial support to children who lost parents in the 2015 and 2023 seismic events.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">8</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">390</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-expanding" style="color:#92400e;">Expanding</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇧🇩</div>
+            <div>
+              <h4>Bangladesh Country Branch</h4>
+              <div class="city">Dhaka</div>
+            </div>
+          </div>
+          <p>Urban child welfare and street-connected children program in Dhaka's Mirpur and Mohammadpur districts. Provides safe spaces, meals, non-formal education, and family tracing services to children living without adult guardians.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">7</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">310</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-new" style="color:#1d4ed8;">New</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Latin America ── -->
+    <div class="branch-section" id="section-latin">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#fef9c3;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#854d0e" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </div>
+        <div>
+          <h2>Latin America</h2>
+          <p>1 regional office, 4 country branches across Central and South America</p>
+        </div>
+        <span class="section-count">5 Locations</span>
+      </div>
+
+      <div class="regional-grid" style="margin-bottom:28px;">
+        <div class="regional-card">
+          <div class="regional-card-header">
+            <div class="region-flag">🌎</div>
+            <div class="region-meta">
+              <h3>Latin America Regional Office</h3>
+              <div class="region-sub">
+                <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Bogotá, Colombia &nbsp;·&nbsp; Est. 2016
+              </div>
+            </div>
+            <span class="region-type-badge" style="background:#fef9c3; color:#854d0e;">Regional HQ</span>
+          </div>
+          <div class="regional-card-body">
+            <p>The Bogotá office leads Volk Donations' Latin American operations, overseeing trauma-informed care programs, crisis shelter networks, and family reintegration services across the region. It works closely with Pacifico Infancia and Crescendo Esperanza Trust on policy advocacy and program delivery in conflict-affected communities.</p>
+            <div class="region-stats">
+              <div class="region-stat"><div class="region-stat-val">36</div><div class="region-stat-label">Regional staff</div></div>
+              <div class="region-stat"><div class="region-stat-val">7</div><div class="region-stat-label">Countries</div></div>
+              <div class="region-stat"><div class="region-stat-val">2,100+</div><div class="region-stat-label">Children reached</div></div>
+            </div>
+          </div>
+          <div class="region-countries">
+            <div class="country-chip"><span>🇨🇴</span> Colombia</div>
+            <div class="country-chip"><span>🇭🇳</span> Honduras</div>
+            <div class="country-chip"><span>🇧🇴</span> Bolivia</div>
+            <div class="country-chip"><span>🇵🇪</span> Peru</div>
+            <div class="country-chip"><span>🇪🇨</span> Ecuador</div>
+            <div class="country-chip"><span>🇬🇹</span> Guatemala</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="country-grid">
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇨🇴</div>
+            <div>
+              <h4>Colombia Country Branch</h4>
+              <div class="city">Bogotá &amp; Medellín</div>
+            </div>
+          </div>
+          <p>Co-located with the regional office. Runs crisis shelters and psychosocial support for children displaced by armed conflict in the Chocó and Cauca departments. Partners with Pacifico Infancia on family reunification services.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">18</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">860</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇭🇳</div>
+            <div>
+              <h4>Honduras Country Branch</h4>
+              <div class="city">Tegucigalpa</div>
+            </div>
+          </div>
+          <p>Provides safe housing for children escaping gang violence and domestic abuse in Central America's Northern Triangle. Works with Vientos del Cambio on government-recognized guardianship processes and legal aid for unaccompanied minors.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">11</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">520</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇧🇴</div>
+            <div>
+              <h4>Bolivia Country Branch</h4>
+              <div class="city">La Paz</div>
+            </div>
+          </div>
+          <p>Supports indigenous-led child welfare programs for Aymara and Quechua children. Coordinates with Futuro Nuestro Bolivia on bilingual education and cultural preservation, ensuring children's identities are protected alongside their welfare.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">8</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">440</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇬🇹</div>
+            <div>
+              <h4>Guatemala Country Branch</h4>
+              <div class="city">Guatemala City</div>
+            </div>
+          </div>
+          <p>Newly established in 2024 to respond to growing needs in the Guatemalan highlands. Piloting a community mother model adapted from the Amaney Ubuntu Network — training local women to provide in-home care for up to 5 orphaned children each.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">5</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">180</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-new" style="color:#1d4ed8;">New</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Europe & MENA ── -->
+    <div class="branch-section" id="section-europe">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#f3e8ff;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </div>
+        <div>
+          <h2>Europe &amp; Middle East / North Africa</h2>
+          <p>1 regional liaison office, 3 country branches</p>
+        </div>
+        <span class="section-count">4 Locations</span>
+      </div>
+
+      <div class="regional-grid" style="margin-bottom:28px;">
+        <div class="regional-card">
+          <div class="regional-card-header">
+            <div class="region-flag">🌍</div>
+            <div class="region-meta">
+              <h3>Europe &amp; MENA Liaison Office</h3>
+              <div class="region-sub">
+                <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Amsterdam, Netherlands &nbsp;·&nbsp; Est. 2018
+              </div>
+            </div>
+            <span class="region-type-badge" style="background:#f3e8ff; color:#6d28d9;">Liaison Office</span>
+          </div>
+          <div class="regional-card-body">
+            <p>The Amsterdam office serves as Volk Donations' European base for donor engagement, foundation relations, and GDPR compliance. It manages relationships with European institutional funders including the Harrow &amp; Aldgate Foundation and Kjeldsen Thorvald Trust, and maintains our EU data protection obligations. It also coordinates the North Africa program desk for Egypt and Morocco.</p>
+            <div class="region-stats">
+              <div class="region-stat"><div class="region-stat-val">18</div><div class="region-stat-label">Regional staff</div></div>
+              <div class="region-stat"><div class="region-stat-val">5</div><div class="region-stat-label">Countries engaged</div></div>
+              <div class="region-stat"><div class="region-stat-val">£2.1M</div><div class="region-stat-label">European grants managed</div></div>
+            </div>
+          </div>
+          <div class="region-countries">
+            <div class="country-chip"><span>🇳🇱</span> Netherlands</div>
+            <div class="country-chip"><span>🇬🇧</span> UK</div>
+            <div class="country-chip"><span>🇩🇰</span> Denmark</div>
+            <div class="country-chip"><span>🇪🇸</span> Spain</div>
+            <div class="country-chip"><span>🇨🇭</span> Switzerland</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="country-grid">
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇪🇬</div>
+            <div>
+              <h4>Egypt Country Branch</h4>
+              <div class="city">Cairo</div>
+            </div>
+          </div>
+          <p>Manages vocational training centers for youth aging out of institutional care in Cairo, Alexandria, and Aswan. Partners with Nile Tomorrow Initiative on hospitality and technology trade tracks with 78% employment placement rates.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">13</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">620</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇲🇦</div>
+            <div>
+              <h4>Morocco Country Branch</h4>
+              <div class="city">Casablanca</div>
+            </div>
+          </div>
+          <p>Early childhood education and nutrition programs in underserved peri-urban communities around Casablanca and Marrakech. Focuses on children under 6 from single-parent households and those in kinship care arrangements.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">9</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">380</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-expanding" style="color:#92400e;">Expanding</div>
+          </div>
+        </div>
+
+        <div class="country-card">
+          <div class="country-card-top">
+            <div class="country-flag-sm">🇯🇴</div>
+            <div>
+              <h4>Jordan Country Branch</h4>
+              <div class="city">Amman</div>
+            </div>
+          </div>
+          <p>Refugee child welfare program serving orphaned and separated Syrian, Iraqi, and Yemeni children in Zaatari and Azraq camps, and urban Amman. Provides psychosocial support, non-formal education, and legal status assistance.</p>
+          <div class="country-card-footer">
+            <div class="country-stat"><div class="country-stat-val">11</div><div class="country-stat-label">Staff</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="country-stat"><div class="country-stat-val">510</div><div class="country-stat-label">Children</div></div>
+            <div class="country-stat-divider"></div>
+            <div class="status-dot status-active" style="color:#15803d;">Active</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── CTA ── -->
+    <div class="branch-cta">
+      <div class="branch-cta-content">
+        <h2>Work With Us Globally</h2>
+        <p>Whether you are looking to volunteer in one of our field offices, partner with a local branch, or fund an expansion into a new country — we want to hear from you.</p>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn-primary">Contact a Branch</a>
+          <a href="/volunteer" class="btn-secondary">Volunteer Opportunities</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h5>Organization</h5>
+        <a href="/about">About Us</a>
+        <a href="/partners">Our Partners</a>
+        <a href="/branches" style="color:#00a86b;">Branches</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
+      </div>
+      <div>
+        <h5>Get Involved</h5>
+        <a href="/contribute">Contribute</a>
+        <a href="/volunteer">Volunteer</a>
+        <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuBtn.addEventListener('click', function () {
+      this.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 968) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sections = {
+      africa:  document.getElementById('section-africa'),
+      asia:    document.getElementById('section-asia'),
+      latin:   document.getElementById('section-latin'),
+      europe:  document.getElementById('section-europe'),
+    };
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        if (filter === 'all') {
+          Object.values(sections).forEach(function (s) { s.classList.remove('hidden'); });
+        } else {
+          Object.entries(sections).forEach(function ([key, el]) {
+            el.classList.toggle('hidden', key !== filter);
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

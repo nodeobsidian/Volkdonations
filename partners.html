@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Partners | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Volk Donations partners with grassroots organizations, corporate sponsors, and global foundations to create lasting change for orphaned children worldwide." />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+    /* ── Header ── */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 18px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-container img { height: 50px; width: auto; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text h1 { font-size: 22px; font-weight: 700; color: #1e3a5f; margin: 0; }
+    .logo-text span { font-size: 12px; color: #00a86b; font-weight: 500; letter-spacing: 0.5px; }
+
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { font-weight: 500; color: #2c3e50; font-size: 15px; position: relative; }
+    nav a:hover { color: #00a86b; }
+    nav a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0;
+      width: 0; height: 2px; background: #00a86b; transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+    nav a.active { color: #00a86b; }
+    nav a.active::after { width: 100%; }
+
+    .mobile-menu-btn {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px;
+    }
+    .mobile-menu-btn span {
+      width: 28px; height: 3px; background: #1e3a5f;
+      transition: all 0.3s ease; border-radius: 2px;
+    }
+    .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px,8px); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-7px); }
+
+    /* ── Hero ── */
+    .page-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      color: #ffffff;
+      padding: 80px 5% 70px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+      background-size: cover; opacity: 0.3;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #ffffff; font-size: 12px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .page-hero h2 { font-size: 44px; font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
+    .page-hero p { font-size: 17px; opacity: 0.90; line-height: 1.75; margin-bottom: 36px; }
+
+    .hero-stats {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px; overflow: hidden; max-width: 640px; margin: 0 auto;
+    }
+    .hero-stat {
+      flex: 1; min-width: 140px;
+      padding: 20px 24px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-val { font-size: 30px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 4px; }
+    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.70); letter-spacing: 0.5px; }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      background: #f0f4f8;
+      border-bottom: 1px solid #d5e0ec;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-label {
+      font-size: 12px; font-weight: 700; color: #5a6c7d;
+      text-transform: uppercase; letter-spacing: 1px;
+      white-space: nowrap; margin-right: 8px; padding: 18px 0;
+    }
+    .filter-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: 1.5px solid #d5e0ec;
+      background: #ffffff; color: #5a6c7d;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: #1e3a5f; color: #1e3a5f; }
+    .filter-btn.active {
+      background: #1e3a5f; color: #ffffff; border-color: #1e3a5f;
+    }
+    .filter-btn .dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── Main content ── */
+    .page-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 64px 5% 80px;
+    }
+
+    /* ── Section headings ── */
+    .section-heading {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 32px; padding-bottom: 16px;
+      border-bottom: 2px solid #e8edf2;
+    }
+    .section-heading-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-heading h2 { font-size: 22px; font-weight: 700; color: #1e3a5f; }
+    .section-heading p { font-size: 14px; color: #5a6c7d; margin-top: 2px; }
+    .section-count {
+      margin-left: auto;
+      background: #f0f4f8; border: 1px solid #d5e0ec;
+      color: #5a6c7d; font-size: 12px; font-weight: 700;
+      padding: 4px 12px; border-radius: 50px; white-space: nowrap;
+    }
+
+    .partner-section { margin-bottom: 64px; }
+    .partner-section.hidden { display: none; }
+
+    /* ── Featured partners (large cards) ── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 24px;
+    }
+
+    .partner-card-featured {
+      background: #ffffff;
+      border: 1px solid #e8edf2;
+      border-radius: 16px;
+      padding: 28px;
+      transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .partner-card-featured:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      border-color: #00a86b;
+      transform: translateY(-3px);
+    }
+
+    .card-top { display: flex; align-items: flex-start; gap: 16px; }
+
+    .partner-logo-box {
+      width: 64px; height: 64px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; flex-shrink: 0;
+      letter-spacing: -1px;
+    }
+
+    .card-meta { flex: 1; min-width: 0; }
+    .card-meta h3 { font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 4px; line-height: 1.3; }
+    .card-location {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; color: #5a6c7d;
+    }
+    .card-location svg { flex-shrink: 0; }
+
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 50px;
+      letter-spacing: 0.3px;
+    }
+    .tag-green { background: #dcfce7; color: #15803d; }
+    .tag-blue  { background: #dbeafe; color: #1e40af; }
+    .tag-amber { background: #fef9c3; color: #854d0e; }
+    .tag-purple{ background: #f3e8ff; color: #7e22ce; }
+    .tag-rose  { background: #ffe4e6; color: #9f1239; }
+    .tag-slate { background: #f1f5f9; color: #475569; }
+
+    .card-desc { font-size: 14px; color: #4a5568; line-height: 1.68; }
+
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid #f0f4f8;
+      margin-top: auto;
+    }
+    .card-since { font-size: 12px; color: #5a6c7d; }
+    .card-since strong { color: #1e3a5f; }
+
+    .partner-type-badge {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      padding: 4px 10px; border-radius: 50px;
+    }
+
+    /* ── Standard partners (medium cards) ── */
+    .standard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .partner-card {
+      background: #ffffff;
+      border: 1px solid #e8edf2;
+      border-radius: 12px;
+      padding: 22px;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .partner-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+      border-color: #00a86b;
+      transform: translateY(-2px);
+    }
+
+    .partner-logo-sm {
+      width: 48px; height: 48px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; flex-shrink: 0;
+    }
+
+    .partner-info h4 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin-bottom: 3px; }
+    .partner-info .loc {
+      font-size: 12px; color: #5a6c7d; margin-bottom: 7px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .partner-info p { font-size: 13px; color: #4a5568; line-height: 1.6; }
+
+    /* ── Corporate sponsors ── */
+    .corporate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .corp-card {
+      background: #f8fafc;
+      border: 1px solid #e8edf2;
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .corp-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-color: #1e3a5f;
+      transform: translateY(-2px);
+      background: #ffffff;
+    }
+
+    .corp-logo {
+      width: 56px; height: 56px; border-radius: 12px;
+      margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800;
+    }
+    .corp-card h4 { font-size: 14px; font-weight: 700; color: #1e3a5f; margin-bottom: 4px; }
+    .corp-card p { font-size: 12px; color: #5a6c7d; line-height: 1.55; margin-bottom: 10px; }
+    .corp-card .corp-type {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: #00a86b;
+    }
+
+    /* ── Become a partner CTA ── */
+    .partner-cta {
+      background: linear-gradient(135deg, #1e3a5f 0%, #00a86b 100%);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .partner-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(255,255,255,0.07) 0%, transparent 60%);
+    }
+    .partner-cta-content { position: relative; z-index: 1; }
+    .partner-cta h2 { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 14px; }
+    .partner-cta p { font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.7; max-width: 580px; margin: 0 auto 32px; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: #ffffff; color: #1e3a5f;
+      padding: 14px 34px; border-radius: 50px;
+      font-weight: 700; font-size: 15px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: #ffffff;
+      padding: 14px 34px; border-radius: 50px;
+      font-weight: 600; font-size: 15px;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Map section ── */
+    .reach-section {
+      background: #f0f4f8;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 24px;
+      text-align: center;
+    }
+    .reach-item { display: flex; flex-direction: column; gap: 6px; }
+    .reach-val { font-size: 36px; font-weight: 700; color: #1e3a5f; line-height: 1; }
+    .reach-label { font-size: 13px; color: #5a6c7d; line-height: 1.4; }
+    .reach-divider { width: 1px; background: #d5e0ec; align-self: stretch; }
+
+    /* ── Footer ── */
+    footer {
+      background: #1e3a5f; color: #ffffff;
+      padding: 70px 5% 30px;
+    }
+    .footer-grid {
+      max-width: 1400px; margin: auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 50px; margin-bottom: 50px;
+    }
+    .footer-about { padding-right: 30px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { height: 45px; width: auto; }
+    .footer-logo-text { font-size: 20px; font-weight: 700; color: #ffffff; }
+    .footer-about p { color: #b8c7d9; line-height: 1.8; margin-bottom: 20px; font-size: 14px; }
+    .social-links { display: flex; gap: 15px; margin-top: 20px; }
+    .social-links a {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover { background: #00a86b; transform: translateY(-3px); }
+    footer h5 { margin: 0 0 20px; font-size: 18px; font-weight: 600; color: #ffffff; }
+    footer a { display: block; color: #b8c7d9; margin-bottom: 12px; font-size: 14px; transition: all 0.3s ease; }
+    footer a:hover { color: #00a86b; padding-left: 5px; }
+    .footer-bottom {
+      text-align: center; padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px; color: #b8c7d9;
+      max-width: 1400px; margin: auto;
+    }
+    .footer-bottom p { margin: 5px 0; }
+
+    @media (max-width: 968px) {
+      nav {
+        position: fixed; top: 86px; right: -100%; width: 70%; max-width: 300px;
+        height: calc(100vh - 86px); background: #ffffff;
+        flex-direction: column; padding: 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.3s ease; gap: 20px; align-items: flex-start;
+      }
+      nav.active { right: 0; }
+      .mobile-menu-btn { display: flex; }
+      .page-hero h2 { font-size: 32px; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .standard-grid { grid-template-columns: 1fr 1fr; }
+      .corporate-grid { grid-template-columns: 1fr 1fr; }
+      .reach-section { grid-template-columns: 1fr 1fr; }
+      .reach-divider { display: none; }
+      .partner-cta { padding: 40px 28px; }
+      .partner-cta h2 { font-size: 26px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-about { padding-right: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .page-hero h2 { font-size: 26px; }
+      .hero-stat-val { font-size: 24px; }
+      .standard-grid { grid-template-columns: 1fr; }
+      .corporate-grid { grid-template-columns: 1fr 1fr; }
+      .reach-section { grid-template-columns: 1fr 1fr; padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="/images/logo.png" alt="Volk Donations Logo">
+      <div class="logo-text">
+        <h1>Volk Donations</h1>
+        <span>A better life for everyone</span>
+      </div>
+    </div>
+    <nav id="mainNav">
+      <a href="/">Home</a>
+      <a href="/impact-calculator">Impact</a>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/report-scam">Scam Check</a>
+      <a href="/contact">Contact</a>
+      <a href="/login">Login</a>
+    </nav>
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Our Global Network</div>
+      <h2>Partners in Purpose</h2>
+      <p>Our work is only possible through the trust, resources, and commitment of our worldwide network of grassroots organizations, foundations, and corporate sponsors united by a single goal — a better future for every child.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">180+</div>
+          <div class="hero-stat-label">Grassroots Partners</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">38</div>
+          <div class="hero-stat-label">Countries</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">24</div>
+          <div class="hero-stat-label">Corporate Sponsors</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">2010</div>
+          <div class="hero-stat-label">Since</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-label">Filter by:</span>
+    <button class="filter-btn active" data-filter="all">
+      <span class="dot" style="background:#1e3a5f;"></span> All Partners
+    </button>
+    <button class="filter-btn" data-filter="strategic">
+      <span class="dot" style="background:#00a86b;"></span> Strategic Partners
+    </button>
+    <button class="filter-btn" data-filter="grassroots">
+      <span class="dot" style="background:#2563eb;"></span> Grassroots NGOs
+    </button>
+    <button class="filter-btn" data-filter="foundations">
+      <span class="dot" style="background:#7c3aed;"></span> Foundations &amp; Trusts
+    </button>
+    <button class="filter-btn" data-filter="corporate">
+      <span class="dot" style="background:#d97706;"></span> Corporate Sponsors
+    </button>
+  </div>
+
+  <div class="page-content">
+
+    <div class="reach-section">
+      <div class="reach-item">
+        <div class="reach-val">14,200+</div>
+        <div class="reach-label">Children supported annually through our partner network</div>
+      </div>
+      <div class="reach-divider"></div>
+      <div class="reach-item">
+        <div class="reach-val">$4.8M</div>
+        <div class="reach-label">Channeled to partner programs in 2025</div>
+      </div>
+      <div class="reach-divider"></div>
+      <div class="reach-item">
+        <div class="reach-val">97%</div>
+        <div class="reach-label">Of partner organizations independently verified</div>
+      </div>
+      <div class="reach-divider"></div>
+      <div class="reach-item">
+        <div class="reach-val">8.4 yrs</div>
+        <div class="reach-label">Average length of our partner relationships</div>
+      </div>
+    </div>
+
+    <!-- ── Strategic Partners ── -->
+    <div class="partner-section" id="section-strategic">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#dcfce7;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#15803d" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div>
+          <h2>Strategic Partners</h2>
+          <p>Long-standing institutional partnerships that shape our programs at scale</p>
+        </div>
+        <span class="section-count">6 Partners</span>
+      </div>
+      <div class="featured-grid">
+
+        <div class="partner-card-featured">
+          <div class="card-top">
+            <div class="partner-logo-box" style="background:#e0f2fe; color:#0369a1;">BF</div>
+            <div class="card-meta">
+              <h3>Bahari Children's Foundation</h3>
+              <div class="card-location">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Nairobi, Kenya &nbsp;·&nbsp; Est. 2004
+              </div>
+              <div class="card-tags">
+                <span class="tag tag-blue">Child Welfare</span>
+                <span class="tag tag-green">Education</span>
+                <span class="tag tag-slate">East Africa</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">One of East Africa's most established child welfare organizations, Bahari operates 14 care centers across Kenya and Tanzania, providing residential support, schooling, and vocational training to over 2,400 orphaned children. Our partnership funds their secondary education scholarship program and nutrition initiative.</p>
+          <div class="card-footer">
+            <span class="card-since">Partner since <strong>2011</strong></span>
+            <span class="partner-type-badge" style="background:#dcfce7; color:#15803d;">Strategic</span>
+          </div>
+        </div>
+
+        <div class="partner-card-featured">
+          <div class="card-top">
+            <div class="partner-logo-box" style="background:#fce7f3; color:#9d174d;">SE</div>
+            <div class="card-meta">
+              <h3>Solaris Education Trust</h3>
+              <div class="card-location">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Mumbai, India &nbsp;·&nbsp; Est. 2001
+              </div>
+              <div class="card-tags">
+                <span class="tag tag-purple">Education Access</span>
+                <span class="tag tag-green">Healthcare</span>
+                <span class="tag tag-slate">South Asia</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">Solaris operates an award-winning network of 31 community learning centers across Maharashtra and Gujarat, reaching children in rural and peri-urban communities who would otherwise have no access to formal schooling. Volk Donations co-funds their digital literacy labs and mobile health clinics.</p>
+          <div class="card-footer">
+            <span class="card-since">Partner since <strong>2013</strong></span>
+            <span class="partner-type-badge" style="background:#dcfce7; color:#15803d;">Strategic</span>
+          </div>
+        </div>
+
+        <div class="partner-card-featured">
+          <div class="card-top">
+            <div class="partner-logo-box" style="background:#fef9c3; color:#854d0e;">MF</div>
+            <div class="card-meta">
+              <h3>Meridian Global Fund</h3>
+              <div class="card-location">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Geneva, Switzerland &nbsp;·&nbsp; Est. 1998
+              </div>
+              <div class="card-tags">
+                <span class="tag tag-amber">Grantmaking</span>
+                <span class="tag tag-blue">Research</span>
+                <span class="tag tag-slate">Global</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">A Geneva-based independent philanthropic fund that channels resources to vetted child welfare programs across 22 countries. Meridian co-grants with Volk Donations on programs in West Africa and Southeast Asia, providing funding, technical assistance, and impact measurement expertise.</p>
+          <div class="card-footer">
+            <span class="card-since">Partner since <strong>2015</strong></span>
+            <span class="partner-type-badge" style="background:#dcfce7; color:#15803d;">Strategic</span>
+          </div>
+        </div>
+
+        <div class="partner-card-featured">
+          <div class="card-top">
+            <div class="partner-logo-box" style="background:#f3e8ff; color:#7e22ce;">AU</div>
+            <div class="card-meta">
+              <h3>Amaney Ubuntu Network</h3>
+              <div class="card-location">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Johannesburg, South Africa &nbsp;·&nbsp; Est. 2007
+              </div>
+              <div class="card-tags">
+                <span class="tag tag-green">Community Care</span>
+                <span class="tag tag-rose">HIV/AIDS Support</span>
+                <span class="tag tag-slate">Southern Africa</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">The Ubuntu Network connects 47 community-based care groups across South Africa, Zambia, and Zimbabwe that support children orphaned by HIV/AIDS. Their community mother model — trained local women providing family-based care — has become a best-practice template adopted across the region.</p>
+          <div class="card-footer">
+            <span class="card-since">Partner since <strong>2012</strong></span>
+            <span class="partner-type-badge" style="background:#dcfce7; color:#15803d;">Strategic</span>
+          </div>
+        </div>
+
+        <div class="partner-card-featured">
+          <div class="card-top">
+            <div class="partner-logo-box" style="background:#fff7ed; color:#c2410c;">PI</div>
+            <div class="card-meta">
+              <h3>Pacifico Infancia</h3>
+              <div class="card-location">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Bogotá, Colombia &nbsp;·&nbsp; Est. 2005
+              </div>
+              <div class="card-tags">
+                <span class="tag tag-green">Child Protection</span>
+                <span class="tag tag-blue">Psychosocial</span>
+                <span class="tag tag-slate">Latin America</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">Pacifico Infancia operates crisis shelters, trauma counseling programs, and family reintegration services across Colombia, Ecuador, and Peru. Specializing in children displaced by conflict or family breakdown, their psychosocial model is recognized by UNICEF as a regional best practice.</p>
+          <div class="card-footer">
+            <span class="card-since">Partner since <strong>2016</strong></span>
+            <span class="partner-type-badge" style="background:#dcfce7; color:#15803d;">Strategic</span>
+          </div>
+        </div>
+
+        <div class="partner-card-featured">
+          <div class="card-top">
+            <div class="partner-logo-box" style="background:#ecfdf5; color:#065f46;">NT</div>
+            <div class="card-meta">
+              <h3>Nile Tomorrow Initiative</h3>
+              <div class="card-location">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Cairo, Egypt &nbsp;·&nbsp; Est. 2009
+              </div>
+              <div class="card-tags">
+                <span class="tag tag-amber">Vocational Training</span>
+                <span class="tag tag-green">Youth Employment</span>
+                <span class="tag tag-slate">North Africa</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-desc">Focused on the critical 16–24 age group who age out of orphanage systems, Nile Tomorrow runs trade training centers in Cairo, Alexandria, and Aswan. Their graduates achieve 78% formal employment within 18 months — one of the highest rates in the region. Volk Donations funds their hospitality and technology tracks.</p>
+          <div class="card-footer">
+            <span class="card-since">Partner since <strong>2018</strong></span>
+            <span class="partner-type-badge" style="background:#dcfce7; color:#15803d;">Strategic</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Grassroots NGOs ── -->
+    <div class="partner-section" id="section-grassroots">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#dbeafe;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#1d4ed8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </div>
+        <div>
+          <h2>Grassroots NGO Partners</h2>
+          <p>Community-rooted organizations delivering direct care on the ground</p>
+        </div>
+        <span class="section-count">12 Featured</span>
+      </div>
+      <div class="standard-grid">
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fef3c7; color:#92400e;">KW</div>
+          <div class="partner-info">
+            <h4>Karibu Watoto Center</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Dar es Salaam, Tanzania</div>
+            <p>Residential care and primary schooling for 340 orphaned children across 3 centers in coastal Tanzania. Notable for their foster family integration program launched in 2019.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#ede9fe; color:#5b21b6;">HV</div>
+          <div class="partner-info">
+            <h4>Hope Village Cambodia</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Phnom Penh, Cambodia</div>
+            <p>Community-based care model for children affected by parental trafficking or incarceration. Serves 280 children through a network of trained host families and weekly support groups.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#dcfce7; color:#166534;">GR</div>
+          <div class="partner-info">
+            <h4>Green Roots Ethiopia</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Addis Ababa, Ethiopia</div>
+            <p>Integrates child welfare with sustainable agriculture — orphaned adolescents learn farming and agribusiness while earning their secondary school certificate. Operates 6 farm schools across the Oromia region.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fff1f2; color:#9f1239;">LS</div>
+          <div class="partner-info">
+            <h4>Lumière des Savanes</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Ouagadougou, Burkina Faso</div>
+            <p>Provides nutritional support, early childhood education, and family reunification services to children in the Sahel region. Operates mobile outreach units to reach children in remote villages with no fixed infrastructure.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#e0f2fe; color:#075985;">AP</div>
+          <div class="partner-info">
+            <h4>Asha Pratishthan</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Kolkata, India</div>
+            <p>Runs 8 after-school learning centers in West Bengal's most underserved urban districts, supporting 1,100 children from single-parent or orphaned backgrounds with tutoring, meals, and health checks.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fef9c3; color:#713f12;">FN</div>
+          <div class="partner-info">
+            <h4>Futuro Nuestro Bolivia</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> La Paz, Bolivia</div>
+            <p>Indigenous-led child welfare organization supporting Aymara and Quechua children orphaned by poverty and parental migration. Cultural preservation is central to their care model — all programs are bilingual.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#f3e8ff; color:#6b21a8;">ZC</div>
+          <div class="partner-info">
+            <h4>Zawadi Children's Trust</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Kampala, Uganda</div>
+            <p>Specializes in transitional housing and life-skills training for youth aged 14–20 leaving institutional care. Their 18-month independence program has supported over 900 young adults since 2014.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#ecfdf5; color:#047857;">RH</div>
+          <div class="partner-info">
+            <h4>Riverbend Haven Philippines</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Cebu City, Philippines</div>
+            <p>Operates 4 small group homes (max 12 children each) prioritizing family-like environments over institutional care. Each home is run by a trained house parent couple and supports children from infancy through secondary school.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fff7ed; color:#9a3412;">SM</div>
+          <div class="partner-info">
+            <h4>Savanna Mungu Foundation</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Lusaka, Zambia</div>
+            <p>Faith-based organization providing hospice care support for children with life-limiting conditions and bereavement services for newly orphaned siblings. Operates a palliative care training program for community volunteers.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#f0fdf4; color:#15803d;">VC</div>
+          <div class="partner-info">
+            <h4>Vientos del Cambio</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Tegucigalpa, Honduras</div>
+            <p>Provides safe housing and trauma-informed care for children escaping gang violence or family abuse in Central America. Partners with local government on family reunification and legal guardianship processes.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#eff6ff; color:#1d4ed8;">MA</div>
+          <div class="partner-info">
+            <h4>Malaika Amani Kenya</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Mombasa, Kenya</div>
+            <p>Community nutrition and early childhood development program serving 620 children under 5 in informal settlements. Their door-to-door nutrition monitoring program has reduced child stunting rates by 34% in target communities since 2017.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fdf2f8; color:#86198f;">TK</div>
+          <div class="partner-info">
+            <h4>Tujenge Kesho Tanzania</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Arusha, Tanzania</div>
+            <p>Grassroots women-led cooperative that funds school fees, uniforms, and supplies for 480 orphaned children across the Kilimanjaro region through a community savings and lending model.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Foundations ── -->
+    <div class="partner-section" id="section-foundations">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#f3e8ff;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <h2>Foundations &amp; Trusts</h2>
+          <p>Philanthropic institutions that provide multi-year funding and strategic guidance</p>
+        </div>
+        <span class="section-count">6 Partners</span>
+      </div>
+      <div class="standard-grid">
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fef3c7; color:#92400e;">HF</div>
+          <div class="partner-info">
+            <h4>Harrow &amp; Aldgate Foundation</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> London, United Kingdom</div>
+            <p>Independent UK charitable trust with a £180M endowment focused on child education in Sub-Saharan Africa and South Asia. Provides Volk Donations with a £400,000 annual program grant for our African school partnerships.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#ecfdf5; color:#065f46;">WF</div>
+          <div class="partner-info">
+            <h4>Westerholm Family Foundation</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Minneapolis, USA</div>
+            <p>Minnesota-based family foundation dedicated to sustainable child welfare. Their unrestricted 5-year grant to Volk Donations has funded our organizational capacity building, staff training, and impact measurement systems.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#eff6ff; color:#1e40af;">CE</div>
+          <div class="partner-info">
+            <h4>Crescendo Esperanza Trust</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Madrid, Spain</div>
+            <p>European philanthropic trust focused on Latin American child welfare. Co-finances our Central and South American program network and provides pro-bono legal expertise for policy advocacy in Colombia, Honduras, and Peru.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fff1f2; color:#9f1239;">LF</div>
+          <div class="partner-info">
+            <h4>Lindiwe &amp; Kofi Foundation</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Accra, Ghana</div>
+            <p>Pan-African foundation established by two West African business leaders committed to solving the continent's orphan crisis through sustainable, locally-led models. Channels funds to vetted Ghanaian and Nigerian partner NGOs in our network.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fdf4ff; color:#7e22ce;">KT</div>
+          <div class="partner-info">
+            <h4>Kjeldsen Thorvald Trust</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Copenhagen, Denmark</div>
+            <p>Danish philanthropic trust with particular focus on psychosocial rehabilitation. Funds our trauma-informed care training program, which has now trained over 1,400 frontline child welfare workers across our partner network.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo-sm" style="background:#fff7ed; color:#c2410c;">RF</div>
+          <div class="partner-info">
+            <h4>Ramanujan Future Fund</h4>
+            <div class="loc"><svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bangalore, India</div>
+            <p>Tech-sector philanthropic fund established by Indian technology entrepreneurs to support STEM education for under-served children across India. Co-funds our digital classroom initiative in partnership with Solaris Education Trust.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Corporate Sponsors ── -->
+    <div class="partner-section" id="section-corporate">
+      <div class="section-heading">
+        <div class="section-heading-icon" style="background:#fef9c3;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#854d0e" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9.5" y1="14.5" x2="14.5" y2="14.5"/></svg>
+        </div>
+        <div>
+          <h2>Corporate Sponsors</h2>
+          <p>Businesses committed to making a measurable difference through philanthropic partnerships</p>
+        </div>
+        <span class="section-count">8 Sponsors</span>
+      </div>
+      <div class="corporate-grid">
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#dbeafe; color:#1e40af;">AV</div>
+          <h4>Avantis Financial Group</h4>
+          <p>Annual payroll giving program and matched employee donations. 480 staff participate annually.</p>
+          <div class="corp-type">Gold Sponsor · Since 2017</div>
+        </div>
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#dcfce7; color:#166534;">NX</div>
+          <h4>Nexara Technologies</h4>
+          <p>Provides free cloud infrastructure and software licenses to our partner NGO network annually.</p>
+          <div class="corp-type">Tech Partner · Since 2019</div>
+        </div>
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#f3e8ff; color:#6d28d9;">BR</div>
+          <h4>Brandveil Retail Group</h4>
+          <p>Donates 1% of annual net revenue through a cause-marketing campaign on all children's products.</p>
+          <div class="corp-type">Silver Sponsor · Since 2020</div>
+        </div>
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#fff7ed; color:#c2410c;">KP</div>
+          <h4>Kalinda Pharma Ltd.</h4>
+          <p>Supplies essential medicines and vitamins to our health programs in East Africa at cost price.</p>
+          <div class="corp-type">Healthcare Partner · Since 2016</div>
+        </div>
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#fef9c3; color:#854d0e;">OC</div>
+          <h4>Oceanic Freight Partners</h4>
+          <p>Provides heavily subsidized shipping for donated goods and supplies to our African and Asian programs.</p>
+          <div class="corp-type">Logistics Partner · Since 2014</div>
+        </div>
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#ffe4e6; color:#9f1239;">TR</div>
+          <h4>Trident Risk Advisors</h4>
+          <p>Donates pro-bono insurance advisory and risk management services across our global program portfolio.</p>
+          <div class="corp-type">Pro-Bono Partner · Since 2021</div>
+        </div>
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#e0f2fe; color:#0369a1;">SB</div>
+          <h4>Solbridge Architecture</h4>
+          <p>Designs and project-manages construction of care facilities at no professional fee — materials only.</p>
+          <div class="corp-type">Construction Partner · Since 2018</div>
+        </div>
+
+        <div class="corp-card">
+          <div class="corp-logo" style="background:#f0fdf4; color:#15803d;">GV</div>
+          <h4>Greenvalley Organics</h4>
+          <p>Supplies nutritional food packages to 14 of our East African partner centers, sourced from local farmers.</p>
+          <div class="corp-type">Nutrition Partner · Since 2022</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Become a partner CTA ── -->
+    <div class="partner-cta">
+      <div class="partner-cta-content">
+        <h2>Become a Partner</h2>
+        <p>Whether you are a grassroots organization, a foundation, or a company with a social mission, we would love to explore how we can work together to change more lives. Our partnerships team is ready to talk.</p>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn-primary">Get in Touch</a>
+          <a href="/reports" class="btn-secondary">View Impact Reports</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/images/logo.png" alt="Volk Donations Logo">
+          <span class="footer-logo-text">Volk Donations</span>
+        </div>
+        <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h5>Organization</h5>
+        <a href="/about">About Us</a>
+        <a href="/partners" style="color:#00a86b;">Our Partners</a>
+        <a href="/branches">Branches</a>
+        <a href="/reports">Annual Reports</a>
+        <a href="/team">Our Team</a>
+      </div>
+      <div>
+        <h5>Get Involved</h5>
+        <a href="/contribute">Contribute</a>
+        <a href="/volunteer">Volunteer</a>
+        <a href="/fundraise">Fundraise</a>
+        <a href="/events">Events</a>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <a href="/faq">FAQ</a>
+        <a href="/blog">Blog</a>
+        <a href="/stories">Success Stories</a>
+        <a href="/press">Press Kit</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/financial">Financial Info</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Volk Donations. All rights reserved.</p>
+      <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+      <p>EIN: 45-1234567 | Making a difference since 2010</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuBtn.addEventListener('click', function () {
+      this.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 968) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sections = {
+      strategic:   document.getElementById('section-strategic'),
+      grassroots:  document.getElementById('section-grassroots'),
+      foundations: document.getElementById('section-foundations'),
+      corporate:   document.getElementById('section-corporate'),
+    };
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+
+        const filter = this.dataset.filter;
+
+        if (filter === 'all') {
+          Object.values(sections).forEach(function (s) { s.classList.remove('hidden'); });
+        } else {
+          Object.entries(sections).forEach(function ([key, el]) {
+            el.classList.toggle('hidden', key !== filter);
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

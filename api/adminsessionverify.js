@@ -1,6 +1,6 @@
 const { neon } = require("@neondatabase/serverless");
 
-const DEBUG = true;
+const DEBUG = false;
 const log = (...args) => { if (DEBUG) console.log("[adminsessionverify]", ...args); };
 const err = (...args) => { if (DEBUG) console.error("[adminsessionverify]", ...args); };
 

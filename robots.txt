@@ -1,0 +1,13 @@
+# robots.txt — Volk Donations
+# https://volkdonations.website
+
+User-agent: *
+Allow: /
+
+# Private & authenticated routes
+Disallow: /admin/
+Disallow: /user/
+Disallow: /auth/
+
+# Sitemap
+Sitemap: https://volkdonations.website/sitemap.xml

@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
   const sql = neon(process.env.NEON_DATABASE_URL);
 
   try {
-    // ---- VERIFY SESSION AGAINST NEON (same as adminsessionverify) ----
+    // ---- VERIFY SESSION AGAINST NEON ----
     const rows = await sql`
       select admin_id, role, expires_at
       from admin_sessions
@@ -37,21 +37,60 @@ module.exports = async (req, res) => {
       return res.status(401).json({ error: "Invalid or expired session" });
     }
 
-    // ---- FETCH ADMIN FROM SUPABASE ----
-    const adminRes = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/admins?id=eq.${session.admin_id}&select=id,email,role`,
-      {
-        headers: {
-          apikey: process.env.SUPABASE_SERVICE_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
-        },
-      }
-    );
+    // ---- ALL SUPABASE FETCHES IN PARALLEL ----
+    const [adminRes, adminsCountRes, contactRes, usersRes] = await Promise.all([
 
-    const adminRaw = await adminRes.text();
+      // Verify the acting admin
+      fetch(
+        `${process.env.SUPABASE_URL}/rest/v1/admins?id=eq.${session.admin_id}&select=id,email,role`,
+        {
+          headers: {
+            apikey: process.env.SUPABASE_SERVICE_KEY,
+            Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
+          },
+        }
+      ),
+
+      // Count all admins
+      fetch(
+        `${process.env.SUPABASE_URL}/rest/v1/admins?select=id`,
+        {
+          headers: {
+            apikey: process.env.SUPABASE_SERVICE_KEY,
+            Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
+            Prefer: "count=exact",
+          },
+        }
+      ),
+
+      // Contact submissions
+      fetch(
+        `${process.env.SUPABASE_URL}/rest/v1/contact?select=id,name,email,subject,message,ip_address,status,created_at&order=created_at.desc`,
+        {
+          headers: {
+            apikey: process.env.SUPABASE_SERVICE_KEY,
+            Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
+          },
+        }
+      ),
+
+      // Registered users
+      fetch(
+        `${process.env.SUPABASE_URL}/rest/v1/users?select=id,name,email,is_verified,is_active,created_at,verified_at&order=created_at.desc`,
+        {
+          headers: {
+            apikey: process.env.SUPABASE_SERVICE_KEY,
+            Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
+          },
+        }
+      ),
+
+    ]);
+
+    // ---- PARSE ACTING ADMIN ----
     let admins;
     try {
-      admins = JSON.parse(adminRaw);
+      admins = JSON.parse(await adminRes.text());
     } catch {
       return res.status(500).json({ error: "Server error" });
     }
@@ -62,24 +101,83 @@ module.exports = async (req, res) => {
 
     const admin = admins[0];
 
-    // ---- FETCH VOLKDATA FROM SUPABASE ----
-    const volkRes = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/volkdata?select=*&order=created_at.desc`,
-      {
-        headers: {
-          apikey: process.env.SUPABASE_SERVICE_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
-        },
-      }
-    );
+    // ---- PARSE TOTAL ADMINS COUNT ----
+    // Supabase returns the count in the Content-Range header: "0-4/5"
+    const contentRange = adminsCountRes.headers.get("content-range") || "";
+    const totalAdmins = contentRange.includes("/")
+      ? parseInt(contentRange.split("/")[1], 10) || 0
+      : 0;
 
-    const volkRaw = await volkRes.text();
-    let volkdata;
+    // ---- PARSE CONTACTS ----
+    let contacts;
     try {
-      volkdata = JSON.parse(volkRaw);
+      contacts = JSON.parse(await contactRes.text());
     } catch {
       return res.status(500).json({ error: "Server error" });
     }
+    if (!Array.isArray(contacts)) contacts = [];
+
+    // ---- PARSE USERS ----
+    let users;
+    try {
+      users = JSON.parse(await usersRes.text());
+    } catch {
+      return res.status(500).json({ error: "Server error" });
+    }
+    if (!Array.isArray(users)) users = [];
+
+    // ---- NEON FETCHES IN PARALLEL ----
+    const [donationsRows, formsRows] = await Promise.all([
+
+      sql`
+        select
+          id,
+          receipt_id,
+          donor_name,
+          email,
+          amount,
+          currency,
+          country,
+          created_at
+        from donations
+        order by created_at desc;
+      `,
+
+      sql`
+        select
+          id,
+          form_id,
+          name,
+          email,
+          phone,
+          country,
+          amount,
+          created_at
+        from forms
+        order by created_at desc;
+      `,
+
+    ]);
+
+    const donations = donationsRows || [];
+    const forms = formsRows || [];
+
+    // ---- SUMMARY STATS ----
+    const totalDonationAmount = donations.reduce((sum, d) => sum + parseFloat(d.amount || 0), 0);
+    const totalFormsAmount = forms.reduce((sum, f) => sum + parseFloat(f.amount || 0), 0);
+
+    const stats = {
+      total_admins: totalAdmins,
+      total_users: users.length,
+      verified_users: users.filter(u => u.is_verified).length,
+      active_users: users.filter(u => u.is_active).length,
+      total_contacts: contacts.length,
+      pending_contacts: contacts.filter(c => c.status === "pending").length,
+      total_donations: donations.length,
+      total_donation_amount: parseFloat(totalDonationAmount.toFixed(2)),
+      total_forms: forms.length,
+      total_forms_amount: parseFloat(totalFormsAmount.toFixed(2)),
+    };
 
     return res.status(200).json({
       success: true,
@@ -87,11 +185,15 @@ module.exports = async (req, res) => {
         id: admin.id,
         role: session.role,
       },
-      data: volkdata,
+      stats,
+      contacts,
+      users,
+      donations,
+      forms,
     });
 
   } catch (e) {
-    console.error("Volkdata error:", e.message);
+    console.error("Dashboard data error:", e.message);
     return res.status(500).json({ error: "Internal server error" });
   }
 };

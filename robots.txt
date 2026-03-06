@@ -8,6 +8,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /user/
 Disallow: /auth/
+Disallow: /operations
 
 # Sitemap
 Sitemap: https://volkdonations.website/sitemap.xml

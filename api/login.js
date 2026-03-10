@@ -256,7 +256,7 @@ module.exports = async function handler(req, res) {
     // If user doesn't exist, still run bcrypt compare against a dummy hash
     // so response time is identical whether the email exists or not.
     // This prevents user enumeration via timing.
-    const DUMMY_HASH = '$2a$12$dummyhashfortimingsafetyxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+    const DUMMY_HASH = '$2b$12$C6UzMDM.H6dfI/f/IKcEeO6uJQ5Q9s7Rk6u1C5sKX0H1d5FJ7ZK6W';
     const hashToCompare = user ? user.password_hash : DUMMY_HASH;
     const passwordMatch = await bcrypt.compare(password, hashToCompare);
 

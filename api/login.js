@@ -80,7 +80,7 @@ function buildCookieHeader(signedToken, expiresAt) {
     `${COOKIE_NAME}=${signedToken}`,
     `Expires=${expires}`,
     'Path=/',
-    'HttpOnly',
+    //'HttpOnly',
     'SameSite=Strict',
   ];
   if (process.env.NODE_ENV === 'production') {

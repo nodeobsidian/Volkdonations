@@ -65,23 +65,14 @@ function verifySignedToken(signedToken) {
   return sessionId;
 }
 
-function sanitizeString(str) {
-  if (typeof str !== 'string') return '';
-  return str.trim().replace(/[\x00-\x1F\x7F<>]/g, '');
-}
-
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase().trim());
-}
-
 function buildCookieHeader(signedToken, expiresAt) {
   const expires = new Date(expiresAt).toUTCString();
   const parts = [
     `${COOKIE_NAME}=${signedToken}`,
     `Expires=${expires}`,
     'Path=/',
-    //'HttpOnly',
-    'SameSite=Strict',
+    // 'HttpOnly',   ← intentionally off for demo
+    // 'SameSite=Strict', ← remove this entirely
   ];
   if (process.env.NODE_ENV === 'production') {
     parts.push('Secure');

@@ -18,10 +18,10 @@ function getNeon() {
 // ─────────────────────────────────────────────
 // Constants
 // ─────────────────────────────────────────────
-const RATE_LIMIT_MAX       = 5;           // max failed attempts
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
-const SESSION_TTL_MS       = 7 * 24 * 60 * 60 * 1000; // 7 days
-const HMAC_SECRET          = process.env.SESSION_HMAC_SECRET; // 32+ byte secret, set in env
+const RATE_LIMIT_MAX       = 5;
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const SESSION_TTL_MS       = 7 * 24 * 60 * 60 * 1000;
+const HMAC_SECRET          = process.env.SESSION_HMAC_SECRET;
 const COOKIE_NAME          = 'vdk_session';
 
 // ─────────────────────────────────────────────
@@ -32,11 +32,9 @@ const COOKIE_NAME          = 'vdk_session';
  * Generate a cryptographically random session ID (32 bytes = 64 hex chars)
  * then sign it with HMAC-SHA256 using SESSION_HMAC_SECRET.
  * Cookie value format: <sessionId>.<hmacSignature>
- * This means even if someone guesses a session ID, they cannot forge
- * a valid cookie without knowing the secret.
  */
 function generateSignedSessionToken() {
-  const sessionId = crypto.randomBytes(32).toString('hex'); // 256 bits of entropy
+  const sessionId = crypto.randomBytes(32).toString('hex');
   const sig = crypto
     .createHmac('sha256', HMAC_SECRET)
     .update(sessionId)
@@ -57,7 +55,6 @@ function verifySignedToken(signedToken) {
     .createHmac('sha256', HMAC_SECRET)
     .update(sessionId)
     .digest('hex');
-  // Constant-time comparison to prevent timing attacks
   const sigBuf      = Buffer.from(sig, 'hex');
   const expectedBuf = Buffer.from(expectedSig, 'hex');
   if (sigBuf.length !== expectedBuf.length) return null;
@@ -72,7 +69,7 @@ function buildCookieHeader(signedToken, expiresAt) {
     `Expires=${expires}`,
     'Path=/',
     // 'HttpOnly',   ← intentionally off for demo
-    // 'SameSite=Strict', ← remove this entirely
+    // 'SameSite=Strict', ← intentionally removed for demo
   ];
   if (process.env.NODE_ENV === 'production') {
     parts.push('Secure');
@@ -80,14 +77,17 @@ function buildCookieHeader(signedToken, expiresAt) {
   return parts.join('; ');
 }
 
+function sanitizeString(str) {
+  if (typeof str !== 'string') return '';
+  return str.trim().replace(/[\x00-\x1F\x7F<>]/g, '');
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase().trim());
+}
+
 // ─────────────────────────────────────────────
 // NeonDB rate limiting
-// Keyed by IP + email combo to prevent both
-// IP-hopping and email enumeration via timing.
-// Table: signup_rate_limit (reused per your spec)
-//   id SERIAL PRIMARY KEY,
-//   key TEXT NOT NULL,
-//   attempted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 // ─────────────────────────────────────────────
 async function checkRateLimit(ip, email) {
   const sql = getNeon();
@@ -105,7 +105,7 @@ async function checkRateLimit(ip, email) {
     return { allowed: count < RATE_LIMIT_MAX, count };
   } catch (err) {
     console.error('Rate limit check error:', err);
-    return { allowed: true, count: 0 }; // fail open — don't block on DB error
+    return { allowed: true, count: 0 };
   }
 }
 
@@ -119,14 +119,13 @@ async function recordFailedAttempt(ip, email) {
       VALUES (${key}, NOW())
     `;
 
-    // Prune stale entries older than the window to keep table lean
     const cutoff = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
     await sql`
       DELETE FROM signup_rate_limit
       WHERE attempted_at < ${cutoff}
     `;
   } catch (err) {
-    console.error('Rate limit record error:', err); // non-fatal
+    console.error('Rate limit record error:', err);
   }
 }
 
@@ -136,19 +135,12 @@ async function clearRateLimitOnSuccess(ip, email) {
   try {
     await sql`DELETE FROM signup_rate_limit WHERE key = ${key}`;
   } catch (err) {
-    console.error('Rate limit clear error:', err); // non-fatal
+    console.error('Rate limit clear error:', err);
   }
 }
 
 // ─────────────────────────────────────────────
-// Session management (Supabase `sessions` table)
-//   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-//   user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-//   session_id TEXT NOT NULL UNIQUE,
-//   ip_address TEXT,
-//   user_agent TEXT,
-//   expires_at TIMESTAMPTZ NOT NULL,
-//   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+// Session management
 // ─────────────────────────────────────────────
 async function createSession(userId, sessionId, ip, userAgent, expiresAt) {
   const { error } = await supabase.from('sessions').insert({
@@ -221,9 +213,7 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'CAPTCHA verification failed. Please try again.' });
     }
 
-    // ── Rate limit check (BEFORE DB lookup) ──
-    // Always check rate limit before doing any DB work to prevent
-    // using the endpoint as a timing oracle even under lockout.
+    // ── Rate limit check ─────────────────────
     const { allowed } = await checkRateLimit(ip, cleanEmail);
     if (!allowed) {
       return res.status(429).json({
@@ -244,19 +234,14 @@ module.exports = async function handler(req, res) {
     }
 
     // ── Timing-safe invalid credential handling ──
-    // If user doesn't exist, still run bcrypt compare against a dummy hash
-    // so response time is identical whether the email exists or not.
-    // This prevents user enumeration via timing.
     const DUMMY_HASH = '$2b$12$C6UzMDM.H6dfI/f/IKcEeO6uJQ5Q9s7Rk6u1C5sKX0H1d5FJ7ZK6W';
     const hashToCompare = user ? user.password_hash : DUMMY_HASH;
     const passwordMatch = await bcrypt.compare(password, hashToCompare);
 
     if (!user || !passwordMatch) {
-      // Record failed attempt only for real IPs (don't record dummy runs)
       if (user || (!user && passwordMatch === false)) {
         await recordFailedAttempt(ip, cleanEmail);
       }
-      // Vague message — never reveal whether email exists
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
 
@@ -284,7 +269,7 @@ module.exports = async function handler(req, res) {
       return res.status(500).json({ error: 'Failed to create session. Please try again.' });
     }
 
-    // ── Clear rate limit on successful login ─
+    // ── Clear rate limit on success ──────────
     await clearRateLimitOnSuccess(ip, cleanEmail);
 
     // ── Set cookie + redirect ────────────────

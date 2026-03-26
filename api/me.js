@@ -1,29 +1,9 @@
 'use strict';
 
-/**
- * GET /api/me
- * ─────────────────────────────────────────────────────────────────
- * Verifies the vdk_session cookie, confirms the session exists and
- * is not expired in Supabase, and returns the authenticated user's
- * public profile { name, email, userId }.
- *
- * Used by the dashboard to:
- *  1. Confirm the visitor is authenticated (401 → redirect /auth/login)
- *  2. Hydrate the dashboard with the real user's name and email
- *
- * Required env vars:
- *   SUPABASE_URL               – Supabase project URL
- *   SUPABASE_SERVICE_ROLE_KEY  – Supabase service-role key
- *   SESSION_HMAC_SECRET        – 32+ char secret used to sign session cookies
- *   ALLOWED_ORIGIN             – Exact frontend origin for CORS
- */
-
 const { createClient } = require('@supabase/supabase-js');
 const crypto           = require('crypto');
 
 const COOKIE_NAME = 'vdk_session';
-
-// ── Lazy Supabase singleton ───────────────────────────────────────────────────
 
 let _supabase = null;
 function getSupabase() {
@@ -40,8 +20,6 @@ function getSupabase() {
   return _supabase;
 }
 
-// ── Cookie parser ─────────────────────────────────────────────────────────────
-
 function parseCookies(header) {
   const cookies = {};
   if (!header) return cookies;
@@ -54,8 +32,6 @@ function parseCookies(header) {
   });
   return cookies;
 }
-
-// ── HMAC token verification ───────────────────────────────────────────────────
 
 function verifySignedToken(signedToken) {
   const secret = process.env.SESSION_HMAC_SECRET;
@@ -86,8 +62,6 @@ function verifySignedToken(signedToken) {
   return sessionId;
 }
 
-// ── Security headers ──────────────────────────────────────────────────────────
-
 function setSecurityHeaders(res) {
   res.setHeader('X-Content-Type-Options',  'nosniff');
   res.setHeader('X-Frame-Options',         'DENY');
@@ -96,25 +70,88 @@ function setSecurityHeaders(res) {
   res.setHeader('Content-Security-Policy', "default-src 'none'");
 }
 
+function sanitizeString(str) {
+  if (typeof str !== 'string') return '';
+  return str.trim().replace(/[\x00-\x1F\x7F<>]/g, '');
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase().trim());
+}
+
+// ── Shared session resolver ───────────────────────────────────────────────────
+// Used by both GET and PATCH to avoid duplicating auth logic
+async function resolveSession(req, res) {
+  const cookies     = parseCookies(req.headers['cookie'] || '');
+  const signedToken = cookies[COOKIE_NAME] || '';
+
+  if (!signedToken) {
+    res.status(401).json({ error: 'Not authenticated.' });
+    return null;
+  }
+
+  const sessionId = verifySignedToken(signedToken);
+  if (!sessionId) {
+    res.setHeader('Set-Cookie',
+      `${COOKIE_NAME}=; Max-Age=0; Path=/; HttpOnly; SameSite=Strict`
+    );
+    res.status(401).json({ error: 'Invalid session.' });
+    return null;
+  }
+
+  const supabase = getSupabase();
+
+  const { data: session, error: sessionErr } = await supabase
+    .from('sessions')
+    .select('user_id, expires_at')
+    .eq('session_id', sessionId)
+    .maybeSingle();
+
+  if (sessionErr) {
+    console.error('[api/me] Session lookup error:', sessionErr.message);
+    res.status(500).json({ error: 'An unexpected error occurred.' });
+    return null;
+  }
+
+  if (!session) {
+    res.setHeader('Set-Cookie',
+      `${COOKIE_NAME}=; Max-Age=0; Path=/; HttpOnly; SameSite=Strict`
+    );
+    res.status(401).json({ error: 'Session not found.' });
+    return null;
+  }
+
+  if (new Date(session.expires_at) < new Date()) {
+    await supabase.from('sessions').delete().eq('session_id', sessionId);
+    res.setHeader('Set-Cookie',
+      `${COOKIE_NAME}=; Max-Age=0; Path=/; HttpOnly; SameSite=Strict`
+    );
+    res.status(401).json({ error: 'Session expired. Please sign in again.' });
+    return null;
+  }
+
+  return { supabase, userId: session.user_id };
+}
+
 // ── Main handler ──────────────────────────────────────────────────────────────
 
 module.exports = async function handler(req, res) {
 
-  // ── CORS ─────────────────────────────────────────────────────────────────────
   const allowedOrigin = process.env.ALLOWED_ORIGIN || '';
   const requestOrigin = req.headers['origin'] || '';
 
   if (req.method === 'OPTIONS') {
     if (allowedOrigin && requestOrigin === allowedOrigin) {
       res.setHeader('Access-Control-Allow-Origin',      allowedOrigin);
-      res.setHeader('Access-Control-Allow-Methods',     'GET, OPTIONS');
+      res.setHeader('Access-Control-Allow-Methods',     'GET, PATCH, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers',     'Content-Type');
       res.setHeader('Access-Control-Allow-Credentials', 'true');
       res.setHeader('Access-Control-Max-Age',           '600');
     }
     return res.status(204).end();
   }
 
-  if (req.method !== 'GET') {
+  if (req.method !== 'GET' && req.method !== 'PATCH') {
     setSecurityHeaders(res);
     return res.status(405).json({ error: 'Method not allowed.' });
   }
@@ -131,86 +168,129 @@ module.exports = async function handler(req, res) {
 
   setSecurityHeaders(res);
 
-  // ── Extract cookie ────────────────────────────────────────────────────────────
-  const cookies     = parseCookies(req.headers['cookie'] || '');
-  const signedToken = cookies[COOKIE_NAME] || '';
-
-  if (!signedToken) {
-    return res.status(401).json({ error: 'Not authenticated.' });
-  }
-
-  // ── Verify HMAC signature ─────────────────────────────────────────────────────
-  const sessionId = verifySignedToken(signedToken);
-  if (!sessionId) {
-    // Tampered or malformed cookie — clear it
-    res.setHeader('Set-Cookie',
-      `${COOKIE_NAME}=; Max-Age=0; Path=/; HttpOnly; SameSite=Strict`
-    );
-    return res.status(401).json({ error: 'Invalid session.' });
-  }
-
-  // ── Look up session in Supabase ───────────────────────────────────────────────
   try {
-    const supabase = getSupabase();
 
-    const { data: session, error: sessionErr } = await supabase
-      .from('sessions')
-      .select('user_id, expires_at')
-      .eq('session_id', sessionId)
-      .maybeSingle();
+    // ── GET /api/me ─────────────────────────────────────────────────────────
+    if (req.method === 'GET') {
+      const auth = await resolveSession(req, res);
+      if (!auth) return;
 
-    if (sessionErr) {
-      console.error('[api/me] Session lookup error:', sessionErr.message);
-      return res.status(500).json({ error: 'An unexpected error occurred.' });
-    }
+      const { supabase, userId } = auth;
 
-    if (!session) {
-      // Session not found — clear stale cookie
-      res.setHeader('Set-Cookie',
-        `${COOKIE_NAME}=; Max-Age=0; Path=/; HttpOnly; SameSite=Strict`
-      );
-      return res.status(401).json({ error: 'Session not found.' });
-    }
+      const { data: user, error: userErr } = await supabase
+        .from('users')
+        .select('id, name, email, is_active')
+        .eq('id', userId)
+        .maybeSingle();
 
-    // ── Expiry check ──────────────────────────────────────────────────────────
-    if (new Date(session.expires_at) < new Date()) {
-      // Expired — clean up and clear cookie
-      await supabase.from('sessions').delete().eq('session_id', sessionId);
-      res.setHeader('Set-Cookie',
-        `${COOKIE_NAME}=; Max-Age=0; Path=/; HttpOnly; SameSite=Strict`
-      );
-      return res.status(401).json({ error: 'Session expired. Please sign in again.' });
-    }
+      if (userErr) {
+        console.error('[api/me] User lookup error:', userErr.message);
+        return res.status(500).json({ error: 'An unexpected error occurred.' });
+      }
 
-    // ── Fetch user profile ────────────────────────────────────────────────────
-    const { data: user, error: userErr } = await supabase
-      .from('users')
-      .select('id, name, email, is_active')
-      .eq('id', session.user_id)
-      .maybeSingle();
+      if (!user) {
+        return res.status(401).json({ error: 'User not found.' });
+      }
 
-    if (userErr) {
-      console.error('[api/me] User lookup error:', userErr.message);
-      return res.status(500).json({ error: 'An unexpected error occurred.' });
-    }
+      if (user.is_active === false) {
+        return res.status(403).json({
+          error: 'Account suspended.',
+          code:  'ACCOUNT_SUSPENDED',
+        });
+      }
 
-    if (!user) {
-      return res.status(401).json({ error: 'User not found.' });
-    }
-
-    if (user.is_active === false) {
-      return res.status(403).json({
-        error: 'Account suspended.',
-        code:  'ACCOUNT_SUSPENDED',
+      return res.status(200).json({
+        userId: user.id,
+        name:   user.name,
+        email:  user.email,
       });
     }
 
-    // ── Return minimal, safe profile ──────────────────────────────────────────
-    return res.status(200).json({
-      userId: user.id,
-      name:   user.name,
-      email:  user.email,
-    });
+    // ── PATCH /api/me ───────────────────────────────────────────────────────
+    if (req.method === 'PATCH') {
+      const auth = await resolveSession(req, res);
+      if (!auth) return;
+
+      const { supabase, userId } = auth;
+
+      const { firstName, lastName, email } = req.body || {};
+
+      // At least one field required
+      if (!firstName && !lastName && !email) {
+        return res.status(400).json({ error: 'No update fields provided.' });
+      }
+
+      const updateObj = {};
+
+      // Build full name from first + last if either is provided
+      if (firstName || lastName) {
+        const cleanFirst = sanitizeString(firstName || '');
+        const cleanLast  = sanitizeString(lastName  || '');
+
+        if (firstName && cleanFirst.length < 1) {
+          return res.status(400).json({ error: 'Invalid first name.' });
+        }
+        if (lastName && cleanLast.length < 1) {
+          return res.status(400).json({ error: 'Invalid last name.' });
+        }
+
+        // If only one is supplied we need the existing name to fill the other half
+        if (!firstName || !lastName) {
+          const { data: existing } = await supabase
+            .from('users')
+            .select('name')
+            .eq('id', userId)
+            .maybeSingle();
+
+          const parts     = (existing?.name || '').trim().split(/\s+/);
+          const existingF = parts[0] || '';
+          const existingL = parts.slice(1).join(' ') || '';
+
+          updateObj.name = `${cleanFirst || existingF} ${cleanLast || existingL}`.trim();
+        } else {
+          updateObj.name = `${cleanFirst} ${cleanLast}`.trim();
+        }
+
+        if (updateObj.name.length < 2 || updateObj.name.length > 100) {
+          return res.status(400).json({ error: 'Full name must be between 2 and 100 characters.' });
+        }
+      }
+
+      if (email) {
+        const cleanEmail = sanitizeString(email).toLowerCase();
+        if (!validateEmail(cleanEmail)) {
+          return res.status(400).json({ error: 'Invalid email address.' });
+        }
+
+        // Check email not already taken by another user
+        const { data: existing } = await supabase
+          .from('users')
+          .select('id')
+          .eq('email', cleanEmail)
+          .maybeSingle();
+
+        if (existing && existing.id !== userId) {
+          return res.status(409).json({ error: 'That email address is already in use.' });
+        }
+
+        updateObj.email = cleanEmail;
+      }
+
+      const { error: updateErr } = await supabase
+        .from('users')
+        .update(updateObj)
+        .eq('id', userId);
+
+      if (updateErr) {
+        console.error('[api/me] Profile update error:', updateErr.message);
+        return res.status(500).json({ error: 'Failed to update profile. Please try again.' });
+      }
+
+      return res.status(200).json({
+        message: 'Profile updated successfully.',
+        updated: updateObj,
+      });
+    }
 
   } catch (err) {
     console.error('[api/me] Unhandled error:', err.message);

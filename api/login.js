@@ -69,7 +69,7 @@ function buildCookieHeader(signedToken, expiresAt) {
     `Expires=${expires}`,
     'Path=/',
     'HttpOnly',             // ← intentionally off for demo // we can comment these out when we want to do a demo
-    'SameSite=Strict',       //← intentionally removed for demo  // we can comment these out when we want to do a demo
+    'SameSite=Lax',       //← intentionally removed for demo  // we can comment it our or switch to Strict/Lax these out when we want to do a demo
   ];
   if (process.env.NODE_ENV === 'production') {
     parts.push('Secure');

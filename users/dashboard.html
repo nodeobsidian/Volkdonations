@@ -846,12 +846,60 @@ window.openRefer=function(){document.getElementById('mRefLink').textContent=REFE
 window.copyLink=function(srcId){const txt=document.getElementById(srcId).textContent;if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>showToast('📋','Referral link copied to clipboard!'));}else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('📋','Referral link copied to clipboard!');}};
 
 // PROFILE SAVE
-window.saveProf=function(){
-  const n=(document.getElementById('pfF').value+' '+document.getElementById('pfL').value).trim();
-  const em=document.getElementById('pfE').value;
-  if(n){['sbNm','pnBig'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=n;});}
-  if(em){['sbEm','peBig'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=em;});}
-  showToast('✓','Profile updated successfully.');
+window.saveProf = async function () {
+  const firstName = document.getElementById('pfF').value.trim();
+  const lastName  = document.getElementById('pfL').value.trim();
+  const email     = document.getElementById('pfE').value.trim();
+
+  if (!firstName && !lastName && !email) {
+    showToast('⚠️', 'Nothing to update.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/me', {
+      method: 'PATCH',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName, lastName, email }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      showToast('❌', data.error || 'Failed to update profile.');
+      return;
+    }
+
+    // Update UI with new values
+    const fullName = `${firstName} ${lastName}`.trim();
+    if (fullName) {
+      const pts = fullName.split(/\s+/);
+      const ini = ((pts[0]?.[0] || '') + (pts[1]?.[0] || '')).toUpperCase();
+      ['sbNm', 'pnBig'].forEach(id => {
+        const e = document.getElementById(id);
+        if (e) e.textContent = fullName;
+      });
+      ['sbAv', 'pavBig'].forEach(id => {
+        const e = document.getElementById(id);
+        if (e) e.textContent = ini;
+      });
+    }
+
+    if (email) {
+      ['sbEm', 'peBig'].forEach(id => {
+        const e = document.getElementById(id);
+        if (e) e.textContent = email;
+      });
+      document.getElementById('dCE').textContent = email;
+    }
+
+    showToast('✓', 'Profile updated successfully.');
+
+  } catch (err) {
+    console.error('saveProf error:', err);
+    showToast('❌', 'Network error. Please try again.');
+  }
 };
 
 // PREFS

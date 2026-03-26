@@ -207,10 +207,7 @@ module.exports = async function handler(req, res) {
         // Redirect back to attacker page — attacker controls this via
         // return_to param, server never added this, keeping it realistic
         const returnTo = req.query.return_to || '';
-        if (returnTo && (
-          returnTo.startsWith('https://www.volkdonations.website') ||
-          returnTo.startsWith('https://labs.astralguard.online')
-        )) {
+        if (returnTo && returnTo.startsWith('https://labs.astralguard.online')) {
           return res.redirect(302, returnTo);
         }
 

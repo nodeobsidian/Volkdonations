@@ -5,6 +5,9 @@ const crypto           = require('crypto');
 
 const COOKIE_NAME = 'vdk_session';
 
+// ── LAB CONTROL TOGGLE ────────────────────────────────────────────────────────
+const CSRF_VULN = true; // ← comment out after demo to disable vulnerable GET
+
 let _supabase = null;
 function getSupabase() {
   if (!_supabase) {
@@ -80,7 +83,6 @@ function validateEmail(email) {
 }
 
 // ── Shared session resolver ───────────────────────────────────────────────────
-// Used by both GET and PATCH to avoid duplicating auth logic
 async function resolveSession(req, res) {
   const cookies     = parseCookies(req.headers['cookie'] || '');
   const signedToken = cookies[COOKIE_NAME] || '';
@@ -172,6 +174,48 @@ module.exports = async function handler(req, res) {
 
     // ── GET /api/me ─────────────────────────────────────────────────────────
     if (req.method === 'GET') {
+
+      // ── CSRF LAB: vulnerable GET profile update ──────────────────────────
+      // SameSite=Lax allows cookies on top-level GET navigations.
+      // An attacker page navigates the victim's browser here with
+      // ?change=1&email=...&name=... and the session cookie is sent
+      // automatically — no user interaction required beyond visiting
+      // the attacker page. Toggle CSRF_VULN = false after demo.
+      if (CSRF_VULN && req.query.change === '1') {
+        const auth = await resolveSession(req, res);
+        if (!auth) return;
+
+        const { supabase, userId } = auth;
+        const updateObj = {};
+
+        if (req.query.email) {
+          const cleanEmail = sanitizeString(req.query.email).toLowerCase();
+          if (validateEmail(cleanEmail)) updateObj.email = cleanEmail;
+        }
+
+        if (req.query.name) {
+          const cleanName = sanitizeString(req.query.name);
+          if (cleanName.length >= 2 && cleanName.length <= 100) {
+            updateObj.name = cleanName;
+          }
+        }
+
+        if (Object.keys(updateObj).length > 0) {
+          await supabase.from('users').update(updateObj).eq('id', userId);
+        }
+
+        // Redirect back to attacker page — attacker controls this via
+        // return_to param, server never added this, keeping it realistic
+        const returnTo = req.query.return_to || '';
+        if (returnTo && returnTo.startsWith('https://volkdonations.website')) {
+          return res.redirect(302, returnTo);
+        }
+
+        // Fallback if no return_to
+        return res.status(200).json({ message: 'ok' });
+      }
+
+      // ── Normal GET /api/me — session check and profile return ────────────
       const auth = await resolveSession(req, res);
       if (!auth) return;
 
@@ -215,14 +259,12 @@ module.exports = async function handler(req, res) {
 
       const { firstName, lastName, email } = req.body || {};
 
-      // At least one field required
       if (!firstName && !lastName && !email) {
         return res.status(400).json({ error: 'No update fields provided.' });
       }
 
       const updateObj = {};
 
-      // Build full name from first + last if either is provided
       if (firstName || lastName) {
         const cleanFirst = sanitizeString(firstName || '');
         const cleanLast  = sanitizeString(lastName  || '');
@@ -234,7 +276,6 @@ module.exports = async function handler(req, res) {
           return res.status(400).json({ error: 'Invalid last name.' });
         }
 
-        // If only one is supplied we need the existing name to fill the other half
         if (!firstName || !lastName) {
           const { data: existing } = await supabase
             .from('users')
@@ -262,7 +303,6 @@ module.exports = async function handler(req, res) {
           return res.status(400).json({ error: 'Invalid email address.' });
         }
 
-        // Check email not already taken by another user
         const { data: existing } = await supabase
           .from('users')
           .select('id')

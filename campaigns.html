@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Campaigns | Volk Donations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Support an active Volk Donations campaign — from clean water wells to emergency shelter — and see exactly where every dollar goes." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <meta name="theme-color" content="#1e3a5f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #1a3254;
+      --navy-deep: #111f35;
+      --navy-mid: #243d62;
+      --navy-light: #2e5080;
+      --green: #00a86b;
+      --green-dark: #008f5a;
+      --green-light: #00c47d;
+      --green-muted: rgba(0,168,107,.13);
+      --gold: #f0a500;
+      --gold-light: #fbbf24;
+      --gold-muted: rgba(240,165,0,.13);
+      --white: #fff;
+      --canvas: #f2f6fb;
+      --surface: #fff;
+      --text: #1a2636;
+      --text-2: #4a5568;
+      --text-3: #8899aa;
+      --border: #e2eaf4;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --r: 12px;
+      --r-lg: 18px;
+      --sh: 0 4px 24px rgba(26,50,84,.09);
+      --sh-lg: 0 16px 56px rgba(26,50,84,.14);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; transition: all .25s ease; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── HEADER ─── */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(26,50,84,.07);
+      padding: 0 5%;
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-container { display: flex; align-items: center; gap: 11px; }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--green), #00e08f);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 17px; font-weight: 700; color: #fff;
+    }
+    .logo-text h1 { font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+    .logo-text span { font-size: 11px; color: var(--green); font-weight: 500; letter-spacing: .4px; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { font-weight: 500; color: var(--text-2); font-size: 14px; position: relative; }
+    nav a:hover { color: var(--green); }
+    nav a.active { color: var(--navy); font-weight: 700; }
+    nav a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--green); border-radius: 2px; }
+    .nav-cta {
+      padding: 9px 20px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: #fff !important;
+      border-radius: 50px;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 14px rgba(0,168,107,.28);
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,168,107,.38); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2.5px; background: var(--navy); border-radius: 2px; transition: all .3s; }
+    .mobile-nav {
+      display: none; position: fixed; top: 70px; left: 0; right: 0;
+      background: #fff; padding: 20px 5%; border-top: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(26,50,84,.1); z-index: 999;
+      flex-direction: column; gap: 16px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 15px; font-weight: 500; color: var(--text-2); padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(150deg, var(--navy-deep) 0%, #0b3d28 60%, #00733d 100%);
+      padding: 90px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-blob {
+      position: absolute; top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,168,107,.22) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-blob2 {
+      position: absolute; bottom: -80px; left: -80px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(59,130,246,.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(0,168,107,.18); border: 1px solid rgba(0,168,107,.3);
+      border-radius: 50px; padding: 5px 14px;
+      font-size: 11px; font-weight: 700; color: #4fffb0;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero-eyebrow::before { content: '●'; font-size: 7px; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(36px, 6vw, 62px);
+      font-weight: 700; color: #fff;
+      line-height: 1.15; margin-bottom: 18px;
+      max-width: 820px;
+    }
+    .hero h2 em { font-style: italic; color: #4fffb0; }
+    .hero p {
+      font-size: clamp(15px, 2.2vw, 18px);
+      color: rgba(255,255,255,.68); max-width: 620px;
+      margin: 0 auto 36px; line-height: 1.75;
+    }
+    .hero-stats {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-top: 10px;
+    }
+    .hstat {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--r); padding: 16px 26px;
+      text-align: center; backdrop-filter: blur(8px);
+      min-width: 120px;
+    }
+    .hstat-val {
+      font-family: 'Fraunces', serif;
+      font-size: 28px; font-weight: 600;
+      color: #4fffb0; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hstat-lbl { font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .4px; }
+
+    /* ─── FILTERS ─── */
+    .filter-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 70px; z-index: 100;
+      box-shadow: 0 2px 8px rgba(26,50,84,.06);
+    }
+    .filter-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 14px 5%;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      flex-wrap: wrap;
+    }
+    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ftab {
+      padding: 7px 16px;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 12.5px; font-weight: 600;
+      color: var(--text-2); cursor: pointer;
+      transition: all .2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      white-space: nowrap;
+    }
+    .ftab:hover { border-color: var(--green); color: var(--green); }
+    .ftab.active { background: var(--green); border-color: var(--green); color: #fff; }
+    .result-count { font-size: 12px; color: var(--text-3); white-space: nowrap; flex-shrink: 0; }
+    .result-count strong { color: var(--navy); font-weight: 700; }
+
+    /* ─── SHARED SECTION ─── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 60px 5%; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--green); margin-bottom: 14px;
+    }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--green); border-radius: 2px; }
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(22px, 3.5vw, 30px); font-weight: 700; color: var(--navy);
+    }
+
+    /* ─── FEATURED CAMPAIGN ─── */
+    .featured {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
+      border-radius: var(--r-lg); overflow: hidden;
+      box-shadow: var(--sh-lg); margin-bottom: 60px;
+      background: var(--navy-deep);
+    }
+    .feat-img { position: relative; min-height: 480px; overflow: hidden; }
+    .feat-img img { width: 100%; height: 100%; object-fit: cover; opacity: .88; }
+    .feat-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 60%, var(--navy-deep) 100%);
+    }
+    .feat-badge {
+      position: absolute; top: 20px; left: 20px; z-index: 2;
+      background: var(--red); color: #fff;
+      padding: 5px 13px; border-radius: 50px;
+      font-size: 10.5px; font-weight: 800; letter-spacing: .8px;
+      text-transform: uppercase;
+      box-shadow: 0 3px 12px rgba(239,68,68,.4);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .feat-badge::before { content: '●'; font-size: 7px; animation: blink 1.6s infinite; }
+    .feat-content {
+      padding: 48px 44px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .feat-cat {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--green); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .feat-cat::before { content: ''; width: 18px; height: 2px; background: var(--green); }
+    .feat-content h3 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(24px, 3.2vw, 34px);
+      font-weight: 600; color: #fff;
+      line-height: 1.25; margin-bottom: 16px;
+    }
+    .feat-content h3 em { font-style: italic; color: #4fffb0; }
+    .feat-content p {
+      font-size: 14.5px; color: rgba(255,255,255,.65);
+      line-height: 1.8; margin-bottom: 26px;
+    }
+    .feat-progress { margin-bottom: 22px; }
+    .feat-progress-top {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 9px; flex-wrap: wrap; gap: 6px;
+    }
+    .feat-raised { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: #4fffb0; }
+    .feat-raised span { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,.45); }
+    .feat-goal { font-size: 12.5px; color: rgba(255,255,255,.5); }
+    .feat-bar-wrap { height: 9px; background: rgba(255,255,255,.12); border-radius: 50px; overflow: hidden; margin-bottom: 10px; }
+    .feat-bar { height: 100%; background: linear-gradient(90deg, var(--green), #4fffb0); border-radius: 50px; }
+    .feat-progress-meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; color: rgba(255,255,255,.5); }
+    .feat-progress-meta strong { color: #fff; font-weight: 700; }
+    .feat-meta {
+      display: flex; align-items: center; gap: 14px;
+      flex-wrap: wrap;
+    }
+    .feat-flag { font-size: 22px; }
+    .feat-loc { font-size: 12px; color: rgba(255,255,255,.5); }
+    .feat-loc strong { display: block; color: rgba(255,255,255,.8); font-size: 13px; }
+    .btn-read {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 22px;
+      background: var(--green);
+      border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 700; color: #fff;
+      cursor: pointer; transition: all .2s;
+      box-shadow: 0 4px 14px rgba(0,168,107,.35);
+      white-space: nowrap;
+    }
+    .btn-read:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(0,168,107,.45); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.75);
+      box-shadow: none;
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); box-shadow: none; }
+
+    /* ─── URGENT STRIP ─── */
+    .urgent-strip {
+      background: var(--canvas);
+      padding: 44px 5% 10px;
+    }
+    .urgent-inner { max-width: 1200px; margin: 0 auto; }
+    .urgent-scroll {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px;
+    }
+    .u-card {
+      background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--red);
+      border-radius: var(--r); padding: 18px;
+      box-shadow: var(--sh);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .u-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .u-days { font-size: 10px; font-weight: 800; color: var(--red); text-transform: uppercase; letter-spacing: .5px; background: rgba(239,68,68,.1); padding: 3px 9px; border-radius: 50px; white-space: nowrap; }
+    .u-flag { font-size: 18px; }
+    .u-card h5 { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; color: var(--navy); line-height: 1.35; }
+    .u-bar-wrap { height: 6px; background: var(--border); border-radius: 50px; overflow: hidden; }
+    .u-bar { height: 100%; background: var(--red); border-radius: 50px; }
+    .u-nums { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); }
+    .u-nums strong { color: var(--navy); font-weight: 700; }
+
+    /* ─── CAMPAIGN GRID ─── */
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 50px;
+    }
+    .c-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--sh);
+      transition: all .3s ease;
+      display: flex; flex-direction: column;
+    }
+    .c-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(26,50,84,.15);
+      border-color: rgba(0,168,107,.2);
+    }
+    .c-img {
+      position: relative; height: 190px; overflow: hidden;
+      background: var(--navy-mid);
+    }
+    .c-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .c-card:hover .c-img img { transform: scale(1.06); }
+    .c-cat {
+      position: absolute; top: 12px; left: 12px;
+      padding: 4px 11px; border-radius: 50px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px;
+      backdrop-filter: blur(6px);
+    }
+    .c-cat.edu { background: rgba(59,130,246,.75); color: #fff; }
+    .c-cat.med { background: rgba(239,68,68,.75); color: #fff; }
+    .c-cat.water { background: rgba(14,165,233,.75); color: #fff; }
+    .c-cat.nutrition { background: rgba(240,165,0,.75); color: #fff; }
+    .c-cat.shelter { background: rgba(139,92,246,.75); color: #fff; }
+    .c-status {
+      position: absolute; bottom: 12px; left: 12px;
+      background: rgba(0,168,107,.85);
+      backdrop-filter: blur(6px);
+      border-radius: 50px;
+      padding: 4px 10px;
+      font-size: 10.5px; font-weight: 700; color: #fff;
+    }
+    .c-status.closing { background: rgba(239,68,68,.85); }
+    .c-country {
+      position: absolute; bottom: 12px; right: 12px;
+      background: rgba(17,31,53,.7);
+      backdrop-filter: blur(6px);
+      border-radius: 50px;
+      padding: 4px 10px;
+      font-size: 11px; color: #fff;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .c-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .c-body h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 17px; font-weight: 600;
+      color: var(--navy); line-height: 1.35;
+      margin-bottom: 9px;
+    }
+    .c-body p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 16px; flex: 1; }
+    .c-progress { margin-bottom: 14px; }
+    .c-progress-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
+    .c-raised { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--navy); }
+    .c-raised span { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; font-weight: 500; color: var(--text-3); }
+    .c-pct { font-size: 11.5px; font-weight: 700; color: var(--green); }
+    .c-bar-wrap { height: 7px; background: var(--border); border-radius: 50px; overflow: hidden; }
+    .c-bar { height: 100%; background: var(--green); border-radius: 50px; }
+    .c-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 13px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .c-donors { font-size: 11px; color: var(--text-3); }
+    .c-donors strong { color: var(--navy); font-weight: 700; }
+    .c-btn {
+      padding: 8px 18px; background: var(--navy);
+      border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px; font-weight: 700; color: #fff;
+      cursor: pointer; transition: all .2s; white-space: nowrap;
+    }
+    .c-btn:hover { background: var(--green); transform: translateY(-1px); }
+
+    /* ─── IMPACT NUMBERS STRIP ─── */
+    .impact-strip {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, #0a3d28 100%);
+      padding: 56px 5%;
+      position: relative; overflow: hidden;
+    }
+    .impact-strip::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,168,107,.15), transparent 70%);
+      border-radius: 50%;
+    }
+    .is-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+      position: relative; z-index: 1;
+      text-align: center;
+    }
+    .is-item { padding: 20px 10px; }
+    .is-num {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600; color: #4fffb0;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .is-lbl { font-size: 12px; color: rgba(255,255,255,.52); max-width: 160px; margin: 0 auto; line-height: 1.5; }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-section { padding: 70px 5%; background: var(--canvas); }
+    .how-inner { max-width: 1200px; margin: 0 auto; }
+    .how-header { text-align: center; margin-bottom: 44px; }
+    .how-header .section-label { justify-content: center; }
+    .how-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 4vw, 38px); font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .how-header p { font-size: 15px; color: var(--text-3); max-width: 520px; margin: 0 auto; }
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .how-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 28px 24px;
+      box-shadow: var(--sh); text-align: center;
+      transition: all .3s;
+    }
+    .how-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); }
+    .how-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--green-muted); color: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700;
+      margin: 0 auto 16px;
+    }
+    .how-card h5 { font-size: 14.5px; font-weight: 700; color: var(--navy); margin-bottom: 9px; }
+    .how-card p { font-size: 12.5px; color: var(--text-2); line-height: 1.7; }
+
+    /* ─── TRANSPARENCY BAND ─── */
+    .transparency {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, #122a48 100%);
+      border-radius: var(--r-lg); padding: 44px 48px;
+      margin: 0 auto 22px; max-width: 1200px;
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px;
+      align-items: center;
+      box-shadow: var(--sh-lg); position: relative; overflow: hidden;
+    }
+    .transparency::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,168,107,.12), transparent 70%);
+      border-radius: 50%;
+    }
+    .tp-text { position: relative; z-index: 1; }
+    .tp-eyebrow {
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--gold-light); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .tp-eyebrow::before { content: '✓'; }
+    .tp-text h3 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(20px, 2.8vw, 27px); font-weight: 600;
+      color: #fff; line-height: 1.3; margin-bottom: 14px;
+    }
+    .tp-text p { font-size: 13.5px; color: rgba(255,255,255,.6); line-height: 1.8; }
+    .tp-bars { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 14px; }
+    .tpb-row { display: flex; align-items: center; gap: 12px; }
+    .tpb-lbl { font-size: 12px; color: rgba(255,255,255,.6); width: 110px; flex-shrink: 0; }
+    .tpb-track { flex: 1; height: 9px; background: rgba(255,255,255,.1); border-radius: 50px; overflow: hidden; }
+    .tpb-fill { height: 100%; border-radius: 50px; }
+    .tpb-pct { font-size: 12px; font-weight: 700; color: #fff; width: 36px; text-align: right; flex-shrink: 0; }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--navy-deep) 100%);
+      padding: 80px 5%; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-inner h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2;
+    }
+    .cta-inner p { font-size: 16px; color: rgba(255,255,255,.68); margin-bottom: 32px; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      padding: 14px 32px; background: #fff;
+      border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 700; color: var(--navy);
+      cursor: pointer; transition: all .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+    .btn-ghost-white {
+      padding: 14px 32px;
+      background: transparent; border: 2px solid rgba(255,255,255,.35);
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 700; color: #fff;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-ghost-white:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy-deep);
+      color: #fff;
+      padding: 60px 5% 28px;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 40px; margin-bottom: 44px;
+    }
+    .footer-about { padding-right: 20px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .fl-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--green), #00e08f); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 15px; color: #fff; font-weight: 700; }
+    .fl-txt { font-size: 16px; font-weight: 700; color: #fff; }
+    .footer-about p { color: rgba(255,255,255,.45); font-size: 13px; line-height: 1.75; margin-bottom: 16px; }
+    .social-row { display: flex; gap: 9px; }
+    .soc-ic { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.5); font-size: 13px; transition: all .2s; cursor: pointer; }
+    .soc-ic:hover { background: var(--green); border-color: var(--green); color: #fff; }
+    footer h5 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    footer a { display: block; color: rgba(255,255,255,.45); margin-bottom: 10px; font-size: 13px; transition: all .2s; }
+    footer a:hover { color: var(--green); padding-left: 4px; }
+    .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); max-width: 1200px; margin: 0 auto; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.3); margin: 4px 0; }
+
+    /* ─── ANIMATIONS ─── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .campaign-grid { grid-template-columns: repeat(2, 1fr); }
+      .urgent-scroll { grid-template-columns: repeat(2, 1fr); }
+      .is-inner { grid-template-columns: repeat(2, 1fr); }
+      .how-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+      .transparency { grid-template-columns: 1fr; padding: 36px; }
+    }
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .featured { grid-template-columns: 1fr; }
+      .feat-img { min-height: 280px; }
+      .feat-img::after { background: linear-gradient(180deg, transparent 40%, var(--navy-deep) 100%); }
+      .feat-content { padding: 32px 28px; }
+    }
+    @media (max-width: 700px) {
+      .campaign-grid { grid-template-columns: 1fr; }
+      .urgent-scroll { grid-template-columns: 1fr; }
+      .is-inner { grid-template-columns: 1fr 1fr; }
+      .how-grid { grid-template-columns: 1fr; }
+      .hero-stats .hstat { min-width: 100px; padding: 12px 16px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 60px 5%; }
+      .filter-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-container">
+    <div class="logo-mark">V</div>
+    <div class="logo-text">
+      <h1>Volk Donations</h1>
+      <span>A better life for everyone</span>
+    </div>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/impact-calculator">Impact</a>
+    <a href="/donate">Donate</a>
+    <a href="/volunteer">Volunteer</a>
+    <a href="/campaigns" class="active">Campaigns</a>
+    <a href="/stories">Stories</a>
+    <a href="/contact">Contact</a>
+    <a href="/donate" class="nav-cta">Give Now</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="/">Home</a>
+  <a href="/impact-calculator">Impact</a>
+  <a href="/donate">Donate</a>
+  <a href="/volunteer">Volunteer</a>
+  <a href="/campaigns">Campaigns</a>
+  <a href="/stories">Stories</a>
+  <a href="/contact">Contact</a>
+  <a href="/donate" class="nav-cta" style="text-align:center;border-radius:50px;background:var(--green);color:#fff">Give Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Active Campaigns</div>
+    <h2>Fund the Work<br><em>Happening Right Now</em></h2>
+    <p>Every campaign below is a specific, funded project with a clear goal and a transparent budget. Choose one that speaks to you and follow it from launch to completion.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val">14</div><div class="hstat-lbl">Active Campaigns</div></div>
+      <div class="hstat"><div class="hstat-val">$1.1M</div><div class="hstat-lbl">Raised This Year</div></div>
+      <div class="hstat"><div class="hstat-val">6,300+</div><div class="hstat-lbl">Donors Contributing</div></div>
+      <div class="hstat"><div class="hstat-val">96%</div><div class="hstat-lbl">Funds to Programs</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="filter-tabs">
+      <button class="ftab active" onclick="filterCampaigns('all',this)">All Campaigns</button>
+      <button class="ftab" onclick="filterCampaigns('education',this)">Education</button>
+      <button class="ftab" onclick="filterCampaigns('medical',this)">Medical</button>
+      <button class="ftab" onclick="filterCampaigns('water',this)">Clean Water</button>
+      <button class="ftab" onclick="filterCampaigns('nutrition',this)">Nutrition</button>
+      <button class="ftab" onclick="filterCampaigns('shelter',this)">Shelter</button>
+    </div>
+    <div class="result-count" id="resultCount">Showing <strong>9</strong> campaigns</div>
+  </div>
+</div>
+
+<!-- FEATURED CAMPAIGN -->
+<div class="section" style="padding-bottom:10px">
+  <div class="section-label">Featured Campaign</div>
+  <div class="featured reveal">
+    <div class="feat-img">
+      <img src="https://images.unsplash.com/photo-1541252260730-0412e8e2108e?w=800&q=80&auto=format&fit=crop" alt="Solar-powered borehole project" loading="lazy">
+      <div class="feat-badge">Urgent · 12 Days Left</div>
+    </div>
+    <div class="feat-content">
+      <div class="feat-cat">Clean Water · Northern Uganda</div>
+      <h3>Three New Boreholes for <em>Kiryandongo District</em></h3>
+      <p>Six villages in Kiryandongo currently share a single failing hand pump serving over 1,900 people. This campaign funds three solar-powered boreholes with biosand filtration, cutting the average water-collection walk from 4.2 km to under 400 meters.</p>
+      <div class="feat-progress">
+        <div class="feat-progress-top">
+          <div class="feat-raised">$41,260 <span>raised of $58,000 goal</span></div>
+          <div class="feat-goal">71% funded</div>
+        </div>
+        <div class="feat-bar-wrap"><div class="feat-bar" style="width:71%"></div></div>
+        <div class="feat-progress-meta">
+          <span><strong>318</strong> donors</span>
+          <span><strong>12</strong> days left</span>
+          <span><strong>1,900+</strong> people reached</span>
+        </div>
+      </div>
+      <div class="feat-meta">
+        <span class="feat-flag">🇺🇬</span>
+        <div class="feat-loc"><strong>Kiryandongo District, Uganda</strong>Clean Water Initiative · Launched Aug 2026</div>
+        <div style="margin-left:auto;display:flex;gap:9px;flex-wrap:wrap">
+          <button class="btn-read" onclick="window.location='/donate?campaign=kiryandongo-boreholes'">Donate to This Campaign</button>
+          <button class="btn-read btn-outline" onclick="window.location='/campaigns/kiryandongo-boreholes'">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- URGENT / CLOSING SOON -->
+<div class="urgent-strip">
+  <div class="urgent-inner">
+    <div class="section-label">Closing Soon</div>
+    <h2 class="section-heading">Campaigns Ending This Month</h2>
+    <div class="urgent-scroll">
+      <div class="u-card reveal">
+        <div class="u-top"><span class="u-flag">🇭🇹</span><span class="u-days">5 days left</span></div>
+        <h5>Transitional Shelter Repairs — Port-au-Prince</h5>
+        <div class="u-bar-wrap"><div class="u-bar" style="width:84%"></div></div>
+        <div class="u-nums"><span><strong>$16,870</strong> of $20,000</span><span>84%</span></div>
+      </div>
+      <div class="u-card reveal">
+        <div class="u-top"><span class="u-flag">🇵🇭</span><span class="u-days">8 days left</span></div>
+        <h5>Mobile Clinic Fuel &amp; Supplies — Visayas Islands</h5>
+        <div class="u-bar-wrap"><div class="u-bar" style="width:62%"></div></div>
+        <div class="u-nums"><span><strong>$7,440</strong> of $12,000</span><span>62%</span></div>
+      </div>
+      <div class="u-card reveal">
+        <div class="u-top"><span class="u-flag">🇳🇵</span><span class="u-days">10 days left</span></div>
+        <h5>Winter School Kits — Solukhumbu Villages</h5>
+        <div class="u-bar-wrap"><div class="u-bar" style="width:47%"></div></div>
+        <div class="u-nums"><span><strong>$5,170</strong> of $11,000</span><span>47%</span></div>
+      </div>
+      <div class="u-card reveal">
+        <div class="u-top"><span class="u-flag">🇺🇬</span><span class="u-days">12 days left</span></div>
+        <h5>Kiryandongo Borehole Project</h5>
+        <div class="u-bar-wrap"><div class="u-bar" style="width:71%"></div></div>
+        <div class="u-nums"><span><strong>$41,260</strong> of $58,000</span><span>71%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALL CAMPAIGNS GRID -->
+<div class="section">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="section-label">All Campaigns</div>
+      <h2 class="section-heading">Choose a Cause to Support</h2>
+    </div>
+  </div>
+
+  <div class="campaign-grid" id="campaignGrid">
+
+    <!-- Card 1 -->
+    <div class="c-card reveal" data-cat="education">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80&auto=format&fit=crop" alt="School library programme in Ethiopia" loading="lazy">
+        <span class="c-cat edu">Education</span>
+        <span class="c-status">Active</span>
+        <div class="c-country">🇪🇹 Ethiopia</div>
+      </div>
+      <div class="c-body">
+        <h4>Tech Literacy Lab — Addis Ababa</h4>
+        <p>Equip a community learning center with 20 tablets, a solar charging station, and a year of mentor-led coding instruction for 140 students.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$9,840 <span>of $16,500</span></div><div class="c-pct">60%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:60%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>142</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=addis-tech-lab'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="c-card reveal" data-cat="medical">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1584467735871-8e4e4d3c2578?w=600&q=80&auto=format&fit=crop" alt="Mobile health clinic in the Philippines" loading="lazy">
+        <span class="c-cat med">Medical</span>
+        <span class="c-status closing">8 Days Left</span>
+        <div class="c-country">🇵🇭 Philippines</div>
+      </div>
+      <div class="c-body">
+        <h4>Mobile Clinic Fuel &amp; Supplies — Visayas</h4>
+        <p>Keep the solar-powered mobile clinic running across 9 remote islands with fuel, restocked medical supplies, and a second nurse for six months.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$7,440 <span>of $12,000</span></div><div class="c-pct">62%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:62%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>96</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=visayas-mobile-clinic'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="c-card reveal" data-cat="water">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1541417904950-b855846fe074?w=600&q=80&auto=format&fit=crop" alt="Clean water well in Bangladesh" loading="lazy">
+        <span class="c-cat water">Clean Water</span>
+        <span class="c-status">Active</span>
+        <div class="c-country">🇧🇩 Bangladesh</div>
+      </div>
+      <div class="c-body">
+        <h4>Tube Wells for Char Mohanpur, Phase II</h4>
+        <p>Expand the successful Sylhet well programme with two additional tube wells, bringing clean water access to 130 more families on the river island.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$5,980 <span>of $14,000</span></div><div class="c-pct">43%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:43%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>71</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=char-mohanpur-phase2'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="c-card reveal" data-cat="nutrition">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80&auto=format&fit=crop" alt="School feeding programme in Mozambique" loading="lazy">
+        <span class="c-cat nutrition">Nutrition</span>
+        <span class="c-status">Active</span>
+        <div class="c-country">🇲🇿 Mozambique</div>
+      </div>
+      <div class="c-body">
+        <h4>Daily Hot Meals — Inhambane Schools</h4>
+        <p>Extend the daily school feeding programme to two additional primary schools, providing hot lunches to 410 more children for a full academic year.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$18,300 <span>of $27,000</span></div><div class="c-pct">68%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:68%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>203</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=inhambane-meals'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="c-card reveal" data-cat="shelter">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=600&q=80&auto=format&fit=crop" alt="Transitional housing repair in Haiti" loading="lazy">
+        <span class="c-cat shelter">Shelter</span>
+        <span class="c-status closing">5 Days Left</span>
+        <div class="c-country">🇭🇹 Haiti</div>
+      </div>
+      <div class="c-body">
+        <h4>Transitional Shelter Repairs — Port-au-Prince</h4>
+        <p>Repair roofing and sanitation at the transitional home currently housing 14 orphaned children displaced by seasonal flooding.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$16,870 <span>of $20,000</span></div><div class="c-pct">84%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:84%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>187</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=port-au-prince-shelter'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="c-card reveal" data-cat="education">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop" alt="Community reading room in India" loading="lazy">
+        <span class="c-cat edu">Education</span>
+        <span class="c-status">Active</span>
+        <div class="c-country">🇮🇳 India</div>
+      </div>
+      <div class="c-body">
+        <h4>Reading Room Expansion — Rajasthan</h4>
+        <p>Double the capacity of the community reading room founded by student-led initiative, adding a second room and 800 new books.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$2,910 <span>of $9,000</span></div><div class="c-pct">32%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:32%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>44</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=rajasthan-reading-room'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="c-card reveal" data-cat="medical">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80&auto=format&fit=crop" alt="Pediatric heart surgery fund in Cambodia" loading="lazy">
+        <span class="c-cat med">Medical</span>
+        <span class="c-status">Active</span>
+        <div class="c-country">🇰🇭 Cambodia</div>
+      </div>
+      <div class="c-body">
+        <h4>Pediatric Heart Surgery Fund — Kampong Cham</h4>
+        <p>Cover surgical costs and post-operative rehabilitation for four children awaiting corrective heart surgery in rural Kampong Cham province.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$22,150 <span>of $40,000</span></div><div class="c-pct">55%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:55%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>261</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=kampong-cham-heart-fund'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="c-card reveal" data-cat="shelter">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1570284613060-3b8d8c7f3def?w=600&q=80&auto=format&fit=crop" alt="Foster placement support in Pakistan" loading="lazy">
+        <span class="c-cat shelter">Shelter</span>
+        <span class="c-status">Active</span>
+        <div class="c-country">🇵🇰 Pakistan</div>
+      </div>
+      <div class="c-body">
+        <h4>Foster Placement Support — Peshawar</h4>
+        <p>Fund trauma counselling, school enrolment, and household costs for six orphaned siblings placed together after the Khyber earthquake.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$4,320 <span>of $10,500</span></div><div class="c-pct">41%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:41%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>58</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=peshawar-foster-support'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="c-card reveal" data-cat="nutrition">
+      <div class="c-img">
+        <img src="https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=600&q=80&auto=format&fit=crop" alt="Malnutrition recovery centre in Brazil" loading="lazy">
+        <span class="c-cat nutrition">Nutrition</span>
+        <span class="c-status">Active</span>
+        <div class="c-country">🇧🇷 Brazil</div>
+      </div>
+      <div class="c-body">
+        <h4>São Paulo Recovery Centre Restock</h4>
+        <p>Replenish therapeutic feeding supplies and fund a second nutritionist at the centre that helped Lucas and 60 other children recover from malnutrition.</p>
+        <div class="c-progress">
+          <div class="c-progress-top"><div class="c-raised">$6,760 <span>of $15,000</span></div><div class="c-pct">45%</div></div>
+          <div class="c-bar-wrap"><div class="c-bar" style="width:45%"></div></div>
+        </div>
+        <div class="c-footer">
+          <div class="c-donors"><strong>83</strong> donors</div>
+          <button class="c-btn" onclick="window.location='/donate?campaign=sao-paulo-recovery-centre'">Donate</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- IMPACT NUMBERS STRIP -->
+<div class="impact-strip">
+  <div class="is-inner">
+    <div class="is-item reveal"><div class="is-num">14</div><div class="is-lbl">Campaigns Currently Active</div></div>
+    <div class="is-item reveal"><div class="is-num">$1.1M</div><div class="is-lbl">Raised Toward 2026 Goals</div></div>
+    <div class="is-item reveal"><div class="is-num">6,300+</div><div class="is-lbl">Donors Contributing</div></div>
+    <div class="is-item reveal"><div class="is-num">22</div><div class="is-lbl">Campaigns Completed in 2025</div></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="how-header reveal">
+      <div class="section-label">How Campaigns Work</div>
+      <h2>From Donation to Delivery</h2>
+      <p>Every campaign is scoped, budgeted, and tracked before it's published — so you always know exactly what your donation funds.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-num">1</div>
+        <h5>A Need Is Identified</h5>
+        <p>Field teams and local partners document a specific, fundable need — a well, a surgery fund, a classroom rebuild.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">2</div>
+        <h5>A Campaign Is Scoped</h5>
+        <p>We set a transparent budget and goal amount, published in full before the campaign goes live for donations.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">3</div>
+        <h5>Donors Fund It Together</h5>
+        <p>Every gift, large or small, moves the progress bar. Donors can track funding in real time on this page.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">4</div>
+        <h5>Impact Is Reported Back</h5>
+        <p>Once complete, we publish outcomes and photos so every donor sees exactly what their support delivered.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSPARENCY BAND -->
+<div class="section" style="padding-top:0">
+  <div class="transparency reveal">
+    <div class="tp-text">
+      <div class="tp-eyebrow">Where Your Money Goes</div>
+      <h3>96 Cents of Every Dollar Reaches the Field</h3>
+      <p>We publish a breakdown for every completed campaign. Across all active campaigns this year, funds are allocated as follows — audited annually by an independent accounting firm.</p>
+    </div>
+    <div class="tp-bars">
+      <div class="tpb-row"><div class="tpb-lbl">Direct Programs</div><div class="tpb-track"><div class="tpb-fill" style="width:96%;background:linear-gradient(90deg,var(--green),#4fffb0)"></div></div><div class="tpb-pct">96%</div></div>
+      <div class="tpb-row"><div class="tpb-lbl">Operations</div><div class="tpb-track"><div class="tpb-fill" style="width:3%;background:var(--gold)"></div></div><div class="tpb-pct">3%</div></div>
+      <div class="tpb-row"><div class="tpb-lbl">Fundraising</div><div class="tpb-track"><div class="tpb-fill" style="width:1%;background:var(--blue)"></div></div><div class="tpb-pct">1%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <h2>Pick a Campaign, Make an Impact</h2>
+    <p>Whether it's $10 or $1,000, your donation goes directly toward a campaign goal you can watch move in real time.</p>
+    <div class="cta-buttons">
+      <button class="btn-white" onclick="window.location='/donate'">Browse All Campaigns</button>
+      <button class="btn-ghost-white" onclick="window.location='/volunteer'">Start Your Own Fundraiser</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <div class="footer-logo">
+        <div class="fl-mark">V</div>
+        <span class="fl-txt">Volk Donations</span>
+      </div>
+      <p>Volk Donations is dedicated to creating lasting change in the lives of orphaned children worldwide. Through compassion, commitment, and community support, we're building a better future for those who need it most.</p>
+      <div class="social-row">
+        <div class="soc-ic">f</div>
+        <div class="soc-ic">in</div>
+        <div class="soc-ic">𝕏</div>
+        <div class="soc-ic">▶</div>
+      </div>
+    </div>
+    <div>
+      <h5>Organization</h5>
+      <a href="/about">About Us</a>
+      <a href="/partners">Our Partners</a>
+      <a href="/branches">Branches</a>
+      <a href="/reports">Annual Reports</a>
+      <a href="/team">Our Team</a>
+    </div>
+    <div>
+      <h5>Get Involved</h5>
+      <a href="/donate">Donate</a>
+      <a href="/volunteer">Volunteer</a>
+      <a href="/campaigns" style="color:var(--green)">Campaigns</a>
+      <a href="/events">Events</a>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
+      <a href="/stories">Success Stories</a>
+      <a href="/press">Press Kit</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+      <a href="/financial">Financial Info</a>
+      <a href="/contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Volk Donations. All rights reserved.</p>
+    <p>A registered 501(c)(3) nonprofit organization based in the United States.</p>
+    <p>EIN: 45-1234567 · Making a difference since 2010</p>
+  </div>
+</footer>
+
+<script>
+// HAMBURGER
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) mobileNav.classList.remove('open');
+});
+
+// SCROLL REVEAL
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), 60 * (Array.from(revealEls).indexOf(entry.target) % 4));
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+// FILTER
+window.filterCampaigns = function(cat, btn) {
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.c-card[data-cat]');
+  let visible = 0;
+  cards.forEach(c => {
+    if (cat === 'all' || c.getAttribute('data-cat') === cat) { c.style.display = ''; visible++; }
+    else { c.style.display = 'none'; }
+  });
+  document.getElementById('resultCount').innerHTML = `Showing <strong>${visible}</strong> campaigns`;
+};
+</script>
+</body>
+</html>

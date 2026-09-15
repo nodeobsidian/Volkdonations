@@ -21,19 +21,19 @@ function getNeon() {
 }
 
 /**
- * Nodemailer transporter configured for SendPulse SMTP.
+ * Nodemailer transporter configured for Brevo SMTP.
  * Credentials pulled from environment variables:
- *   SENDPULSE_SMTP_USER  — SendPulse SMTP username
- *   SENDPULSE_SMTP_KEY   — SendPulse SMTP password / API key
- *   SENDPULSE_FROM_EMAIL — verified sender address in SendPulse
+ *   BREVO_SMTP_USER  — Brevo SMTP username
+ *   BREVO_SMTP_KEY   — Brevo SMTP password / API key
+ *   BREVO_FROM_EMAIL — verified sender address in Brevo
  */
 const transporter = nodemailer.createTransport({
-  host:   'smtp-pulse.com',
+  host:   'smtp-relay.brevo.com',
   port:   587,
   secure: false,
   auth: {
-    user: process.env.SENDPULSE_SMTP_USER,
-    pass: process.env.SENDPULSE_SMTP_KEY,
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_KEY,
   },
 });
 
@@ -345,7 +345,7 @@ async function sendResetEmail(toEmail, toName, resetLink) {
   const displayName = toName || 'there';
 
   const mailOptions = {
-    from:    `"Volk Donations" <${process.env.SENDPULSE_FROM_EMAIL}>`,
+    from:    `"Volk Donations" <${process.env.BREVO_FROM_EMAIL}>`,
     to:      toEmail,
     subject: 'Reset your Volk Donations password',
     html: `

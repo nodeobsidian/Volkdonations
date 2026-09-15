@@ -21,19 +21,19 @@ function getNeon() {
 }
 
 /**
- * Nodemailer transporter configured for SendPulse SMTP.
+ * Nodemailer transporter configured for Brevo SMTP.
  * Used to send the post-reset confirmation email.
- *   SENDPULSE_SMTP_USER  — SendPulse SMTP username
- *   SENDPULSE_SMTP_KEY   — SendPulse SMTP password / API key
- *   SENDPULSE_FROM_EMAIL — verified sender address in SendPulse
+ *   BREVO_SMTP_USER  — Brevo SMTP username
+ *   BREVO_SMTP_KEY   — Brevo SMTP password / API key
+ *   BREVO_FROM_EMAIL — verified sender address in Brevo
  */
 const transporter = nodemailer.createTransport({
-  host:   'smtp-pulse.com',
+  host:   'smtp-relay.brevo.com',
   port:   587,
   secure: false,
   auth: {
-    user: process.env.SENDPULSE_SMTP_USER,
-    pass: process.env.SENDPULSE_SMTP_KEY,
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_KEY,
   },
 });
 
@@ -291,7 +291,7 @@ async function invalidateAllSessions(userId) {
  * if the reset was not initiated by the legitimate user, they are alerted
  * immediately and can contact support to recover their account.
  *
- * Sent via SendPulse SMTP using the shared nodemailer transporter.
+ * Sent via Brevo SMTP using the shared nodemailer transporter.
  * Fire-and-forget — failure is logged but does not fail the request,
  * as the password has already been changed successfully at this point.
  *
@@ -303,7 +303,7 @@ async function sendPasswordChangedEmail(toEmail, toName) {
   const timestamp   = new Date().toUTCString();
 
   const mailOptions = {
-    from:    `"Volk Donations" <${process.env.SENDPULSE_FROM_EMAIL}>`,
+    from: `"Volk Donations" <${process.env.BREVO_FROM_EMAIL}>`,
     to:      toEmail,
     subject: 'Your Volk Donations password has been changed',
     html: `

@@ -8,12 +8,12 @@ const supabase = createClient(
 );
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp-pulse.com',
+  host: 'smtp-relay.brevo.com',
   port: 587,
   secure: false,
   auth: {
-    user: process.env.SENDPULSE_SMTP_USER,
-    pass: process.env.SENDPULSE_SMTP_KEY,
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_KEY,
   },
 });
 
@@ -175,7 +175,7 @@ async function sendVerificationEmail(email, name, token) {
   const digits = token.split('');
 
   const mailOptions = {
-    from: `"Volk Donations" <${process.env.SENDPULSE_FROM_EMAIL}>`,
+    from: `"Volk Donations" <${process.env.BREVO_FROM_EMAIL}>`,
     to: email,
     subject: 'Your Volk Donations Verification Code',
     html: `
